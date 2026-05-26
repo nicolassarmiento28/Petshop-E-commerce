@@ -1,0 +1,116 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e6]:
+      - link "🐾 Petshop" [ref=e7] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e8]: 🐾
+        - generic [ref=e9]: Petshop
+      - navigation [ref=e10]:
+        - link "Perro" [ref=e12] [cursor=pointer]:
+          - /url: /categoria/perro
+          - text: Perro
+          - img [ref=e13]
+        - link "Gato" [ref=e16] [cursor=pointer]:
+          - /url: /categoria/gato
+          - text: Gato
+          - img [ref=e17]
+        - link "Farmacia" [ref=e20] [cursor=pointer]:
+          - /url: /categoria/farmacia
+        - link "Pequeñas Mascotas" [ref=e22] [cursor=pointer]:
+          - /url: /categoria/pequenas-mascotas
+        - link "Ofertas" [ref=e24] [cursor=pointer]:
+          - /url: /categoria/ofertas
+        - link "Marcas" [ref=e26] [cursor=pointer]:
+          - /url: /categoria/marcas
+      - generic [ref=e27]:
+        - button "Buscar" [ref=e28] [cursor=pointer]:
+          - img [ref=e29]
+        - button "Ver carrito" [ref=e32] [cursor=pointer]:
+          - img [ref=e33]
+  - main [ref=e37]:
+    - generic [ref=e38]:
+      - heading "Perro" [level=1] [ref=e40]
+      - generic [ref=e41]:
+        - button "Filtros" [ref=e42] [cursor=pointer]:
+          - img [ref=e43]
+          - text: Filtros
+        - combobox [ref=e44]:
+          - option "Más relevantes" [selected]
+          - option "Menor precio"
+          - option "Mayor precio"
+          - option "Más nuevos"
+      - generic [ref=e45]:
+        - paragraph [ref=e46]: 🐾
+        - paragraph [ref=e47]: Los productos de esta categoría estarán disponibles pronto.
+  - contentinfo [ref=e48]:
+    - generic [ref=e49]:
+      - generic [ref=e50]:
+        - generic [ref=e51]:
+          - generic [ref=e52]:
+            - generic [ref=e53]: 🐾
+            - generic [ref=e54]: Petshop
+          - paragraph [ref=e55]: Tu tienda de confianza para el cuidado y bienestar de tus mascotas. Productos de calidad, atención personalizada.
+          - generic [ref=e56]:
+            - link "Instagram" [ref=e57] [cursor=pointer]:
+              - /url: https://instagram.com
+              - img [ref=e58]
+            - link "Facebook" [ref=e61] [cursor=pointer]:
+              - /url: https://facebook.com
+              - img [ref=e62]
+            - link "TikTok" [ref=e64] [cursor=pointer]:
+              - /url: https://tiktok.com
+              - img [ref=e65]
+        - generic [ref=e67]:
+          - heading "Categorías" [level=4] [ref=e68]
+          - list [ref=e69]:
+            - listitem [ref=e70]:
+              - link "Perro" [ref=e71] [cursor=pointer]:
+                - /url: /categoria/perro
+            - listitem [ref=e72]:
+              - link "Gato" [ref=e73] [cursor=pointer]:
+                - /url: /categoria/gato
+            - listitem [ref=e74]:
+              - link "Farmacia" [ref=e75] [cursor=pointer]:
+                - /url: /categoria/farmacia
+            - listitem [ref=e76]:
+              - link "Pequeñas Mascotas" [ref=e77] [cursor=pointer]:
+                - /url: /categoria/pequenas-mascotas
+            - listitem [ref=e78]:
+              - link "Ofertas" [ref=e79] [cursor=pointer]:
+                - /url: /categoria/ofertas
+            - listitem [ref=e80]:
+              - link "Marcas" [ref=e81] [cursor=pointer]:
+                - /url: /categoria/marcas
+        - generic [ref=e82]:
+          - heading "Información" [level=4] [ref=e83]
+          - list [ref=e84]:
+            - listitem [ref=e85]:
+              - link "Política de privacidad" [ref=e86] [cursor=pointer]:
+                - /url: /privacidad
+            - listitem [ref=e87]:
+              - link "Términos y condiciones" [ref=e88] [cursor=pointer]:
+                - /url: /terminos
+            - listitem [ref=e89]:
+              - link "Cambios y devoluciones" [ref=e90] [cursor=pointer]:
+                - /url: /devoluciones
+        - generic [ref=e91]:
+          - heading "Contacto" [level=4] [ref=e92]
+          - list [ref=e93]:
+            - listitem [ref=e94]:
+              - link "Av. Ejemplo 1234, Santiago, Chile" [ref=e95] [cursor=pointer]:
+                - /url: https://maps.google.com
+                - img [ref=e96]
+                - generic [ref=e99]: Av. Ejemplo 1234, Santiago, Chile
+            - listitem [ref=e100]:
+              - link "+56 9 1234 5678" [ref=e101] [cursor=pointer]:
+                - /url: tel:+56912345678
+                - img [ref=e102]
+                - text: +56 9 1234 5678
+            - listitem [ref=e104]:
+              - link "contacto@petshop.cl" [ref=e105] [cursor=pointer]:
+                - /url: mailto:contacto@petshop.cl
+                - img [ref=e106]
+                - text: contacto@petshop.cl
+      - generic [ref=e109]:
+        - paragraph [ref=e110]: © 2026 Petshop. Todos los derechos reservados.
+        - paragraph [ref=e111]: Hecho con ❤️ para tus mascotas

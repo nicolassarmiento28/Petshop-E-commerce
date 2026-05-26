@@ -1,0 +1,213 @@
+import { useState, useMemo } from 'react'
+import { useParams, Link } from 'react-router-dom'
+import { Search } from 'lucide-react'
+import ProductGrid from '@/components/product/ProductGrid'
+import { useProducts, useCategories, useBrands } from '@/hooks/useProducts'
+import type { CategoryType } from '@/types'
+
+// ── helpers ────────────────────────────────────────────────────────────────────
+function findCategory(cats: CategoryType[], slug: string): CategoryType | undefined {
+  for (const c of cats) {
+    if (c.slug === slug) return c
+    if (c.children) {
+      const found = findCategory(c.children, slug)
+      if (found) return found
+    }
+  }
+  return undefined
+}
+
+const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1).replace(/-/g, ' ')
+
+// ── Component ──────────────────────────────────────────────────────────────────
+export default function CategoryPage() {
+  const { slug, sub } = useParams<{ slug: string; sub?: string }>()
+  const [sort, setSort] = useState('')
+  const [search, setSearch] = useState('')
+  const [brandFilter, setBrandFilter] = useState('')
+
+  const { data: allCategories = [] } = useCategories()
+  const { data: allBrands = [] } = useBrands()
+
+  const isOfertas = slug === 'ofertas'
+  const isMarcas = slug === 'marcas'
+  const effectiveSlug = sub ?? slug ?? ''
+
+  // Build query filters
+  const filters = useMemo(() => {
+    const f: Parameters<typeof useProducts>[0] = { limit: 60 }
+    if (isOfertas) {
+      f.sale = true
+    } else if (!isMarcas) {
+      f.category = effectiveSlug
+    }
+    if (sort) f.sort = sort
+    if (search) f.search = search
+    if (brandFilter) f.brand = brandFilter
+    return f
+  }, [isOfertas, isMarcas, effectiveSlug, sort, search, brandFilter])
+
+  const { data, isLoading } = useProducts(filters)
+  const products = data?.products ?? []
+
+  // Subcategories of current parent (for nav pills)
+  const parentCat = useMemo(() => {
+    if (sub || isOfertas || isMarcas) return null
+    return findCategory(allCategories, slug ?? '') ?? null
+  }, [allCategories, slug, sub, isOfertas, isMarcas])
+
+  const subcategories = parentCat?.children ?? []
+
+  // Page title
+  const pageTitle = isOfertas
+    ? 'Ofertas'
+    : isMarcas
+    ? 'Marcas'
+    : sub
+    ? capitalize(sub)
+    : capitalize(slug ?? '')
+
+  const breadcrumb = sub ? capitalize(slug ?? '') : null
+
+  return (
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 dark:bg-[#111111]">
+      {/* Header */}
+      <div className="mb-6">
+        {breadcrumb && (
+          <nav className="text-sm text-gray-400 dark:text-[#8892a4] mb-1">
+            <Link to={`/categoria/${slug}`} className="hover:text-blue-600 transition-colors">
+              {breadcrumb}
+            </Link>
+            <span className="mx-1">›</span>
+            <span className="text-gray-600 dark:text-[#8892a4]">{pageTitle}</span>
+          </nav>
+        )}
+        <h1
+          className="text-3xl font-bold text-gray-900 dark:text-[#e8eaf0]"
+          style={{ fontFamily: "'Fraunces', Georgia, serif" }}
+        >
+          {pageTitle}
+        </h1>
+        {isOfertas && (
+          <p className="text-sm text-gray-500 dark:text-[#8892a4] mt-1">Todos los productos con precio de oferta</p>
+        )}
+        {!isLoading && (
+          <p className="text-sm text-gray-400 dark:text-[#8892a4] mt-1">
+            {products.length} {products.length === 1 ? 'producto' : 'productos'}
+          </p>
+        )}
+      </div>
+
+      {/* Subcategory pills */}
+      {subcategories.length > 0 && (
+        <div className="flex flex-wrap gap-2 mb-6">
+          <Link
+            to={`/categoria/${slug}`}
+            className="px-3 py-1.5 rounded-full text-sm font-medium bg-blue-600 text-white"
+          >
+            Todo
+          </Link>
+          {subcategories.map((sub) => (
+            <Link
+              key={sub.slug}
+              to={`/categoria/${slug}/${sub.slug}`}
+              className="px-3 py-1.5 rounded-full text-sm font-medium border border-gray-200 dark:border-[#2a2a2a] text-gray-600 dark:text-[#e8eaf0] hover:border-blue-400 hover:text-blue-600 transition-colors bg-white dark:bg-[#1a1a1a]"
+            >
+              {sub.name}
+            </Link>
+          ))}
+        </div>
+      )}
+
+      {/* Brand list for /marcas */}
+      {isMarcas && (
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 mb-8">
+          {allBrands.map((brand) => (
+            <Link
+              key={brand.id}
+              to={`/categoria/marcas?brand=${brand.slug}`}
+              onClick={() => setBrandFilter(brand.slug)}
+              className="group flex items-center justify-center p-5 rounded-2xl border border-gray-100 dark:border-[#2a2a2a] hover:border-blue-300 hover:shadow-lg hover:shadow-blue-50 transition-all duration-200 bg-white dark:bg-[#1a1a1a]"
+            >
+              <div className="h-16 flex items-center justify-center px-2">
+                {brand.logoUrl ? (
+                  <img
+                    src={brand.logoUrl}
+                    alt={brand.name}
+                    className="max-h-14 max-w-full w-auto object-contain group-hover:scale-105 transition-transform duration-200"
+                  />
+                ) : (
+                  <div className="w-14 h-14 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 font-bold text-2xl">
+                    {brand.name.charAt(0)}
+                  </div>
+                )}
+              </div>
+            </Link>
+          ))}
+        </div>
+      )}
+
+      {/* Filters bar */}
+      <div className="flex flex-wrap items-center gap-3 mb-6">
+        {/* Search */}
+        <div className="relative flex-1 min-w-[180px] max-w-xs">
+          <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-[#8892a4]" />
+          <input
+            type="text"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Buscar en esta categoría..."
+            className="w-full pl-8 pr-3 py-2 border border-gray-200 dark:border-[#2a2a2a] rounded-xl text-sm text-gray-700 dark:text-[#e8eaf0] bg-white dark:bg-[#222222] focus:outline-none focus:border-blue-400 transition-colors"
+          />
+        </div>
+
+        {/* Brand filter */}
+        {!isMarcas && allBrands.length > 0 && (
+          <select
+            value={brandFilter}
+            onChange={(e) => setBrandFilter(e.target.value)}
+            className="px-3 py-2 border border-gray-200 dark:border-[#2a2a2a] rounded-xl text-sm text-gray-600 dark:text-[#e8eaf0] bg-white dark:bg-[#222222] hover:border-blue-300 transition-colors outline-none"
+          >
+            <option value="">Todas las marcas</option>
+            {allBrands.map((b) => (
+              <option key={b.id} value={b.slug}>{b.name}</option>
+            ))}
+          </select>
+        )}
+
+        {/* Sort */}
+        <select
+          value={sort}
+          onChange={(e) => setSort(e.target.value)}
+          className="px-3 py-2 border border-gray-200 dark:border-[#2a2a2a] rounded-xl text-sm text-gray-600 dark:text-[#e8eaf0] bg-white dark:bg-[#222222] hover:border-blue-300 transition-colors outline-none"
+        >
+          <option value="">Más relevantes</option>
+          <option value="price_asc">Menor precio</option>
+          <option value="price_desc">Mayor precio</option>
+          <option value="newest">Más nuevos</option>
+        </select>
+
+        {/* Clear filters */}
+        {(search || brandFilter || sort) && (
+          <button
+            onClick={() => { setSearch(''); setBrandFilter(''); setSort('') }}
+            className="px-3 py-2 text-sm text-red-500 hover:text-red-600 border border-red-200 rounded-xl hover:bg-red-50 transition-colors"
+          >
+            Limpiar
+          </button>
+        )}
+      </div>
+
+      {/* Products */}
+      <ProductGrid
+        products={products}
+        isLoading={isLoading}
+        emptyMessage={
+          search || brandFilter
+            ? 'No se encontraron productos con esos filtros.'
+            : 'No hay productos en esta categoría.'
+        }
+      />
+    </div>
+  )
+}

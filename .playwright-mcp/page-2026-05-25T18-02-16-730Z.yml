@@ -1,0 +1,854 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e5]:
+        - generic [ref=e6]:
+          - link "online@petstop.cl" [ref=e7] [cursor=pointer]:
+            - /url: mailto:online@petstop.cl
+            - img [ref=e9]
+            - text: online@petstop.cl
+          - link "+56 9 7914 0338" [ref=e12] [cursor=pointer]:
+            - /url: https://wa.me/56979140338
+            - img [ref=e14]
+            - text: +56 9 7914 0338
+        - generic [ref=e18]:
+          - link "contacto@petstop.cl" [ref=e19] [cursor=pointer]:
+            - /url: mailto:contacto@petstop.cl
+            - img [ref=e21]
+            - text: contacto@petstop.cl
+          - link "+56 9 5611 5573" [ref=e24] [cursor=pointer]:
+            - /url: https://wa.me/56956115573
+            - img [ref=e26]
+            - text: +56 9 5611 5573
+      - generic [ref=e31]:
+        - link "PetStop – Tienda Online" [ref=e32] [cursor=pointer]:
+          - /url: https://petstop.cl/
+          - img "PetStop – Tienda Online" [ref=e33]
+        - navigation [ref=e34]:
+          - generic [ref=e35]:
+            - text: 
+            - generic [ref=e36] [cursor=pointer]: ×
+          - list [ref=e38]:
+            - listitem [ref=e39]:
+              - link "Todos Productos" [ref=e40] [cursor=pointer]:
+                - /url: https://petstop.cl/tienda/
+            - listitem [ref=e41]:
+              - link "Ofertas" [ref=e42] [cursor=pointer]:
+                - /url: https://petstop.cl/productos-con-descuento/
+            - listitem [ref=e43]:
+              - link "Marcas" [ref=e44] [cursor=pointer]:
+                - /url: https://petstop.cl/marcas/
+            - listitem [ref=e45]:
+              - link "Veterinaria y Tienda" [ref=e46] [cursor=pointer]:
+                - /url: https://petstop.cl/veterinaria/
+            - listitem [ref=e47]:
+              - link "Despachos" [ref=e48] [cursor=pointer]:
+                - /url: https://petstop.cl/despachos/
+        - generic [ref=e49]:
+          - link "mi cuenta" [ref=e50] [cursor=pointer]:
+            - /url: /mi-cuenta
+            - img "mi cuenta" [ref=e52]
+          - link "icono carrito $0(0)" [ref=e53] [cursor=pointer]:
+            - /url: https://petstop.cl/carrito/
+            - img "icono carrito" [ref=e55]
+            - generic [ref=e56]: $0(0)
+          - link "buscar" [ref=e57] [cursor=pointer]:
+            - /url: "#search"
+            - img "buscar" [ref=e58]
+          - button [ref=e60] [cursor=pointer]
+      - search [ref=e64]:
+        - generic [ref=e66]:
+          - generic [ref=e69]:
+            - generic [ref=e70]: "Buscar:"
+            - searchbox "Buscar:" [ref=e71]
+          - combobox [ref=e74]:
+            - combobox "marca" [ref=e76]:
+              - option "Selecciona una Marca" [selected]
+              - option "Acana"
+              - option "AFP"
+              - option "Agility"
+              - option "Alpha Spirit"
+              - option "America Litter"
+              - option "Amity"
+              - option "Beaphar"
+              - option "Benebone"
+              - option "Bil Jac"
+              - option "Biogance"
+              - option "Bioline"
+              - option "Boehringen Ingelheim"
+              - option "Bracco"
+              - option "Bravecto"
+              - option "Bravery"
+              - option "Brit"
+              - option "Broadline"
+              - option "Brouwer"
+              - option "Calibra"
+              - option "Calier"
+              - option "Camon"
+              - option "Cat It"
+              - option "Cat Love"
+              - option "Chemie"
+              - option "Country Dog"
+              - option "Diamond Naturals"
+              - option "Doc Kennedy"
+              - option "Dog It"
+              - option "Drag Pharma"
+              - option "Earthborn Holistic"
+              - option "Easy Clean"
+              - option "Ehlinger"
+              - option "Elanco"
+              - option "Eukanuba"
+              - option "Exoterra"
+              - option "Farmina"
+              - option "Feliway"
+              - option "Fit Formula"
+              - option "Flexi"
+              - option "Furminator"
+              - option "Fuzzyard"
+              - option "Habitrail"
+              - option "Hagen"
+              - option "Heel"
+              - option "Hills"
+              - option "Holliday"
+              - option "Inaba"
+              - option "Interfarma"
+              - option "Intersand"
+              - option "Intervet"
+              - option "Kimba Pets"
+              - option "Kong"
+              - option "Labyes"
+              - option "Le Salon"
+              - option "Living World"
+              - option "Maintenance Criadores"
+              - option "Marben Pets"
+              - option "Mazuri"
+              - option "MedVetArom"
+              - option "Msd"
+              - option "Naturale"
+              - option "Natures Miracle"
+              - option "Nexgard"
+              - option "Nina Ottosson"
+              - option "Nomade"
+              - option "Nutra Nuggets"
+              - option "Nutrafin"
+              - option "Nutrience"
+              - option "Orijen"
+              - option "Outward Hound"
+              - option "Oxbow"
+              - option "Pawise"
+              - option "Pet Naturals"
+              - option "PetAg"
+              - option "Petstages"
+              - option "PharmaDiet"
+              - option "Pro Nutrition"
+              - option "Pro Plan"
+              - option "ProDen"
+              - option "ProVet"
+              - option "Purina"
+              - option "Royal Canin"
+              - option "Sieger"
+              - option "Skouts Honor"
+              - option "Synergy Labs"
+              - option "Taste Of The Wild"
+              - option "Tropican"
+              - option "TropiClean"
+              - option "Vetnil"
+              - option "VetPlus"
+              - option "Virbac"
+              - option "Vitakraft"
+              - option "Vitanimal"
+              - option "Wanpy"
+              - option "Wild"
+              - option "Worlds Best"
+              - option "Zeus"
+              - option "Zoetis"
+              - option "ZuPet"
+          - combobox [ref=e79]:
+            - combobox "mascota" [ref=e81]:
+              - option "Selecciona una Mascota" [selected]
+              - option "Exóticos"
+              - option "Gatos"
+              - option "Perros"
+    - generic [ref=e83]: PetStop Online - para despacho a domicilio
+    - main [ref=e84]:
+      - generic [ref=e85]:
+        - generic [ref=e87]:
+          - link "Despacho gratuito a domicilio" [ref=e89] [cursor=pointer]:
+            - /url: https://petstop.cl/despachos/
+            - img "Despacho gratuito a domicilio" [ref=e90]
+          - link "Actualizando el sitio" [ref=e92] [cursor=pointer]:
+            - /url: https://petstop.cl/marca/brit/
+            - img "Actualizando el sitio" [ref=e93]
+        - generic [ref=e98]:
+          - group "1 / 103" [ref=e99]:
+            - link "Acana" [ref=e100] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/acana/
+              - img "Acana" [ref=e101]
+          - group "2 / 103" [ref=e102]:
+            - link "AFP" [ref=e103] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/afp/
+              - img "AFP" [ref=e104]
+          - group "3 / 103" [ref=e105]:
+            - link "Agility" [ref=e106] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/agility/
+              - img "Agility" [ref=e107]
+          - group "4 / 103" [ref=e108]:
+            - link "Alpha Spirit" [ref=e109] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/alpha-spirit/
+              - img "Alpha Spirit" [ref=e110]
+          - group "5 / 103" [ref=e111]:
+            - link "America Litter" [ref=e112] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/america-litter/
+              - img "America Litter" [ref=e113]
+          - group "6 / 103" [ref=e114]:
+            - link "Amity" [ref=e115] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/amity/
+              - img "Amity" [ref=e116]
+          - group "7 / 103" [ref=e117]:
+            - link "Beaphar" [ref=e118] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/beaphar/
+              - img "Beaphar" [ref=e119]
+          - group "8 / 103" [ref=e120]:
+            - link "Benebone" [ref=e121] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/benebone/
+              - img "Benebone" [ref=e122]
+          - group "9 / 103" [ref=e123]:
+            - link "Bil Jac" [ref=e124] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/bil-jac/
+              - img "Bil Jac" [ref=e125]
+          - group "10 / 103" [ref=e126]:
+            - link "Biogance" [ref=e127] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/biogance/
+              - img "Biogance" [ref=e128]
+          - group "11 / 103" [ref=e129]:
+            - link "Bioline" [ref=e130] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/bioline/
+              - img "Bioline" [ref=e131]
+          - group "12 / 103" [ref=e132]:
+            - link "Boehringen Ingelheim" [ref=e133] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/boehringen-ingelheim/
+              - img "Boehringen Ingelheim" [ref=e134]
+          - group "13 / 103" [ref=e135]:
+            - link "Bracco" [ref=e136] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/bracco/
+              - img "Bracco" [ref=e137]
+          - group "14 / 103" [ref=e138]:
+            - link "Bravecto" [ref=e139] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/bravecto/
+              - img "Bravecto" [ref=e140]
+          - group "15 / 103" [ref=e141]:
+            - link "Bravery" [ref=e142] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/bravery/
+              - img "Bravery" [ref=e143]
+          - group "16 / 103" [ref=e144]:
+            - link "Brit" [ref=e145] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/brit/
+              - img "Brit" [ref=e146]
+          - group "17 / 103" [ref=e147]:
+            - link "Broadline" [ref=e148] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/broadline/
+              - img "Broadline" [ref=e149]
+          - group "18 / 103" [ref=e150]:
+            - link "Brouwer" [ref=e151] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/brouwer/
+              - img "Brouwer" [ref=e152]
+          - group "19 / 103" [ref=e153]:
+            - link "Calibra" [ref=e154] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/calibra/
+              - img "Calibra" [ref=e155]
+          - group "20 / 103" [ref=e156]:
+            - link "Calier" [ref=e157] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/calier/
+              - img "Calier" [ref=e158]
+          - group "21 / 103" [ref=e159]:
+            - link "Camon" [ref=e160] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/camon/
+              - img "Camon" [ref=e161]
+          - group "22 / 103" [ref=e162]:
+            - link "Cat It" [ref=e163] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/cat-it/
+              - img "Cat It" [ref=e164]
+          - group "23 / 103" [ref=e165]:
+            - link "Cat Love" [ref=e166] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/cat-love/
+              - img "Cat Love" [ref=e167]
+          - group "24 / 103" [ref=e168]:
+            - link "Chemie" [ref=e169] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/chemie/
+              - img "Chemie" [ref=e170]
+          - group "25 / 103" [ref=e171]:
+            - link "Coastal" [ref=e172] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/coastal/
+              - img "Coastal" [ref=e173]
+          - group "26 / 103" [ref=e174]:
+            - link "Country Dog" [ref=e175] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/country-dog/
+              - img "Country Dog" [ref=e176]
+          - group "27 / 103" [ref=e177]:
+            - link "Diamond Naturals" [ref=e178] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/diamond-naturals/
+              - img "Diamond Naturals" [ref=e179]
+          - group "28 / 103" [ref=e180]:
+            - link "Doc Kennedy" [ref=e181] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/doc-kennedy/
+              - img "Doc Kennedy" [ref=e182]
+          - group "29 / 103" [ref=e183]:
+            - link "Dog It" [ref=e184] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/dog-it/
+              - img "Dog It" [ref=e185]
+          - group "30 / 103" [ref=e186]:
+            - link "Drag Pharma" [ref=e187] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/drag-pharma/
+              - img "Drag Pharma" [ref=e188]
+          - group "31 / 103" [ref=e189]:
+            - link "Earthborn Holistic" [ref=e190] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/earthborn-holistic/
+              - img "Earthborn Holistic" [ref=e191]
+          - group "32 / 103" [ref=e192]:
+            - link "Easy Clean" [ref=e193] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/easy-clean/
+              - img "Easy Clean" [ref=e194]
+          - group "33 / 103" [ref=e195]:
+            - link "Ehlinger" [ref=e196] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/ehlinger/
+              - img "Ehlinger" [ref=e197]
+          - group "34 / 103" [ref=e198]:
+            - link "Elanco" [ref=e199] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/elanco/
+              - img "Elanco" [ref=e200]
+          - group "35 / 103" [ref=e201]:
+            - link "Eukanuba" [ref=e202] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/eukanuba/
+              - img "Eukanuba" [ref=e203]
+          - group "36 / 103" [ref=e204]:
+            - link "Exoterra" [ref=e205] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/exoterra/
+              - img "Exoterra" [ref=e206]
+          - group "37 / 103" [ref=e207]:
+            - link "Farmina" [ref=e208] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/farmina/
+              - img "Farmina" [ref=e209]
+          - group "38 / 103" [ref=e210]:
+            - link "Feliway" [ref=e211] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/feliway/
+              - img "Feliway" [ref=e212]
+          - group "39 / 103" [ref=e213]:
+            - link "Fit Formula" [ref=e214] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/fit-formula/
+              - img "Fit Formula" [ref=e215]
+          - group "40 / 103" [ref=e216]:
+            - link "Flexi" [ref=e217] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/flexi/
+              - img "Flexi" [ref=e218]
+          - group "41 / 103" [ref=e219]:
+            - link "Furminator" [ref=e220] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/furminator/
+              - img "Furminator" [ref=e221]
+          - group "42 / 103" [ref=e222]:
+            - link "Fuzzyard" [ref=e223] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/fuzzyard/
+              - img "Fuzzyard" [ref=e224]
+          - group "43 / 103" [ref=e225]:
+            - link "Habitrail" [ref=e226] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/habitrail/
+              - img "Habitrail" [ref=e227]
+          - group "44 / 103" [ref=e228]:
+            - link "Hagen" [ref=e229] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/hagen/
+              - img "Hagen" [ref=e230]
+          - group "45 / 103" [ref=e231]:
+            - link "Heel" [ref=e232] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/heel/
+              - img "Heel" [ref=e233]
+          - group "46 / 103" [ref=e234]:
+            - link "Hills" [ref=e235] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/hills/
+              - img "Hills" [ref=e236]
+          - group "47 / 103" [ref=e237]:
+            - link "Holliday" [ref=e238] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/holliday/
+              - img "Holliday" [ref=e239]
+          - group "48 / 103" [ref=e240]:
+            - link "Inaba" [ref=e241] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/inaba/
+              - img "Inaba" [ref=e242]
+          - group "49 / 103" [ref=e243]:
+            - link "Interfarma" [ref=e244] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/interfarma/
+              - img "Interfarma" [ref=e245]
+          - group "50 / 103" [ref=e246]:
+            - link "Intersand" [ref=e247] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/intersand/
+              - img "Intersand" [ref=e248]
+          - group "51 / 103" [ref=e249]:
+            - link "Intervet" [ref=e250] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/intervet/
+              - img "Intervet" [ref=e251]
+          - group "52 / 103" [ref=e252]:
+            - link "Kimba Pets" [ref=e253] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/kimba-pets/
+              - img "Kimba Pets" [ref=e254]
+          - group "53 / 103" [ref=e255]:
+            - link "Kong" [ref=e256] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/kong/
+              - img "Kong" [ref=e257]
+          - group "54 / 103" [ref=e258]:
+            - link "Labyes" [ref=e259] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/labyes/
+              - img "Labyes" [ref=e260]
+          - group "55 / 103" [ref=e261]:
+            - link "Le Salon" [ref=e262] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/le-salon/
+              - img "Le Salon" [ref=e263]
+          - group "56 / 103" [ref=e264]:
+            - link "Living World" [ref=e265] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/living-world/
+              - img "Living World" [ref=e266]
+          - group "57 / 103" [ref=e267]:
+            - link "Maintenance Criadores" [ref=e268] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/maintenance-criadores/
+              - img "Maintenance Criadores" [ref=e269]
+          - group "58 / 103" [ref=e270]:
+            - link "Marben Pets" [ref=e271] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/marben-pets/
+              - img "Marben Pets" [ref=e272]
+          - group "59 / 103" [ref=e273]:
+            - link "Mazuri" [ref=e274] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/mazuri/
+              - img "Mazuri" [ref=e275]
+          - group "60 / 103" [ref=e276]:
+            - link "MedVetArom" [ref=e277] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/medvetarom/
+              - img "MedVetArom" [ref=e278]
+          - group "61 / 103" [ref=e279]:
+            - link "Msd" [ref=e280] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/msd/
+              - img "Msd" [ref=e281]
+          - group "62 / 103" [ref=e282]:
+            - link "Naturale" [ref=e283] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/naturale/
+              - img "Naturale" [ref=e284]
+          - group "63 / 103" [ref=e285]:
+            - link "Natures Miracle" [ref=e286] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/natures-miracle/
+              - img "Natures Miracle" [ref=e287]
+          - group "64 / 103" [ref=e288]:
+            - link "Nexgard" [ref=e289] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/nexgard/
+              - img "Nexgard" [ref=e290]
+          - group "65 / 103" [ref=e291]:
+            - link "Nina Ottosson" [ref=e292] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/nina-ottosson/
+              - img "Nina Ottosson" [ref=e293]
+          - group "66 / 103" [ref=e294]:
+            - link "Nomade" [ref=e295] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/nomade/
+              - img "Nomade" [ref=e296]
+          - group "67 / 103" [ref=e297]:
+            - link "Nutra Nuggets" [ref=e298] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/nutra-nuggets/
+              - img "Nutra Nuggets" [ref=e299]
+          - group "68 / 103" [ref=e300]:
+            - link "Nutrafin" [ref=e301] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/nutrafin/
+              - img "Nutrafin" [ref=e302]
+          - group "69 / 103" [ref=e303]:
+            - link "Nutrience" [ref=e304] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/nutrience/
+              - img "Nutrience" [ref=e305]
+          - group "70 / 103" [ref=e306]:
+            - link "Orijen" [ref=e307] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/orijen/
+              - img "Orijen" [ref=e308]
+          - group "71 / 103" [ref=e309]:
+            - link "Outward Hound" [ref=e310] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/outward-hound/
+              - img "Outward Hound" [ref=e311]
+          - group "72 / 103" [ref=e312]:
+            - link "Oxbow" [ref=e313] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/oxbow/
+              - img "Oxbow" [ref=e314]
+          - group "73 / 103" [ref=e315]:
+            - link "Pawise" [ref=e316] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/pawise/
+              - img "Pawise" [ref=e317]
+          - group "74 / 103" [ref=e318]:
+            - link "Pet Naturals" [ref=e319] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/pet-naturals/
+              - img "Pet Naturals" [ref=e320]
+          - group "75 / 103" [ref=e321]:
+            - link "PetAg" [ref=e322] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/petag/
+              - img "PetAg" [ref=e323]
+          - group "76 / 103" [ref=e324]:
+            - link "Pfizer" [ref=e325] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/pfizer/
+              - img "Pfizer" [ref=e326]
+          - group "77 / 103" [ref=e327]:
+            - link "PharmaDiet" [ref=e328] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/pharmadiet/
+              - img "PharmaDiet" [ref=e329]
+          - group "78 / 103" [ref=e330]:
+            - link "Prevue" [ref=e331] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/prevue/
+              - img "Prevue" [ref=e332]
+          - group "79 / 103" [ref=e333]:
+            - link "Pro Nutrition" [ref=e334] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/pro-nutrition/
+              - img "Pro Nutrition" [ref=e335]
+          - group "80 / 103" [ref=e336]:
+            - link "Pro Pac" [ref=e337] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/pro-pac/
+              - img "Pro Pac" [ref=e338]
+          - group "81 / 103" [ref=e339]:
+            - link "Pro Plan" [ref=e340] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/pro-plan/
+              - img "Pro Plan" [ref=e341]
+          - group "82 / 103" [ref=e342]:
+            - link "ProDen" [ref=e343] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/proden/
+              - img "ProDen" [ref=e344]
+          - group "83 / 103" [ref=e345]:
+            - link "ProVet" [ref=e346] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/provet/
+              - img "ProVet" [ref=e347]
+          - group "84 / 103" [ref=e348]:
+            - link "Purina" [ref=e349] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/purina/
+              - img "Purina" [ref=e350]
+          - group "85 / 103" [ref=e351]:
+            - link "Revolution" [ref=e352] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/revolution/
+              - img "Revolution" [ref=e353]
+          - group "86 / 103" [ref=e354]:
+            - link "Royal Canin" [ref=e355] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/royal-canin/
+              - img "Royal Canin" [ref=e356]
+          - group "87 / 103" [ref=e357]:
+            - link "Sieger" [ref=e358] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/sieger/
+              - img "Sieger" [ref=e359]
+          - group "88 / 103" [ref=e360]:
+            - link "Skouts Honor" [ref=e361] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/skouts-honor/
+              - img "Skouts Honor" [ref=e362]
+          - group "89 / 103" [ref=e363]:
+            - link "Synergy Labs" [ref=e364] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/synergy-labs/
+              - img "Synergy Labs" [ref=e365]
+          - group "90 / 103" [ref=e366]:
+            - link "Taste Of The Wild" [ref=e367] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/taste-of-the-wild/
+              - img "Taste Of The Wild" [ref=e368]
+          - group "91 / 103" [ref=e369]:
+            - link "Tropican" [ref=e370] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/tropican/
+              - img "Tropican" [ref=e371]
+          - group "92 / 103" [ref=e372]:
+            - link "TropiClean" [ref=e373] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/tropiclean/
+              - img "TropiClean" [ref=e374]
+          - group "93 / 103" [ref=e375]:
+            - link "Vetnil" [ref=e376] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/vetnil/
+              - img "Vetnil" [ref=e377]
+          - group "94 / 103" [ref=e378]:
+            - link "VetPlus" [ref=e379] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/vetplus/
+              - img "VetPlus" [ref=e380]
+          - group "95 / 103" [ref=e381]:
+            - link "Virbac" [ref=e382] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/virbac/
+              - img "Virbac" [ref=e383]
+          - group "96 / 103" [ref=e384]:
+            - link "Vitakraft" [ref=e385] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/vitakraft/
+              - img "Vitakraft" [ref=e386]
+          - group "97 / 103" [ref=e387]:
+            - link "Vitanimal" [ref=e388] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/vitanimal/
+              - img "Vitanimal" [ref=e389]
+          - group "98 / 103" [ref=e390]:
+            - link "Wanpy" [ref=e391] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/wanpy/
+              - img "Wanpy" [ref=e392]
+          - group "99 / 103" [ref=e393]:
+            - link "Wild" [ref=e394] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/wild/
+              - img "Wild" [ref=e395]
+          - group "100 / 103" [ref=e396]:
+            - link "Worlds Best" [ref=e397] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/worlds-best/
+              - img "Worlds Best" [ref=e398]
+          - group "101 / 103" [ref=e399]:
+            - link "Zeus" [ref=e400] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/zeus/
+              - img "Zeus" [ref=e401]
+          - group "102 / 103" [ref=e402]:
+            - link "Zoetis" [ref=e403] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/zoetis/
+              - img "Zoetis" [ref=e404]
+          - group "103 / 103" [ref=e405]:
+            - link "ZuPet" [ref=e406] [cursor=pointer]:
+              - /url: https://petstop.cl/marca/zupet/
+              - img "ZuPet" [ref=e407]
+        - paragraph [ref=e409]:
+          - link [ref=e410] [cursor=pointer]:
+            - /url: /marca/royal-canin/
+        - heading "Novedades!" [level=2] [ref=e412]
+        - generic [ref=e415]:
+          - group "1 / 8" [ref=e416]:
+            - 'link "Plasmoral Immunity 10 comprimidos Plasmoral Immunity 10 comprimidos -11% El precio original era: $6.990. El precio actual es: $6.250." [ref=e418] [cursor=pointer]':
+              - /url: https://petstop.cl/producto/plasmoral-immunity-10-comprimidos/
+              - img "Plasmoral Immunity 10 comprimidos" [ref=e419]
+              - heading "Plasmoral Immunity 10 comprimidos" [level=2] [ref=e420]
+              - generic [ref=e421]: "-11%"
+              - generic [ref=e422]:
+                - deletion [ref=e423]:
+                  - generic [ref=e425]: $6.990
+                - generic [ref=e426]: "El precio original era: $6.990."
+                - insertion [ref=e427]:
+                  - generic [ref=e429]: $6.250
+                - generic [ref=e430]: "El precio actual es: $6.250."
+          - group "2 / 8" [ref=e431]:
+            - 'link "IRCVet 60 comprimidos IRCVet 60 comprimidos -12% El precio original era: $50.990. El precio actual es: $44.750." [ref=e433] [cursor=pointer]':
+              - /url: https://petstop.cl/producto/ircvet-60-comprimidos/
+              - img "IRCVet 60 comprimidos" [ref=e434]
+              - heading "IRCVet 60 comprimidos" [level=2] [ref=e435]
+              - generic [ref=e436]: "-12%"
+              - generic [ref=e437]:
+                - deletion [ref=e438]:
+                  - generic [ref=e440]: $50.990
+                - generic [ref=e441]: "El precio original era: $50.990."
+                - insertion [ref=e442]:
+                  - generic [ref=e444]: $44.750
+                - generic [ref=e445]: "El precio actual es: $44.750."
+          - group "3 / 8" [ref=e446]:
+            - 'link "IRCVet Gel 50ml IRCVet Gel 50ml -9% El precio original era: $36.990. El precio actual es: $33.750." [ref=e448] [cursor=pointer]':
+              - /url: https://petstop.cl/producto/ircvet-gel-50ml/
+              - img "IRCVet Gel 50ml" [ref=e449]
+              - heading "IRCVet Gel 50ml" [level=2] [ref=e450]
+              - generic [ref=e451]: "-9%"
+              - generic [ref=e452]:
+                - deletion [ref=e453]:
+                  - generic [ref=e455]: $36.990
+                - generic [ref=e456]: "El precio original era: $36.990."
+                - insertion [ref=e457]:
+                  - generic [ref=e459]: $33.750
+                - generic [ref=e460]: "El precio actual es: $33.750."
+          - group "4 / 8" [ref=e461]:
+            - 'link "Daforte Gel 50ml Daforte Gel 50ml -18% El precio original era: $17.990. El precio actual es: $14.750." [ref=e463] [cursor=pointer]':
+              - /url: https://petstop.cl/producto/daforte-gel-50ml/
+              - img "Daforte Gel 50ml" [ref=e464]
+              - heading "Daforte Gel 50ml" [level=2] [ref=e465]
+              - generic [ref=e466]: "-18%"
+              - generic [ref=e467]:
+                - deletion [ref=e468]:
+                  - generic [ref=e470]: $17.990
+                - generic [ref=e471]: "El precio original era: $17.990."
+                - insertion [ref=e472]:
+                  - generic [ref=e474]: $14.750
+                - generic [ref=e475]: "El precio actual es: $14.750."
+          - group "5 / 8" [ref=e476]:
+            - 'link "Hyaloral Raza Grande/Gigante 12 comprimidos Hyaloral Raza Grande/Gigante 12 comprimidos -8% El precio original era: $5.990. El precio actual es: $5.500." [ref=e478] [cursor=pointer]':
+              - /url: https://petstop.cl/producto/hyaloral-raza-grande-gigante-12-comprimidos/
+              - img "Hyaloral Raza Grande/Gigante 12 comprimidos" [ref=e479]
+              - heading "Hyaloral Raza Grande/Gigante 12 comprimidos" [level=2] [ref=e480]
+              - generic [ref=e481]: "-8%"
+              - generic [ref=e482]:
+                - deletion [ref=e483]:
+                  - generic [ref=e485]: $5.990
+                - generic [ref=e486]: "El precio original era: $5.990."
+                - insertion [ref=e487]:
+                  - generic [ref=e489]: $5.500
+                - generic [ref=e490]: "El precio actual es: $5.500."
+          - group "6 / 8" [ref=e491]:
+            - link "Royal Canin Kitten Gastrointestinal 2kg Royal Canin Kitten Gastrointestinal 2kg $27.990" [ref=e493] [cursor=pointer]:
+              - /url: https://petstop.cl/producto/royal-canin-kitten-gastrointestinal-2kg/
+              - img "Royal Canin Kitten Gastrointestinal 2kg" [ref=e494]
+              - heading "Royal Canin Kitten Gastrointestinal 2kg" [level=2] [ref=e495]
+              - generic [ref=e498]: $27.990
+          - group "7 / 8" [ref=e499]:
+            - link "Royal Canin Kitten Gastrointestinal 400gr Royal Canin Kitten Gastrointestinal 400gr $5.990" [ref=e501] [cursor=pointer]:
+              - /url: https://petstop.cl/producto/royal-canin-kitten-gastrointestinal-400gr/
+              - img "Royal Canin Kitten Gastrointestinal 400gr" [ref=e502]
+              - heading "Royal Canin Kitten Gastrointestinal 400gr" [level=2] [ref=e503]
+              - generic [ref=e506]: $5.990
+          - group "8 / 8" [ref=e507]:
+            - 'link "Catit Arena Go Natural Sin Aroma 5.6kg Catit Arena Go Natural Sin Aroma 5.6kg -7% El precio original era: $19.990. El precio actual es: $18.500." [ref=e509] [cursor=pointer]':
+              - /url: https://petstop.cl/producto/catit-arena-go-natural-sin-aroma-5-6kg/
+              - img "Catit Arena Go Natural Sin Aroma 5.6kg" [ref=e510]
+              - heading "Catit Arena Go Natural Sin Aroma 5.6kg" [level=2] [ref=e511]
+              - generic [ref=e512]: "-7%"
+              - generic [ref=e513]:
+                - deletion [ref=e514]:
+                  - generic [ref=e516]: $19.990
+                - generic [ref=e517]: "El precio original era: $19.990."
+                - insertion [ref=e518]:
+                  - generic [ref=e520]: $18.500
+                - generic [ref=e521]: "El precio actual es: $18.500."
+        - generic [ref=e523]:
+          - link "La mejor arena para gatos del mundo!" [ref=e525] [cursor=pointer]:
+            - /url: /marca/america/
+            - img "La mejor arena para gatos del mundo!" [ref=e526]
+          - link "Descubre toda la linea brit care" [ref=e528] [cursor=pointer]:
+            - /url: /marca/brit/
+            - img "Descubre toda la linea brit care" [ref=e529]
+        - generic [ref=e530]:
+          - heading "Productos más vendidos!" [level=2] [ref=e531]
+          - generic [ref=e533]:
+            - 'link "America Litter Ultra Odor Seal Rango de precios: desde $12.500 hasta $21.750" [ref=e535] [cursor=pointer]':
+              - /url: https://petstop.cl/producto/arena-america-litter-ultra-odor-seal/
+              - heading "America Litter Ultra Odor Seal" [level=2] [ref=e536]
+              - generic [ref=e537]:
+                - generic [ref=e538]: $12.500
+                - text: "-"
+                - generic [ref=e539]: $21.750
+                - generic [ref=e540]: "Rango de precios: desde $12.500 hasta $21.750"
+            - 'link "America Litter Clean Paws Rango de precios: desde $10.250 hasta $17.750" [ref=e542] [cursor=pointer]':
+              - /url: https://petstop.cl/producto/arena-america-litter-clean-paws/
+              - heading "America Litter Clean Paws" [level=2] [ref=e543]
+              - generic [ref=e544]:
+                - generic [ref=e545]: $10.250
+                - text: "-"
+                - generic [ref=e546]: $17.750
+                - generic [ref=e547]: "Rango de precios: desde $10.250 hasta $17.750"
+            - generic [ref=e548]:
+              - generic [ref=e549]: Oferta! -14%
+              - 'link "America Litter Dust Free 7kg El precio original era: $15.990. El precio actual es: $13.750." [ref=e550] [cursor=pointer]':
+                - /url: https://petstop.cl/producto/arena-america-litter-dust-free-7kg/
+                - heading "America Litter Dust Free 7kg" [level=2] [ref=e551]
+                - generic [ref=e552]:
+                  - deletion [ref=e553]:
+                    - generic [ref=e554]: $15.990
+                  - generic [ref=e555]: "El precio original era: $15.990."
+                  - insertion [ref=e556]:
+                    - generic [ref=e557]: $13.750
+                  - generic [ref=e558]: "El precio actual es: $13.750."
+            - 'link "Brit Care Dog Senior & Light Salmon Rango de precios: desde $23.500 hasta $68.500" [ref=e560] [cursor=pointer]':
+              - /url: https://petstop.cl/producto/brit-care-senior-light-salmon/
+              - heading "Brit Care Dog Senior & Light Salmon" [level=2] [ref=e561]
+              - generic [ref=e562]:
+                - generic [ref=e563]: $23.500
+                - text: "-"
+                - generic [ref=e564]: $68.500
+                - generic [ref=e565]: "Rango de precios: desde $23.500 hasta $68.500"
+            - 'link "America Litter Quick Clumping Rango de precios: desde $3.500 hasta $15.750" [ref=e567] [cursor=pointer]':
+              - /url: https://petstop.cl/producto/america-litter-quick-clumping/
+              - heading "America Litter Quick Clumping" [level=2] [ref=e568]
+              - generic [ref=e569]:
+                - generic [ref=e570]: $3.500
+                - text: "-"
+                - generic [ref=e571]: $15.750
+                - generic [ref=e572]: "Rango de precios: desde $3.500 hasta $15.750"
+            - 'link "Brit Care Dog Adult Salmon Rango de precios: desde $23.500 hasta $68.500" [ref=e574] [cursor=pointer]':
+              - /url: https://petstop.cl/producto/brit-care-adult-salmon/
+              - heading "Brit Care Dog Adult Salmon" [level=2] [ref=e575]
+              - generic [ref=e576]:
+                - generic [ref=e577]: $23.500
+                - text: "-"
+                - generic [ref=e578]: $68.500
+                - generic [ref=e579]: "Rango de precios: desde $23.500 hasta $68.500"
+            - 'link "Brit Care Dog Senior Lamb Rango de precios: desde $8.990 hasta $67.500" [ref=e581] [cursor=pointer]':
+              - /url: https://petstop.cl/producto/brit-care-senior-lamb-rice/
+              - heading "Brit Care Dog Senior Lamb" [level=2] [ref=e582]
+              - generic [ref=e583]:
+                - generic [ref=e584]: $8.990
+                - text: "-"
+                - generic [ref=e585]: $67.500
+                - generic [ref=e586]: "Rango de precios: desde $8.990 hasta $67.500"
+            - 'link "Brit Care Dog Weight Loss Rabbit Rango de precios: desde $23.750 hasta $71.500" [ref=e588] [cursor=pointer]':
+              - /url: https://petstop.cl/producto/brit-care-weight-loss-rabbit-rice/
+              - heading "Brit Care Dog Weight Loss Rabbit" [level=2] [ref=e589]
+              - generic [ref=e590]:
+                - generic [ref=e591]: $23.750
+                - text: "-"
+                - generic [ref=e592]: $71.500
+                - generic [ref=e593]: "Rango de precios: desde $23.750 hasta $71.500"
+        - generic [ref=e595]:
+          - link "Agenda tu hora veterinaria" [ref=e597] [cursor=pointer]:
+            - /url: https://wa.me/56956115573
+            - img "Agenda tu hora veterinaria" [ref=e598]
+          - link "Consultanos lo que quieras" [ref=e600] [cursor=pointer]:
+            - /url: https://wa.me/56979140338
+            - img "Consultanos lo que quieras" [ref=e601]
+  - contentinfo [ref=e602]:
+    - generic [ref=e607]:
+      - generic [ref=e608]:
+        - generic [ref=e609]: PetStop Online
+        - list [ref=e610]:
+          - listitem [ref=e611]:
+            - strong [ref=e612]: Tus preguntas al correo
+            - text: ":"
+            - link "online@petstop.cl" [ref=e613] [cursor=pointer]:
+              - /url: mailto:online@petstop.cl
+          - listitem [ref=e614]:
+            - strong [ref=e615]: Despacho a domicilio
+            - text: ":"
+            - text: Lunes a Sábado, despacho dentro 2 días hábiles,
+            - text: pedidos recibidos hasta las 11am
+            - text: normalmente se despachan el mismo dia
+            - text: sujeto a disponibilidad y segun nuestras rutas.
+          - listitem [ref=e616]:
+            - strong [ref=e617]: Whatsapp tienda online
+            - text: ":"
+            - link "+56 9 7914 0338" [ref=e618] [cursor=pointer]:
+              - /url: https://wa.me/56979140338
+          - listitem [ref=e619]:
+            - strong [ref=e620]: Horario de Atención
+            - text: ":"
+            - paragraph [ref=e621]:
+              - text: Lunes a Sábado 8:30-11:30am
+              - text: desde las 11:30am envíanos un whataspp
+              - text: te contactamos lo antes posible
+              - text: Domingos y Festivos cerrado
+          - listitem [ref=e622]:
+            - strong [ref=e623]: Horario de entrega
+            - text: ":"
+            - text: 12:00-20:00 sujeto a nuestras rutas
+      - generic [ref=e624]:
+        - generic [ref=e625]: Tienda PetStop
+        - list [ref=e626]:
+          - listitem [ref=e627]:
+            - strong [ref=e628]: Tus preguntas al correo
+            - text: ":"
+            - text: contacto@petstop.cl
+          - listitem [ref=e629]:
+            - strong [ref=e630]: Whatsapp tienda física
+            - text: ":"
+            - link "+56 9 5611 5573" [ref=e631] [cursor=pointer]:
+              - /url: https://wa.me/56956115573
+          - listitem [ref=e632]:
+            - strong [ref=e633]: Teléfono tienda física
+            - text: ":"
+            - link "32 258 7743" [ref=e634] [cursor=pointer]:
+              - /url: tel:32 258 7743
+          - listitem [ref=e635]:
+            - link "Alvarez 1136 Local 4, Viña del Mar." [ref=e636] [cursor=pointer]:
+              - /url: https://maps.app.goo.gl/VsW4LXCnGovdXk3q8
+        - link "como llegar a la tienda" [ref=e637] [cursor=pointer]:
+          - /url: https://maps.app.goo.gl/VsW4LXCnGovdXk3q8
+          - img "como llegar a la tienda" [ref=e638]
+      - generic [ref=e639]:
+        - generic [ref=e640]: Tienda y Farmacia
+        - list [ref=e641]:
+          - listitem [ref=e642]: Alimentos, Accesorios, Consulta y Farmacia Veterinaria.
+          - listitem [ref=e643]:
+            - strong [ref=e644]: Horario Tienda y Farmacia
+            - text: ":"
+            - text: Lunes a Viernes 10:00-19:30
+            - text: Sábados 10:00-16:00
+            - text: Domingos y Festivos Cerrado
+          - listitem [ref=e645]:
+            - strong [ref=e646]: Consulta Veterinaria
+            - text: ":"
+            - text: Valor consulta $15.000 se recomienda con reserva de hora
+          - listitem [ref=e647]:
+            - link "Visitanos en facebook!" [ref=e648] [cursor=pointer]:
+              - /url: https://www.facebook.com/PETSTOPCHILE/
+        - img "PetStop – Tienda Online" [ref=e650]
+    - paragraph [ref=e652]:
+      - text: 2024 Hecho con ❤
+      - link "Zeleny ®" [ref=e653] [cursor=pointer]:
+        - /url: https://zeleny.cl
+  - status [ref=e654]
