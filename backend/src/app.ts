@@ -2,7 +2,6 @@ import express from 'express'
 import cors from 'cors'
 import helmet from 'helmet'
 import dotenv from 'dotenv'
-
 import productRoutes from './routes/productRoutes'
 import categoryRoutes from './routes/categoryRoutes'
 import brandsRoutes from './routes/brandsRoutes'
@@ -18,7 +17,11 @@ const app = express()
 app.use(helmet())
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL ?? 'http://localhost:5173',
+    origin: [
+      'http://localhost:5173',
+      'https://petshop-e-commerce.vercel.app',
+      process.env.FRONTEND_URL ?? ''
+    ],
     credentials: true,
   }),
 )
