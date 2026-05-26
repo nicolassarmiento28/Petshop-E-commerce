@@ -89,19 +89,19 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Contact */}
+          {/* Contact + Map */}
           <div>
             <h4 className="text-white dark:text-[#e8eaf0] font-semibold text-sm uppercase tracking-wider mb-4">Contacto</h4>
-            <ul className="space-y-3">
+            <ul className="space-y-3 mb-5">
               <li>
                 <a
-                  href="https://maps.google.com"
+                  href="https://maps.app.goo.gl/8wmBjrmk5d53DyXk9"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-start gap-2 text-sm text-gray-400 hover:text-blue-500 transition-colors"
                 >
                   <MapPin size={15} className="shrink-0 mt-0.5" />
-                  <span>Av. Ejemplo 1234, Santiago, Chile</span>
+                  <span>Av. Libertad 535, Viña del Mar, Chile</span>
                 </a>
               </li>
               <li>
@@ -117,6 +117,19 @@ export default function Footer() {
                 </a>
               </li>
             </ul>
+            <div className="overflow-hidden rounded-xl">
+              <iframe
+                src="https://www.google.com/maps?q=Av.+Libertad+535+Vi%C3%B1a+del+Mar+Chile&output=embed"
+                width="100%"
+                height="160"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Ubicación Petshop Viña del Mar"
+                className="bg-gray-800 dark:bg-[#222222]"
+              />
+            </div>
           </div>
         </div>
 
