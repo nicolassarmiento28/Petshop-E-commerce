@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { ShoppingCart, Menu, X, Search, User, Sun, Moon } from 'lucide-react'
+import { ShoppingCart, Menu, X, Search, User, Sun, Moon, Pill } from 'lucide-react'
 import { useCartStore } from '@/store/cartStore'
 import { useThemeStore } from '@/store/themeStore'
 import { useUiStore } from '@/store/uiStore'
@@ -10,8 +10,8 @@ const NAV_LINKS = [
   { label: 'Todos los productos', to: '/productos' },
   { label: 'Perro', to: '/categoria/perro' },
   { label: 'Gato', to: '/categoria/gato' },
-  { label: 'Farmacia', to: '/categoria/farmacia' },
-  { label: 'Pequeñas Mascotas', to: '/categoria/pequenas-mascotas' },
+  { label: 'Farmacia', to: '/categoria/farmacia', icon: Pill },
+  { label: 'Peluquería', to: '/categoria/pequenas-mascotas' },
   { label: 'Ofertas', to: '/categoria/ofertas' },
   { label: 'Marcas', to: '/categoria/marcas' },
 ]
@@ -142,10 +142,11 @@ export default function Navbar() {
                     : 'text-gray-600 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-[#222222]'
                 }`}
               >
+                {item.icon && <item.icon size={14} className="inline mr-1" />}
                 {item.label}
               </Link>
-            ))}
-          </nav>
+          ))}
+        </nav>
         </div>
 
         {/* Mobile menu */}
@@ -172,6 +173,7 @@ export default function Navbar() {
                   className="block px-3 py-2.5 text-sm font-medium text-gray-700 dark:text-[#e8eaf0] rounded-lg hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-[#222222] transition-colors"
                   onClick={() => setMobileOpen(false)}
                 >
+                  {item.icon && <item.icon size={14} className="inline mr-1.5" />}
                   {item.label}
                 </Link>
               ))}

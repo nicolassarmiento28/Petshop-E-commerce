@@ -58,16 +58,23 @@ export default function Footer() {
           <div>
             <h4 className="text-white dark:text-[#e8eaf0] font-semibold text-sm uppercase tracking-wider mb-4">Categorías</h4>
             <ul className="space-y-2">
-              {['Perro', 'Gato', 'Farmacia', 'Pequeñas Mascotas', 'Ofertas', 'Marcas'].map((cat) => (
-                <li key={cat}>
-                  <Link
-                    to={`/categoria/${cat.toLowerCase().replace(/ /g, '-').replace('ñ', 'n')}`}
-                    className="text-sm text-gray-400 hover:text-blue-500 transition-colors"
-                  >
-                    {cat}
-                  </Link>
-                </li>
-              ))}
+              {[
+                'Perro', 'Gato', 'Farmacia',
+                { label: 'Peluquería', to: '/categoria/pequenas-mascotas' },
+                'Ofertas', 'Marcas',
+              ].map((cat) => {
+                const label = typeof cat === 'string' ? cat : cat.label
+                const to = typeof cat === 'string'
+                  ? `/categoria/${cat.toLowerCase().replace(/ /g, '-').replace('ñ', 'n')}`
+                  : cat.to
+                return (
+                  <li key={label}>
+                    <Link to={to} className="text-sm text-gray-400 hover:text-blue-500 transition-colors">
+                      {label}
+                    </Link>
+                  </li>
+                )
+              })}
             </ul>
           </div>
 

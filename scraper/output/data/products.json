@@ -1,0 +1,602 @@
+[
+  {
+    "name": "Dogxtreme Puppy pollo y arroz alimento seco para perro",
+    "price": 15990,
+    "description": "",
+    "category": "perro",
+    "imageUrl": "https://www.superzoo.cl/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dwa5ad0110/images/Dogxtreme%20Puppy%20pollo%20y%20arroz%20alimento%20para%20perro.jpg",
+    "localImage": "output/images/perro/dogxtreme-puppy-pollo-y-arroz-alimento-seco-para-perro.jpg",
+    "brand": "",
+    "slug": "dogxtreme-puppy-pollo-y-arroz-alimento-seco-para-perro"
+  },
+  {
+    "name": "Nath adulto Maxi sabor pollo y arroz integral alimento para perros",
+    "price": 54990,
+    "description": "",
+    "category": "perro",
+    "imageUrl": "https://www.superzoo.cl/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dw29f33640/images/Nath%20adulto%20Maxi%20sabor%20pollo%20y%20arroz%20integral%20alimento%20para%20perros.jpg",
+    "localImage": "output/images/perro/nath-adulto-maxi-sabor-pollo-y-arroz-integral-alimento-para-perros.jpg",
+    "brand": "",
+    "slug": "nath-adulto-maxi-sabor-pollo-y-arroz-integral-alimento-para-perros"
+  },
+  {
+    "name": "Nath adulto Medium sabor pollo y arroz integral alimento para perros",
+    "price": 18392,
+    "description": "",
+    "category": "perro",
+    "imageUrl": "https://www.superzoo.cl/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dwecc9797d/images/Nath%20adulto%20Medium%20sabor%20pollo%20y%20arroz%20integral%20alimento%20para%20perros.jpg",
+    "localImage": "output/images/perro/nath-adulto-medium-sabor-pollo-y-arroz-integral-alimento-para-perros.jpg",
+    "brand": "",
+    "slug": "nath-adulto-medium-sabor-pollo-y-arroz-integral-alimento-para-perros"
+  },
+  {
+    "name": "Nath adulto mini sabor pollo y arroz integral alimento para perros",
+    "price": 18392,
+    "description": "",
+    "category": "perro",
+    "imageUrl": "https://www.superzoo.cl/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dwee5c11dd/images/Nath%20adulto%20mini%20sabor%20pollo%20y%20arroz%20integral%20alimento%20para%20perros.jpg",
+    "localImage": "output/images/perro/nath-adulto-mini-sabor-pollo-y-arroz-integral-alimento-para-perros.jpg",
+    "brand": "",
+    "slug": "nath-adulto-mini-sabor-pollo-y-arroz-integral-alimento-para-perros"
+  },
+  {
+    "name": "Nath Puppy Medium Maxi sabor pollo y arroz integral alimento para perros",
+    "price": 18392,
+    "description": "",
+    "category": "perro",
+    "imageUrl": "https://www.superzoo.cl/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dwea07c28d/images/Nath%20Puppy%20Medium%20Maxi%20sabor%20pollo%20y%20arroz%20integral%20alimento%20para%20perros.jpg",
+    "localImage": "output/images/perro/nath-puppy-medium-maxi-sabor-pollo-y-arroz-integral-alimento-para-perros.jpg",
+    "brand": "",
+    "slug": "nath-puppy-medium-maxi-sabor-pollo-y-arroz-integral-alimento-para-perros"
+  },
+  {
+    "name": "Nath Puppy Mini sabor pollo y arroz integral alimento para perros",
+    "price": 18392,
+    "description": "",
+    "category": "perro",
+    "imageUrl": "https://www.superzoo.cl/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dw743950cd/images/Nath%20Puppy%20Mini%20sabor%20pollo%20y%20arroz%20integral%20alimento%20para%20perros.jpg",
+    "localImage": "output/images/perro/nath-puppy-mini-sabor-pollo-y-arroz-integral-alimento-para-perros.jpg",
+    "brand": "",
+    "slug": "nath-puppy-mini-sabor-pollo-y-arroz-integral-alimento-para-perros"
+  },
+  {
+    "name": "Bravery salmón adult alimento para perro",
+    "price": 30990,
+    "description": "",
+    "category": "perro",
+    "imageUrl": "https://www.superzoo.cl/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dw38088055/images/676c9-salmon-adulto-large-breed.jpg",
+    "localImage": "output/images/perro/bravery-salmon-adult-alimento-para-perro.jpg",
+    "brand": "",
+    "slug": "bravery-salmon-adult-alimento-para-perro"
+  },
+  {
+    "name": "Bravery Chicken Adult alimento para perro",
+    "price": 28990,
+    "description": "",
+    "category": "perro",
+    "imageUrl": "https://www.superzoo.cl/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dwc048a17c/images/3f3a3-chicken-adult.jpg",
+    "localImage": "output/images/perro/bravery-chicken-adult-alimento-para-perro.jpg",
+    "brand": "",
+    "slug": "bravery-chicken-adult-alimento-para-perro"
+  },
+  {
+    "name": "Bravery Lamb Adult Large/Medium Breeds alimento para perro",
+    "price": 75990,
+    "description": "",
+    "category": "perro",
+    "imageUrl": "https://www.superzoo.cl/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dwb295481d/images/15cbc-4kg.jpg",
+    "localImage": "output/images/perro/bravery-lamb-adult-large-medium-breeds-alimento-para-perro.jpg",
+    "brand": "",
+    "slug": "bravery-lamb-adult-large-medium-breeds-alimento-para-perro"
+  },
+  {
+    "name": "Bravery Lamb Adult Large/Medium Breeds alimento para perro",
+    "price": 30990,
+    "description": "",
+    "category": "perro",
+    "imageUrl": "https://www.superzoo.cl/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dwb295481d/images/15cbc-4kg.jpg",
+    "localImage": "output/images/perro/bravery-lamb-adult-large-medium-breeds-alimento-para-perro.jpg",
+    "brand": "",
+    "slug": "bravery-lamb-adult-large-medium-breeds-alimento-para-perro"
+  },
+  {
+    "name": "Fit Formula Adulto alimento para perro",
+    "price": 46990,
+    "description": "",
+    "category": "perro",
+    "imageUrl": "https://www.superzoo.cl/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dw0474b5be/images/563_m.jpg",
+    "localImage": "output/images/perro/fit-formula-adulto-alimento-para-perro.jpg",
+    "brand": "",
+    "slug": "fit-formula-adulto-alimento-para-perro"
+  },
+  {
+    "name": "Royal Canin adulto Mini Adult alimento para perro",
+    "price": 64990,
+    "description": "",
+    "category": "perro",
+    "imageUrl": "https://www.superzoo.cl/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dwcdd6bd50/images/86c84-mini-adulto-02.jpg.jpg",
+    "localImage": "output/images/perro/royal-canin-adulto-mini-adult-alimento-para-perro.jpg",
+    "brand": "",
+    "slug": "royal-canin-adulto-mini-adult-alimento-para-perro"
+  },
+  {
+    "name": "Leeby Cama Desfundable Beige para perros",
+    "price": 31990,
+    "description": "",
+    "category": "perro",
+    "imageUrl": "https://www.superzoo.cl/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dwc32a2919/images/8105_m-1.jpg",
+    "localImage": "output/images/perro/leeby-cama-desfundable-beige-para-perros.jpg",
+    "brand": "",
+    "slug": "leeby-cama-desfundable-beige-para-perros"
+  },
+  {
+    "name": "Leeby Cama Redonda Antiestrés de Pelo Gris para perros",
+    "price": 19990,
+    "description": "",
+    "category": "perro",
+    "imageUrl": "https://www.superzoo.cl/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dwfde345a4/images/8114_m-1.jpg",
+    "localImage": "output/images/perro/leeby-cama-redonda-antiestres-de-pelo-gris-para-perros.jpg",
+    "brand": "",
+    "slug": "leeby-cama-redonda-antiestres-de-pelo-gris-para-perros"
+  },
+  {
+    "name": "Leeby Cojín Impermeable Anti Pelos Rojo para perros",
+    "price": 21990,
+    "description": "",
+    "category": "perro",
+    "imageUrl": "https://www.superzoo.cl/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dwc88c327f/images/8097_m-1.jpg",
+    "localImage": "output/images/perro/leeby-cojin-impermeable-anti-pelos-rojo-para-perros.jpg",
+    "brand": "",
+    "slug": "leeby-cojin-impermeable-anti-pelos-rojo-para-perros"
+  },
+  {
+    "name": "Leeby Cuna Desenfundable de Terciopelo Verde para perros",
+    "price": 34990,
+    "description": "",
+    "category": "perro",
+    "imageUrl": "https://www.superzoo.cl/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dwc93872bc/images/15850_m1.jpg",
+    "localImage": "output/images/perro/leeby-cuna-desenfundable-de-terciopelo-verde-para-perros.jpg",
+    "brand": "",
+    "slug": "leeby-cuna-desenfundable-de-terciopelo-verde-para-perros"
+  },
+  {
+    "name": "Leeby Sofá Ortopédico Viscoelástico Gris para perros",
+    "price": 139990,
+    "description": "",
+    "category": "perro",
+    "imageUrl": "https://www.superzoo.cl/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dwcba0fe0f/images/8117_m1.jpg",
+    "localImage": "output/images/perro/leeby-sofa-ortopedico-viscoelastico-gris-para-perros.jpg",
+    "brand": "",
+    "slug": "leeby-sofa-ortopedico-viscoelastico-gris-para-perros"
+  },
+  {
+    "name": "Leeby Colchón Desfundable y Antideslizante para perros",
+    "price": 49990,
+    "description": "",
+    "category": "perro",
+    "imageUrl": "https://www.superzoo.cl/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dwd6af69b0/images/8112_m1.jpg",
+    "localImage": "output/images/perro/leeby-colchon-desfundable-y-antideslizante-para-perros.jpg",
+    "brand": "",
+    "slug": "leeby-colchon-desfundable-y-antideslizante-para-perros"
+  },
+  {
+    "name": "Porta bolsas de nylon negro",
+    "price": 4990,
+    "description": "",
+    "category": "perro",
+    "imageUrl": "https://www.superzoo.cl/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dwa25cdc02/images/sku15226_1.jpg",
+    "localImage": "output/images/perro/porta-bolsas-de-nylon-negro.jpg",
+    "brand": "",
+    "slug": "porta-bolsas-de-nylon-negro"
+  },
+  {
+    "name": "Gotoo plato plegable paw para mascotas color azul",
+    "price": 3990,
+    "description": "",
+    "category": "perro",
+    "imageUrl": "https://www.superzoo.cl/on/demandware.static/-/Sites-SuperZoo-master-catalog/es_CL/v1780686052296/images/17222_m1.jpg;",
+    "localImage": "output/images/perro/gotoo-plato-plegable-paw-para-mascotas-color-azul.jpg;",
+    "brand": "",
+    "slug": "gotoo-plato-plegable-paw-para-mascotas-color-azul"
+  },
+  {
+    "name": "Gotoo botella portatil para mascotas con bebedero de agua",
+    "price": 2990,
+    "description": "",
+    "category": "perro",
+    "imageUrl": "https://www.superzoo.cl/on/demandware.static/-/Sites-SuperZoo-master-catalog/es_CL/v1780686052296/images/17229_m1.jpg;",
+    "localImage": "output/images/perro/gotoo-botella-portatil-para-mascotas-con-bebedero-de-agua.jpg;",
+    "brand": "",
+    "slug": "gotoo-botella-portatil-para-mascotas-con-bebedero-de-agua"
+  },
+  {
+    "name": "Leeby Cuna Desfundable Blanco con estampado de erizos para perros",
+    "price": 34990,
+    "description": "",
+    "category": "perro",
+    "imageUrl": "https://www.superzoo.cl/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dwc3adea4b/images/8101_m-1.jpg",
+    "localImage": "output/images/perro/leeby-cuna-desfundable-blanco-con-estampado-de-erizos-para-perros.jpg",
+    "brand": "",
+    "slug": "leeby-cuna-desfundable-blanco-con-estampado-de-erizos-para-perros"
+  },
+  {
+    "name": "Leeby Cuna Antiestrés Desfundable Gris para perros",
+    "price": 46990,
+    "description": "",
+    "category": "perro",
+    "imageUrl": "https://www.superzoo.cl/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dw6b895f32/images/8115_m-1.jpg",
+    "localImage": "output/images/perro/leeby-cuna-antiestres-desfundable-gris-para-perros.jpg",
+    "brand": "",
+    "slug": "leeby-cuna-antiestres-desfundable-gris-para-perros"
+  },
+  {
+    "name": "Correa larga negra de nylon para perros",
+    "price": 9990,
+    "description": "",
+    "category": "perro",
+    "imageUrl": "https://www.superzoo.cl/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dw9ee56baf/images/8937_m1.jpg",
+    "localImage": "output/images/perro/correa-larga-negra-de-nylon-para-perros.jpg",
+    "brand": "",
+    "slug": "correa-larga-negra-de-nylon-para-perros"
+  },
+  {
+    "name": "Kong Classic",
+    "price": 9990,
+    "description": "",
+    "category": "perro",
+    "imageUrl": "https://www.superzoo.cl/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dwf0321f65/images/4bffd-t1-7-.jpg",
+    "localImage": "output/images/perro/kong-classic.jpg",
+    "brand": "",
+    "slug": "kong-classic"
+  },
+  {
+    "name": "Outward Hound Nina Ottosson Puppy Lickin' Layers Juguete Interactivo con snack para cachorros",
+    "price": 15990,
+    "description": "",
+    "category": "perro",
+    "imageUrl": "https://www.superzoo.cl/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dwb2fda4a4/images/sku14527_1.jpg",
+    "localImage": "output/images/perro/outward-hound-nina-ottosson-puppy-lickin-layers-juguete-interactivo-con-snack-para-cachorros.jpg",
+    "brand": "",
+    "slug": "outward-hound-nina-ottosson-puppy-lickin-layers-juguete-interactivo-con-snack-para-cachorros"
+  },
+  {
+    "name": "Extreme Kong",
+    "price": 10990,
+    "description": "",
+    "category": "perro",
+    "imageUrl": "https://www.superzoo.cl/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dwce4788dd/images/ea2ba-k1-7-.jpg",
+    "localImage": "output/images/perro/extreme-kong.jpg",
+    "brand": "",
+    "slug": "extreme-kong"
+  },
+  {
+    "name": "Peluche dispensador cocodrilo con patas de cuerda para perros",
+    "price": 15990,
+    "description": "",
+    "category": "perro",
+    "imageUrl": "https://www.superzoo.cl/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dw444acf5e/images/sku14482_1.jpg",
+    "localImage": "output/images/perro/peluche-dispensador-cocodrilo-con-patas-de-cuerda-para-perros.jpg",
+    "brand": "",
+    "slug": "peluche-dispensador-cocodrilo-con-patas-de-cuerda-para-perros"
+  },
+  {
+    "name": "Juguete rinoceronte ultraresistente para perros",
+    "price": 15990,
+    "description": "",
+    "category": "perro",
+    "imageUrl": "https://www.superzoo.cl/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dw3c408666/images/sku14484_1.jpg",
+    "localImage": "output/images/perro/juguete-rinoceronte-ultraresistente-para-perros.jpg",
+    "brand": "",
+    "slug": "juguete-rinoceronte-ultraresistente-para-perros"
+  },
+  {
+    "name": "Comfort Rope Skeleton Monkey Cuddler peluche para perros",
+    "price": 11990,
+    "description": "",
+    "category": "perro",
+    "imageUrl": "https://www.superzoo.cl/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dwa6614d02/images/sku14424_1.jpg",
+    "localImage": "output/images/perro/comfort-rope-skeleton-monkey-cuddler-peluche-para-perros.jpg",
+    "brand": "",
+    "slug": "comfort-rope-skeleton-monkey-cuddler-peluche-para-perros"
+  },
+  {
+    "name": "Juguete para perros carnivore costillas de cerdo - sabor tocino",
+    "price": 6990,
+    "description": "",
+    "category": "perro",
+    "imageUrl": "https://www.superzoo.cl/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dwd32a6bba/images/sku14624_1.jpg",
+    "localImage": "output/images/perro/juguete-para-perros-carnivore-costillas-de-cerdo-sabor-tocino.jpg",
+    "brand": "",
+    "slug": "juguete-para-perros-carnivore-costillas-de-cerdo-sabor-tocino"
+  },
+  {
+    "name": "Mono de peluche con sonido y cuerda para perro",
+    "price": 11990,
+    "description": "",
+    "category": "perro",
+    "imageUrl": "https://www.superzoo.cl/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dw46bbcf79/images/sku14359_1.jpg",
+    "localImage": "output/images/perro/mono-de-peluche-con-sonido-y-cuerda-para-perro.jpg",
+    "brand": "",
+    "slug": "mono-de-peluche-con-sonido-y-cuerda-para-perro"
+  },
+  {
+    "name": "Tootoy! juguete pelota tri-ball para perro",
+    "price": 7990,
+    "description": "",
+    "category": "perro",
+    "imageUrl": "https://www.superzoo.cl/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dwc81c8db9/images/16747_m1.jpg",
+    "localImage": "output/images/perro/tootoy-juguete-pelota-tri-ball-para-perro.jpg",
+    "brand": "",
+    "slug": "tootoy-juguete-pelota-tri-ball-para-perro"
+  },
+  {
+    "name": "Peluche de erizo para perros",
+    "price": 4990,
+    "description": "",
+    "category": "perro",
+    "imageUrl": "https://www.superzoo.cl/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dwfb6adff6/images/8667_m4.jpg",
+    "localImage": "output/images/perro/peluche-de-erizo-para-perros.jpg",
+    "brand": "",
+    "slug": "peluche-de-erizo-para-perros"
+  },
+  {
+    "name": "Muslo de juguete para perros carnivore - sabor tocino",
+    "price": 6990,
+    "description": "",
+    "category": "perro",
+    "imageUrl": "https://www.superzoo.cl/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dw8fbb53f7/images/sku14622_1.jpg",
+    "localImage": "output/images/perro/muslo-de-juguete-para-perros-carnivore-sabor-tocino.jpg",
+    "brand": "",
+    "slug": "muslo-de-juguete-para-perros-carnivore-sabor-tocino"
+  },
+  {
+    "name": "Peluche cangrejo de río con patas de cuerda para perros",
+    "price": 11990,
+    "description": "",
+    "category": "perro",
+    "imageUrl": "https://www.superzoo.cl/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dw317bf7ad/images/sku14381_1.jpg",
+    "localImage": "output/images/perro/peluche-cangrejo-de-rio-con-patas-de-cuerda-para-perros.jpg",
+    "brand": "",
+    "slug": "peluche-cangrejo-de-rio-con-patas-de-cuerda-para-perros"
+  },
+  {
+    "name": "Nath Cat adulto esterilizado sabor pollo y arroz alimento para gatos",
+    "price": 37990,
+    "description": "",
+    "category": "gato",
+    "imageUrl": "https://www.superzoo.cl/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dwfffa0a64/images/Nath%20Cat%20adulto%20esterilizado%20sabor%20pollo%20y%20arroz%20alimento%20para%20gatos.jpg",
+    "localImage": "output/images/gato/nath-cat-adulto-esterilizado-sabor-pollo-y-arroz-alimento-para-gatos.jpg",
+    "brand": "",
+    "slug": "nath-cat-adulto-esterilizado-sabor-pollo-y-arroz-alimento-para-gatos"
+  },
+  {
+    "name": "Nath Kitten sabor pollo y arroz alimento para gatos",
+    "price": 17592,
+    "description": "",
+    "category": "gato",
+    "imageUrl": "https://www.superzoo.cl/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dw70205b21/images/Nath%20Kitten%20sabor%20pollo%20y%20arroz%20alimento%20para%20gatos.jpg",
+    "localImage": "output/images/gato/nath-kitten-sabor-pollo-y-arroz-alimento-para-gatos.jpg",
+    "brand": "",
+    "slug": "nath-kitten-sabor-pollo-y-arroz-alimento-para-gatos"
+  },
+  {
+    "name": "Bravery Chicken Adult Cat alimento para gato",
+    "price": 24990,
+    "description": "",
+    "category": "gato",
+    "imageUrl": "https://www.superzoo.cl/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dwf30e77a8/images/549a0-web.jpg",
+    "localImage": "output/images/gato/bravery-chicken-adult-cat-alimento-para-gato.jpg",
+    "brand": "",
+    "slug": "bravery-chicken-adult-cat-alimento-para-gato"
+  },
+  {
+    "name": "Fit Formula Gato Adulto alimento para gato",
+    "price": 31990,
+    "description": "",
+    "category": "gato",
+    "imageUrl": "https://www.superzoo.cl/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dw5fa1505f/images/4969e-gato-10-web.jpg",
+    "localImage": "output/images/gato/fit-formula-gato-adulto-alimento-para-gato.jpg",
+    "brand": "",
+    "slug": "fit-formula-gato-adulto-alimento-para-gato"
+  },
+  {
+    "name": "Bravery Salmón Adult Cat Sterilized alimento para gato",
+    "price": 26990,
+    "description": "",
+    "category": "gato",
+    "imageUrl": "https://www.superzoo.cl/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dwa1125616/images/2435_m.jpg",
+    "localImage": "output/images/gato/bravery-salmon-adult-cat-sterilized-alimento-para-gato.jpg",
+    "brand": "",
+    "slug": "bravery-salmon-adult-cat-sterilized-alimento-para-gato"
+  },
+  {
+    "name": "Bravery Salmón Adult Cat alimento para gato",
+    "price": 26990,
+    "description": "",
+    "category": "gato",
+    "imageUrl": "https://www.superzoo.cl/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dw3ba00303/images/e346c-web.jpg",
+    "localImage": "output/images/gato/bravery-salmon-adult-cat-alimento-para-gato.jpg",
+    "brand": "",
+    "slug": "bravery-salmon-adult-cat-alimento-para-gato"
+  },
+  {
+    "name": "Bravery Salmón Adult Cat alimento para gato",
+    "price": 61990,
+    "description": "",
+    "category": "gato",
+    "imageUrl": "https://www.superzoo.cl/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dw3ba00303/images/e346c-web.jpg",
+    "localImage": "output/images/gato/bravery-salmon-adult-cat-alimento-para-gato.jpg",
+    "brand": "",
+    "slug": "bravery-salmon-adult-cat-alimento-para-gato"
+  },
+  {
+    "name": "Bravery Cat Chicken Adult Sterilized alimento para gato 7KG",
+    "price": 59990,
+    "description": "",
+    "category": "gato",
+    "imageUrl": "https://www.superzoo.cl/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dw2f41bac6/images/c99f7-4ga070003.jpg",
+    "localImage": "output/images/gato/bravery-cat-chicken-adult-sterilized-alimento-para-gato-7kg.jpg",
+    "brand": "",
+    "slug": "bravery-cat-chicken-adult-sterilized-alimento-para-gato-7kg"
+  },
+  {
+    "name": "Catxtreme Salmon Esterilizado alimento para gato",
+    "price": 19990,
+    "description": "",
+    "category": "gato",
+    "imageUrl": "https://www.superzoo.cl/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dwec6cb34a/images/Catxtreme%20Salmon%20Esterilizado%20alimento%20para%20gato.jpg",
+    "localImage": "output/images/gato/catxtreme-salmon-esterilizado-alimento-para-gato.jpg",
+    "brand": "",
+    "slug": "catxtreme-salmon-esterilizado-alimento-para-gato"
+  },
+  {
+    "name": "Churu para gatos atún/cangrejo 56 GR",
+    "price": 3190,
+    "description": "",
+    "category": "gato",
+    "imageUrl": "https://www.superzoo.cl/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dw88c560d3/images/sku14877_1.jpg",
+    "localImage": "output/images/gato/churu-para-gatos-atun-cangrejo-56-gr.jpg",
+    "brand": "",
+    "slug": "churu-para-gatos-atun-cangrejo-56-gr"
+  },
+  {
+    "name": "Churu de pollo con cangrejo 56 GR",
+    "price": 3190,
+    "description": "",
+    "category": "gato",
+    "imageUrl": "https://www.superzoo.cl/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dw9ee48afc/images/Churu%20de%20pollo%20con%20cangrejo%2056%20GR.jpg",
+    "localImage": "output/images/gato/churu-de-pollo-con-cangrejo-56-gr.jpg",
+    "brand": "",
+    "slug": "churu-de-pollo-con-cangrejo-56-gr"
+  },
+  {
+    "name": "Churu de atún 56 GR",
+    "price": 3190,
+    "description": "",
+    "category": "gato",
+    "imageUrl": "https://www.superzoo.cl/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dwd050cd19/images/Churu%20de%20atun%2056%20GR.jpg",
+    "localImage": "output/images/gato/churu-de-atun-56-gr.jpg",
+    "brand": "",
+    "slug": "churu-de-atun-56-gr"
+  },
+  {
+    "name": "Leeby Cama Cueva Antiestrés Gris para gatos",
+    "price": 29990,
+    "description": "",
+    "category": "gato",
+    "imageUrl": "https://www.superzoo.cl/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dwc43b6058/images/13663-1.jpg",
+    "localImage": "output/images/gato/leeby-cama-cueva-antiestres-gris-para-gatos.jpg",
+    "brand": "",
+    "slug": "leeby-cama-cueva-antiestres-gris-para-gatos"
+  },
+  {
+    "name": "Olympus cat rascador grey & beige",
+    "price": 99990,
+    "description": "",
+    "category": "gato",
+    "imageUrl": "https://www.superzoo.cl/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dwcc3a9b53/images/5e796-web.png",
+    "localImage": "output/images/gato/olympus-cat-rascador-grey-beige.png",
+    "brand": "",
+    "slug": "olympus-cat-rascador-grey-beige"
+  },
+  {
+    "name": "Tootoy! juguete pelota ranurada para gato",
+    "price": 990,
+    "description": "",
+    "category": "gato",
+    "imageUrl": "https://www.superzoo.cl/on/demandware.static/-/Sites-SuperZoo-master-catalog/es_CL/v1780686052296/images/16659_1.jpg;",
+    "localImage": "output/images/gato/tootoy-juguete-pelota-ranurada-para-gato.jpg;",
+    "brand": "",
+    "slug": "tootoy-juguete-pelota-ranurada-para-gato"
+  },
+  {
+    "name": "Leeby cama/cuna gris y blanco con juguete colgante para gatos",
+    "price": 29990,
+    "description": "",
+    "category": "gato",
+    "imageUrl": "https://www.superzoo.cl/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dw8439bf48/images/13659-1.jpg",
+    "localImage": "output/images/gato/leeby-cama-cuna-gris-y-blanco-con-juguete-colgante-para-gatos.jpg",
+    "brand": "",
+    "slug": "leeby-cama-cuna-gris-y-blanco-con-juguete-colgante-para-gatos"
+  },
+  {
+    "name": "Filtros fuente bebedera flower - flor pack 2 unidades",
+    "price": 8990,
+    "description": "",
+    "category": "gato",
+    "imageUrl": "https://www.superzoo.cl/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dwf27b2ac5/images/2d9a9-filtro-catit-triple-accion.png",
+    "localImage": "output/images/gato/filtros-fuente-bebedera-flower-flor-pack-2-unidades.png",
+    "brand": "",
+    "slug": "filtros-fuente-bebedera-flower-flor-pack-2-unidades"
+  },
+  {
+    "name": "Tootoy! juguete peluche ratones de felpa para gato",
+    "price": 990,
+    "description": "",
+    "category": "gato",
+    "imageUrl": "https://www.superzoo.cl/on/demandware.static/-/Sites-SuperZoo-master-catalog/es_CL/v1780686052296/images/16636_1.jpg;",
+    "localImage": "output/images/gato/tootoy-juguete-peluche-ratones-de-felpa-para-gato.jpg;",
+    "brand": "",
+    "slug": "tootoy-juguete-peluche-ratones-de-felpa-para-gato"
+  },
+  {
+    "name": "Tootoy! juguete pelotas de colores para gato",
+    "price": 3990,
+    "description": "",
+    "category": "gato",
+    "imageUrl": "https://www.superzoo.cl/on/demandware.static/-/Sites-SuperZoo-master-catalog/es_CL/v1780686052296/images/16624.jpg;",
+    "localImage": "output/images/gato/tootoy-juguete-pelotas-de-colores-para-gato.jpg;",
+    "brand": "",
+    "slug": "tootoy-juguete-pelotas-de-colores-para-gato"
+  },
+  {
+    "name": "Charmy catnip - ratones",
+    "price": 3990,
+    "description": "",
+    "category": "gato",
+    "imageUrl": "https://www.superzoo.cl/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dw05191e5f/images/sku15760_1.jpg",
+    "localImage": "output/images/gato/charmy-catnip-ratones.jpg",
+    "brand": "",
+    "slug": "charmy-catnip-ratones"
+  },
+  {
+    "name": "Tootoy! juguete pelota rebote para gatito",
+    "price": 3990,
+    "description": "",
+    "category": "gato",
+    "imageUrl": "https://www.superzoo.cl/on/demandware.static/-/Sites-SuperZoo-master-catalog/es_CL/v1780686052296/images/16641_1.jpg;",
+    "localImage": "output/images/gato/tootoy-juguete-pelota-rebote-para-gatito.jpg;",
+    "brand": "",
+    "slug": "tootoy-juguete-pelota-rebote-para-gatito"
+  },
+  {
+    "name": "Tootoy! juguete set de pelotas de ratán para gatito",
+    "price": 3990,
+    "description": "",
+    "category": "gato",
+    "imageUrl": "https://www.superzoo.cl/on/demandware.static/-/Sites-SuperZoo-master-catalog/es_CL/v1780686052296/images/16637_1.jpg;",
+    "localImage": "output/images/gato/tootoy-juguete-set-de-pelotas-de-ratan-para-gatito.jpg;",
+    "brand": "",
+    "slug": "tootoy-juguete-set-de-pelotas-de-ratan-para-gatito"
+  },
+  {
+    "name": "Tootoy! juguete ratón zumbador para gatito",
+    "price": 3990,
+    "description": "",
+    "category": "gato",
+    "imageUrl": "https://www.superzoo.cl/on/demandware.static/-/Sites-SuperZoo-master-catalog/es_CL/v1780686052296/images/16718_1.jpg;",
+    "localImage": "output/images/gato/tootoy-juguete-raton-zumbador-para-gatito.jpg;",
+    "brand": "",
+    "slug": "tootoy-juguete-raton-zumbador-para-gatito"
+  },
+  {
+    "name": "Collar de gato suave_jade verde",
+    "price": 2990,
+    "description": "",
+    "category": "gato",
+    "imageUrl": "https://www.superzoo.cl/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dw36d593ed/images/sku14576.jpg",
+    "localImage": "output/images/gato/collar-de-gato-suave-jade-verde.jpg",
+    "brand": "",
+    "slug": "collar-de-gato-suave-jade-verde"
+  }
+]
