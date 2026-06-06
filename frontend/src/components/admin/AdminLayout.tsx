@@ -24,12 +24,12 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
     <div className="min-h-screen flex bg-gray-50 dark:bg-[#111111]">
       {/* Sidebar */}
       <aside className="w-60 bg-white dark:bg-[#1a1a1a] border-r border-gray-200 dark:border-[#2a2a2a] flex flex-col shrink-0">
-        <div className="px-6 py-5 border-b border-gray-200 dark:border-[#2a2a2a]">
+        <div className="px-6 py-5 bg-[#2b44d4] dark:bg-[#1e33a8]">
           <Link to="/admin/dashboard" className="flex items-center gap-2">
-            <span className="text-lg font-bold text-blue-600">🐾</span>
-            <span className="text-lg font-bold text-gray-900 dark:text-[#e8eaf0]">Petshop</span>
+            <span className="text-lg font-bold text-white">🐾</span>
+            <span className="text-lg font-bold text-white">Petshop</span>
           </Link>
-          <p className="text-xs text-gray-400 dark:text-[#8892a4] mt-0.5">Panel de administración</p>
+          <p className="text-xs text-blue-200 mt-0.5">Panel de administración</p>
         </div>
         <nav className="flex-1 px-3 py-4 space-y-1">
           {navItems.map((item) => {

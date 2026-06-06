@@ -195,8 +195,8 @@ const AdminDashboard = () => {
                   <AreaChart data={revenueData.daily} margin={{ top: 5, right: 5, left: -20, bottom: 0 }}>
                     <defs>
                       <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.3} />
-                        <stop offset="95%" stopColor="#3b82f6" stopOpacity={0} />
+                        <stop offset="5%" stopColor="#2b44d4" stopOpacity={0.3} />
+                        <stop offset="95%" stopColor="#2b44d4" stopOpacity={0} />
                       </linearGradient>
                     </defs>
                     <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
@@ -224,11 +224,11 @@ const AdminDashboard = () => {
                     <Area
                       type="monotone"
                       dataKey="revenue"
-                      stroke="#3b82f6"
+                      stroke="#2b44d4"
                       strokeWidth={2}
                       fill="url(#colorRevenue)"
                       dot={false}
-                      activeDot={{ r: 4, fill: '#3b82f6', stroke: '#fff', strokeWidth: 2 }}
+                      activeDot={{ r: 4, fill: '#2b44d4', stroke: '#fff', strokeWidth: 2 }}
                     />
                   </AreaChart>
                 </ResponsiveContainer>

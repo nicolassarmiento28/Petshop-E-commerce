@@ -34,12 +34,15 @@ const AdminLogin = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-[#111111]">
-      <div className="bg-white dark:bg-[#1a1a1a] rounded-2xl shadow-lg w-full max-w-sm p-8">
-        <div className="flex items-center gap-2 mb-8">
-          <span className="text-2xl font-bold text-blue-600">🐾</span>
-          <span className="text-xl font-bold text-gray-900 dark:text-[#e8eaf0]">Petshop Admin</span>
+      <div className="bg-white dark:bg-[#1a1a1a] rounded-2xl shadow-lg w-full max-w-sm overflow-hidden">
+        <div className="bg-[#2b44d4] dark:bg-[#1e33a8] px-8 py-5">
+          <div className="flex items-center gap-2">
+            <span className="text-2xl font-bold text-white">🐾</span>
+            <span className="text-xl font-bold text-white">Petshop Admin</span>
+          </div>
         </div>
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-[#e8eaf0] mb-6">Iniciar sesión</h1>
+        <div className="p-8">
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-[#e8eaf0] mb-6">Iniciar sesión</h1>
         <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-4">
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-[#e8eaf0] mb-1">
@@ -80,6 +83,7 @@ const AdminLogin = () => {
             {isSubmitting ? 'Ingresando...' : 'Ingresar'}
           </button>
         </form>
+        </div>
       </div>
     </div>
   )
