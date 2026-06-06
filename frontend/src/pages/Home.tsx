@@ -8,7 +8,7 @@ const CATEGORIES = [
   { label: 'Perros', slug: 'perro', emoji: '🐶' },
   { label: 'Gatos', slug: 'gato', emoji: '🐱' },
   { label: 'Farmacia', slug: 'farmacia', emoji: '💊' },
-  { label: 'Peluquería', slug: 'pequenas-mascotas', emoji: '✂️' },
+  { label: 'Peluquería', slug: 'peluqueria', emoji: '✂️' },
   { label: 'Ofertas', slug: 'ofertas', emoji: '🏷️' },
   { label: 'Marcas', slug: 'marcas', emoji: '⭐' },
 ]

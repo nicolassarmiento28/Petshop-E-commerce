@@ -60,7 +60,7 @@ export default function Footer() {
             <ul className="space-y-2">
               {[
                 'Perro', 'Gato', 'Farmacia',
-                { label: 'Peluquería', to: '/categoria/pequenas-mascotas' },
+                { label: 'Peluquería', to: '/categoria/peluqueria' },
                 'Ofertas', 'Marcas',
               ].map((cat) => {
                 const label = typeof cat === 'string' ? cat : cat.label

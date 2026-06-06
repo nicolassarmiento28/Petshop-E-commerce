@@ -36,6 +36,7 @@ async function main() {
     { name: 'Gato', slug: 'gato', description: 'Todo para tu gato' },
     { name: 'Farmacia', slug: 'farmacia', description: 'Salud veterinaria' },
     { name: 'Pequeñas Mascotas', slug: 'pequenas-mascotas', description: 'Roedores, aves, reptiles' },
+    { name: 'Peluquería', slug: 'peluqueria', description: 'Baño, corte e higiene' },
     { name: 'Ofertas', slug: 'ofertas', description: 'Productos con descuento' },
     { name: 'Marcas', slug: 'marcas', description: 'Filtra por marca' },
   ]

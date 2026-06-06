@@ -14,14 +14,24 @@ const CATEGORIES = [
       '/perro/alimentos',
       '/perro/accesorios',
       '/perro/juguetes',
-      '/perro/farmacia-e-higiene',
     ],
   },
   {
     name: 'gato', slug: 'gato', urls: [
       '/gato/alimentos',
       '/gato/accesorios',
+    ],
+  },
+  {
+    name: 'farmacia', slug: 'farmacia', urls: [
+      '/perro/farmacia-e-higiene',
       '/gato/farmacia-e-higiene',
+    ],
+  },
+  {
+    name: 'peluqueria', slug: 'peluqueria', urls: [
+      '/perro/farmacia-e-higiene/peluqueria-e-higiene',
+      '/gato/farmacia-e-higiene/peluqueria-e-higiene',
     ],
   },
 ]

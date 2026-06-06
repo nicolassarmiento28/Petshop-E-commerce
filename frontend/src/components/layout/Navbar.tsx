@@ -11,7 +11,7 @@ const NAV_LINKS = [
   { label: 'Perro', to: '/categoria/perro' },
   { label: 'Gato', to: '/categoria/gato' },
   { label: 'Farmacia', to: '/categoria/farmacia', icon: Pill },
-  { label: 'Peluquería', to: '/categoria/pequenas-mascotas' },
+  { label: 'Peluquería', to: '/categoria/peluqueria' },
   { label: 'Ofertas', to: '/categoria/ofertas' },
   { label: 'Marcas', to: '/categoria/marcas' },
 ]
