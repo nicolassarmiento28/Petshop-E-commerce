@@ -4,6 +4,7 @@ import type { ProductType, CategoryType, BrandType, ProductFilters } from '@/typ
 export interface ProductsResponse {
   products: ProductType[]
   nextCursor: number | null
+  total: number
 }
 
 export const fetchProducts = async (filters: ProductFilters = {}): Promise<ProductsResponse> => {
