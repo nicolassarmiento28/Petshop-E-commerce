@@ -87,7 +87,8 @@ export const getOrderStats = async (
       by: ['status'],
       _count: { id: true },
     })
-    const stats = Object.fromEntries(grouped.map((s) => [s.status, s._count.id]))
+    const base = Object.fromEntries(Object.values(OrderStatus).map((s) => [s, 0]))
+    const stats = { ...base, ...Object.fromEntries(grouped.map((s) => [s.status, s._count.id])) }
     res.json(stats)
   } catch (error) {
     next(error)

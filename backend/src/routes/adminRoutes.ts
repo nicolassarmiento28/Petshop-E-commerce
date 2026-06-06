@@ -16,7 +16,7 @@ router.put('/products/:id', authMiddleware, updateProduct)
 router.delete('/products/:id', authMiddleware, deleteProduct)
 
 // Protected — orders
-router.get('/orders/stats', authMiddleware, getOrderStats)   // ← BEFORE /orders/:id
+router.get('/orders/stats', authMiddleware, getOrderStats)   // must precede any /orders/:id route
 router.get('/orders', authMiddleware, getAdminOrders)
 router.put('/orders/:id/status', authMiddleware, updateOrderStatus)
 
