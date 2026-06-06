@@ -88,12 +88,12 @@ export default function Home() {
       </section>
 
       {/* ── 2. Banner principal (despacho) ────────────────────────────── */}
-      <section className="w-full">
-        <Link to="/productos" className="block w-full hover:opacity-95 transition-opacity">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <Link to="/productos" className="block hover:opacity-95 transition-opacity">
           <img
             src="/banners/despacho.png"
             alt="Despacho gratis por compras sobre $29.990"
-            className="w-full h-auto object-cover"
+            className="w-full h-auto"
           />
         </Link>
       </section>
