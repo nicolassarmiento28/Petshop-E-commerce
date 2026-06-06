@@ -24,7 +24,12 @@ export const getProducts = async (
     const where: any = { isActive: true }
 
     if (category) {
-      where.category = { slug: category }
+      const cat = await prisma.category.findUnique({
+        where: { slug: category },
+        select: { id: true, children: { select: { id: true } } },
+      })
+      const ids = cat ? [cat.id, ...cat.children.map((c) => c.id)] : []
+      where.categoryId = { in: ids }
     }
     if (brand) {
       where.brand = { slug: brand }
