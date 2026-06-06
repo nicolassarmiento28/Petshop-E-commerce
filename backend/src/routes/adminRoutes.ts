@@ -2,7 +2,7 @@ import { Router } from 'express'
 import { adminLogin } from '../controllers/adminController'
 import { authMiddleware } from '../middleware/authMiddleware'
 import { getAdminProducts, createProduct, updateProduct, deleteProduct } from '../controllers/adminProductController'
-import { getAdminOrders, updateOrderStatus } from '../controllers/adminOrderController'
+import { getAdminOrders, updateOrderStatus, getOrderStats } from '../controllers/adminOrderController'
 
 const router = Router()
 
@@ -16,6 +16,7 @@ router.put('/products/:id', authMiddleware, updateProduct)
 router.delete('/products/:id', authMiddleware, deleteProduct)
 
 // Protected — orders
+router.get('/orders/stats', authMiddleware, getOrderStats)   // ← BEFORE /orders/:id
 router.get('/orders', authMiddleware, getAdminOrders)
 router.put('/orders/:id/status', authMiddleware, updateOrderStatus)
 

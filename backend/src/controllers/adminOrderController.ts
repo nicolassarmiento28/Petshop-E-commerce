@@ -76,3 +76,20 @@ export const updateOrderStatus = async (
     next(error)
   }
 }
+
+export const getOrderStats = async (
+  _req: AuthRequest,
+  res: Response,
+  next: NextFunction,
+): Promise<void> => {
+  try {
+    const grouped = await prisma.order.groupBy({
+      by: ['status'],
+      _count: { id: true },
+    })
+    const stats = Object.fromEntries(grouped.map((s) => [s.status, s._count.id]))
+    res.json(stats)
+  } catch (error) {
+    next(error)
+  }
+}
