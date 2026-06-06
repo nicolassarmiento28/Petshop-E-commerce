@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
 import ProductGrid from '@/components/product/ProductGrid'
@@ -13,13 +14,32 @@ const CATEGORIES = [
   { label: 'Marcas', slug: 'marcas', emoji: '⭐' },
 ]
 
+const POPULAR_CATEGORIES = ['perro', 'gato', 'farmacia', 'peluqueria'] as const
+
 export default function Home() {
-  const { data: featuredData, isLoading: loadingFeatured } = useProducts({ featured: true, limit: 8 })
-  const { data: saleData, isLoading: loadingSale } = useProducts({ sale: true, limit: 8 })
+  // Novedades: newest 8 products overall
+  const { data: featuredData, isLoading: loadingFeatured } = useProducts({ sort: 'newest', limit: 8 })
+  // Más Vendidos: newest 8 from a random category (chosen once on mount)
+  const randomCategory = useMemo(
+    () => POPULAR_CATEGORIES[Math.floor(Math.random() * POPULAR_CATEGORIES.length)],
+    [],
+  )
+  const { data: bestSellerData, isLoading: loadingBestSellers } = useProducts({
+    category: randomCategory,
+    sort: 'newest',
+    limit: 8,
+  })
   const { data: brands } = useBrands()
 
   const featured = featuredData?.products ?? []
-  const onSale = saleData?.products ?? []
+  const bestSellers = bestSellerData?.products ?? []
+
+  const categoryLabel: Record<string, string> = {
+    perro: 'Perros',
+    gato: 'Gatos',
+    farmacia: 'Farmacia',
+    peluqueria: 'Peluquería',
+  }
 
   return (
     <div className="bg-[#FAFAF8] dark:bg-[#111111] transition-colors duration-300">
@@ -100,7 +120,7 @@ export default function Home() {
               <span className="text-4xl group-hover:scale-110 transition-transform duration-200">
                 {cat.emoji}
               </span>
-               <span className="text-xs font-semibold text-gray-600 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 text-center whitespace-pre-line leading-tight transition-colors">
+              <span className="text-xs font-semibold text-gray-600 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 text-center whitespace-pre-line leading-tight transition-colors">
                 {cat.label}
               </span>
             </Link>
@@ -160,10 +180,9 @@ export default function Home() {
         <ProductGrid products={featured} isLoading={loadingFeatured} />
       </section>
 
-      {/* ── 7. Banners secundarios (exact + farmacia) ─────────────────── */}
+      {/* ── 7. Banners secundarios ────────────────────────────────────── */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {/* exact.jpg — banner imagen */}
           <Link to="/categoria/perro" className="block rounded-2xl overflow-hidden hover:opacity-95 transition-opacity hover:shadow-lg">
             <img
               src="/banners/exact.jpg"
@@ -172,20 +191,16 @@ export default function Home() {
             />
           </Link>
 
-          {/* Ofertas banner */}
           <Link
             to="/categoria/ofertas"
             className="group relative flex items-center rounded-2xl overflow-hidden px-8 py-8 transition-all duration-300 hover:shadow-lg hover:scale-[1.01] min-h-[200px]"
           >
-            {/* Foto de fondo */}
             <img
               src="/ofertas/churuoferta.jpg"
               alt="Churu oferta"
               className="absolute inset-0 w-full h-full object-cover"
             />
-            {/* Overlay oscuro para legibilidad */}
             <div className="absolute inset-0 bg-black/50 group-hover:bg-black/40 transition-colors" />
-            {/* Texto */}
             <div className="relative z-10">
               <p className="text-white/70 text-xs font-semibold uppercase tracking-widest mb-2">Sección especial</p>
               <h3 className="text-2xl font-bold text-white mb-1 drop-shadow" style={{ fontFamily: "'Fraunces', Georgia, serif" }}>
@@ -201,25 +216,28 @@ export default function Home() {
       </section>
 
       {/* ── 8. Productos más vendidos ────────────────────────────────── */}
-      {onSale.length > 0 && (
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
-          <div className="flex items-end justify-between mb-6">
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-widest text-green-600 dark:text-green-400 mb-1">Más populares</p>
-              <h2
-                className="text-2xl font-bold text-gray-900 dark:text-[#e8eaf0]"
-                style={{ fontFamily: "'Fraunces', Georgia, serif" }}
-              >
-                Productos más vendidos
-              </h2>
-            </div>
-            <Link to="/categoria/ofertas" className="flex items-center gap-1 text-sm text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300 font-medium transition-colors">
-              Ver todos <ArrowRight size={14} />
-            </Link>
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+        <div className="flex items-end justify-between mb-6">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-widest text-green-600 dark:text-green-400 mb-1">
+              Más populares en {categoryLabel[randomCategory]}
+            </p>
+            <h2
+              className="text-2xl font-bold text-gray-900 dark:text-[#e8eaf0]"
+              style={{ fontFamily: "'Fraunces', Georgia, serif" }}
+            >
+              Productos más vendidos
+            </h2>
           </div>
-          <ProductGrid products={onSale} isLoading={loadingSale} />
-        </section>
-      )}
+          <Link
+            to={`/categoria/${randomCategory}`}
+            className="flex items-center gap-1 text-sm text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300 font-medium transition-colors"
+          >
+            Ver todos <ArrowRight size={14} />
+          </Link>
+        </div>
+        <ProductGrid products={bestSellers} isLoading={loadingBestSellers} />
+      </section>
     </div>
   )
 }
