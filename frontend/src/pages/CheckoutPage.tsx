@@ -9,17 +9,17 @@ import { formatCLP } from '@/utils/formatters'
 
 export default function CheckoutPage() {
   const navigate = useNavigate()
-  const { items } = useCartStore()
+  const { items, hydrated } = useCartStore()
   const totalPrice = items.reduce((n, i) => n + i.unitPrice * i.quantity, 0)
   const payment = usePayment()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isError, setIsError] = useState(false)
 
   useEffect(() => {
-    if (items.length === 0) {
+    if (hydrated && items.length === 0) {
       navigate('/carrito')
     }
-  }, [items.length, navigate])
+  }, [hydrated, items.length, navigate])
 
   const handleSubmit = async (data: CheckoutFormData) => {
     setIsSubmitting(true)
@@ -41,7 +41,7 @@ export default function CheckoutPage() {
     }
   }
 
-  if (items.length === 0) {
+  if (hydrated && items.length === 0) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center gap-4">
         <p className="text-gray-600 dark:text-[#8892a4]">Tu carrito está vacío.</p>
@@ -50,6 +50,10 @@ export default function CheckoutPage() {
         </Link>
       </div>
     )
+  }
+
+  if (!hydrated) {
+    return null
   }
 
   return (
