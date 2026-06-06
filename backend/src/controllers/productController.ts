@@ -66,6 +66,7 @@ export const getProducts = async (
     const nextCursor =
       products.length === take ? products[products.length - 1].id : null
 
+    // total = full matching count regardless of cursor position
     res.json({ products, nextCursor, total })
   } catch (error) {
     next(error)
