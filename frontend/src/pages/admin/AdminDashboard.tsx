@@ -14,7 +14,7 @@ interface OrdersResponse {
   total: number
 }
 
-type OrderStatsResponse = Partial<Record<OrderStatus, number>>
+type OrderStatsResponse = Record<OrderStatus, number>
 
 const STATUS_META: { status: OrderStatus; label: string; color: string }[] = [
   { status: 'PENDING',    label: 'Pendiente',   color: 'bg-yellow-50 border-yellow-200 text-yellow-700 dark:bg-yellow-900/20 dark:border-yellow-800 dark:text-yellow-400' },
@@ -79,7 +79,7 @@ const AdminDashboard = () => {
     queryFn: fetchSummary,
   })
 
-  const { data: orderStats } = useQuery({
+  const { data: orderStats, isError: isStatsError } = useQuery({
     queryKey: ['admin', 'orderStats'],
     queryFn: fetchOrderStats,
   })
@@ -99,13 +99,15 @@ const AdminDashboard = () => {
           </div>
 
           {/* Order status breakdown */}
-          {orderStats && (
+          {isStatsError ? (
+            <p className="text-sm text-red-500 mb-8">No se pudo cargar el estado de órdenes.</p>
+          ) : orderStats ? (
             <div className="mb-8">
               <h2 className="text-sm font-semibold text-gray-500 dark:text-[#8892a4] uppercase tracking-widest mb-3">
                 Estado de órdenes
               </h2>
               <div className="flex flex-wrap gap-3">
-                {STATUS_META.filter((m) => (orderStats[m.status] ?? 0) > 0).map((m) => (
+                {STATUS_META.filter((m) => orderStats[m.status] > 0).map((m) => (
                   <div
                     key={m.status}
                     className={`flex items-center gap-2 px-4 py-2 rounded-xl border text-sm font-medium ${m.color}`}
@@ -114,12 +116,12 @@ const AdminDashboard = () => {
                     <span>{m.label}</span>
                   </div>
                 ))}
-                {STATUS_META.every((m) => (orderStats[m.status] ?? 0) === 0) && (
+                {STATUS_META.every((m) => orderStats[m.status] === 0) && (
                   <p className="text-sm text-gray-400 dark:text-[#8892a4]">Sin órdenes aún</p>
                 )}
               </div>
             </div>
-          )}
+          ) : null}
 
           {/* Recent orders table */}
           <div className="bg-white dark:bg-[#1a1a1a] rounded-xl border border-gray-200 dark:border-[#2a2a2a] overflow-hidden">
