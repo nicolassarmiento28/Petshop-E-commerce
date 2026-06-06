@@ -49,21 +49,24 @@ export const getProducts = async (
     }
     const orderBy = sort && sortOptions[sort] ? sortOptions[sort] : { createdAt: 'desc' }
 
-    const products = await prisma.product.findMany({
-      where,
-      take,
-      ...(cursor ? { skip: 1, cursor: { id: parseInt(cursor, 10) } } : {}),
-      orderBy,
-      include: {
-        category: { select: { id: true, name: true, slug: true } },
-        brand: { select: { id: true, name: true, slug: true, logoUrl: true } },
-      },
-    })
+    const [products, total] = await Promise.all([
+      prisma.product.findMany({
+        where,
+        take,
+        ...(cursor ? { skip: 1, cursor: { id: parseInt(cursor, 10) } } : {}),
+        orderBy,
+        include: {
+          category: { select: { id: true, name: true, slug: true } },
+          brand: { select: { id: true, name: true, slug: true, logoUrl: true } },
+        },
+      }),
+      prisma.product.count({ where }),
+    ])
 
     const nextCursor =
       products.length === take ? products[products.length - 1].id : null
 
-    res.json({ products, nextCursor })
+    res.json({ products, nextCursor, total })
   } catch (error) {
     next(error)
   }
