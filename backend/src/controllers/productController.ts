@@ -43,11 +43,13 @@ export const getProducts = async (
     }
 
     const sortOptions: Record<string, object> = {
+      name_asc: { name: 'asc' },
+      name_desc: { name: 'desc' },
       price_asc: { price: 'asc' },
       price_desc: { price: 'desc' },
       newest: { createdAt: 'desc' },
     }
-    const orderBy = sort && sortOptions[sort] ? sortOptions[sort] : { createdAt: 'desc' }
+    const orderBy = sort && sortOptions[sort] ? sortOptions[sort] : { name: 'asc' }
 
     const [products, total] = await Promise.all([
       prisma.product.findMany({

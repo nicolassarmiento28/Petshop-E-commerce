@@ -2,8 +2,8 @@ import { useState, useMemo } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { Search } from 'lucide-react'
 import ProductGrid from '@/components/product/ProductGrid'
-import { useProducts, useCategories, useBrands } from '@/hooks/useProducts'
-import type { CategoryType } from '@/types'
+import { useProductsInfinite, useCategories, useBrands } from '@/hooks/useProducts'
+import type { ProductFilters, CategoryType } from '@/types'
 
 // ── helpers ────────────────────────────────────────────────────────────────────
 function findCategory(cats: CategoryType[], slug: string): CategoryType | undefined {
@@ -22,7 +22,7 @@ const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1).replace
 // ── Component ──────────────────────────────────────────────────────────────────
 export default function CategoryPage() {
   const { slug, sub } = useParams<{ slug: string; sub?: string }>()
-  const [sort, setSort] = useState('')
+  const [sort, setSort] = useState('name_asc')
   const [search, setSearch] = useState('')
   const [brandFilter, setBrandFilter] = useState('')
 
@@ -34,8 +34,8 @@ export default function CategoryPage() {
   const effectiveSlug = sub ?? slug ?? ''
 
   // Build query filters
-  const filters = useMemo(() => {
-    const f: Parameters<typeof useProducts>[0] = { limit: 60 }
+  const filters = useMemo<Omit<ProductFilters, 'cursor'>>(() => {
+    const f: Omit<ProductFilters, 'cursor'> = { limit: 100 }
     if (isOfertas) {
       f.sale = true
     } else if (!isMarcas) {
@@ -47,8 +47,19 @@ export default function CategoryPage() {
     return f
   }, [isOfertas, isMarcas, effectiveSlug, sort, search, brandFilter])
 
-  const { data, isLoading } = useProducts(filters)
-  const products = data?.products ?? []
+  const {
+    data,
+    isLoading,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useProductsInfinite(filters)
+
+  const products = useMemo(
+    () => data?.pages.flatMap((p) => p.products) ?? [],
+    [data],
+  )
+  const total = data?.pages[0]?.total ?? 0
 
   // Subcategories of current parent (for nav pills)
   const parentCat = useMemo(() => {
@@ -89,12 +100,13 @@ export default function CategoryPage() {
           {pageTitle}
         </h1>
         {isOfertas && (
-          <p className="text-sm text-gray-500 dark:text-[#8892a4] mt-1">Todos los productos con precio de oferta</p>
+          <p className="text-sm text-gray-500 dark:text-[#8892a4] mt-1">
+            Todos los productos con precio de oferta
+          </p>
         )}
         {!isLoading && (
           <p className="text-sm text-gray-400 dark:text-[#8892a4] mt-1">
-            {data?.total ?? products.length}{' '}
-            {(data?.total ?? products.length) === 1 ? 'producto' : 'productos'}
+            {total} {total === 1 ? 'producto' : 'productos'}
           </p>
         )}
       </div>
@@ -151,53 +163,60 @@ export default function CategoryPage() {
       {/* Filters bar */}
       <div className="sticky top-16 z-10 bg-[#FAFAF8] dark:bg-[#111111] py-3 -mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8 mb-3 border-b border-gray-100 dark:border-[#2a2a2a]">
         <div className="flex flex-wrap items-center gap-3">
-        {/* Search */}
-        <div className="relative flex-1 min-w-[180px] max-w-xs">
-          <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-[#8892a4]" />
-          <input
-            type="text"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="Buscar en esta categoría..."
-            className="w-full pl-8 pr-3 py-2 border border-gray-200 dark:border-[#2a2a2a] rounded-xl text-sm text-gray-700 dark:text-[#e8eaf0] bg-white dark:bg-[#222222] focus:outline-none focus:border-blue-400 transition-colors"
-          />
-        </div>
+          {/* Search */}
+          <div className="relative flex-1 min-w-[180px] max-w-xs">
+            <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-[#8892a4]" />
+            <input
+              type="text"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Buscar en esta categoría..."
+              className="w-full pl-8 pr-3 py-2 border border-gray-200 dark:border-[#2a2a2a] rounded-xl text-sm text-gray-700 dark:text-[#e8eaf0] bg-white dark:bg-[#222222] focus:outline-none focus:border-blue-400 transition-colors"
+            />
+          </div>
 
-        {/* Brand filter */}
-        {!isMarcas && allBrands.length > 0 && (
+          {/* Brand filter */}
+          {!isMarcas && allBrands.length > 0 && (
+            <select
+              value={brandFilter}
+              onChange={(e) => setBrandFilter(e.target.value)}
+              className="w-full sm:w-auto px-3 py-2 border border-gray-200 dark:border-[#2a2a2a] rounded-xl text-sm text-gray-600 dark:text-[#e8eaf0] bg-white dark:bg-[#222222] hover:border-blue-300 transition-colors outline-none"
+            >
+              <option value="">Todas las marcas</option>
+              {allBrands.map((b) => (
+                <option key={b.id} value={b.slug}>
+                  {b.name}
+                </option>
+              ))}
+            </select>
+          )}
+
+          {/* Sort */}
           <select
-            value={brandFilter}
-            onChange={(e) => setBrandFilter(e.target.value)}
+            value={sort}
+            onChange={(e) => setSort(e.target.value)}
             className="w-full sm:w-auto px-3 py-2 border border-gray-200 dark:border-[#2a2a2a] rounded-xl text-sm text-gray-600 dark:text-[#e8eaf0] bg-white dark:bg-[#222222] hover:border-blue-300 transition-colors outline-none"
           >
-            <option value="">Todas las marcas</option>
-            {allBrands.map((b) => (
-              <option key={b.id} value={b.slug}>{b.name}</option>
-            ))}
+            <option value="name_asc">Nombre (A-Z)</option>
+            <option value="name_desc">Nombre (Z-A)</option>
+            <option value="price_asc">Menor precio</option>
+            <option value="price_desc">Mayor precio</option>
+            <option value="newest">Más nuevos</option>
           </select>
-        )}
 
-        {/* Sort */}
-        <select
-          value={sort}
-          onChange={(e) => setSort(e.target.value)}
-          className="w-full sm:w-auto px-3 py-2 border border-gray-200 dark:border-[#2a2a2a] rounded-xl text-sm text-gray-600 dark:text-[#e8eaf0] bg-white dark:bg-[#222222] hover:border-blue-300 transition-colors outline-none"
-        >
-          <option value="">Más relevantes</option>
-          <option value="price_asc">Menor precio</option>
-          <option value="price_desc">Mayor precio</option>
-          <option value="newest">Más nuevos</option>
-        </select>
-
-        {/* Clear filters */}
-        {(search || brandFilter || sort) && (
-          <button
-            onClick={() => { setSearch(''); setBrandFilter(''); setSort('') }}
-            className="px-3 py-2 text-sm text-red-500 hover:text-red-600 border border-red-200 rounded-xl hover:bg-red-50 transition-colors"
-          >
-            Limpiar
-          </button>
-        )}
+          {/* Clear filters */}
+          {(search || brandFilter || sort !== 'name_asc') && (
+            <button
+              onClick={() => {
+                setSearch('')
+                setBrandFilter('')
+                setSort('name_asc')
+              }}
+              className="px-3 py-2 text-sm text-red-500 hover:text-red-600 border border-red-200 rounded-xl hover:bg-red-50 transition-colors"
+            >
+              Limpiar
+            </button>
+          )}
         </div>
       </div>
 
@@ -211,6 +230,26 @@ export default function CategoryPage() {
             : 'No hay productos en esta categoría.'
         }
       />
+
+      {/* Load more */}
+      {hasNextPage && (
+        <div className="flex justify-center mt-10">
+          <button
+            onClick={() => fetchNextPage()}
+            disabled={isFetchingNextPage}
+            className="px-8 py-3 bg-blue-600 text-white text-sm font-medium rounded-xl hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          >
+            {isFetchingNextPage ? 'Cargando...' : 'Cargar más productos'}
+          </button>
+        </div>
+      )}
+
+      {/* Loaded count hint */}
+      {!isLoading && total > 0 && (
+        <p className="text-center text-xs text-gray-400 dark:text-[#8892a4] mt-4">
+          Mostrando {products.length} de {total} productos
+        </p>
+      )}
     </div>
   )
 }

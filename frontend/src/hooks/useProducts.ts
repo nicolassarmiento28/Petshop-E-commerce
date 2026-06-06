@@ -1,11 +1,32 @@
-import { useQuery } from '@tanstack/react-query'
-import { fetchProducts, fetchProductBySlug, fetchCategories, fetchBrands, fetchRelatedProducts } from '@/services/productService'
+import { useQuery, useInfiniteQuery } from '@tanstack/react-query'
+import {
+  fetchProducts,
+  fetchProductBySlug,
+  fetchCategories,
+  fetchBrands,
+  fetchRelatedProducts,
+} from '@/services/productService'
+import type { ProductsResponse } from '@/services/productService'
 import type { ProductFilters } from '@/types'
 
 export const useProducts = (filters: ProductFilters = {}) =>
   useQuery({
     queryKey: ['products', filters],
     queryFn: () => fetchProducts(filters),
+  })
+
+export const useProductsInfinite = (filters: Omit<ProductFilters, 'cursor'>) =>
+  useInfiniteQuery<
+    ProductsResponse,
+    Error,
+    { pages: ProductsResponse[] },
+    [string, Omit<ProductFilters, 'cursor'>],
+    number | undefined
+  >({
+    queryKey: ['products-infinite', filters],
+    queryFn: ({ pageParam }) => fetchProducts({ ...filters, cursor: pageParam }),
+    initialPageParam: undefined,
+    getNextPageParam: (lastPage) => lastPage.nextCursor ?? undefined,
   })
 
 export const useProduct = (slug: string) =>
