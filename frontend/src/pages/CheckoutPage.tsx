@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { CheckoutForm } from '@/components/checkout/CheckoutForm'
-import type { CheckoutFormData } from '@/components/checkout/CheckoutForm'
+import type { CheckoutFormData } from '@/components/checkout/checkoutSchema'
 import { useCartStore } from '@/store/cartStore'
 import { createOrder } from '@/services/orderService'
 import { usePayment } from '@/hooks/usePayment'
