@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { Helmet } from 'react-helmet-async'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -34,6 +35,9 @@ const AdminLogin = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-[#111111]">
+      <Helmet>
+        <title>Admin - Iniciar sesión | Petshop</title>
+      </Helmet>
       <div className="bg-white dark:bg-[#1a1a1a] rounded-2xl shadow-lg w-full max-w-sm overflow-hidden">
         <div className="bg-[#2b44d4] dark:bg-[#1e33a8] px-8 py-5">
           <div className="flex items-center gap-2">

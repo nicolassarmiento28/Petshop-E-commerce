@@ -32,6 +32,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           <img
             src={product.imageUrl}
             alt={product.name}
+            loading="lazy"
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />
         ) : (
@@ -69,6 +70,7 @@ export default function ProductCard({ product }: ProductCardProps) {
               <img
                 src={product.brand.logoUrl}
                 alt={product.brand.name}
+                loading="lazy"
                 className="max-h-5 max-w-[80px] w-auto object-contain opacity-60 dark:opacity-80 dark:brightness-150"
               />
             ) : (

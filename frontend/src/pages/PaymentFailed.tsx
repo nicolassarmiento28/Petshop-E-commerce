@@ -1,4 +1,5 @@
 import { Link, useSearchParams, useNavigate } from 'react-router-dom'
+import { Helmet } from 'react-helmet-async'
 import { XCircle } from 'lucide-react'
 
 export default function PaymentFailed() {
@@ -8,6 +9,9 @@ export default function PaymentFailed() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-[#111111] flex flex-col items-center justify-center">
+      <Helmet>
+        <title>Pago rechazado | Petshop</title>
+      </Helmet>
       <div className="bg-white dark:bg-[#1a1a1a] rounded-3xl shadow-sm p-8 max-w-md w-full mx-auto mt-20 flex flex-col items-center gap-5 text-center">
         <XCircle size={64} className="text-red-500" />
 

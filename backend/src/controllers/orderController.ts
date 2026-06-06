@@ -7,12 +7,13 @@ export const createOrder = async (
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { customerName, customerEmail, customerPhone, shippingAddress, items } = req.body as {
+    const { customerName, customerEmail, customerPhone, shippingAddress, items, couponCode } = req.body as {
       customerName?: string
       customerEmail?: string
       customerPhone?: string
       shippingAddress?: string
       items?: Array<{ productId: number; quantity: number }>
+      couponCode?: string
     }
 
     if (!customerName || !customerEmail || !items || items.length === 0) {
@@ -33,12 +34,30 @@ export const createOrder = async (
       }
     }
 
-    const total = items.reduce((sum, item) => {
+    let total = items.reduce((sum, item) => {
       const product = products.find((p) => p.id === item.productId)!
       const unitPrice = product.salePrice ?? product.price
       return sum + unitPrice * item.quantity
     }, 0)
 
+    let discount = 0
+    if (couponCode) {
+      const coupon = await prisma.coupon.findUnique({ where: { code: String(couponCode).toUpperCase() } })
+      if (coupon && coupon.isActive) {
+        if (!coupon.expiresAt || new Date() <= coupon.expiresAt) {
+          if (!coupon.maxUses || coupon.usedCount < coupon.maxUses) {
+            if (!coupon.minPurchase || total >= coupon.minPurchase) {
+              discount = coupon.discountType === 'PERCENTAGE'
+                ? total * (coupon.discountValue / 100)
+                : coupon.discountValue
+              if (discount > total) discount = total
+            }
+          }
+        }
+      }
+    }
+
+    const finalTotal = total - discount
     const orderNumber = 'ORD-' + Date.now()
 
     const [order] = await prisma.$transaction([
@@ -49,7 +68,7 @@ export const createOrder = async (
           customerEmail,
           customerPhone,
           shippingAddress,
-          total,
+          total: finalTotal,
           items: {
             create: items.map((item) => {
               const product = products.find((p) => p.id === item.productId)!
@@ -70,9 +89,22 @@ export const createOrder = async (
           data: { stock: { decrement: item.quantity } },
         }),
       ),
+      ...(discount > 0
+        ? [
+            prisma.coupon.update({
+              where: { code: String(couponCode).toUpperCase() },
+              data: { usedCount: { increment: 1 } },
+            }),
+          ]
+        : []),
     ])
 
-    res.status(201).json({ orderId: order.id, orderNumber: order.orderNumber, total: order.total })
+    res.status(201).json({
+      orderId: order.id,
+      orderNumber: order.orderNumber,
+      total: order.total,
+      ...(discount > 0 && { discount, originalTotal: total }),
+    })
   } catch (error) {
     next(error)
   }

@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async'
 import { Link, useNavigate } from 'react-router-dom'
 import { useCartStore } from '@/store/cartStore'
 import CartItem from '@/components/cart/CartItem'
@@ -13,6 +14,9 @@ export default function CartPage() {
 
   return (
     <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <Helmet>
+        <title>Carrito de compras | Petshop</title>
+      </Helmet>
       <h1 className="text-3xl font-bold text-gray-900 dark:text-[#e8eaf0] mb-8">Tu Carrito</h1>
 
       {items.length === 0 ? (

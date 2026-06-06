@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async'
 import { useQuery } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
 import { AlertTriangle, TrendingUp, DollarSign, Package, ShoppingCart, ArrowUp, ArrowDown, Clock } from 'lucide-react'
@@ -199,6 +200,9 @@ const AdminDashboard = () => {
 
   return (
     <AdminLayout>
+      <Helmet>
+        <title>Admin - Dashboard | Petshop</title>
+      </Helmet>
       <h1 className="text-2xl font-bold text-gray-900 dark:text-[#e8eaf0] mb-6">Dashboard</h1>
       {isLoading && <p className="text-gray-500 dark:text-[#8892a4]">Cargando...</p>}
       {isError && <p className="text-red-500">Error al cargar datos</p>}

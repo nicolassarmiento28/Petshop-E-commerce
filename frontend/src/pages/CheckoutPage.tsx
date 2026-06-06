@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
+import { Helmet } from 'react-helmet-async'
 import { CheckoutForm } from '@/components/checkout/CheckoutForm'
 import type { CheckoutFormData } from '@/components/checkout/checkoutSchema'
 import { useCartStore } from '@/store/cartStore'
 import { createOrder } from '@/services/orderService'
 import { usePayment } from '@/hooks/usePayment'
 import { formatCLP } from '@/utils/formatters'
+import api from '@/services/api'
+import type { CouponValidation } from '@/types'
 
 const TEST_CARD = {
   number: '4051 8856 0044 6623',
@@ -24,6 +27,19 @@ export default function CheckoutPage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isError, setIsError] = useState(false)
 
+  // Coupon state
+  const [couponCode, setCouponCode] = useState('')
+  const [validating, setValidating] = useState(false)
+  const [couponResult, setCouponResult] = useState<CouponValidation | null>(null)
+  const [couponError, setCouponError] = useState<string | null>(null)
+
+  const discountAmount = couponResult?.valid
+    ? couponResult.discountType === 'PERCENTAGE'
+      ? totalPrice * (couponResult.discountValue / 100)
+      : couponResult.discountValue
+    : 0
+  const finalTotal = Math.max(0, totalPrice - discountAmount)
+
   useEffect(() => {
     setReady(true)
   }, [])
@@ -33,6 +49,24 @@ export default function CheckoutPage() {
       navigate('/carrito')
     }
   }, [ready, items.length, navigate])
+
+  const handleValidateCoupon = async () => {
+    if (!couponCode.trim()) return
+    setValidating(true)
+    setCouponError(null)
+    setCouponResult(null)
+    try {
+      const { data } = await api.post<CouponValidation>('/coupons/validate', { code: couponCode.trim(), orderTotal: totalPrice })
+      setCouponResult(data)
+      if (!data.valid) {
+        setCouponError('Cupón no válido')
+      }
+    } catch {
+      setCouponError('Error al validar cupón')
+    } finally {
+      setValidating(false)
+    }
+  }
 
   const handleSubmit = async (data: CheckoutFormData) => {
     setIsSubmitting(true)
@@ -44,6 +78,7 @@ export default function CheckoutPage() {
         customerPhone: data.customerPhone,
         shippingAddress: data.shippingAddress,
         items: items.map((item) => ({ productId: item.id, quantity: item.quantity })),
+        couponCode: couponResult?.valid ? couponCode.trim() : undefined,
       })
       const { token, url } = await payment.mutateAsync(orderId)
       payment.submitToTransbank(token, url)
@@ -70,6 +105,9 @@ export default function CheckoutPage() {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-[#111111] py-10">
       <div className="max-w-5xl mx-auto px-4">
+        <Helmet>
+          <title>Checkout | Petshop</title>
+        </Helmet>
         <h1 className="text-2xl font-bold text-gray-800 dark:text-[#e8eaf0] mb-8">Checkout</h1>
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Left — form */}
@@ -95,6 +133,34 @@ export default function CheckoutPage() {
           {/* Right — order summary */}
           <div className="lg:w-80 bg-white dark:bg-[#1a1a1a] rounded-2xl shadow-sm p-6 h-fit">
             <h2 className="text-lg font-semibold text-gray-800 dark:text-[#e8eaf0] mb-4">Resumen del pedido</h2>
+
+            {/* Coupon section */}
+            <div className="mb-4 pb-4 border-b border-gray-100 dark:border-[#2a2a2a]">
+              <label className="block text-sm font-medium text-gray-700 dark:text-[#e8eaf0] mb-2">Cupón de descuento</label>
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  value={couponCode}
+                  onChange={(e) => { setCouponCode(e.target.value); setCouponResult(null); setCouponError(null) }}
+                  placeholder="Código"
+                  className="flex-1 px-3 py-2 border border-gray-200 dark:border-[#2a2a2a] rounded-xl text-sm bg-white dark:bg-[#222222] text-gray-900 dark:text-[#e8eaf0] focus:outline-none focus:border-blue-400 transition-colors"
+                />
+                <button
+                  onClick={handleValidateCoupon}
+                  disabled={validating || !couponCode.trim()}
+                  className="px-3 py-2 text-sm font-medium bg-blue-600 text-white rounded-xl hover:bg-blue-700 disabled:opacity-50 transition-colors"
+                >
+                  {validating ? '...' : 'Validar'}
+                </button>
+              </div>
+              {couponError && <p className="text-red-500 text-xs mt-1">{couponError}</p>}
+              {couponResult?.valid && (
+                <p className="text-green-600 text-xs mt-1">
+                  Cupón aplicado: {couponResult.discountType === 'PERCENTAGE' ? `${couponResult.discountValue}%` : formatCLP(couponResult.discountValue)} de descuento
+                </p>
+              )}
+            </div>
+
             <ul className="space-y-3 mb-4">
               {items.map((item) => (
                 <li key={item.id} className="flex justify-between text-sm text-gray-700 dark:text-[#e8eaf0]">
@@ -109,9 +175,15 @@ export default function CheckoutPage() {
               ))}
             </ul>
             <hr className="border-gray-100 dark:border-[#2a2a2a] mb-4" />
+            {discountAmount > 0 && (
+              <div className="flex justify-between text-sm text-green-600 mb-2">
+                <span>Descuento</span>
+                <span>-{formatCLP(discountAmount)}</span>
+              </div>
+            )}
             <div className="flex justify-between font-semibold text-gray-800 dark:text-[#e8eaf0]">
               <span>Total</span>
-              <span className="text-blue-600">{formatCLP(totalPrice)}</span>
+              <span className="text-blue-600">{formatCLP(finalTotal)}</span>
             </div>
           </div>
         </div>

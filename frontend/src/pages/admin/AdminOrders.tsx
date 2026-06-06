@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Helmet } from 'react-helmet-async'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import AdminLayout from '@/components/admin/AdminLayout'
 import { formatCLP } from '@/utils/formatters'
@@ -82,6 +83,9 @@ const AdminOrders = () => {
 
   return (
     <AdminLayout>
+      <Helmet>
+        <title>Admin - Órdenes | Petshop</title>
+      </Helmet>
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold text-gray-900 dark:text-[#e8eaf0]">Órdenes</h1>
         <div className="flex items-center gap-3">

@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react'
+import { Helmet } from 'react-helmet-async'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -198,6 +199,9 @@ const AdminBrands = () => {
 
   return (
     <AdminLayout>
+      <Helmet>
+        <title>Admin - Marcas | Petshop</title>
+      </Helmet>
       <ConfirmDialog
         open={confirmBrand !== null}
         title="Eliminar marca"

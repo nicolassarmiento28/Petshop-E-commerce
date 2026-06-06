@@ -12,58 +12,60 @@ interface CartStore {
   totalPrice: number
 }
 
+const calcTotals = (items: CartItemType[]) => ({
+  totalItems: items.reduce((n, i) => n + i.quantity, 0),
+  totalPrice: items.reduce((n, i) => n + i.unitPrice * i.quantity, 0),
+})
+
 export const useCartStore = create<CartStore>()(
   persist(
-    (set, get) => ({
+    (set) => ({
       items: [],
+      totalItems: 0,
+      totalPrice: 0,
 
       addItem: (product, quantity = 1) =>
         set((state) => {
           const existing = state.items.find((i) => i.id === product.id)
-          if (existing) {
-            return {
-              items: state.items.map((i) =>
+          const items = existing
+            ? state.items.map((i) =>
                 i.id === product.id ? { ...i, quantity: i.quantity + quantity } : i,
-              ),
-            }
-          }
-          return {
-            items: [
-              ...state.items,
-              {
-                id: product.id,
-                name: product.name,
-                slug: product.slug,
-                imageUrl: product.imageUrl,
-                unitPrice: product.salePrice ?? product.price,
-                quantity,
-              },
-            ],
-          }
+              )
+            : [
+                ...state.items,
+                {
+                  id: product.id,
+                  name: product.name,
+                  slug: product.slug,
+                  imageUrl: product.imageUrl,
+                  unitPrice: product.salePrice ?? product.price,
+                  quantity,
+                },
+              ]
+          return { items, ...calcTotals(items) }
         }),
 
       removeItem: (id) =>
-        set((state) => ({ items: state.items.filter((i) => i.id !== id) })),
+        set((state) => {
+          const items = state.items.filter((i) => i.id !== id)
+          return { items, ...calcTotals(items) }
+        }),
 
       updateQuantity: (id, quantity) =>
-        set((state) => ({
-          items: quantity <= 0
+        set((state) => {
+          const items = quantity <= 0
             ? state.items.filter((i) => i.id !== id)
-            : state.items.map((i) => (i.id === id ? { ...i, quantity } : i)),
-        })),
+            : state.items.map((i) => (i.id === id ? { ...i, quantity } : i))
+          return { items, ...calcTotals(items) }
+        }),
 
-      clearCart: () => set({ items: [] }),
-
-      get totalItems() {
-        return get().items.reduce((n, i) => n + i.quantity, 0)
-      },
-
-      get totalPrice() {
-        return get().items.reduce((n, i) => n + i.unitPrice * i.quantity, 0)
-      },
+      clearCart: () => set({ items: [], totalItems: 0, totalPrice: 0 }),
     }),
     {
       name: 'petshop-cart',
+      partialize: (state) => ({
+        items: state.items,
+      }),
     },
   ),
 )

@@ -75,6 +75,7 @@ export default function BrandsCarousel({ brands }: BrandsCarouselProps) {
               <img
                 src={brand.logoUrl}
                 alt={brand.name}
+                loading="lazy"
                 className="max-h-12 max-w-[130px] w-auto object-contain"
               />
             ) : (

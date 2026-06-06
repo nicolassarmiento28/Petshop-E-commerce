@@ -107,6 +107,16 @@ export interface ProductFilters {
   sort?: string
   cursor?: number
   limit?: number
+  minPrice?: number
+  maxPrice?: number
+}
+
+export interface CouponValidation {
+  valid: boolean
+  discount: number
+  discountType: 'PERCENTAGE' | 'FIXED'
+  discountValue: number
+  code: string
 }
 
 export interface CreateOrderInput {
@@ -115,4 +125,5 @@ export interface CreateOrderInput {
   customerPhone?: string
   shippingAddress?: string
   items: { productId: number; quantity: number }[]
+  couponCode?: string
 }

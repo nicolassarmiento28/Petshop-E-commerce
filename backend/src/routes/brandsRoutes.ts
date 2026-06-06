@@ -1,8 +1,8 @@
 import { Router } from 'express'
-import { getBrands } from '../controllers/categoryController'
+import { getPublicBrands } from '../controllers/categoryController'
 
 const router = Router()
 
-router.get('/', getBrands)
+router.get('/', getPublicBrands)
 
 export default router

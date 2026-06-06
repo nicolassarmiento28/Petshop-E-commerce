@@ -1,11 +1,13 @@
 import { useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
+import { Helmet } from 'react-helmet-async'
 import { ShoppingCart, ArrowLeft, Package } from 'lucide-react'
 import { toast } from 'sonner'
 import { formatCLP } from '@/utils/formatters'
 import { useProduct, useRelatedProducts } from '@/hooks/useProducts'
 import { useCartStore } from '@/store/cartStore'
 import { useUiStore } from '@/store/uiStore'
+import Breadcrumbs from '@/components/layout/Breadcrumbs'
 import ProductGrid from '@/components/product/ProductGrid'
 
 export default function ProductPage() {
@@ -88,14 +90,17 @@ export default function ProductPage() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 dark:bg-[#111111]">
-      {/* Breadcrumb */}
-      <Link
-        to={product.category ? `/categoria/${product.category.slug}` : '/'}
-        className="inline-flex items-center gap-1 text-sm text-gray-500 dark:text-[#8892a4] hover:text-blue-600 transition-colors mb-8"
-      >
-        <ArrowLeft size={14} />
-        {product.category ? product.category.name : 'Volver'}
-      </Link>
+      <Helmet>
+        <title>{product.name} | Petshop</title>
+        <meta name="description" content={product.description ? product.description.slice(0, 160) : `${product.name} en Petshop`} />
+      </Helmet>
+
+      <Breadcrumbs
+        items={[
+          ...(product.category ? [{ label: product.category.name, href: `/categoria/${product.category.slug}` }] : []),
+          { label: product.name },
+        ]}
+      />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
         {/* Left — image + thumbnail strip */}
@@ -105,6 +110,7 @@ export default function ProductPage() {
               <img
                 src={thumbImage}
                 alt={product.name}
+                loading="lazy"
                 className="w-full h-full object-cover"
               />
             ) : (
@@ -122,7 +128,7 @@ export default function ProductPage() {
                 }`}
               >
                 {thumbImage ? (
-                  <img src={thumbImage} alt={`${product.name} ${i + 1}`} className="w-full h-full object-cover" />
+                  <img src={thumbImage} alt={`${product.name} ${i + 1}`} loading="lazy" className="w-full h-full object-cover" />
                 ) : (
                   <div className="w-full h-full bg-blue-50 dark:bg-[#1a1a1a] flex items-center justify-center text-2xl">🐾</div>
                 )}

@@ -1,6 +1,20 @@
 import type { Response, NextFunction } from 'express'
 import type { AuthRequest } from '../middleware/authMiddleware'
 import { prisma } from '../lib/prisma'
+import { z, ZodError } from 'zod'
+
+const createProductSchema = z.object({
+  name: z.string().min(2),
+  slug: z.string().min(2),
+  price: z.number().positive(),
+  stock: z.number().int().nonnegative(),
+  description: z.string().optional(),
+  salePrice: z.number().optional(),
+  imageUrl: z.string().optional(),
+  categoryId: z.number(),
+  brandId: z.number().optional(),
+  isFeatured: z.boolean().optional(),
+})
 
 export const getAdminProducts = async (
   req: AuthRequest,
@@ -46,24 +60,17 @@ export const createProduct = async (
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { name, slug, description, price, salePrice, stock, imageUrl, categoryId, brandId, isFeatured } =
-      req.body as {
-        name?: unknown
-        slug?: unknown
-        description?: unknown
-        price?: unknown
-        salePrice?: unknown
-        stock?: unknown
-        imageUrl?: unknown
-        categoryId?: unknown
-        brandId?: unknown
-        isFeatured?: unknown
+    let parsed: { name: string; slug: string; price: number; stock: number; description?: string; salePrice?: number; imageUrl?: string; categoryId: number; brandId?: number; isFeatured?: boolean }
+    try {
+      parsed = createProductSchema.parse(req.body)
+    } catch (error) {
+      if (error instanceof ZodError) {
+        res.status(400).json({ error: error.errors.map(e => e.message).join(', ') })
+        return
       }
-
-    if (!name || !slug || price === undefined || price === null || stock === undefined || stock === null || !categoryId) {
-      res.status(400).json({ error: 'name, slug, price, stock, and categoryId are required' })
-      return
+      throw error
     }
+    const { name, slug, description, price, salePrice, stock, imageUrl, categoryId, brandId, isFeatured } = parsed
 
     const existing = await prisma.product.findUnique({ where: { slug: String(slug) } })
     if (existing) {

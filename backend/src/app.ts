@@ -7,6 +7,7 @@ import categoryRoutes from './routes/categoryRoutes'
 import brandsRoutes from './routes/brandsRoutes'
 import orderRoutes from './routes/orderRoutes'
 import paymentRoutes from './routes/paymentRoutes'
+import couponRoutes from './routes/couponRoutes'
 import adminRoutes from './routes/adminRoutes'
 import { errorHandler } from './middleware/errorHandler'
 
@@ -39,6 +40,7 @@ app.use('/api/categories', categoryRoutes)
 app.use('/api/brands', brandsRoutes)
 app.use('/api/orders', orderRoutes)
 app.use('/api/payment', paymentRoutes)
+app.use('/api/coupons', couponRoutes)
 app.use('/api/admin', adminRoutes)
 
 // Centralized error handler (must be last)

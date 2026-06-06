@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react'
+import { Helmet } from 'react-helmet-async'
 import { Search, ChevronLeft, ChevronRight } from 'lucide-react'
 import { useSearchParams } from 'react-router-dom'
+import Breadcrumbs from '@/components/layout/Breadcrumbs'
 import ProductGrid from '@/components/product/ProductGrid'
 import { useProducts, useBrands } from '@/hooks/useProducts'
 import { cn } from '@/lib/utils'
 
-const PAGE_SIZE = 20
+const PAGE_SIZES = [12, 24, 48]
 
 export default function AllProductsPage() {
   const [searchParams] = useSearchParams()
@@ -13,6 +15,7 @@ export default function AllProductsPage() {
   const [brandFilter, setBrandFilter] = useState('')
   const [sort, setSort] = useState('')
   const [page, setPage] = useState(1)
+  const [pageSize, setPageSize] = useState(PAGE_SIZES[0])
 
   // Sync when URL param changes (e.g. navbar search)
   useEffect(() => {
@@ -31,8 +34,8 @@ export default function AllProductsPage() {
   const { data: allBrands = [] } = useBrands()
 
   const products = data?.products ?? []
-  const totalPages = Math.max(1, Math.ceil(products.length / PAGE_SIZE))
-  const paginated = products.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE)
+  const totalPages = Math.max(1, Math.ceil(products.length / pageSize))
+  const paginated = products.slice((page - 1) * pageSize, page * pageSize)
   const hasFilters = !!(search || brandFilter || sort)
 
   function applyFilter(fn: () => void) {
@@ -55,6 +58,12 @@ export default function AllProductsPage() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 dark:bg-[#111111]">
+      <Helmet>
+        <title>Todos los productos | Petshop</title>
+      </Helmet>
+
+      <Breadcrumbs items={[{ label: 'Todos los productos' }]} />
+
       {/* Header */}
       <div className="mb-8">
         <p className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-1">Catálogo</p>
@@ -112,6 +121,17 @@ export default function AllProductsPage() {
             Limpiar
           </button>
         )}
+
+        {/* Page size selector */}
+        <select
+          value={pageSize}
+          onChange={(e) => { setPageSize(Number(e.target.value)); setPage(1) }}
+          className="px-3 py-2.5 border border-gray-200 dark:border-[#2a2a2a] rounded-xl text-sm text-gray-600 dark:text-[#e8eaf0] bg-white dark:bg-[#222222] hover:border-blue-300 transition-colors outline-none"
+        >
+          {PAGE_SIZES.map((s) => (
+            <option key={s} value={s}>{s} por página</option>
+          ))}
+        </select>
       </div>
 
       {/* Grid */}

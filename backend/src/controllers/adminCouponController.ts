@@ -1,6 +1,16 @@
 import type { Response, NextFunction } from 'express'
 import type { AuthRequest } from '../middleware/authMiddleware'
 import { prisma } from '../lib/prisma'
+import { z, ZodError } from 'zod'
+
+const createCouponSchema = z.object({
+  code: z.string().min(3),
+  discountType: z.enum(['PERCENTAGE', 'FIXED']),
+  discountValue: z.number().positive(),
+  minPurchase: z.number().optional(),
+  maxUses: z.number().optional(),
+  expiresAt: z.string().optional(),
+})
 
 export const getCoupons = async (
   req: AuthRequest,
@@ -40,20 +50,17 @@ export const createCoupon = async (
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { code, discountType, discountValue, minPurchase, maxUses, expiresAt } =
-      req.body as {
-        code?: unknown
-        discountType?: unknown
-        discountValue?: unknown
-        minPurchase?: unknown
-        maxUses?: unknown
-        expiresAt?: unknown
+    let parsed: { code: string; discountType: 'PERCENTAGE' | 'FIXED'; discountValue: number; minPurchase?: number; maxUses?: number; expiresAt?: string }
+    try {
+      parsed = createCouponSchema.parse(req.body)
+    } catch (error) {
+      if (error instanceof ZodError) {
+        res.status(400).json({ error: error.errors.map(e => e.message).join(', ') })
+        return
       }
-
-    if (!code || !discountType || discountValue === undefined || discountValue === null) {
-      res.status(400).json({ error: 'code, discountType, and discountValue are required' })
-      return
+      throw error
     }
+    const { code, discountType, discountValue, minPurchase, maxUses, expiresAt } = parsed
 
     const upperCode = String(code).toUpperCase()
 

@@ -47,6 +47,27 @@ export const getProducts = async (
       ]
     }
 
+    const minPrice = req.query.minPrice ? parseFloat(req.query.minPrice as string) : undefined
+    const maxPrice = req.query.maxPrice ? parseFloat(req.query.maxPrice as string) : undefined
+    if (minPrice !== undefined) {
+      where.AND = [
+        ...(where.AND ? (Array.isArray(where.AND) ? where.AND : [where.AND]) : []),
+        { OR: [
+          { price: { gte: minPrice } },
+          { salePrice: { gte: minPrice } },
+        ]},
+      ]
+    }
+    if (maxPrice !== undefined) {
+      where.AND = [
+        ...(where.AND ? (Array.isArray(where.AND) ? where.AND : [where.AND]) : []),
+        { OR: [
+          { price: { lte: maxPrice } },
+          { salePrice: { lte: maxPrice } },
+        ]},
+      ]
+    }
+
     const sortOptions: Record<string, object> = {
       name_asc: { name: 'asc' },
       name_desc: { name: 'desc' },

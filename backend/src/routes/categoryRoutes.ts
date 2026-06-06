@@ -1,9 +1,10 @@
 import { Router } from 'express'
-import { getCategories, getBrands } from '../controllers/categoryController'
+import { getCategories, getCategoryBySlug, getPublicBrands } from '../controllers/categoryController'
 
 const router = Router()
 
 router.get('/', getCategories)
-router.get('/brands', getBrands)
+router.get('/brands', getPublicBrands)
+router.get('/:slug', getCategoryBySlug)
 
 export default router

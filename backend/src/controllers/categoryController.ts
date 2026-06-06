@@ -22,7 +22,32 @@ export const getCategories = async (
   }
 }
 
-export const getBrands = async (
+export const getCategoryBySlug = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): Promise<void> => {
+  try {
+    const category = await prisma.category.findUnique({
+      where: { slug: req.params.slug as string },
+      include: {
+        children: {
+          select: { id: true, name: true, slug: true, imageUrl: true },
+        },
+        parent: { select: { id: true, name: true, slug: true } },
+      },
+    })
+    if (!category) {
+      res.status(404).json({ error: 'Category not found' })
+      return
+    }
+    res.json(category)
+  } catch (error) {
+    next(error)
+  }
+}
+
+export const getPublicBrands = async (
   _req: Request,
   res: Response,
   next: NextFunction,

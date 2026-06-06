@@ -41,6 +41,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
               <Link
                 key={item.href}
                 to={item.href}
+                title={item.label}
                 className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                   active
                     ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-400'
@@ -48,6 +49,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
                 }`}
               >
                 <item.icon size={18} className={active ? 'text-blue-600 dark:text-blue-400' : ''} />
+                <span className="sr-only">{item.label}</span>
                 {item.label}
               </Link>
             )
@@ -56,9 +58,11 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
         <div className="px-3 py-4 border-t border-gray-200 dark:border-[#2a2a2a]">
           <button
             onClick={logout}
+            title="Cerrar sesión"
             className="flex items-center gap-3 w-full px-3 py-2.5 rounded-lg text-sm text-gray-500 dark:text-[#8892a4] hover:bg-gray-100 dark:hover:bg-[#222222] transition-colors"
           >
             <LogOut size={18} />
+            <span className="sr-only">Cerrar sesión</span>
             Cerrar sesión
           </button>
         </div>

@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { Helmet } from 'react-helmet-async'
 import Layout from '@/components/layout/Layout'
 
 const Section = ({ title, children }: { title: string; children: React.ReactNode }) => (
@@ -13,6 +14,9 @@ const Section = ({ title, children }: { title: string; children: React.ReactNode
 export default function ReturnsPage() {
   return (
     <Layout>
+      <Helmet>
+        <title>Devoluciones | Petshop</title>
+      </Helmet>
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <nav className="text-sm text-gray-400 mb-6">
           <Link to="/" className="hover:text-blue-600 transition-colors">Inicio</Link>

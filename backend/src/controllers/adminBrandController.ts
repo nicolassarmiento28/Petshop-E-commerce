@@ -1,6 +1,9 @@
 import type { Response, NextFunction } from 'express'
 import type { AuthRequest } from '../middleware/authMiddleware'
 import { prisma } from '../lib/prisma'
+import { z, ZodError } from 'zod'
+
+const createBrandSchema = z.object({ name: z.string().min(2), slug: z.string().min(2).regex(/^[a-z0-9-]+$/), logoUrl: z.string().url().optional() })
 
 export const getBrands = async (
   req: AuthRequest,
@@ -41,16 +44,17 @@ export const createBrand = async (
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { name, slug, logoUrl } = req.body as {
-      name?: unknown
-      slug?: unknown
-      logoUrl?: unknown
+    let parsed: { name: string; slug: string; logoUrl?: string }
+    try {
+      parsed = createBrandSchema.parse(req.body)
+    } catch (error) {
+      if (error instanceof ZodError) {
+        res.status(400).json({ error: error.errors.map(e => e.message).join(', ') })
+        return
+      }
+      throw error
     }
-
-    if (!name || !slug) {
-      res.status(400).json({ error: 'name and slug are required' })
-      return
-    }
+    const { name, slug, logoUrl } = parsed
 
     const existing = await prisma.brand.findUnique({ where: { slug: String(slug) } })
     if (existing) {

@@ -1,4 +1,5 @@
 import { Router } from 'express'
+import { loginLimiter } from '../middleware/rateLimiter'
 import { adminLogin } from '../controllers/adminController'
 import { authMiddleware } from '../middleware/authMiddleware'
 import {
@@ -19,7 +20,7 @@ import { getCoupons, createCoupon, updateCoupon, deleteCoupon } from '../control
 const router = Router()
 
 // Public
-router.post('/login', adminLogin)
+router.post('/login', loginLimiter, adminLogin)
 
 // Protected — products
 router.get('/products/low-stock', authMiddleware, getLowStockProducts) // must precede /products/:id

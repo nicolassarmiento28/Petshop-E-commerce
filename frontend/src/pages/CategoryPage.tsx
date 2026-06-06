@@ -1,6 +1,8 @@
 import { useState, useMemo } from 'react'
 import { useParams, Link } from 'react-router-dom'
+import { Helmet } from 'react-helmet-async'
 import { Search } from 'lucide-react'
+import Breadcrumbs from '@/components/layout/Breadcrumbs'
 import ProductGrid from '@/components/product/ProductGrid'
 import { useProductsInfinite, useCategories, useBrands } from '@/hooks/useProducts'
 import type { ProductFilters, CategoryType } from '@/types'
@@ -25,6 +27,8 @@ export default function CategoryPage() {
   const [sort, setSort] = useState('name_asc')
   const [search, setSearch] = useState('')
   const [brandFilter, setBrandFilter] = useState('')
+  const [minPrice, setMinPrice] = useState('')
+  const [maxPrice, setMaxPrice] = useState('')
 
   const { data: allCategories = [] } = useCategories()
   const { data: allBrands = [] } = useBrands()
@@ -44,8 +48,10 @@ export default function CategoryPage() {
     if (sort) f.sort = sort
     if (search) f.search = search
     if (brandFilter) f.brand = brandFilter
+    if (minPrice) f.minPrice = Number(minPrice)
+    if (maxPrice) f.maxPrice = Number(maxPrice)
     return f
-  }, [isOfertas, isMarcas, effectiveSlug, sort, search, brandFilter])
+  }, [isOfertas, isMarcas, effectiveSlug, sort, search, brandFilter, minPrice, maxPrice])
 
   const {
     data,
@@ -82,6 +88,12 @@ export default function CategoryPage() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 dark:bg-[#111111]">
+      <Helmet>
+        <title>{pageTitle} | Petshop</title>
+      </Helmet>
+
+      <Breadcrumbs items={sub ? [{ label: capitalize(slug ?? ''), href: `/categoria/${slug}` }, { label: pageTitle }] : [{ label: pageTitle }]} />
+
       {/* Header */}
       <div className="mb-6">
         {breadcrumb && (
@@ -191,6 +203,22 @@ export default function CategoryPage() {
             </select>
           )}
 
+          {/* Price range */}
+          <input
+            type="number"
+            value={minPrice}
+            onChange={(e) => setMinPrice(e.target.value)}
+            placeholder="Precio mínimo"
+            className="w-full sm:w-28 px-3 py-2 border border-gray-200 dark:border-[#2a2a2a] rounded-xl text-sm text-gray-600 dark:text-[#e8eaf0] bg-white dark:bg-[#222222] focus:outline-none focus:border-blue-400 transition-colors"
+          />
+          <input
+            type="number"
+            value={maxPrice}
+            onChange={(e) => setMaxPrice(e.target.value)}
+            placeholder="Precio máximo"
+            className="w-full sm:w-28 px-3 py-2 border border-gray-200 dark:border-[#2a2a2a] rounded-xl text-sm text-gray-600 dark:text-[#e8eaf0] bg-white dark:bg-[#222222] focus:outline-none focus:border-blue-400 transition-colors"
+          />
+
           {/* Sort */}
           <select
             value={sort}
@@ -211,6 +239,8 @@ export default function CategoryPage() {
                 setSearch('')
                 setBrandFilter('')
                 setSort('name_asc')
+                setMinPrice('')
+                setMaxPrice('')
               }}
               className="px-3 py-2 text-sm text-red-500 hover:text-red-600 border border-red-200 rounded-xl hover:bg-red-50 transition-colors"
             >

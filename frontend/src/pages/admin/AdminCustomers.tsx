@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react'
+import { Helmet } from 'react-helmet-async'
 import { useQuery } from '@tanstack/react-query'
 import { Search } from 'lucide-react'
 import AdminLayout from '@/components/admin/AdminLayout'
@@ -49,6 +50,9 @@ const AdminCustomers = () => {
 
   return (
     <AdminLayout>
+      <Helmet>
+        <title>Admin - Clientes | Petshop</title>
+      </Helmet>
       <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
         <h1 className="text-2xl font-bold text-gray-900 dark:text-[#e8eaf0]">Clientes</h1>
       </div>

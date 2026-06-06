@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react'
+import { Helmet } from 'react-helmet-async'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -298,6 +299,9 @@ const AdminProducts = () => {
 
   return (
     <AdminLayout>
+      <Helmet>
+        <title>Admin - Productos | Petshop</title>
+      </Helmet>
       <ConfirmDialog
         open={confirmProduct !== null}
         title="Desactivar producto"

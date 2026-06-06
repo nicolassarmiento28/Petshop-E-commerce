@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { Helmet } from 'react-helmet-async'
 import { ArrowRight } from 'lucide-react'
 import ProductGrid from '@/components/product/ProductGrid'
 import BrandsCarousel from '@/components/product/BrandsCarousel'
@@ -42,6 +43,10 @@ export default function Home() {
 
   return (
     <div className="bg-[#FAFAF8] dark:bg-[#111111] transition-colors duration-300">
+      <Helmet>
+        <title>Petshop | Tienda de Mascotas</title>
+        <meta name="description" content="Tienda de mascotas online. Encuentra alimentos, accesorios, juguetes y más para perros y gatos." />
+      </Helmet>
 
       {/* ── 1. Hero ───────────────────────────────────────────────────── */}
       <section className="w-full bg-gradient-to-r from-blue-50 to-blue-100 dark:from-[#111111] dark:to-[#1a1a1a] overflow-hidden transition-colors duration-300">

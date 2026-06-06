@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion'
 import ProductCard from './ProductCard'
 import type { ProductType } from '@/types'
 
@@ -47,8 +48,16 @@ export default function ProductGrid({
 
   return (
     <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6">
-      {products.map((product) => (
-        <ProductCard key={product.id} product={product} />
+      {products.map((product, i) => (
+        <motion.div
+          key={product.id}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.3, delay: i * 0.03 }}
+        >
+          <ProductCard product={product} />
+        </motion.div>
       ))}
     </div>
   )
