@@ -1,9 +1,10 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { LayoutDashboard, Package, ShoppingCart, LogOut } from 'lucide-react'
 
 const navItems = [
-  { label: 'Dashboard', href: '/admin/dashboard' },
-  { label: 'Productos', href: '/admin/productos' },
-  { label: 'Órdenes', href: '/admin/ordenes' },
+  { label: 'Dashboard', href: '/admin/dashboard', icon: LayoutDashboard },
+  { label: 'Productos', href: '/admin/productos', icon: Package },
+  { label: 'Órdenes', href: '/admin/ordenes', icon: ShoppingCart },
 ]
 
 interface AdminLayoutProps {
@@ -22,31 +23,39 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
   return (
     <div className="min-h-screen flex bg-gray-50 dark:bg-[#111111]">
       {/* Sidebar */}
-      <aside className="w-56 bg-white dark:bg-[#1a1a1a] border-r border-gray-200 dark:border-[#2a2a2a] flex flex-col">
+      <aside className="w-60 bg-white dark:bg-[#1a1a1a] border-r border-gray-200 dark:border-[#2a2a2a] flex flex-col shrink-0">
         <div className="px-6 py-5 border-b border-gray-200 dark:border-[#2a2a2a]">
-          <span className="text-lg font-bold text-blue-600">🐾 Petshop</span>
+          <Link to="/admin/dashboard" className="flex items-center gap-2">
+            <span className="text-lg font-bold text-blue-600">🐾</span>
+            <span className="text-lg font-bold text-gray-900 dark:text-[#e8eaf0]">Petshop</span>
+          </Link>
           <p className="text-xs text-gray-400 dark:text-[#8892a4] mt-0.5">Panel de administración</p>
         </div>
         <nav className="flex-1 px-3 py-4 space-y-1">
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              to={item.href}
-              className={`block px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                location.pathname === item.href
-                  ? 'bg-blue-50 text-blue-700'
-                  : 'text-gray-600 dark:text-[#e8eaf0] hover:bg-gray-100 dark:hover:bg-[#222222]'
-              }`}
-            >
-              {item.label}
-            </Link>
-          ))}
+          {navItems.map((item) => {
+            const active = location.pathname === item.href
+            return (
+              <Link
+                key={item.href}
+                to={item.href}
+                className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                  active
+                    ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-400'
+                    : 'text-gray-600 dark:text-[#e8eaf0] hover:bg-gray-100 dark:hover:bg-[#222222]'
+                }`}
+              >
+                <item.icon size={18} className={active ? 'text-blue-600 dark:text-blue-400' : ''} />
+                {item.label}
+              </Link>
+            )
+          })}
         </nav>
         <div className="px-3 py-4 border-t border-gray-200 dark:border-[#2a2a2a]">
           <button
             onClick={logout}
-            className="w-full text-left px-3 py-2 rounded-lg text-sm text-gray-500 dark:text-[#8892a4] hover:bg-gray-100 dark:hover:bg-[#222222] transition-colors"
+            className="flex items-center gap-3 w-full px-3 py-2.5 rounded-lg text-sm text-gray-500 dark:text-[#8892a4] hover:bg-gray-100 dark:hover:bg-[#222222] transition-colors"
           >
+            <LogOut size={18} />
             Cerrar sesión
           </button>
         </div>

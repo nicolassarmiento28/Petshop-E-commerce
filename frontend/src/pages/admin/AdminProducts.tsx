@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { Search } from 'lucide-react'
 import AdminLayout from '@/components/admin/AdminLayout'
 import { formatCLP } from '@/utils/formatters'
 import api from '@/services/api'
@@ -15,8 +16,11 @@ interface ProductsResponse {
   totalPages: number
 }
 
-const fetchProducts = (page: number) =>
-  api.get<ProductsResponse>(`/admin/products?page=${page}&limit=20`).then((r) => r.data)
+const fetchProducts = (page: number, search?: string) => {
+  const params = new URLSearchParams({ page: String(page), limit: '20' })
+  if (search) params.set('search', search)
+  return api.get<ProductsResponse>(`/admin/products?${params.toString()}`).then((r) => r.data)
+}
 
 const fetchCategories = () =>
   api.get<CategoryType[]>('/categories').then((r) => r.data)
@@ -204,15 +208,72 @@ const ProductModal = ({ product, categories, brands, onClose }: ProductModalProp
   )
 }
 
+// ── Confirm dialog ─────────────────────────────────────────────────────────────
+const ConfirmDialog = ({
+  open,
+  title,
+  message,
+  onConfirm,
+  onCancel,
+  loading,
+}: {
+  open: boolean
+  title: string
+  message: string
+  onConfirm: () => void
+  onCancel: () => void
+  loading?: boolean
+}) => {
+  if (!open) return null
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center">
+      <div className="absolute inset-0 bg-black/40" onClick={onCancel} />
+      <div className="relative bg-white dark:bg-[#1a1a1a] rounded-2xl shadow-xl w-full max-w-sm mx-4 p-6">
+        <h3 className="text-lg font-bold text-gray-900 dark:text-[#e8eaf0] mb-2">{title}</h3>
+        <p className="text-sm text-gray-500 dark:text-[#8892a4] mb-6">{message}</p>
+        <div className="flex justify-end gap-3">
+          <button
+            onClick={onCancel}
+            className="px-4 py-2 text-sm rounded-lg border border-gray-300 dark:border-[#2a2a2a] text-gray-600 dark:text-[#e8eaf0] hover:bg-gray-50 dark:hover:bg-[#222222] transition-colors"
+          >
+            Cancelar
+          </button>
+          <button
+            onClick={onConfirm}
+            disabled={loading}
+            className="px-4 py-2 text-sm rounded-lg bg-red-600 text-white font-semibold hover:bg-red-700 disabled:opacity-50 transition-colors"
+          >
+            {loading ? 'Desactivando...' : 'Desactivar'}
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 // ── Main page ──────────────────────────────────────────────────────────────────
 const AdminProducts = () => {
   const [page, setPage] = useState(1)
+  const [search, setSearch] = useState('')
+  const [searchInput, setSearchInput] = useState('')
   const [modalProduct, setModalProduct] = useState<ProductType | null | 'new'>(null)
+  const [confirmProduct, setConfirmProduct] = useState<ProductType | null>(null)
   const queryClient = useQueryClient()
 
+  const searchTimerRef = useRef<ReturnType<typeof setTimeout>>()
+
+  const handleSearch = (value: string) => {
+    setSearchInput(value)
+    clearTimeout(searchTimerRef.current)
+    searchTimerRef.current = setTimeout(() => {
+      setSearch(value)
+      setPage(1)
+    }, 350)
+  }
+
   const { data, isLoading } = useQuery({
-    queryKey: ['admin', 'products', page],
-    queryFn: () => fetchProducts(page),
+    queryKey: ['admin', 'products', page, search],
+    queryFn: () => fetchProducts(page, search || undefined),
   })
 
   const { data: categories = [] } = useQuery({
@@ -227,14 +288,30 @@ const AdminProducts = () => {
 
   const deactivateMutation = useMutation({
     mutationFn: (id: number) => api.delete(`/admin/products/${id}`),
-    onSuccess: () => void queryClient.invalidateQueries({ queryKey: ['admin', 'products'] }),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: ['admin', 'products'] })
+      setConfirmProduct(null)
+    },
   })
 
   const flatCats = flattenCategories(categories)
 
   return (
     <AdminLayout>
-      <div className="flex items-center justify-between mb-6">
+      <ConfirmDialog
+        open={confirmProduct !== null}
+        title="Desactivar producto"
+        message={
+          confirmProduct
+            ? `¿Desactivar "${confirmProduct.name}"? El producto dejará de mostrarse en la tienda.`
+            : ''
+        }
+        onConfirm={() => confirmProduct && deactivateMutation.mutate(confirmProduct.id)}
+        onCancel={() => setConfirmProduct(null)}
+        loading={deactivateMutation.isPending}
+      />
+
+      <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
         <h1 className="text-2xl font-bold text-gray-900 dark:text-[#e8eaf0]">Productos</h1>
         <button
           onClick={() => setModalProduct('new')}
@@ -242,6 +319,18 @@ const AdminProducts = () => {
         >
           + Nuevo producto
         </button>
+      </div>
+
+      {/* Search bar */}
+      <div className="relative max-w-xs mb-4">
+        <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-[#8892a4]" />
+        <input
+          type="text"
+          value={searchInput}
+          onChange={(e) => handleSearch(e.target.value)}
+          placeholder="Buscar por nombre o slug..."
+          className="w-full pl-9 pr-3 py-2 border border-gray-200 dark:border-[#2a2a2a] rounded-xl text-sm text-gray-700 dark:text-[#e8eaf0] bg-white dark:bg-[#222222] focus:outline-none focus:border-blue-400 transition-colors placeholder:text-gray-400 dark:placeholder:text-[#8892a4]"
+        />
       </div>
 
       <div className="bg-white dark:bg-[#1a1a1a] rounded-xl border border-gray-200 dark:border-[#2a2a2a] overflow-hidden">
@@ -304,7 +393,7 @@ const AdminProducts = () => {
                         </button>
                         {product.isActive && (
                           <button
-                            onClick={() => deactivateMutation.mutate(product.id)}
+                            onClick={() => setConfirmProduct(product)}
                             className="text-xs px-3 py-1 rounded-lg border border-red-200 text-red-500 hover:bg-red-50 transition-colors"
                           >
                             Desactivar

@@ -11,15 +11,26 @@ export const getAdminProducts = async (
     const page = Math.max(1, parseInt(String(req.query.page ?? '1'), 10) || 1)
     const limit = Math.max(1, parseInt(String(req.query.limit ?? '20'), 10) || 20)
     const skip = (page - 1) * limit
+    const search = req.query.search ? String(req.query.search) : undefined
+
+    const where = search
+      ? {
+          OR: [
+            { name: { contains: search, mode: 'insensitive' as const } },
+            { slug: { contains: search, mode: 'insensitive' as const } },
+          ],
+        }
+      : {}
 
     const [products, total] = await Promise.all([
       prisma.product.findMany({
+        where,
         skip,
         take: limit,
         orderBy: { createdAt: 'desc' },
         include: { category: true, brand: true },
       }),
-      prisma.product.count(),
+      prisma.product.count({ where }),
     ])
 
     const totalPages = Math.ceil(total / limit)
@@ -143,6 +154,61 @@ export const deleteProduct = async (
     await prisma.product.update({ where: { id }, data: { isActive: false } })
 
     res.status(204).send()
+  } catch (error) {
+    next(error)
+  }
+}
+
+export const getLowStockProducts = async (
+  _req: AuthRequest,
+  res: Response,
+  next: NextFunction,
+): Promise<void> => {
+  try {
+    const threshold = parseInt(String(_req.query.threshold ?? '5'), 10) || 5
+
+    const products = await prisma.product.findMany({
+      where: { isActive: true, stock: { lte: threshold } },
+      orderBy: { stock: 'asc' },
+      take: 20,
+      include: { category: { select: { name: true } } },
+    })
+
+    res.json({ products, total: products.length })
+  } catch (error) {
+    next(error)
+  }
+}
+
+export const getTopSellingProducts = async (
+  _req: AuthRequest,
+  res: Response,
+  next: NextFunction,
+): Promise<void> => {
+  try {
+    const top = await prisma.orderItem.groupBy({
+      by: ['productId'],
+      _sum: { quantity: true },
+      orderBy: { _sum: { quantity: 'desc' } },
+      take: 10,
+    })
+
+    const ids = top.map((t) => t.productId)
+    const products =
+      ids.length > 0
+        ? await prisma.product.findMany({
+            where: { id: { in: ids } },
+            select: { id: true, name: true, price: true, imageUrl: true, slug: true },
+          })
+        : []
+
+    const map = Object.fromEntries(products.map((p) => [p.id, p]))
+    const result = top.map((t) => ({
+      product: map[t.productId] ?? null,
+      totalSold: t._sum.quantity ?? 0,
+    }))
+
+    res.json(result)
   } catch (error) {
     next(error)
   }
