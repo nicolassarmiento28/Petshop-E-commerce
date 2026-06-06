@@ -1,6 +1,9 @@
 import { useQuery } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
 import { AlertTriangle, TrendingUp, DollarSign, Package, ShoppingCart } from 'lucide-react'
+import {
+  AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid,
+} from 'recharts'
 import AdminLayout from '@/components/admin/AdminLayout'
 import { formatCLP } from '@/utils/formatters'
 import api from '@/services/api'
@@ -136,8 +139,6 @@ const AdminDashboard = () => {
     queryFn: fetchRevenue,
   })
 
-  const maxRevenue = Math.max(...(revenueData?.daily.map((d) => d.revenue) ?? [0]), 1)
-
   return (
     <AdminLayout>
       <h1 className="text-2xl font-bold text-gray-900 dark:text-[#e8eaf0] mb-6">Dashboard</h1>
@@ -190,16 +191,47 @@ const AdminDashboard = () => {
                   <h2 className="font-semibold text-gray-800 dark:text-[#e8eaf0]">Ingresos (últimos 30 días)</h2>
                   <span className="text-xs text-gray-400 dark:text-[#8892a4]">{revenueData.orderCount} órdenes</span>
                 </div>
-                <div className="flex items-end gap-[3px] h-32">
-                  {revenueData.daily.map((d) => (
-                    <div
-                      key={d.date}
-                      className="flex-1 bg-blue-500 dark:bg-blue-600 rounded-t hover:opacity-80 transition-opacity relative group"
-                      style={{ height: `${Math.max((d.revenue / maxRevenue) * 100, d.revenue > 0 ? 4 : 0)}%` }}
-                      title={`${d.date}: ${formatCLP(d.revenue)}`}
+                <ResponsiveContainer width="100%" height={200}>
+                  <AreaChart data={revenueData.daily} margin={{ top: 5, right: 5, left: -20, bottom: 0 }}>
+                    <defs>
+                      <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.3} />
+                        <stop offset="95%" stopColor="#3b82f6" stopOpacity={0} />
+                      </linearGradient>
+                    </defs>
+                    <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                    <XAxis
+                      dataKey="date"
+                      tick={{ fontSize: 11, fill: '#9ca3af' }}
+                      tickFormatter={(v: string) => v.slice(5)}
+                      interval="preserveStartEnd"
                     />
-                  ))}
-                </div>
+                    <YAxis tick={{ fontSize: 11, fill: '#9ca3af' }} tickFormatter={(v: number) => `$${(v / 1000).toFixed(0)}k`} />
+                    <Tooltip
+                      contentStyle={{
+                        backgroundColor: '#1a1a1a',
+                        border: '1px solid #2a2a2a',
+                        borderRadius: '8px',
+                        color: '#e8eaf0',
+                        fontSize: '13px',
+                      }}
+                      formatter={(value) => [formatCLP(Number(value) || 0), 'Ingresos']}
+                      labelFormatter={(label) => {
+                        const d = new Date(String(label) + 'T00:00:00')
+                        return d.toLocaleDateString('es-CL', { weekday: 'short', day: 'numeric', month: 'short' })
+                      }}
+                    />
+                    <Area
+                      type="monotone"
+                      dataKey="revenue"
+                      stroke="#3b82f6"
+                      strokeWidth={2}
+                      fill="url(#colorRevenue)"
+                      dot={false}
+                      activeDot={{ r: 4, fill: '#3b82f6', stroke: '#fff', strokeWidth: 2 }}
+                    />
+                  </AreaChart>
+                </ResponsiveContainer>
               </div>
             )}
 
