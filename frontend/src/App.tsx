@@ -16,6 +16,9 @@ import AdminLogin from '@/pages/admin/AdminLogin'
 import AdminDashboard from '@/pages/admin/AdminDashboard'
 import AdminProducts from '@/pages/admin/AdminProducts'
 import AdminOrders from '@/pages/admin/AdminOrders'
+import AdminBrands from '@/pages/admin/AdminBrands'
+import AdminCustomers from '@/pages/admin/AdminCustomers'
+import AdminCoupons from '@/pages/admin/AdminCoupons'
 import PrivateRoute from '@/components/admin/PrivateRoute'
 
 function App() {
@@ -41,6 +44,9 @@ function App() {
         <Route element={<PrivateRoute><AdminDashboard /></PrivateRoute>} path="/admin/dashboard" />
         <Route element={<PrivateRoute><AdminProducts /></PrivateRoute>} path="/admin/productos" />
         <Route element={<PrivateRoute><AdminOrders /></PrivateRoute>} path="/admin/ordenes" />
+        <Route element={<PrivateRoute><AdminBrands /></PrivateRoute>} path="/admin/marcas" />
+        <Route element={<PrivateRoute><AdminCustomers /></PrivateRoute>} path="/admin/clientes" />
+        <Route element={<PrivateRoute><AdminCoupons /></PrivateRoute>} path="/admin/cupones" />
       </Routes>
     </BrowserRouter>
   )

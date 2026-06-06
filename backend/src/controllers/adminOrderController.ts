@@ -77,6 +77,58 @@ export const updateOrderStatus = async (
   }
 }
 
+export const exportOrdersCsv = async (
+  _req: AuthRequest,
+  res: Response,
+  next: NextFunction,
+): Promise<void> => {
+  try {
+    const orders = await prisma.order.findMany({
+      orderBy: { createdAt: 'desc' },
+      select: {
+        orderNumber: true,
+        customerName: true,
+        customerEmail: true,
+        customerPhone: true,
+        shippingAddress: true,
+        total: true,
+        status: true,
+        createdAt: true,
+      },
+    })
+
+    const escapeCsv = (val: unknown): string => {
+      const str = String(val ?? '')
+      if (str.includes(',') || str.includes('"') || str.includes('\n')) {
+        return `"${str.replace(/"/g, '""')}"`
+      }
+      return str
+    }
+
+    const bom = '\uFEFF'
+    const headers = 'N° Orden,Cliente,Email,Teléfono,Dirección,Total,Estado,Fecha'
+    const rows = orders.map((o) =>
+      [
+        escapeCsv(o.orderNumber),
+        escapeCsv(o.customerName),
+        escapeCsv(o.customerEmail),
+        escapeCsv(o.customerPhone),
+        escapeCsv(o.shippingAddress),
+        escapeCsv(o.total),
+        escapeCsv(o.status),
+        escapeCsv(o.createdAt.toISOString()),
+      ].join(','),
+    )
+
+    const dateStr = new Date().toISOString().slice(0, 10)
+    res.setHeader('Content-Type', 'text/csv; charset=utf-8')
+    res.setHeader('Content-Disposition', `attachment; filename="ordenes-${dateStr}.csv"`)
+    res.send(bom + headers + '\n' + rows.join('\n'))
+  } catch (error) {
+    next(error)
+  }
+}
+
 export const getOrderStats = async (
   _req: AuthRequest,
   res: Response,

@@ -1,8 +1,9 @@
 import { useQuery } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
-import { AlertTriangle, TrendingUp, DollarSign, Package, ShoppingCart } from 'lucide-react'
+import { AlertTriangle, TrendingUp, DollarSign, Package, ShoppingCart, ArrowUp, ArrowDown, Clock } from 'lucide-react'
 import {
   AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid,
+  PieChart, Pie, Cell, Legend,
 } from 'recharts'
 import AdminLayout from '@/components/admin/AdminLayout'
 import { formatCLP } from '@/utils/formatters'
@@ -39,6 +40,27 @@ interface RevenueData {
 }
 
 type OrderStatsResponse = Record<OrderStatus, number>
+
+interface SalesByCategoryItem {
+  name: string
+  revenue: number
+  percentage: number
+}
+
+interface SalesByCategoryResponse {
+  categories: SalesByCategoryItem[]
+}
+
+interface MonthComparisonResponse {
+  currentMonth: { revenue: number; orders: number }
+  previousMonth: { revenue: number; orders: number }
+  revenueChange: number
+  ordersChange: number
+}
+
+interface RecentOrdersFeedResponse {
+  orders: { id: number; orderNumber: string; customerName: string; total: number; status: string; createdAt: string }[]
+}
 
 const STATUS_META: { status: OrderStatus; label: string; color: string }[] = [
   { status: 'PENDING',    label: 'Pendiente',   color: 'bg-yellow-50 border-yellow-200 text-yellow-700 dark:bg-yellow-900/20 dark:border-yellow-800 dark:text-yellow-400' },
@@ -78,6 +100,27 @@ const fetchTopSelling = () =>
 
 const fetchRevenue = () =>
   api.get<RevenueData>('/admin/revenue?days=30').then((r) => r.data)
+
+const fetchSalesByCategory = () =>
+  api.get<SalesByCategoryResponse>('/admin/analytics/sales-by-category').then((r) => r.data)
+
+const fetchMonthComparison = () =>
+  api.get<MonthComparisonResponse>('/admin/analytics/month-comparison').then((r) => r.data)
+
+const fetchRecentOrdersFeed = () =>
+  api.get<RecentOrdersFeedResponse>('/admin/orders/recent-feed').then((r) => r.data)
+
+function timeAgo(date: string): string {
+  const diff = Date.now() - new Date(date).getTime()
+  const mins = Math.floor(diff / 60000)
+  if (mins < 1) return 'hace unos segundos'
+  if (mins < 60) return `hace ${mins}m`
+  const hours = Math.floor(mins / 60)
+  if (hours < 24) return `hace ${hours}h`
+  return `hace ${Math.floor(hours / 24)}d`
+}
+
+const DONUT_COLORS = ['#f97316', '#059669', '#fbbf24', '#3b82f6', '#a855f7', '#ec4899']
 
 const STATUS_LABELS: Record<string, string> = {
   PENDING: 'Pendiente',
@@ -137,6 +180,21 @@ const AdminDashboard = () => {
   const { data: revenueData } = useQuery({
     queryKey: ['admin', 'revenue'],
     queryFn: fetchRevenue,
+  })
+
+  const { data: salesByCategory } = useQuery({
+    queryKey: ['admin', 'salesByCategory'],
+    queryFn: fetchSalesByCategory,
+  })
+
+  const { data: monthComparison } = useQuery({
+    queryKey: ['admin', 'monthComparison'],
+    queryFn: fetchMonthComparison,
+  })
+
+  const { data: recentFeed } = useQuery({
+    queryKey: ['admin', 'recentOrdersFeed'],
+    queryFn: fetchRecentOrdersFeed,
   })
 
   return (
@@ -333,6 +391,93 @@ const AdminDashboard = () => {
               </table>
             </div>
           </div>
+
+          {/* Sales by category + Month comparison */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+            {/* Sales by category donut */}
+            {salesByCategory && salesByCategory.categories.length > 0 && (
+              <div className="bg-white rounded-xl border p-6">
+                <h2 className="font-semibold text-gray-800 mb-4">Ventas por categoría</h2>
+                <ResponsiveContainer width="100%" height={250}>
+                  <PieChart>
+                    <Pie
+                      data={salesByCategory.categories}
+                      cx="50%"
+                      cy="50%"
+                      innerRadius={60}
+                      outerRadius={90}
+                      dataKey="revenue"
+                      nameKey="name"
+                    >
+                      {salesByCategory.categories.map((_, index) => (
+                        <Cell key={`cell-${index}`} fill={DONUT_COLORS[index % DONUT_COLORS.length]} />
+                      ))}
+                    </Pie>
+                    <Tooltip formatter={(value) => [formatCLP(Number(value)), 'Ingresos']} />
+                    <Legend
+                      formatter={(value: string) => (
+                        <span className="text-sm text-gray-600">{value}</span>
+                      )}
+                    />
+                  </PieChart>
+                </ResponsiveContainer>
+              </div>
+            )}
+
+            {/* Month comparison */}
+            {monthComparison && (
+              <div className="bg-white rounded-xl border p-6">
+                <h2 className="font-semibold text-gray-800 mb-4">Comparación mensual</h2>
+                <div className="grid grid-cols-2 gap-6">
+                  <div>
+                    <p className="text-sm text-gray-500 mb-1">Ingresos</p>
+                    <p className="text-xl font-bold text-gray-900">{formatCLP(monthComparison.currentMonth.revenue)}</p>
+                    <span className={`inline-flex items-center gap-1 text-sm font-medium ${monthComparison.revenueChange >= 0 ? 'text-green-600' : 'text-red-500'}`}>
+                      {monthComparison.revenueChange >= 0 ? <ArrowUp size={14} /> : <ArrowDown size={14} />}
+                      {Math.abs(monthComparison.revenueChange)}%
+                    </span>
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-500 mb-1">Órdenes</p>
+                    <p className="text-xl font-bold text-gray-900">{monthComparison.currentMonth.orders}</p>
+                    <span className={`inline-flex items-center gap-1 text-sm font-medium ${monthComparison.ordersChange >= 0 ? 'text-green-600' : 'text-red-500'}`}>
+                      {monthComparison.ordersChange >= 0 ? <ArrowUp size={14} /> : <ArrowDown size={14} />}
+                      {Math.abs(monthComparison.ordersChange)}%
+                    </span>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Orders 24h feed */}
+          {recentFeed && recentFeed.orders.length > 0 && (
+            <div className="bg-white rounded-xl border p-6 overflow-hidden mb-8">
+              <h2 className="font-semibold text-gray-800 mb-4">Órdenes últimas 24h</h2>
+              <div className="divide-y divide-gray-100">
+                {recentFeed.orders.map((order) => (
+                  <div key={order.id} className="py-3 flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center shrink-0">
+                        <Clock size={14} className="text-gray-400" />
+                      </div>
+                      <div>
+                        <p className="text-sm font-mono text-gray-700">{order.orderNumber}</p>
+                        <p className="text-xs text-gray-500">{order.customerName}</p>
+                        <p className="text-xs text-gray-400">{timeAgo(order.createdAt)}</p>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-sm font-medium text-gray-900">{formatCLP(order.total)}</p>
+                      <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${STATUS_COLORS[order.status] ?? 'bg-gray-100 text-gray-600'}`}>
+                        {STATUS_LABELS[order.status] ?? order.status}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </>
       )}
     </AdminLayout>

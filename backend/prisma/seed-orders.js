@@ -130,6 +130,31 @@ async function seedOrders() {
   console.log('✅ 6 low-stock products created')
 }
 
-seedOrders()
+// ── Coupons ────────────────────────────────────────────────────────────────────
+async function seedCoupons() {
+  const existingCoupons = await prisma.coupon.count()
+  if (existingCoupons > 0) {
+    console.log('Coupons already exist, skipping')
+    return
+  }
+  const coupons = [
+    { code: 'BIENVENIDO10', discountType: 'PERCENTAGE', discountValue: 10, minPurchase: 29990, maxUses: 100, isActive: true },
+    { code: 'DESCUENTO5K', discountType: 'FIXED', discountValue: 5000, minPurchase: 49990, maxUses: 50, isActive: true },
+    { code: 'ENVIOGRATIS', discountType: 'FIXED', discountValue: 5990, minPurchase: 29990, maxUses: 200, isActive: true },
+    { code: 'VERANO20', discountType: 'PERCENTAGE', discountValue: 20, minPurchase: 59990, expiresAt: new Date('2026-12-31'), maxUses: 30, isActive: true },
+    { code: 'VIP50', discountType: 'FIXED', discountValue: 50000, minPurchase: 150000, maxUses: 10, isActive: false },
+  ]
+  for (const c of coupons) {
+    await prisma.coupon.create({ data: c })
+  }
+  console.log(`✅ ${coupons.length} coupons seeded`)
+}
+
+async function main() {
+  await seedOrders()
+  await seedCoupons()
+}
+
+main()
   .catch((e) => { console.error(e); process.exit(1) })
   .finally(() => prisma.$disconnect())

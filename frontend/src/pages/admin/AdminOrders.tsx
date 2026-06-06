@@ -64,21 +64,45 @@ const AdminOrders = () => {
     setPage(1)
   }
 
+  const handleExport = async () => {
+    try {
+      const response = await api.get('/admin/orders/export', { responseType: 'blob' })
+      const url = window.URL.createObjectURL(new Blob([response.data]))
+      const link = document.createElement('a')
+      link.href = url
+      link.setAttribute('download', `ordenes-${new Date().toISOString().slice(0, 10)}.csv`)
+      document.body.appendChild(link)
+      link.click()
+      link.remove()
+      window.URL.revokeObjectURL(url)
+    } catch {
+      // Silently handle — token will be attached by api interceptor
+    }
+  }
+
   return (
     <AdminLayout>
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold text-gray-900 dark:text-[#e8eaf0]">Órdenes</h1>
-        {/* Status filter */}
-        <select
+        <div className="flex items-center gap-3">
+          <button
+            onClick={handleExport}
+            className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition-colors"
+          >
+            Exportar CSV
+          </button>
+          {/* Status filter */}
+          <select
           value={statusFilter}
           onChange={(e) => handleFilterChange(e.target.value)}
           className="border border-gray-300 dark:border-[#2a2a2a] rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-[#222222] dark:text-[#e8eaf0]"
         >
           <option value="">Todos los estados</option>
-          {ORDER_STATUSES.map((s) => (
+            {ORDER_STATUSES.map((s) => (
             <option key={s} value={s}>{STATUS_LABELS[s]}</option>
           ))}
         </select>
+        </div>
       </div>
 
       <div className="bg-white dark:bg-[#1a1a1a] rounded-xl border border-gray-200 dark:border-[#2a2a2a] overflow-hidden">
