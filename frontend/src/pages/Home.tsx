@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
 import ProductGrid from '@/components/product/ProductGrid'
@@ -16,13 +16,19 @@ const CATEGORIES = [
 
 const POPULAR_CATEGORIES = ['perro', 'gato', 'farmacia', 'peluqueria'] as const
 
+const CATEGORY_LABELS: Record<string, string> = {
+  perro: 'Perros',
+  gato: 'Gatos',
+  farmacia: 'Farmacia',
+  peluqueria: 'Peluquería',
+}
+
 export default function Home() {
   // Novedades: newest 8 products overall
   const { data: featuredData, isLoading: loadingFeatured } = useProducts({ sort: 'newest', limit: 8 })
   // Más Vendidos: newest 8 from a random category (chosen once on mount)
-  const randomCategory = useMemo(
+  const [randomCategory] = useState(
     () => POPULAR_CATEGORIES[Math.floor(Math.random() * POPULAR_CATEGORIES.length)],
-    [],
   )
   const { data: bestSellerData, isLoading: loadingBestSellers } = useProducts({
     category: randomCategory,
@@ -33,13 +39,6 @@ export default function Home() {
 
   const featured = featuredData?.products ?? []
   const bestSellers = bestSellerData?.products ?? []
-
-  const categoryLabel: Record<string, string> = {
-    perro: 'Perros',
-    gato: 'Gatos',
-    farmacia: 'Farmacia',
-    peluqueria: 'Peluquería',
-  }
 
   return (
     <div className="bg-[#FAFAF8] dark:bg-[#111111] transition-colors duration-300">
@@ -216,11 +215,12 @@ export default function Home() {
       </section>
 
       {/* ── 8. Productos más vendidos ────────────────────────────────── */}
+      {(loadingBestSellers || bestSellers.length > 0) && (
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
         <div className="flex items-end justify-between mb-6">
           <div>
             <p className="text-xs font-semibold uppercase tracking-widest text-green-600 dark:text-green-400 mb-1">
-              Más populares en {categoryLabel[randomCategory]}
+              Más populares en {CATEGORY_LABELS[randomCategory]}
             </p>
             <h2
               className="text-2xl font-bold text-gray-900 dark:text-[#e8eaf0]"
@@ -238,6 +238,7 @@ export default function Home() {
         </div>
         <ProductGrid products={bestSellers} isLoading={loadingBestSellers} />
       </section>
+      )}
     </div>
   )
 }
