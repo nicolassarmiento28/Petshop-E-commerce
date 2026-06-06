@@ -4,7 +4,6 @@ import type { CartItemType, ProductType } from '@/types'
 
 interface CartStore {
   items: CartItemType[]
-  hydrated: boolean
   addItem: (product: ProductType, quantity?: number) => void
   removeItem: (id: number) => void
   updateQuantity: (id: number, quantity: number) => void
@@ -17,7 +16,6 @@ export const useCartStore = create<CartStore>()(
   persist(
     (set, get) => ({
       items: [],
-      hydrated: false,
 
       addItem: (product, quantity = 1) =>
         set((state) => {
@@ -66,9 +64,6 @@ export const useCartStore = create<CartStore>()(
     }),
     {
       name: 'petshop-cart',
-      onRehydrateStorage: () => () => {
-        useCartStore.setState({ hydrated: true })
-      },
     },
   ),
 )
