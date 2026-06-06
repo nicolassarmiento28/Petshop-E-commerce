@@ -93,7 +93,8 @@ export default function CategoryPage() {
         )}
         {!isLoading && (
           <p className="text-sm text-gray-400 dark:text-[#8892a4] mt-1">
-            {products.length} {products.length === 1 ? 'producto' : 'productos'}
+            {data?.total ?? products.length}{' '}
+            {(data?.total ?? products.length) === 1 ? 'producto' : 'productos'}
           </p>
         )}
       </div>
@@ -148,7 +149,8 @@ export default function CategoryPage() {
       )}
 
       {/* Filters bar */}
-      <div className="flex flex-wrap items-center gap-3 mb-6">
+      <div className="sticky top-16 z-10 bg-[#FAFAF8] dark:bg-[#111111] py-3 -mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8 mb-3 border-b border-gray-100 dark:border-[#2a2a2a]">
+        <div className="flex flex-wrap items-center gap-3">
         {/* Search */}
         <div className="relative flex-1 min-w-[180px] max-w-xs">
           <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-[#8892a4]" />
@@ -166,7 +168,7 @@ export default function CategoryPage() {
           <select
             value={brandFilter}
             onChange={(e) => setBrandFilter(e.target.value)}
-            className="px-3 py-2 border border-gray-200 dark:border-[#2a2a2a] rounded-xl text-sm text-gray-600 dark:text-[#e8eaf0] bg-white dark:bg-[#222222] hover:border-blue-300 transition-colors outline-none"
+            className="w-full sm:w-auto px-3 py-2 border border-gray-200 dark:border-[#2a2a2a] rounded-xl text-sm text-gray-600 dark:text-[#e8eaf0] bg-white dark:bg-[#222222] hover:border-blue-300 transition-colors outline-none"
           >
             <option value="">Todas las marcas</option>
             {allBrands.map((b) => (
@@ -179,7 +181,7 @@ export default function CategoryPage() {
         <select
           value={sort}
           onChange={(e) => setSort(e.target.value)}
-          className="px-3 py-2 border border-gray-200 dark:border-[#2a2a2a] rounded-xl text-sm text-gray-600 dark:text-[#e8eaf0] bg-white dark:bg-[#222222] hover:border-blue-300 transition-colors outline-none"
+          className="w-full sm:w-auto px-3 py-2 border border-gray-200 dark:border-[#2a2a2a] rounded-xl text-sm text-gray-600 dark:text-[#e8eaf0] bg-white dark:bg-[#222222] hover:border-blue-300 transition-colors outline-none"
         >
           <option value="">Más relevantes</option>
           <option value="price_asc">Menor precio</option>
@@ -196,6 +198,7 @@ export default function CategoryPage() {
             Limpiar
           </button>
         )}
+        </div>
       </div>
 
       {/* Products */}
