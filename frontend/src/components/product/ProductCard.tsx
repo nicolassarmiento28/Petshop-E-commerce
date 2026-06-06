@@ -56,6 +56,13 @@ export default function ProductCard({ product }: ProductCardProps) {
 
       {/* Info */}
       <div className="p-3 sm:p-4 flex flex-col flex-1 gap-2">
+        {/* Category label — only show if no brand (brand takes the same slot) */}
+        {!product.brand && product.category && (
+          <p className="text-xs text-gray-400 dark:text-[#8892a4] font-medium uppercase tracking-wide">
+            {product.category.name}
+          </p>
+        )}
+
         {product.brand && (
           <div className="h-6 flex items-center">
             {product.brand.logoUrl ? (
