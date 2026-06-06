@@ -37,7 +37,7 @@ export default function Navbar() {
   return (
     <>
       {/* Top info bar */}
-      <div className="bg-blue-700 dark:bg-[#1a1a1a] text-white dark:text-white text-xs py-1.5 hidden sm:block transition-colors duration-300">
+      <div className="bg-[#2b44d4] dark:bg-[#1e33a8] text-white text-xs py-1.5 hidden sm:block transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           <span>Envío a todo Chile · Lunes a Sábado</span>
           <span>contacto@petshop.cl · +56 9 1234 5678</span>
