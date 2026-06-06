@@ -68,6 +68,10 @@ const AdminLogin = () => {
             {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password.message}</p>}
           </div>
           {serverError && <p className="text-red-500 text-sm">{serverError}</p>}
+          <div className="rounded-lg bg-gray-100 dark:bg-[#222222] border border-gray-200 dark:border-[#2a2a2a] p-3 text-xs text-gray-500 dark:text-[#8892a4] space-y-0.5">
+            <p>Credenciales de prueba:</p>
+            <p className="font-mono">admin@petshop.cl / admin123</p>
+          </div>
           <button
             type="submit"
             disabled={isSubmitting}
