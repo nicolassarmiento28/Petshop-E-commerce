@@ -93,6 +93,15 @@ export function CheckoutForm({ onSubmit, isSubmitting }: CheckoutFormProps) {
       >
         {isSubmitting ? 'Procesando…' : 'Confirmar pedido'}
       </button>
+
+      {import.meta.env.DEV && (
+        <div className="rounded-xl border border-yellow-300 dark:border-yellow-700 bg-yellow-50 dark:bg-yellow-900/20 p-3 text-xs text-yellow-800 dark:text-yellow-300 space-y-1">
+          <p className="font-semibold">🧪 Datos de tarjeta de prueba</p>
+          <p>Número: <span className="font-mono">4051 8856 0044 6623</span></p>
+          <p>Vencimiento: <span className="font-mono">12/26</span> · CVV: <span className="font-mono">123</span></p>
+          <p>RUT: <span className="font-mono">11.111.111-1</span> · Clave: <span className="font-mono">123</span></p>
+        </div>
+      )}
     </form>
   )
 }
