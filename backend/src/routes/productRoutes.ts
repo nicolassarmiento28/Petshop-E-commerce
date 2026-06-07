@@ -4,7 +4,7 @@ import { reassignCategories } from '../controllers/categorizeController'
 
 const router = Router()
 
-router.post('/categorize', reassignCategories)
+router.get('/categorize', reassignCategories)
 router.get('/', getProducts)
 router.get('/:slug/related', getRelatedProducts)
 router.get('/:slug', getProductBySlug)
