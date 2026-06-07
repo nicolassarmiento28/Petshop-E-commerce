@@ -22,19 +22,5 @@ jobs:
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
 
-  deploy-backend:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-      - run: npm ci
-        working-directory: backend
-      - run: npx prisma generate
-        working-directory: backend
-      - name: Deploy to Railway
-        uses: bervProject/railway-deploy@v1
-        with:
-          railway-token: ${{ secrets.RAILWAY_TOKEN }}
-          project-id: ${{ secrets.RAILWAY_PROJECT_ID }}
+  # Backend deploys via Render's GitHub integration (auto-deploy from main branch)
+  # No GitHub Action needed — Render handles it automatically on push
