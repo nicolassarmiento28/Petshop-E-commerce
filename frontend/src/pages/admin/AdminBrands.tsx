@@ -4,7 +4,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Search } from 'lucide-react'
+import { Search, Wand2 } from 'lucide-react'
 import AdminLayout from '@/components/admin/AdminLayout'
 import api from '@/services/api'
 import type { BrandType } from '@/types'
@@ -182,6 +182,8 @@ const AdminBrands = () => {
     queryFn: () => fetchBrands(page, search || undefined),
   })
 
+  const [assignResult, setAssignResult] = useState<{ assigned: number; remaining: number } | null>(null)
+
   const deleteMutation = useMutation({
     mutationFn: (id: number) => api.delete(`/admin/brands/${id}`),
     onSuccess: () => {
@@ -194,6 +196,14 @@ const AdminBrands = () => {
         (err as { response?: { data?: { error?: string } } })?.response?.data?.error ??
         'Error al eliminar la marca'
       setDeleteError(msg)
+    },
+  })
+
+  const assignMutation = useMutation({
+    mutationFn: () => api.post('/admin/brands/auto-assign'),
+    onSuccess: (res) => {
+      setAssignResult(res.data)
+      void queryClient.invalidateQueries({ queryKey: ['admin', 'brands'] })
     },
   })
 
@@ -222,13 +232,32 @@ const AdminBrands = () => {
 
       <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
         <h1 className="text-2xl font-bold text-gray-900 dark:text-[#e8eaf0]">Marcas</h1>
-        <button
-          onClick={() => setModalBrand('new')}
-          className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-lg text-sm transition-colors"
-        >
-          + Nueva marca
-        </button>
+        <div className="flex gap-2">
+          <button
+            onClick={() => assignMutation.mutate()}
+            disabled={assignMutation.isPending}
+            className="flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 disabled:bg-emerald-400 text-white font-semibold px-4 py-2 rounded-lg text-sm transition-colors"
+          >
+            <Wand2 size={16} />
+            {assignMutation.isPending ? 'Asignando...' : 'Asignar automáticamente'}
+          </button>
+          <button
+            onClick={() => setModalBrand('new')}
+            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-lg text-sm transition-colors"
+          >
+            + Nueva marca
+          </button>
+        </div>
       </div>
+
+      {assignResult && !assignMutation.isPending && (
+        <div className={`mb-4 px-4 py-3 rounded-xl text-sm ${assignResult.assigned > 0 ? 'bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800' : 'bg-gray-50 dark:bg-[#222222] text-gray-500 dark:text-[#8892a4] border border-gray-200 dark:border-[#2a2a2a]'}`}>
+          {assignResult.assigned > 0
+            ? `✅ ${assignResult.assigned} productos asignados a sus marcas. ${assignResult.remaining > 0 ? `Quedan ${assignResult.remaining} sin asignar.` : '¡Todos los productos tienen marca!'}`
+            : `No se encontraron productos para asignar. Quedan ${assignResult.remaining} sin marca.`}
+          <button onClick={() => setAssignResult(null)} className="ml-3 underline hover:no-underline">Cerrar</button>
+        </div>
+      )}
 
       <div className="relative max-w-xs mb-4">
         <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-[#8892a4]" />

@@ -107,6 +107,136 @@ export const updateBrand = async (
   }
 }
 
+// Brand keyword matching — same logic as seed-brands.ts
+const BRAND_KEYWORDS: Record<string, string[]> = {
+  'Royal Canin': ['royal canin'],
+  "Purina Pro Plan": ['purina pro plan'],
+  "Hill's": ["hill's", 'hills science diet'],
+  'Taste of the Wild': ['taste of the wild'],
+  'True Origins': ['true origins'],
+  'Outward Hound': ['outward hound', 'nina ottosson'],
+  'Brit Care': ['brit care'],
+  'Catxtreme': ['catxtreme', 'cat extreme'],
+  'America Litter': ['america litter'],
+  'Better Bones': ['better bones'],
+  'Skouts Honor': ['skouts honor'],
+  'Stay Happy': ['stay happy'],
+  'Remy Rocker': ['remy rocker'],
+  'Minus One': ['minus one'],
+  'Puppy Cuddle': ['puppy cuddle'],
+  'Churu': ['churu'],
+  'Advance': ['advance'],
+  'Eukanuba': ['eukanuba'],
+  'Pedigree': ['pedigree'],
+  'SuperZoo': ['superzoo'],
+  'Pet Wippi': ['pet wippi'],
+  'Naturalistic': ['naturalistic'],
+  'Catit': ['catit'],
+  'Furminator': ['furminator'],
+  'Bravecto': ['bravecto'],
+  'Comfort': ['comfort rope', 'comfort skinny'],
+  'Feliway': ['feliway'],
+  'Frontline': ['frontline'],
+  'Kong': ['kong'],
+  'Nath': ['nath'],
+  'Salvaje': ['salvaje'],
+  'Mpets': ['mpets'],
+  'Leeby': ['leeby'],
+  'Tootoy': ['tootoy'],
+  'Fit Formula': ['fit formula'],
+  'Dogxtreme': ['dogxtreme'],
+  'Dingo': ['dingo'],
+  'Rahue': ['rahue'],
+  'Wanpy': ['wanpy'],
+  'Acana': ['acana'],
+  'Applaws': ['applaws'],
+  'Bravery': ['bravery'],
+  'Vitakraft': ['vitakraft'],
+  'Ama': ['ama alimento'],
+  'Gotoo': ['gotoo'],
+  'Outech': ['outech'],
+  'My Zoo': ['my zoo'],
+  'Nexgard': ['nexgard'],
+  'Simparica': ['simparica'],
+  'Leonardo': ['leonardo'],
+  'Belcando': ['belcando'],
+  'Wellness Core': ['wellness core'],
+  'Zeedog': ['zeedog'],
+  'Amity': ['amity'],
+  'Dogzilla': ['dogzilla'],
+  'Catzilla': ['catzilla'],
+  'Tk Pet': ['tk pet'],
+  'Nice Care': ['nice care'],
+  'Natural & Delicious': ['natural & delicious', 'n&d'],
+}
+
+function normalize(str: string): string {
+  return str
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9\s!'"]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+}
+
+function findBrand(name: string, brandSlugMap: Map<string, { id: number; name: string }>): { id: number; name: string } | null {
+  const normalized = normalize(name)
+  for (const [brandName, keywords] of Object.entries(BRAND_KEYWORDS)) {
+    for (const keyword of keywords) {
+      if (normalized.includes(keyword)) {
+        const found = brandSlugMap.get(brandName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''))
+        if (found) return found
+        break
+      }
+    }
+  }
+  return null
+}
+
+export const autoAssignBrands = async (
+  req: AuthRequest,
+  res: Response,
+  next: NextFunction,
+): Promise<void> => {
+  try {
+    const brands = await prisma.brand.findMany()
+    const slugMap = new Map<string, { id: number; name: string }>()
+    for (const b of brands) {
+      slugMap.set(b.slug, { id: b.id, name: b.name })
+    }
+
+    const products = await prisma.product.findMany({
+      where: { brandId: null, isActive: true },
+      select: { id: true, name: true },
+    })
+
+    let assigned = 0
+    const results: { id: number; name: string; brand: string }[] = []
+
+    for (const product of products) {
+      const match = findBrand(product.name, slugMap)
+      if (match) {
+        await prisma.product.update({
+          where: { id: product.id },
+          data: { brandId: match.id },
+        })
+        assigned++
+        results.push({ id: product.id, name: product.name, brand: match.name })
+      }
+    }
+
+    res.json({
+      assigned,
+      total: products.length,
+      remaining: products.length - assigned,
+      details: results,
+    })
+  } catch (error) {
+    next(error)
+  }
+}
+
 export const deleteBrand = async (
   req: AuthRequest,
   res: Response,

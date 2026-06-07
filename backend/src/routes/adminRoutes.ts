@@ -13,7 +13,7 @@ import {
 import { getAdminOrders, updateOrderStatus, getOrderStats, exportOrdersCsv } from '../controllers/adminOrderController'
 import { getRevenue } from '../controllers/adminRevenueController'
 import { getSalesByCategory, getMonthComparison, getRecentOrdersFeed } from '../controllers/adminAnalyticsController'
-import { getBrands, createBrand, updateBrand, deleteBrand } from '../controllers/adminBrandController'
+import { getBrands, createBrand, updateBrand, deleteBrand, autoAssignBrands } from '../controllers/adminBrandController'
 import { getCustomers } from '../controllers/adminCustomerController'
 import { getCoupons, createCoupon, updateCoupon, deleteCoupon } from '../controllers/adminCouponController'
 
@@ -39,6 +39,7 @@ router.get('/brands', authMiddleware, getBrands)
 router.post('/brands', authMiddleware, createBrand)
 router.put('/brands/:id', authMiddleware, updateBrand)
 router.delete('/brands/:id', authMiddleware, deleteBrand)
+router.post('/brands/auto-assign', authMiddleware, autoAssignBrands)
 
 // Protected — customers
 router.get('/customers', authMiddleware, getCustomers)
