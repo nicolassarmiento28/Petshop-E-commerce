@@ -1,0 +1,1010 @@
+- generic [ref=e4]:
+  - region "Notifications alt+T"
+  - generic [ref=e6]:
+    - generic [ref=e7]: Envío a todo Chile · Lunes a Sábado
+    - generic [ref=e8]: contacto@petshop.cl · +56 9 1234 5678
+  - banner [ref=e9]:
+    - generic [ref=e11]:
+      - link "🐾 Petshop" [ref=e12] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e13]: 🐾
+        - generic [ref=e14]: Petshop
+      - generic [ref=e16]:
+        - textbox "Buscar productos, marcas..." [ref=e17]
+        - button [ref=e18] [cursor=pointer]:
+          - img [ref=e19]
+      - generic [ref=e22]:
+        - button "Activar modo claro" [ref=e23] [cursor=pointer]:
+          - img [ref=e24]
+        - link "Mi cuenta" [ref=e30] [cursor=pointer]:
+          - /url: /admin
+          - img [ref=e31]
+        - button "Ver carrito" [ref=e34] [cursor=pointer]:
+          - img [ref=e35]
+          - generic [ref=e39]: "1"
+        - button "Menú" [ref=e40] [cursor=pointer]:
+          - img [ref=e41]
+  - dialog "Tu carrito" [ref=e42]:
+    - generic [ref=e43]:
+      - heading "Tu carrito" [level=2] [ref=e44]
+      - button "Cerrar carrito" [ref=e45] [cursor=pointer]:
+        - img [ref=e46]
+    - generic [ref=e50]:
+      - img "Acana Heritage Free Run Poultry alimento para perro" [ref=e52]
+      - generic [ref=e53]:
+        - paragraph [ref=e54]: Acana Heritage Free Run Poultry alimento para perro
+        - paragraph [ref=e55]: $86.990
+      - generic [ref=e56]:
+        - button "Disminuir cantidad" [ref=e57] [cursor=pointer]:
+          - img [ref=e58]
+        - generic [ref=e59]: "1"
+        - button "Aumentar cantidad" [ref=e60] [cursor=pointer]:
+          - img [ref=e61]
+      - button "Eliminar producto" [ref=e62] [cursor=pointer]:
+        - img [ref=e63]
+    - generic [ref=e67]:
+      - generic [ref=e68]:
+        - generic [ref=e69]: Total
+        - generic [ref=e70]: $86.990
+      - button "Ir al checkout" [ref=e71] [cursor=pointer]
+  - main [ref=e72]:
+    - generic [ref=e73]:
+      - navigation [ref=e74]:
+        - link "Inicio" [ref=e75] [cursor=pointer]:
+          - /url: /
+        - generic [ref=e76]:
+          - img [ref=e77]
+          - generic [ref=e79]: Peluqueria
+      - generic [ref=e80]:
+        - heading "Peluqueria" [level=1] [ref=e81]
+        - paragraph [ref=e214]: 58 productos
+      - generic [ref=e83]:
+        - generic [ref=e84]:
+          - img [ref=e85]
+          - textbox "Buscar en esta categoría..." [ref=e88]
+        - combobox [ref=e215]:
+          - option "Todas las marcas" [selected]
+          - option "Acana"
+          - option "Advance"
+          - option "Advantage"
+          - option "Ama"
+          - option "America Litter"
+          - option "Apeticat"
+          - option "Applaws"
+          - option "Better Bones"
+          - option "Biopets"
+          - option "Bravecto"
+          - option "Bravery"
+          - option "Brit Care"
+          - option "Calmer"
+          - option "Canigest"
+          - option "Cat Extreme"
+          - option "Catit"
+          - option "Catxtreme"
+          - option "Charmy"
+          - option "Churu"
+          - option "Comfort"
+          - option "Coolpet"
+          - option "Cunatex"
+          - option "Dingo"
+          - option "Dogxtreme"
+          - option "Drontal"
+          - option "Eukanuba"
+          - option "Feliway"
+          - option "Fellini"
+          - option "Fit Formula"
+          - option "Fitz"
+          - option "Flamingo Penken"
+          - option "Flovovermic"
+          - option "Frontline"
+          - option "Furinaid"
+          - option "Furminator"
+          - option "Gotoo"
+          - option "Hairball"
+          - option "Hill's"
+          - option "Invermic"
+          - option "Kong"
+          - option "Laveta"
+          - option "Leeby"
+          - option "Leonardo"
+          - option "Mamistop"
+          - option "Mebermic"
+          - option "Minus One"
+          - option "Mpets"
+          - option "My Zoo"
+          - option "Nanormen"
+          - option "Nath"
+          - option "Natur'luxe"
+          - option "Naturalistic"
+          - option "Nexgard"
+          - option "No Stress"
+          - option "Olympus"
+          - option "Outech"
+          - option "Outward Hound"
+          - option "Oxyfresh"
+          - option "Papainpet"
+          - option "Pedigree"
+          - option "Pepolli"
+          - option "Pet Block"
+          - option "PlaqueOff"
+          - option "Playology"
+          - option "Probiocat"
+          - option "Puppy Cuddle"
+          - option "Purina Pro Plan"
+          - option "Qchefs"
+          - option "Rahue"
+          - option "Remy Rocker"
+          - option "Revolution"
+          - option "Royal Canin"
+          - option "Ruffwear"
+          - option "Salvaje"
+          - option "Senilpet"
+          - option "Seresto"
+          - option "Silimadrag"
+          - option "Simparica"
+          - option "Skouts Honor"
+          - option "Stay Happy"
+          - option "Stride Plus"
+          - option "Suava"
+          - option "Superpet"
+          - option "Taste of the Wild"
+          - option "The Cat Band"
+          - option "Tootoy"
+          - option "True Origins"
+          - option "Vetlife"
+          - option "Virbac"
+          - option "Vitakraft"
+          - option "Wanpy"
+          - option "Winga"
+          - option "Zeecat"
+        - spinbutton [ref=e89]
+        - spinbutton [ref=e90]
+        - combobox [ref=e91]:
+          - option "Nombre (A-Z)" [selected]
+          - option "Nombre (Z-A)"
+          - option "Menor precio"
+          - option "Mayor precio"
+          - option "Más nuevos"
+      - generic [ref=e92]:
+        - generic [ref=e217]:
+          - link "Acondicionador con aceite de Castaña de Pará y extracto de Frutos Rojos 250 ML" [ref=e218] [cursor=pointer]:
+            - /url: /producto/acondicionador-con-aceite-de-castana-de-para-y-extracto-de-frutos-rojos-250-ml
+            - img "Acondicionador con aceite de Castaña de Pará y extracto de Frutos Rojos 250 ML" [ref=e219]
+          - generic [ref=e220]:
+            - paragraph [ref=e221]: Peluqueria
+            - link "Acondicionador con aceite de Castaña de Pará y extracto de Frutos Rojos 250 ML" [ref=e222] [cursor=pointer]:
+              - /url: /producto/acondicionador-con-aceite-de-castana-de-para-y-extracto-de-frutos-rojos-250-ml
+              - heading "Acondicionador con aceite de Castaña de Pará y extracto de Frutos Rojos 250 ML" [level=3] [ref=e223]
+            - generic [ref=e225]: $10.990
+            - button "Agregar al carrito" [ref=e226] [cursor=pointer]:
+              - img [ref=e227]
+              - text: Agregar al carrito
+        - generic [ref=e232]:
+          - link "Acondicionador de Avena para pieles sensibles" [ref=e233] [cursor=pointer]:
+            - /url: /producto/acondicionador-de-avena-para-pieles-sensibles
+            - img "Acondicionador de Avena para pieles sensibles" [ref=e234]
+          - generic [ref=e235]:
+            - paragraph [ref=e236]: Peluqueria
+            - link "Acondicionador de Avena para pieles sensibles" [ref=e237] [cursor=pointer]:
+              - /url: /producto/acondicionador-de-avena-para-pieles-sensibles
+              - heading "Acondicionador de Avena para pieles sensibles" [level=3] [ref=e238]
+            - generic [ref=e240]: $10.990
+            - button "Agregar al carrito" [ref=e241] [cursor=pointer]:
+              - img [ref=e242]
+              - text: Agregar al carrito
+        - generic [ref=e247]:
+          - link "Acondicionador Miel y Pracaxi con aceite de Castaña de Pará y extracto de Miel 250 ML" [ref=e248] [cursor=pointer]:
+            - /url: /producto/acondicionador-miel-y-pracaxi-con-aceite-de-castana-de-para-y-extracto-de-miel-250-ml
+            - img "Acondicionador Miel y Pracaxi con aceite de Castaña de Pará y extracto de Miel 250 ML" [ref=e249]
+          - generic [ref=e250]:
+            - paragraph [ref=e251]: Peluqueria
+            - link "Acondicionador Miel y Pracaxi con aceite de Castaña de Pará y extracto de Miel 250 ML" [ref=e252] [cursor=pointer]:
+              - /url: /producto/acondicionador-miel-y-pracaxi-con-aceite-de-castana-de-para-y-extracto-de-miel-250-ml
+              - heading "Acondicionador Miel y Pracaxi con aceite de Castaña de Pará y extracto de Miel 250 ML" [level=3] [ref=e253]
+            - generic [ref=e255]: $10.990
+            - button "Agregar al carrito" [ref=e256] [cursor=pointer]:
+              - img [ref=e257]
+              - text: Agregar al carrito
+        - generic [ref=e262]:
+          - link "Adjustable dematter tool furminator" [ref=e263] [cursor=pointer]:
+            - /url: /producto/adjustable-dematter-tool-furminator
+            - img "Adjustable dematter tool furminator" [ref=e264]
+          - generic [ref=e265]:
+            - paragraph [ref=e267]: Furminator
+            - link "Adjustable dematter tool furminator" [ref=e268] [cursor=pointer]:
+              - /url: /producto/adjustable-dematter-tool-furminator
+              - heading "Adjustable dematter tool furminator" [level=3] [ref=e269]
+            - generic [ref=e271]: $29.990
+            - button "Agregar al carrito" [ref=e272] [cursor=pointer]:
+              - img [ref=e273]
+              - text: Agregar al carrito
+        - generic [ref=e278]:
+          - link "Bolsas recoge fecas reciclables 4 und 4 rollos" [ref=e279] [cursor=pointer]:
+            - /url: /producto/bolsas-recoge-fecas-reciclables-4-und-4-rollos
+            - img "Bolsas recoge fecas reciclables 4 und 4 rollos" [ref=e280]
+          - generic [ref=e281]:
+            - paragraph [ref=e282]: Peluqueria
+            - link "Bolsas recoge fecas reciclables 4 und 4 rollos" [ref=e283] [cursor=pointer]:
+              - /url: /producto/bolsas-recoge-fecas-reciclables-4-und-4-rollos
+              - heading "Bolsas recoge fecas reciclables 4 und 4 rollos" [level=3] [ref=e284]
+            - generic [ref=e286]: $4.990
+            - button "Agregar al carrito" [ref=e287] [cursor=pointer]:
+              - img [ref=e288]
+              - text: Agregar al carrito
+        - generic [ref=e293]:
+          - link "Caja bolsas recoge fecas" [ref=e294] [cursor=pointer]:
+            - /url: /producto/caja-bolsas-recoge-fecas
+            - img "Caja bolsas recoge fecas" [ref=e295]
+          - generic [ref=e296]:
+            - paragraph [ref=e297]: Peluqueria
+            - link "Caja bolsas recoge fecas" [ref=e298] [cursor=pointer]:
+              - /url: /producto/caja-bolsas-recoge-fecas
+              - heading "Caja bolsas recoge fecas" [level=3] [ref=e299]
+            - generic [ref=e301]: $7.990
+            - button "Agregar al carrito" [ref=e302] [cursor=pointer]:
+              - img [ref=e303]
+              - text: Agregar al carrito
+        - generic [ref=e308]:
+          - link "Cleansing wipes with baby powder fragrance 1 un." [ref=e309] [cursor=pointer]:
+            - /url: /producto/cleansing-wipes-with-baby-powder-fragrance-1-un
+            - img "Cleansing wipes with baby powder fragrance 1 un." [ref=e310]
+          - generic [ref=e311]:
+            - paragraph [ref=e312]: Peluqueria
+            - link "Cleansing wipes with baby powder fragrance 1 un." [ref=e313] [cursor=pointer]:
+              - /url: /producto/cleansing-wipes-with-baby-powder-fragrance-1-un
+              - heading "Cleansing wipes with baby powder fragrance 1 un." [level=3] [ref=e314]
+            - generic [ref=e316]: $9.990
+            - button "Agregar al carrito" [ref=e317] [cursor=pointer]:
+              - img [ref=e318]
+              - text: Agregar al carrito
+        - generic [ref=e323]:
+          - link "Colonia Pet Spray" [ref=e324] [cursor=pointer]:
+            - /url: /producto/colonia-pet-spray
+            - img "Colonia Pet Spray" [ref=e325]
+          - generic [ref=e326]:
+            - paragraph [ref=e327]: Peluqueria
+            - link "Colonia Pet Spray" [ref=e328] [cursor=pointer]:
+              - /url: /producto/colonia-pet-spray
+              - heading "Colonia Pet Spray" [level=3] [ref=e329]
+            - generic [ref=e331]: $10.990
+            - button "Agregar al carrito" [ref=e332] [cursor=pointer]:
+              - img [ref=e333]
+              - text: Agregar al carrito
+        - generic [ref=e338]:
+          - link "Colonia spray angelical 150 ML" [ref=e339] [cursor=pointer]:
+            - /url: /producto/colonia-spray-angelical-150-ml
+            - img "Colonia spray angelical 150 ML" [ref=e340]
+          - generic [ref=e341]:
+            - paragraph [ref=e342]: Peluqueria
+            - link "Colonia spray angelical 150 ML" [ref=e343] [cursor=pointer]:
+              - /url: /producto/colonia-spray-angelical-150-ml
+              - heading "Colonia spray angelical 150 ML" [level=3] [ref=e344]
+            - generic [ref=e346]: $14.990
+            - button "Agregar al carrito" [ref=e347] [cursor=pointer]:
+              - img [ref=e348]
+              - text: Agregar al carrito
+        - generic [ref=e353]:
+          - link "Cortauñas furminator perros y gatos Oferta" [ref=e354] [cursor=pointer]:
+            - /url: /producto/cortaunas-furminator-perros-y-gatos
+            - img "Cortauñas furminator perros y gatos" [ref=e355]
+            - generic [ref=e357]: Oferta
+          - generic [ref=e358]:
+            - paragraph [ref=e360]: Furminator
+            - link "Cortauñas furminator perros y gatos" [ref=e361] [cursor=pointer]:
+              - /url: /producto/cortaunas-furminator-perros-y-gatos
+              - heading "Cortauñas furminator perros y gatos" [level=3] [ref=e362]
+            - generic [ref=e363]:
+              - generic [ref=e364]: $15.113
+              - generic [ref=e365]: $20.990
+            - button "Agregar al carrito" [ref=e366] [cursor=pointer]:
+              - img [ref=e367]
+              - text: Agregar al carrito
+        - generic [ref=e372]:
+          - link "Crema reparadora antimicrobiana para patitas y narices" [ref=e373] [cursor=pointer]:
+            - /url: /producto/crema-reparadora-antimicrobiana-para-patitas-y-narices
+            - img "Crema reparadora antimicrobiana para patitas y narices" [ref=e374]
+          - generic [ref=e375]:
+            - paragraph [ref=e376]: Peluqueria
+            - link "Crema reparadora antimicrobiana para patitas y narices" [ref=e377] [cursor=pointer]:
+              - /url: /producto/crema-reparadora-antimicrobiana-para-patitas-y-narices
+              - heading "Crema reparadora antimicrobiana para patitas y narices" [level=3] [ref=e378]
+            - generic [ref=e380]: $10.990
+            - button "Agregar al carrito" [ref=e381] [cursor=pointer]:
+              - img [ref=e382]
+              - text: Agregar al carrito
+        - generic [ref=e387]:
+          - link "Dematting tool mpets" [ref=e388] [cursor=pointer]:
+            - /url: /producto/dematting-tool-mpets
+            - img "Dematting tool mpets" [ref=e389]
+          - generic [ref=e390]:
+            - paragraph [ref=e392]: Mpets
+            - link "Dematting tool mpets" [ref=e393] [cursor=pointer]:
+              - /url: /producto/dematting-tool-mpets
+              - heading "Dematting tool mpets" [level=3] [ref=e394]
+            - generic [ref=e396]: $7.990
+            - button "Agregar al carrito" [ref=e397] [cursor=pointer]:
+              - img [ref=e398]
+              - text: Agregar al carrito
+        - generic [ref=e403]:
+          - link "Dog conditioner vitamina e skin drag 250ML" [ref=e404] [cursor=pointer]:
+            - /url: /producto/dog-conditioner-vitamina-e-skin-drag-250ml
+            - img "Dog conditioner vitamina e skin drag 250ML" [ref=e405]
+          - generic [ref=e406]:
+            - paragraph [ref=e407]: Peluqueria
+            - link "Dog conditioner vitamina e skin drag 250ML" [ref=e408] [cursor=pointer]:
+              - /url: /producto/dog-conditioner-vitamina-e-skin-drag-250ml
+              - heading "Dog conditioner vitamina e skin drag 250ML" [level=3] [ref=e409]
+            - generic [ref=e411]: $11.990
+            - button "Agregar al carrito" [ref=e412] [cursor=pointer]:
+              - img [ref=e413]
+              - text: Agregar al carrito
+        - generic [ref=e418]:
+          - link "Ear cleaner mpets" [ref=e419] [cursor=pointer]:
+            - /url: /producto/ear-cleaner-mpets
+            - img "Ear cleaner mpets" [ref=e420]
+          - generic [ref=e421]:
+            - paragraph [ref=e423]: Mpets
+            - link "Ear cleaner mpets" [ref=e424] [cursor=pointer]:
+              - /url: /producto/ear-cleaner-mpets
+              - heading "Ear cleaner mpets" [level=3] [ref=e425]
+            - generic [ref=e427]: $4.990
+            - button "Agregar al carrito" [ref=e428] [cursor=pointer]:
+              - img [ref=e429]
+              - text: Agregar al carrito
+        - generic [ref=e434]:
+          - link "Guante de goma mpets Oferta" [ref=e435] [cursor=pointer]:
+            - /url: /producto/guante-de-goma-mpets
+            - img "Guante de goma mpets" [ref=e436]
+            - generic [ref=e438]: Oferta
+          - generic [ref=e439]:
+            - paragraph [ref=e441]: Mpets
+            - link "Guante de goma mpets" [ref=e442] [cursor=pointer]:
+              - /url: /producto/guante-de-goma-mpets
+              - heading "Guante de goma mpets" [level=3] [ref=e443]
+            - generic [ref=e444]:
+              - generic [ref=e445]: $13.191
+              - generic [ref=e446]: $14.990
+            - button "Agregar al carrito" [ref=e447] [cursor=pointer]:
+              - img [ref=e448]
+              - text: Agregar al carrito
+        - generic [ref=e453]:
+          - link "Higienizante s.o.s." [ref=e454] [cursor=pointer]:
+            - /url: /producto/higienizante-s-o-s
+            - img "Higienizante s.o.s." [ref=e455]
+          - generic [ref=e456]:
+            - paragraph [ref=e457]: Peluqueria
+            - link "Higienizante s.o.s." [ref=e458] [cursor=pointer]:
+              - /url: /producto/higienizante-s-o-s
+              - heading "Higienizante s.o.s." [level=3] [ref=e459]
+            - generic [ref=e461]: $10.990
+            - button "Agregar al carrito" [ref=e462] [cursor=pointer]:
+              - img [ref=e463]
+              - text: Agregar al carrito
+        - generic [ref=e468]:
+          - link "Lime and cocoa butter conditioner" [ref=e469] [cursor=pointer]:
+            - /url: /producto/lime-and-cocoa-butter-conditioner
+            - img "Lime and cocoa butter conditioner" [ref=e470]
+          - generic [ref=e471]:
+            - paragraph [ref=e472]: Peluqueria
+            - link "Lime and cocoa butter conditioner" [ref=e473] [cursor=pointer]:
+              - /url: /producto/lime-and-cocoa-butter-conditioner
+              - heading "Lime and cocoa butter conditioner" [level=3] [ref=e474]
+            - generic [ref=e476]: $21.990
+            - button "Agregar al carrito" [ref=e477] [cursor=pointer]:
+              - img [ref=e478]
+              - text: Agregar al carrito
+        - generic [ref=e483]:
+          - link "Limpiador probiotico de oidos Oferta" [ref=e484] [cursor=pointer]:
+            - /url: /producto/limpiador-probiotico-de-oidos
+            - img "Limpiador probiotico de oidos" [ref=e485]
+            - generic [ref=e487]: Oferta
+          - generic [ref=e488]:
+            - paragraph [ref=e489]: Peluqueria
+            - link "Limpiador probiotico de oidos" [ref=e490] [cursor=pointer]:
+              - /url: /producto/limpiador-probiotico-de-oidos
+              - heading "Limpiador probiotico de oidos" [level=3] [ref=e491]
+            - generic [ref=e492]:
+              - generic [ref=e493]: $10.353
+              - generic [ref=e494]: $13.990
+            - button "Agregar al carrito" [ref=e495] [cursor=pointer]:
+              - img [ref=e496]
+              - text: Agregar al carrito
+        - generic [ref=e501]:
+          - link "Long Hair Dog Furminator -" [ref=e502] [cursor=pointer]:
+            - /url: /producto/long-hair-dog-furminator
+            - img "Long Hair Dog Furminator -" [ref=e503]
+          - generic [ref=e504]:
+            - paragraph [ref=e506]: Furminator
+            - link "Long Hair Dog Furminator -" [ref=e507] [cursor=pointer]:
+              - /url: /producto/long-hair-dog-furminator
+              - heading "Long Hair Dog Furminator -" [level=3] [ref=e508]
+            - generic [ref=e510]: $19.593
+            - button "Agregar al carrito" [ref=e511] [cursor=pointer]:
+              - img [ref=e512]
+              - text: Agregar al carrito
+        - generic [ref=e517]:
+          - link "Mini peine para mascotas 2 en 1 para pelo corto - verde" [ref=e518] [cursor=pointer]:
+            - /url: /producto/mini-peine-para-mascotas-2-en-1-para-pelo-corto-verde
+            - img "Mini peine para mascotas 2 en 1 para pelo corto - verde" [ref=e519]
+          - generic [ref=e520]:
+            - paragraph [ref=e521]: Peluqueria
+            - link "Mini peine para mascotas 2 en 1 para pelo corto - verde" [ref=e522] [cursor=pointer]:
+              - /url: /producto/mini-peine-para-mascotas-2-en-1-para-pelo-corto-verde
+              - heading "Mini peine para mascotas 2 en 1 para pelo corto - verde" [level=3] [ref=e523]
+            - generic [ref=e525]: $8.990
+            - button "Agregar al carrito" [ref=e526] [cursor=pointer]:
+              - img [ref=e527]
+              - text: Agregar al carrito
+        - generic [ref=e532]:
+          - link "Mpets Toalla de secado rápido para gatos" [ref=e533] [cursor=pointer]:
+            - /url: /producto/mpets-toalla-de-secado-rapido-para-gatos
+            - img "Mpets Toalla de secado rápido para gatos" [ref=e534]
+          - generic [ref=e535]:
+            - paragraph [ref=e537]: Mpets
+            - link "Mpets Toalla de secado rápido para gatos" [ref=e538] [cursor=pointer]:
+              - /url: /producto/mpets-toalla-de-secado-rapido-para-gatos
+              - heading "Mpets Toalla de secado rápido para gatos" [level=3] [ref=e539]
+            - generic [ref=e541]: $6.990
+            - button "Agregar al carrito" [ref=e542] [cursor=pointer]:
+              - img [ref=e543]
+              - text: Agregar al carrito
+        - generic [ref=e548]:
+          - link "My Zoo Odor Eliminator Plus Gato 500CC" [ref=e549] [cursor=pointer]:
+            - /url: /producto/my-zoo-odor-eliminator-plus-gato-500cc
+            - img "My Zoo Odor Eliminator Plus Gato 500CC" [ref=e550]
+          - generic [ref=e551]:
+            - paragraph [ref=e553]: My Zoo
+            - link "My Zoo Odor Eliminator Plus Gato 500CC" [ref=e554] [cursor=pointer]:
+              - /url: /producto/my-zoo-odor-eliminator-plus-gato-500cc
+              - heading "My Zoo Odor Eliminator Plus Gato 500CC" [level=3] [ref=e555]
+            - generic [ref=e557]: $11.990
+            - button "Agregar al carrito" [ref=e558] [cursor=pointer]:
+              - img [ref=e559]
+              - text: Agregar al carrito
+        - generic [ref=e564]:
+          - link "My Zoo Shampoo Neutro Avena Coloidal 420CC" [ref=e565] [cursor=pointer]:
+            - /url: /producto/my-zoo-shampoo-neutro-avena-coloidal-420cc
+            - img "My Zoo Shampoo Neutro Avena Coloidal 420CC" [ref=e566]
+          - generic [ref=e567]:
+            - paragraph [ref=e569]: My Zoo
+            - link "My Zoo Shampoo Neutro Avena Coloidal 420CC" [ref=e570] [cursor=pointer]:
+              - /url: /producto/my-zoo-shampoo-neutro-avena-coloidal-420cc
+              - heading "My Zoo Shampoo Neutro Avena Coloidal 420CC" [level=3] [ref=e571]
+            - generic [ref=e573]: $8.990
+            - button "Agregar al carrito" [ref=e574] [cursor=pointer]:
+              - img [ref=e575]
+              - text: Agregar al carrito
+        - generic [ref=e580]:
+          - link "My Zoo Shampoo Seco Espuma Perro Coco Aloe Vera 250CC" [ref=e581] [cursor=pointer]:
+            - /url: /producto/my-zoo-shampoo-seco-espuma-perro-coco-aloe-vera-250cc
+            - img "My Zoo Shampoo Seco Espuma Perro Coco Aloe Vera 250CC" [ref=e582]
+          - generic [ref=e583]:
+            - paragraph [ref=e585]: My Zoo
+            - link "My Zoo Shampoo Seco Espuma Perro Coco Aloe Vera 250CC" [ref=e586] [cursor=pointer]:
+              - /url: /producto/my-zoo-shampoo-seco-espuma-perro-coco-aloe-vera-250cc
+              - heading "My Zoo Shampoo Seco Espuma Perro Coco Aloe Vera 250CC" [level=3] [ref=e587]
+            - generic [ref=e589]: $9.990
+            - button "Agregar al carrito" [ref=e590] [cursor=pointer]:
+              - img [ref=e591]
+              - text: Agregar al carrito
+        - generic [ref=e596]:
+          - link "Myrrh and chlorhexidine wipes 1 un." [ref=e597] [cursor=pointer]:
+            - /url: /producto/myrrh-and-chlorhexidine-wipes-1-un
+            - img "Myrrh and chlorhexidine wipes 1 un." [ref=e598]
+          - generic [ref=e599]:
+            - paragraph [ref=e600]: Peluqueria
+            - link "Myrrh and chlorhexidine wipes 1 un." [ref=e601] [cursor=pointer]:
+              - /url: /producto/myrrh-and-chlorhexidine-wipes-1-un
+              - heading "Myrrh and chlorhexidine wipes 1 un." [level=3] [ref=e602]
+            - generic [ref=e604]: $8.990
+            - button "Agregar al carrito" [ref=e605] [cursor=pointer]:
+              - img [ref=e606]
+              - text: Agregar al carrito
+        - generic [ref=e611]:
+          - link "Natur'luxe Shampoo aceite de cedro y árbol de té 500 ML" [ref=e612] [cursor=pointer]:
+            - /url: /producto/natur-luxe-shampoo-aceite-de-cedro-y-arbol-de-te-500-ml
+            - img "Natur'luxe Shampoo aceite de cedro y árbol de té 500 ML" [ref=e613]
+          - generic [ref=e614]:
+            - paragraph [ref=e616]: Natur'luxe
+            - link "Natur'luxe Shampoo aceite de cedro y árbol de té 500 ML" [ref=e617] [cursor=pointer]:
+              - /url: /producto/natur-luxe-shampoo-aceite-de-cedro-y-arbol-de-te-500-ml
+              - heading "Natur'luxe Shampoo aceite de cedro y árbol de té 500 ML" [level=3] [ref=e618]
+            - generic [ref=e620]: $9.990
+            - button "Agregar al carrito" [ref=e621] [cursor=pointer]:
+              - img [ref=e622]
+              - text: Agregar al carrito
+        - generic [ref=e627]:
+          - link "Oatmeal and tea tree shampoo" [ref=e628] [cursor=pointer]:
+            - /url: /producto/oatmeal-and-tea-tree-shampoo
+            - img "Oatmeal and tea tree shampoo" [ref=e629]
+          - generic [ref=e630]:
+            - paragraph [ref=e631]: Peluqueria
+            - link "Oatmeal and tea tree shampoo" [ref=e632] [cursor=pointer]:
+              - /url: /producto/oatmeal-and-tea-tree-shampoo
+              - heading "Oatmeal and tea tree shampoo" [level=3] [ref=e633]
+            - generic [ref=e635]: $21.990
+            - button "Agregar al carrito" [ref=e636] [cursor=pointer]:
+              - img [ref=e637]
+              - text: Agregar al carrito
+        - generic [ref=e642]:
+          - link "Pet wippi mini toallita húmeda de bolsillo" [ref=e643] [cursor=pointer]:
+            - /url: /producto/pet-wippi-mini-toallita-humeda-de-bolsillo
+            - img "Pet wippi mini toallita húmeda de bolsillo" [ref=e644]
+          - generic [ref=e645]:
+            - paragraph [ref=e646]: Peluqueria
+            - link "Pet wippi mini toallita húmeda de bolsillo" [ref=e647] [cursor=pointer]:
+              - /url: /producto/pet-wippi-mini-toallita-humeda-de-bolsillo
+              - heading "Pet wippi mini toallita húmeda de bolsillo" [level=3] [ref=e648]
+            - generic [ref=e650]: $790
+            - button "Agregar al carrito" [ref=e651] [cursor=pointer]:
+              - img [ref=e652]
+              - text: Agregar al carrito
+        - generic [ref=e657]:
+          - link "Pet wippi set 8 mini toallitas húmedas de bolsillo" [ref=e658] [cursor=pointer]:
+            - /url: /producto/pet-wippi-set-8-mini-toallitas-humedas-de-bolsillo
+            - img "Pet wippi set 8 mini toallitas húmedas de bolsillo" [ref=e659]
+          - generic [ref=e660]:
+            - paragraph [ref=e661]: Peluqueria
+            - link "Pet wippi set 8 mini toallitas húmedas de bolsillo" [ref=e662] [cursor=pointer]:
+              - /url: /producto/pet-wippi-set-8-mini-toallitas-humedas-de-bolsillo
+              - heading "Pet wippi set 8 mini toallitas húmedas de bolsillo" [level=3] [ref=e663]
+            - generic [ref=e665]: $5.990
+            - button "Agregar al carrito" [ref=e666] [cursor=pointer]:
+              - img [ref=e667]
+              - text: Agregar al carrito
+        - generic [ref=e672]:
+          - link "Pin brush black & blue" [ref=e673] [cursor=pointer]:
+            - /url: /producto/pin-brush-black-blue
+            - img "Pin brush black & blue" [ref=e674]
+          - generic [ref=e675]:
+            - paragraph [ref=e676]: Peluqueria
+            - link "Pin brush black & blue" [ref=e677] [cursor=pointer]:
+              - /url: /producto/pin-brush-black-blue
+              - heading "Pin brush black & blue" [level=3] [ref=e678]
+            - generic [ref=e680]: $8.990
+            - button "Agregar al carrito" [ref=e681] [cursor=pointer]:
+              - img [ref=e682]
+              - text: Agregar al carrito
+        - generic [ref=e687]:
+          - link "Pulidora de garras (lima) para perros y gatos 14 cm" [ref=e688] [cursor=pointer]:
+            - /url: /producto/pulidora-de-garras-lima-para-perros-y-gatos-14-cm
+            - img "Pulidora de garras (lima) para perros y gatos 14 cm" [ref=e689]
+          - generic [ref=e690]:
+            - paragraph [ref=e691]: Peluqueria
+            - link "Pulidora de garras (lima) para perros y gatos 14 cm" [ref=e692] [cursor=pointer]:
+              - /url: /producto/pulidora-de-garras-lima-para-perros-y-gatos-14-cm
+              - heading "Pulidora de garras (lima) para perros y gatos 14 cm" [level=3] [ref=e693]
+            - generic [ref=e695]: $22.990
+            - button "Agregar al carrito" [ref=e696] [cursor=pointer]:
+              - img [ref=e697]
+              - text: Agregar al carrito
+        - generic [ref=e702]:
+          - link "Removedor De Olores Y Orina Antimicrobiano Con Nano Cobre Para Gatos" [ref=e703] [cursor=pointer]:
+            - /url: /producto/removedor-de-olores-y-orina-antimicrobiano-con-nano-cobre-para-gatos
+            - img "Removedor De Olores Y Orina Antimicrobiano Con Nano Cobre Para Gatos" [ref=e704]
+          - generic [ref=e705]:
+            - paragraph [ref=e706]: Peluqueria
+            - link "Removedor De Olores Y Orina Antimicrobiano Con Nano Cobre Para Gatos" [ref=e707] [cursor=pointer]:
+              - /url: /producto/removedor-de-olores-y-orina-antimicrobiano-con-nano-cobre-para-gatos
+              - heading "Removedor De Olores Y Orina Antimicrobiano Con Nano Cobre Para Gatos" [level=3] [ref=e708]
+            - generic [ref=e710]: $12.990
+            - button "Agregar al carrito" [ref=e711] [cursor=pointer]:
+              - img [ref=e712]
+              - text: Agregar al carrito
+        - generic [ref=e717]:
+          - link "Repelente indoor - gatos spray interiores 170 ML" [ref=e718] [cursor=pointer]:
+            - /url: /producto/repelente-indoor-gatos-spray-interiores-170-ml
+            - img "Repelente indoor - gatos spray interiores 170 ML" [ref=e719]
+          - generic [ref=e720]:
+            - paragraph [ref=e721]: Peluqueria
+            - link "Repelente indoor - gatos spray interiores 170 ML" [ref=e722] [cursor=pointer]:
+              - /url: /producto/repelente-indoor-gatos-spray-interiores-170-ml
+              - heading "Repelente indoor - gatos spray interiores 170 ML" [level=3] [ref=e723]
+            - generic [ref=e725]: $13.990
+            - button "Agregar al carrito" [ref=e726] [cursor=pointer]:
+              - img [ref=e727]
+              - text: Agregar al carrito
+        - generic [ref=e732]:
+          - link "Saca pelos zeropelo reutilizable" [ref=e733] [cursor=pointer]:
+            - /url: /producto/saca-pelos-zeropelo-reutilizable
+            - img "Saca pelos zeropelo reutilizable" [ref=e734]
+          - generic [ref=e735]:
+            - paragraph [ref=e736]: Peluqueria
+            - link "Saca pelos zeropelo reutilizable" [ref=e737] [cursor=pointer]:
+              - /url: /producto/saca-pelos-zeropelo-reutilizable
+              - heading "Saca pelos zeropelo reutilizable" [level=3] [ref=e738]
+            - generic [ref=e740]: $13.990
+            - button "Agregar al carrito" [ref=e741] [cursor=pointer]:
+              - img [ref=e742]
+              - text: Agregar al carrito
+        - generic [ref=e747]:
+          - link "Shampoo aloe vera para perros aroma jazmín 260 ML" [ref=e748] [cursor=pointer]:
+            - /url: /producto/shampoo-aloe-vera-para-perros-aroma-jazmin-260-ml
+            - img "Shampoo aloe vera para perros aroma jazmín 260 ML" [ref=e749]
+          - generic [ref=e750]:
+            - paragraph [ref=e751]: Peluqueria
+            - link "Shampoo aloe vera para perros aroma jazmín 260 ML" [ref=e752] [cursor=pointer]:
+              - /url: /producto/shampoo-aloe-vera-para-perros-aroma-jazmin-260-ml
+              - heading "Shampoo aloe vera para perros aroma jazmín 260 ML" [level=3] [ref=e753]
+            - generic [ref=e755]: $4.990
+            - button "Agregar al carrito" [ref=e756] [cursor=pointer]:
+              - img [ref=e757]
+              - text: Agregar al carrito
+        - generic [ref=e762]:
+          - link "Shampoo de avena para pieles sensibles Oferta" [ref=e763] [cursor=pointer]:
+            - /url: /producto/shampoo-de-avena-para-pieles-sensibles
+            - img "Shampoo de avena para pieles sensibles" [ref=e764]
+            - generic [ref=e766]: Oferta
+          - generic [ref=e767]:
+            - paragraph [ref=e768]: Peluqueria
+            - link "Shampoo de avena para pieles sensibles" [ref=e769] [cursor=pointer]:
+              - /url: /producto/shampoo-de-avena-para-pieles-sensibles
+              - heading "Shampoo de avena para pieles sensibles" [level=3] [ref=e770]
+            - generic [ref=e771]:
+              - generic [ref=e772]: $8.023
+              - generic [ref=e773]: $10.990
+            - button "Agregar al carrito" [ref=e774] [cursor=pointer]:
+              - img [ref=e775]
+              - text: Agregar al carrito
+        - generic [ref=e780]:
+          - link "Shampoo de lavanda y manzanilla 500 ML" [ref=e781] [cursor=pointer]:
+            - /url: /producto/shampoo-de-lavanda-y-manzanilla-500-ml
+            - img "Shampoo de lavanda y manzanilla 500 ML" [ref=e782]
+          - generic [ref=e783]:
+            - paragraph [ref=e784]: Peluqueria
+            - link "Shampoo de lavanda y manzanilla 500 ML" [ref=e785] [cursor=pointer]:
+              - /url: /producto/shampoo-de-lavanda-y-manzanilla-500-ml
+              - heading "Shampoo de lavanda y manzanilla 500 ML" [level=3] [ref=e786]
+            - generic [ref=e788]: $9.990
+            - button "Agregar al carrito" [ref=e789] [cursor=pointer]:
+              - img [ref=e790]
+              - text: Agregar al carrito
+        - generic [ref=e795]:
+          - link "Shampoo de limón y argán 500 ML" [ref=e796] [cursor=pointer]:
+            - /url: /producto/shampoo-de-limon-y-argan-500-ml
+            - img "Shampoo de limón y argán 500 ML" [ref=e797]
+          - generic [ref=e798]:
+            - paragraph [ref=e799]: Peluqueria
+            - link "Shampoo de limón y argán 500 ML" [ref=e800] [cursor=pointer]:
+              - /url: /producto/shampoo-de-limon-y-argan-500-ml
+              - heading "Shampoo de limón y argán 500 ML" [level=3] [ref=e801]
+            - generic [ref=e803]: $9.990
+            - button "Agregar al carrito" [ref=e804] [cursor=pointer]:
+              - img [ref=e805]
+              - text: Agregar al carrito
+        - generic [ref=e810]:
+          - link "Shampoo dry foam 230 ML" [ref=e811] [cursor=pointer]:
+            - /url: /producto/shampoo-dry-foam-230-ml
+            - img "Shampoo dry foam 230 ML" [ref=e812]
+          - generic [ref=e813]:
+            - paragraph [ref=e814]: Peluqueria
+            - link "Shampoo dry foam 230 ML" [ref=e815] [cursor=pointer]:
+              - /url: /producto/shampoo-dry-foam-230-ml
+              - heading "Shampoo dry foam 230 ML" [level=3] [ref=e816]
+            - generic [ref=e818]: $5.990
+            - button "Agregar al carrito" [ref=e819] [cursor=pointer]:
+              - img [ref=e820]
+              - text: Agregar al carrito
+        - generic [ref=e825]:
+          - link "Shampoo en seco para perros Cunatex 250 ML" [ref=e826] [cursor=pointer]:
+            - /url: /producto/shampoo-en-seco-para-perros-cunatex-250-ml
+            - img "Shampoo en seco para perros Cunatex 250 ML" [ref=e827]
+          - generic [ref=e828]:
+            - paragraph [ref=e830]: Cunatex
+            - link "Shampoo en seco para perros Cunatex 250 ML" [ref=e831] [cursor=pointer]:
+              - /url: /producto/shampoo-en-seco-para-perros-cunatex-250-ml
+              - heading "Shampoo en seco para perros Cunatex 250 ML" [level=3] [ref=e832]
+            - generic [ref=e834]: $8.990
+            - button "Agregar al carrito" [ref=e835] [cursor=pointer]:
+              - img [ref=e836]
+              - text: Agregar al carrito
+        - generic [ref=e841]:
+          - link "Shampoo espuma seca perro (170 cc)" [ref=e842] [cursor=pointer]:
+            - /url: /producto/shampoo-espuma-seca-perro-170-cc
+            - img "Shampoo espuma seca perro (170 cc)" [ref=e843]
+          - generic [ref=e844]:
+            - paragraph [ref=e845]: Peluqueria
+            - link "Shampoo espuma seca perro (170 cc)" [ref=e846] [cursor=pointer]:
+              - /url: /producto/shampoo-espuma-seca-perro-170-cc
+              - heading "Shampoo espuma seca perro (170 cc)" [level=3] [ref=e847]
+            - generic [ref=e849]: $4.990
+            - button "Agregar al carrito" [ref=e850] [cursor=pointer]:
+              - img [ref=e851]
+              - text: Agregar al carrito
+        - generic [ref=e856]:
+          - link "Shampoo hipoalergénico para cachorros aroma cerezo en flor 260 ML" [ref=e857] [cursor=pointer]:
+            - /url: /producto/shampoo-hipoalergenico-para-cachorros-aroma-cerezo-en-flor-260-ml
+            - img "Shampoo hipoalergénico para cachorros aroma cerezo en flor 260 ML" [ref=e858]
+          - generic [ref=e859]:
+            - paragraph [ref=e860]: Peluqueria
+            - link "Shampoo hipoalergénico para cachorros aroma cerezo en flor 260 ML" [ref=e861] [cursor=pointer]:
+              - /url: /producto/shampoo-hipoalergenico-para-cachorros-aroma-cerezo-en-flor-260-ml
+              - heading "Shampoo hipoalergénico para cachorros aroma cerezo en flor 260 ML" [level=3] [ref=e862]
+            - generic [ref=e864]: $4.990
+            - button "Agregar al carrito" [ref=e865] [cursor=pointer]:
+              - img [ref=e866]
+              - text: Agregar al carrito
+        - generic [ref=e871]:
+          - link "Shampoo Neutralizador de Olores con aceite de Copaiba 250 ML" [ref=e872] [cursor=pointer]:
+            - /url: /producto/shampoo-neutralizador-de-olores-con-aceite-de-copaiba-250-ml
+            - img "Shampoo Neutralizador de Olores con aceite de Copaiba 250 ML" [ref=e873]
+          - generic [ref=e874]:
+            - paragraph [ref=e875]: Peluqueria
+            - link "Shampoo Neutralizador de Olores con aceite de Copaiba 250 ML" [ref=e876] [cursor=pointer]:
+              - /url: /producto/shampoo-neutralizador-de-olores-con-aceite-de-copaiba-250-ml
+              - heading "Shampoo Neutralizador de Olores con aceite de Copaiba 250 ML" [level=3] [ref=e877]
+            - generic [ref=e879]: $11.990
+            - button "Agregar al carrito" [ref=e880] [cursor=pointer]:
+              - img [ref=e881]
+              - text: Agregar al carrito
+        - generic [ref=e886]:
+          - link "Shampoo Neutro para gatos 250 ML" [ref=e887] [cursor=pointer]:
+            - /url: /producto/shampoo-neutro-para-gatos-250-ml
+            - img "Shampoo Neutro para gatos 250 ML" [ref=e888]
+          - generic [ref=e889]:
+            - paragraph [ref=e890]: Peluqueria
+            - link "Shampoo Neutro para gatos 250 ML" [ref=e891] [cursor=pointer]:
+              - /url: /producto/shampoo-neutro-para-gatos-250-ml
+              - heading "Shampoo Neutro para gatos 250 ML" [level=3] [ref=e892]
+            - generic [ref=e894]: $12.990
+            - button "Agregar al carrito" [ref=e895] [cursor=pointer]:
+              - img [ref=e896]
+              - text: Agregar al carrito
+        - generic [ref=e901]:
+          - link "Shampoo para perros extra brillo y suavidad aroma yogurt y miel 260 ML" [ref=e902] [cursor=pointer]:
+            - /url: /producto/shampoo-para-perros-extra-brillo-y-suavidad-aroma-yogurt-y-miel-260-ml
+            - img "Shampoo para perros extra brillo y suavidad aroma yogurt y miel 260 ML" [ref=e903]
+          - generic [ref=e904]:
+            - paragraph [ref=e905]: Peluqueria
+            - link "Shampoo para perros extra brillo y suavidad aroma yogurt y miel 260 ML" [ref=e906] [cursor=pointer]:
+              - /url: /producto/shampoo-para-perros-extra-brillo-y-suavidad-aroma-yogurt-y-miel-260-ml
+              - heading "Shampoo para perros extra brillo y suavidad aroma yogurt y miel 260 ML" [level=3] [ref=e907]
+            - generic [ref=e909]: $4.990
+            - button "Agregar al carrito" [ref=e910] [cursor=pointer]:
+              - img [ref=e911]
+              - text: Agregar al carrito
+        - generic [ref=e916]:
+          - link "Shampoo piel extra sensible eco traper 250 ML" [ref=e917] [cursor=pointer]:
+            - /url: /producto/shampoo-piel-extra-sensible-eco-traper-250-ml
+            - img "Shampoo piel extra sensible eco traper 250 ML" [ref=e918]
+          - generic [ref=e919]:
+            - paragraph [ref=e920]: Peluqueria
+            - link "Shampoo piel extra sensible eco traper 250 ML" [ref=e921] [cursor=pointer]:
+              - /url: /producto/shampoo-piel-extra-sensible-eco-traper-250-ml
+              - heading "Shampoo piel extra sensible eco traper 250 ML" [level=3] [ref=e922]
+            - generic [ref=e924]: $5.990
+            - button "Agregar al carrito" [ref=e925] [cursor=pointer]:
+              - img [ref=e926]
+              - text: Agregar al carrito
+        - generic [ref=e931]:
+          - link "Shampoo sin enjuague para gato" [ref=e932] [cursor=pointer]:
+            - /url: /producto/shampoo-sin-enjuague-para-gato
+            - img "Shampoo sin enjuague para gato" [ref=e933]
+          - generic [ref=e934]:
+            - paragraph [ref=e935]: Peluqueria
+            - link "Shampoo sin enjuague para gato" [ref=e936] [cursor=pointer]:
+              - /url: /producto/shampoo-sin-enjuague-para-gato
+              - heading "Shampoo sin enjuague para gato" [level=3] [ref=e937]
+            - generic [ref=e939]: $11.990
+            - button "Agregar al carrito" [ref=e940] [cursor=pointer]:
+              - img [ref=e941]
+              - text: Agregar al carrito
+        - generic [ref=e946]:
+          - link "Shampoo sin enjuague para perro" [ref=e947] [cursor=pointer]:
+            - /url: /producto/shampoo-sin-enjuague-para-perro
+            - img "Shampoo sin enjuague para perro" [ref=e948]
+          - generic [ref=e949]:
+            - paragraph [ref=e950]: Peluqueria
+            - link "Shampoo sin enjuague para perro" [ref=e951] [cursor=pointer]:
+              - /url: /producto/shampoo-sin-enjuague-para-perro
+              - heading "Shampoo sin enjuague para perro" [level=3] [ref=e952]
+            - generic [ref=e954]: $11.990
+            - button "Agregar al carrito" [ref=e955] [cursor=pointer]:
+              - img [ref=e956]
+              - text: Agregar al carrito
+        - generic [ref=e961]:
+          - link "Shampoo skin drag de avena y esencia de grosellas 250ML" [ref=e962] [cursor=pointer]:
+            - /url: /producto/shampoo-skin-drag-de-avena-y-esencia-de-grosellas-250ml
+            - img "Shampoo skin drag de avena y esencia de grosellas 250ML" [ref=e963]
+          - generic [ref=e964]:
+            - paragraph [ref=e965]: Peluqueria
+            - link "Shampoo skin drag de avena y esencia de grosellas 250ML" [ref=e966] [cursor=pointer]:
+              - /url: /producto/shampoo-skin-drag-de-avena-y-esencia-de-grosellas-250ml
+              - heading "Shampoo skin drag de avena y esencia de grosellas 250ML" [level=3] [ref=e967]
+            - generic [ref=e969]: $11.990
+            - button "Agregar al carrito" [ref=e970] [cursor=pointer]:
+              - img [ref=e971]
+              - text: Agregar al carrito
+        - generic [ref=e976]:
+          - link "Shampoo-acondicionador probiotico madreselva" [ref=e977] [cursor=pointer]:
+            - /url: /producto/shampoo-acondicionador-probiotico-madreselva
+            - img "Shampoo-acondicionador probiotico madreselva" [ref=e978]
+          - generic [ref=e979]:
+            - paragraph [ref=e980]: Peluqueria
+            - link "Shampoo-acondicionador probiotico madreselva" [ref=e981] [cursor=pointer]:
+              - /url: /producto/shampoo-acondicionador-probiotico-madreselva
+              - heading "Shampoo-acondicionador probiotico madreselva" [level=3] [ref=e982]
+            - generic [ref=e984]: $24.990
+            - button "Agregar al carrito" [ref=e985] [cursor=pointer]:
+              - img [ref=e986]
+              - text: Agregar al carrito
+        - generic [ref=e991]:
+          - link "Short Hair Dog Furminator" [ref=e992] [cursor=pointer]:
+            - /url: /producto/short-hair-dog-furminator
+            - img "Short Hair Dog Furminator" [ref=e993]
+          - generic [ref=e994]:
+            - paragraph [ref=e996]: Furminator
+            - link "Short Hair Dog Furminator" [ref=e997] [cursor=pointer]:
+              - /url: /producto/short-hair-dog-furminator
+              - heading "Short Hair Dog Furminator" [level=3] [ref=e998]
+            - generic [ref=e1000]: $19.593
+            - button "Agregar al carrito" [ref=e1001] [cursor=pointer]:
+              - img [ref=e1002]
+              - text: Agregar al carrito
+        - generic [ref=e1007]:
+          - link "Skouts honor gato limpiador probiotico de oidos 118ML para gatos" [ref=e1008] [cursor=pointer]:
+            - /url: /producto/skouts-honor-gato-limpiador-probiotico-de-oidos-118ml-para-gatos
+            - img "Skouts honor gato limpiador probiotico de oidos 118ML para gatos" [ref=e1009]
+          - generic [ref=e1010]:
+            - paragraph [ref=e1012]: Skouts Honor
+            - link "Skouts honor gato limpiador probiotico de oidos 118ML para gatos" [ref=e1013] [cursor=pointer]:
+              - /url: /producto/skouts-honor-gato-limpiador-probiotico-de-oidos-118ml-para-gatos
+              - heading "Skouts honor gato limpiador probiotico de oidos 118ML para gatos" [level=3] [ref=e1014]
+            - generic [ref=e1016]: $13.990
+            - button "Agregar al carrito" [ref=e1017] [cursor=pointer]:
+              - img [ref=e1018]
+              - text: Agregar al carrito
+        - generic [ref=e1023]:
+          - link "Skouts honor shampoo probiotico calmante de la picazon 473ML para perros" [ref=e1024] [cursor=pointer]:
+            - /url: /producto/skouts-honor-shampoo-probiotico-calmante-de-la-picazon-473ml-para-perros
+            - img "Skouts honor shampoo probiotico calmante de la picazon 473ML para perros" [ref=e1025]
+          - generic [ref=e1026]:
+            - paragraph [ref=e1028]: Skouts Honor
+            - link "Skouts honor shampoo probiotico calmante de la picazon 473ML para perros" [ref=e1029] [cursor=pointer]:
+              - /url: /producto/skouts-honor-shampoo-probiotico-calmante-de-la-picazon-473ml-para-perros
+              - heading "Skouts honor shampoo probiotico calmante de la picazon 473ML para perros" [level=3] [ref=e1030]
+            - generic [ref=e1032]: $24.990
+            - button "Agregar al carrito" [ref=e1033] [cursor=pointer]:
+              - img [ref=e1034]
+              - text: Agregar al carrito
+        - generic [ref=e1039]:
+          - link "Slicker brush mpets negro y azul" [ref=e1040] [cursor=pointer]:
+            - /url: /producto/slicker-brush-mpets-negro-y-azul
+            - img "Slicker brush mpets negro y azul" [ref=e1041]
+          - generic [ref=e1042]:
+            - paragraph [ref=e1044]: Mpets
+            - link "Slicker brush mpets negro y azul" [ref=e1045] [cursor=pointer]:
+              - /url: /producto/slicker-brush-mpets-negro-y-azul
+              - heading "Slicker brush mpets negro y azul" [level=3] [ref=e1046]
+            - generic [ref=e1048]: $8.990
+            - button "Agregar al carrito" [ref=e1049] [cursor=pointer]:
+              - img [ref=e1050]
+              - text: Agregar al carrito
+        - generic [ref=e1055]:
+          - link "Spray probiotico calmante de la picazon" [ref=e1056] [cursor=pointer]:
+            - /url: /producto/spray-probiotico-calmante-de-la-picazon
+            - img "Spray probiotico calmante de la picazon" [ref=e1057]
+          - generic [ref=e1058]:
+            - paragraph [ref=e1059]: Peluqueria
+            - link "Spray probiotico calmante de la picazon" [ref=e1060] [cursor=pointer]:
+              - /url: /producto/spray-probiotico-calmante-de-la-picazon
+              - heading "Spray probiotico calmante de la picazon" [level=3] [ref=e1061]
+            - generic [ref=e1063]: $20.990
+            - button "Agregar al carrito" [ref=e1064] [cursor=pointer]:
+              - img [ref=e1065]
+              - text: Agregar al carrito
+        - generic [ref=e1070]:
+          - link "Stain & Odor Remover Spray" [ref=e1071] [cursor=pointer]:
+            - /url: /producto/stain-odor-remover-spray
+            - img "Stain & Odor Remover Spray" [ref=e1072]
+          - generic [ref=e1073]:
+            - paragraph [ref=e1074]: Peluqueria
+            - link "Stain & Odor Remover Spray" [ref=e1075] [cursor=pointer]:
+              - /url: /producto/stain-odor-remover-spray
+              - heading "Stain & Odor Remover Spray" [level=3] [ref=e1076]
+            - generic [ref=e1078]: $19.990
+            - button "Agregar al carrito" [ref=e1079] [cursor=pointer]:
+              - img [ref=e1080]
+              - text: Agregar al carrito
+        - generic [ref=e1085]:
+          - link "Virbac allercalm shampoo 250ML" [ref=e1086] [cursor=pointer]:
+            - /url: /producto/virbac-allercalm-shampoo-250ml
+            - img "Virbac allercalm shampoo 250ML" [ref=e1087]
+          - generic [ref=e1088]:
+            - paragraph [ref=e1090]: Virbac
+            - link "Virbac allercalm shampoo 250ML" [ref=e1091] [cursor=pointer]:
+              - /url: /producto/virbac-allercalm-shampoo-250ml
+              - heading "Virbac allercalm shampoo 250ML" [level=3] [ref=e1092]
+            - generic [ref=e1094]: $21.990
+            - button "Agregar al carrito" [ref=e1095] [cursor=pointer]:
+              - img [ref=e1096]
+              - text: Agregar al carrito
+        - generic [ref=e1101]:
+          - link "Waterless cat shampoo dander reducing 220 ML" [ref=e1102] [cursor=pointer]:
+            - /url: /producto/waterless-cat-shampoo-dander-reducing-220-ml
+            - img "Waterless cat shampoo dander reducing 220 ML" [ref=e1103]
+          - generic [ref=e1104]:
+            - paragraph [ref=e1105]: Peluqueria
+            - link "Waterless cat shampoo dander reducing 220 ML" [ref=e1106] [cursor=pointer]:
+              - /url: /producto/waterless-cat-shampoo-dander-reducing-220-ml
+              - heading "Waterless cat shampoo dander reducing 220 ML" [level=3] [ref=e1107]
+            - generic [ref=e1109]: $18.990
+            - button "Agregar al carrito" [ref=e1110] [cursor=pointer]:
+              - img [ref=e1111]
+              - text: Agregar al carrito
+      - paragraph [ref=e1115]: Mostrando 58 de 58 productos
+  - contentinfo [ref=e149]:
+    - generic [ref=e150]:
+      - generic [ref=e151]:
+        - generic [ref=e152]:
+          - generic [ref=e153]:
+            - generic [ref=e154]: 🐾
+            - generic [ref=e155]: Petshop
+          - paragraph [ref=e156]: Tu tienda de confianza para el cuidado y bienestar de tus mascotas. Productos de calidad, atención personalizada.
+          - generic [ref=e157]:
+            - link "Instagram" [ref=e158] [cursor=pointer]:
+              - /url: https://instagram.com
+              - img [ref=e159]
+            - link "Facebook" [ref=e162] [cursor=pointer]:
+              - /url: https://facebook.com
+              - img [ref=e163]
+            - link "TikTok" [ref=e165] [cursor=pointer]:
+              - /url: https://tiktok.com
+              - img [ref=e166]
+        - generic [ref=e168]:
+          - heading "Categorías" [level=4] [ref=e169]
+          - list [ref=e170]:
+            - listitem [ref=e171]:
+              - link "Perro" [ref=e172] [cursor=pointer]:
+                - /url: /categoria/perro
+            - listitem [ref=e173]:
+              - link "Gato" [ref=e174] [cursor=pointer]:
+                - /url: /categoria/gato
+            - listitem [ref=e175]:
+              - link "Farmacia" [ref=e176] [cursor=pointer]:
+                - /url: /categoria/farmacia
+            - listitem [ref=e177]:
+              - link "Peluquería" [ref=e178] [cursor=pointer]:
+                - /url: /categoria/peluqueria
+            - listitem [ref=e179]:
+              - link "Ofertas" [ref=e180] [cursor=pointer]:
+                - /url: /categoria/ofertas
+            - listitem [ref=e181]:
+              - link "Marcas" [ref=e182] [cursor=pointer]:
+                - /url: /categoria/marcas
+        - generic [ref=e183]:
+          - heading "Información" [level=4] [ref=e184]
+          - list [ref=e185]:
+            - listitem [ref=e186]:
+              - link "Política de privacidad" [ref=e187] [cursor=pointer]:
+                - /url: /privacidad
+            - listitem [ref=e188]:
+              - link "Términos y condiciones" [ref=e189] [cursor=pointer]:
+                - /url: /terminos
+            - listitem [ref=e190]:
+              - link "Cambios y devoluciones" [ref=e191] [cursor=pointer]:
+                - /url: /devoluciones
+        - generic [ref=e192]:
+          - heading "Contacto" [level=4] [ref=e193]
+          - list [ref=e194]:
+            - listitem [ref=e195]:
+              - link "Av. Libertad 535, Viña del Mar, Chile" [ref=e196] [cursor=pointer]:
+                - /url: https://maps.app.goo.gl/8wmBjrmk5d53DyXk9
+                - img [ref=e197]
+                - generic [ref=e200]: Av. Libertad 535, Viña del Mar, Chile
+            - listitem [ref=e201]:
+              - link "+56 9 1234 5678" [ref=e202] [cursor=pointer]:
+                - /url: tel:+56912345678
+                - img [ref=e203]
+                - text: +56 9 1234 5678
+            - listitem [ref=e205]:
+              - link "contacto@petshop.cl" [ref=e206] [cursor=pointer]:
+                - /url: mailto:contacto@petshop.cl
+                - img [ref=e207]
+                - text: contacto@petshop.cl
+          - iframe [ref=e211]:
+            - link "Maps (opens in new tab)" [ref=f3e5] [cursor=pointer]:
+              - /url: about:invalid#zClosurez
+              - text: Maps
+              - img [ref=f3e7]
+      - paragraph [ref=e213]: © 2026 Petshop. Todos los derechos reservados.

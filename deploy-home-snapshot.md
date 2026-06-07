@@ -1,0 +1,701 @@
+- generic [ref=e4]:
+  - region "Notifications alt+T"
+  - generic [ref=e6]:
+    - generic [ref=e7]: Envío a todo Chile · Lunes a Sábado
+    - generic [ref=e8]: contacto@petshop.cl · +56 9 1234 5678
+  - banner [ref=e9]:
+    - generic [ref=e11]:
+      - link "🐾 Petshop" [ref=e12] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e13]: 🐾
+        - generic [ref=e14]: Petshop
+      - generic [ref=e16]:
+        - textbox "Buscar productos, marcas..." [ref=e17]
+        - button [ref=e18] [cursor=pointer]:
+          - img [ref=e19]
+      - generic [ref=e22]:
+        - button "Activar modo claro" [ref=e23] [cursor=pointer]:
+          - img [ref=e24]
+        - link "Mi cuenta" [ref=e30] [cursor=pointer]:
+          - /url: /admin
+          - img [ref=e31]
+        - button "Ver carrito" [ref=e34] [cursor=pointer]:
+          - img [ref=e35]
+          - generic [ref=e39]: "1"
+        - button "Menú" [ref=e40] [cursor=pointer]:
+          - img [ref=e41]
+  - dialog "Tu carrito" [ref=e42]:
+    - generic [ref=e43]:
+      - heading "Tu carrito" [level=2] [ref=e44]
+      - button "Cerrar carrito" [ref=e45] [cursor=pointer]:
+        - img [ref=e46]
+    - generic [ref=e50]:
+      - img "Acana Heritage Free Run Poultry alimento para perro" [ref=e52]
+      - generic [ref=e53]:
+        - paragraph [ref=e54]: Acana Heritage Free Run Poultry alimento para perro
+        - paragraph [ref=e55]: $86.990
+      - generic [ref=e56]:
+        - button "Disminuir cantidad" [ref=e57] [cursor=pointer]:
+          - img [ref=e58]
+        - generic [ref=e59]: "1"
+        - button "Aumentar cantidad" [ref=e60] [cursor=pointer]:
+          - img [ref=e61]
+      - button "Eliminar producto" [ref=e62] [cursor=pointer]:
+        - img [ref=e63]
+    - generic [ref=e67]:
+      - generic [ref=e68]:
+        - generic [ref=e69]: Total
+        - generic [ref=e70]: $86.990
+      - button "Ir al checkout" [ref=e71] [cursor=pointer]
+  - main [ref=e72]:
+    - generic [ref=e73]:
+      - generic [ref=e77]:
+        - generic [ref=e78]: Tu tienda de mascotas
+        - heading "Todo lo que tu mascota necesita" [level=1] [ref=e79]
+        - paragraph [ref=e80]: Alimentos premium, accesorios, farmacia veterinaria y mucho más. Envío a todo Chile.
+        - generic [ref=e81]:
+          - link "Ver productos" [ref=e82] [cursor=pointer]:
+            - /url: /productos
+            - text: Ver productos
+            - img [ref=e83]
+          - link "Ver ofertas" [ref=e85] [cursor=pointer]:
+            - /url: /categoria/ofertas
+      - link "Despacho gratis por compras sobre $29.990" [ref=e87] [cursor=pointer]:
+        - /url: /productos
+        - img "Despacho gratis por compras sobre $29.990" [ref=e88]
+      - generic [ref=e327]:
+        - button "Anterior" [disabled]:
+          - img
+        - generic [ref=e328]:
+          - link "Acana" [ref=e329] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=acana
+            - img "Acana" [ref=e330]
+          - link "Advance" [ref=e331] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=advance
+            - img "Advance" [ref=e332]
+          - link "Advantage" [ref=e333] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=advantage
+            - generic [ref=e334]: Advantage
+          - link "Ama" [ref=e335] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=ama
+            - generic [ref=e336]: Ama
+          - link "America Litter" [ref=e337] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=america-litter
+            - img "America Litter" [ref=e338]
+          - link "Apeticat" [ref=e339] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=apeticat
+            - generic [ref=e340]: Apeticat
+          - link "Applaws" [ref=e341] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=applaws
+            - img "Applaws" [ref=e342]
+          - link "Better Bones" [ref=e343] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=better-bones
+            - generic [ref=e344]: Better Bones
+          - link "Biopets" [ref=e345] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=biopets
+            - generic [ref=e346]: Biopets
+          - link "Bravecto" [ref=e347] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=bravecto
+            - generic [ref=e348]: Bravecto
+          - link "Bravery" [ref=e349] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=bravery
+            - img "Bravery" [ref=e350]
+          - link "Brit Care" [ref=e351] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=brit-care
+            - img "Brit Care" [ref=e352]
+          - link "Calmer" [ref=e353] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=calmer
+            - generic [ref=e354]: Calmer
+          - link "Canigest" [ref=e355] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=canigest
+            - generic [ref=e356]: Canigest
+          - link "Cat Extreme" [ref=e357] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=cat-extreme
+            - img "Cat Extreme" [ref=e358]
+          - link "Catit" [ref=e359] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=catit
+            - generic [ref=e360]: Catit
+          - link "Catxtreme" [ref=e361] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=catxtreme
+            - generic [ref=e362]: Catxtreme
+          - link "Charmy" [ref=e363] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=charmy
+            - generic [ref=e364]: Charmy
+          - link "Churu" [ref=e365] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=churu
+            - img "Churu" [ref=e366]
+          - link "Comfort" [ref=e367] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=comfort
+            - generic [ref=e368]: Comfort
+          - link "Coolpet" [ref=e369] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=coolpet
+            - generic [ref=e370]: Coolpet
+          - link "Cunatex" [ref=e371] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=cunatex
+            - generic [ref=e372]: Cunatex
+          - link "Dingo" [ref=e373] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=dingo
+            - generic [ref=e374]: Dingo
+          - link "Dogxtreme" [ref=e375] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=dogxtreme
+            - generic [ref=e376]: Dogxtreme
+          - link "Drontal" [ref=e377] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=drontal
+            - generic [ref=e378]: Drontal
+          - link "Eukanuba":
+            - /url: /categoria/marcas?brand=eukanuba
+            - img "Eukanuba"
+          - link "Feliway" [ref=e379] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=feliway
+            - generic [ref=e380]: Feliway
+          - link "Fellini" [ref=e381] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=fellini
+            - generic [ref=e382]: Fellini
+          - link "Fit Formula" [ref=e383] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=fit-formula
+            - generic [ref=e384]: Fit Formula
+          - link "Fitz" [ref=e385] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=fitz
+            - generic [ref=e386]: Fitz
+          - link "Flamingo Penken" [ref=e387] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=flamingo-penken
+            - generic [ref=e388]: Flamingo Penken
+          - link "Flovovermic" [ref=e389] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=flovovermic
+            - generic [ref=e390]: Flovovermic
+          - link "Frontline" [ref=e391] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=frontline
+            - generic [ref=e392]: Frontline
+          - link "Furinaid" [ref=e393] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=furinaid
+            - generic [ref=e394]: Furinaid
+          - link "Furminator" [ref=e395] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=furminator
+            - generic [ref=e396]: Furminator
+          - link "Gotoo" [ref=e397] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=gotoo
+            - generic [ref=e398]: Gotoo
+          - link "Hairball" [ref=e399] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=hairball
+            - generic [ref=e400]: Hairball
+          - link "Hill's":
+            - /url: /categoria/marcas?brand=hills
+            - img "Hill's"
+          - link "Invermic" [ref=e401] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=invermic
+            - generic [ref=e402]: Invermic
+          - link "Kong" [ref=e403] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=kong
+            - generic [ref=e404]: Kong
+          - link "Laveta" [ref=e405] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=laveta
+            - generic [ref=e406]: Laveta
+          - link "Leeby" [ref=e407] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=leeby
+            - generic [ref=e408]: Leeby
+          - link "Leonardo" [ref=e409] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=leonardo
+            - generic [ref=e410]: Leonardo
+          - link "Mamistop" [ref=e411] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=mamistop
+            - generic [ref=e412]: Mamistop
+          - link "Mebermic" [ref=e413] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=mebermic
+            - generic [ref=e414]: Mebermic
+          - link "Minus One" [ref=e415] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=minus-one
+            - generic [ref=e416]: Minus One
+          - link "Mpets" [ref=e417] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=mpets
+            - generic [ref=e418]: Mpets
+          - link "My Zoo" [ref=e419] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=my-zoo
+            - generic [ref=e420]: My Zoo
+          - link "Nanormen" [ref=e421] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=nanormen
+            - generic [ref=e422]: Nanormen
+          - link "Nath" [ref=e423] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=nath
+            - generic [ref=e424]: Nath
+          - link "Natur'luxe" [ref=e425] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=natur-luxe
+            - generic [ref=e426]: Natur'luxe
+          - link "Naturalistic" [ref=e427] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=naturalistic
+            - generic [ref=e428]: Naturalistic
+          - link "Nexgard" [ref=e429] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=nexgard
+            - generic [ref=e430]: Nexgard
+          - link "No Stress" [ref=e431] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=no-stress
+            - generic [ref=e432]: No Stress
+          - link "Olympus" [ref=e433] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=olympus
+            - generic [ref=e434]: Olympus
+          - link "Outech" [ref=e435] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=outech
+            - generic [ref=e436]: Outech
+          - link "Outward Hound" [ref=e437] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=outward-hound
+            - generic [ref=e438]: Outward Hound
+          - link "Oxyfresh" [ref=e439] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=oxyfresh
+            - generic [ref=e440]: Oxyfresh
+          - link "Papainpet" [ref=e441] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=papainpet
+            - generic [ref=e442]: Papainpet
+          - link "Pedigree":
+            - /url: /categoria/marcas?brand=pedigree
+            - img "Pedigree"
+          - link "Pepolli" [ref=e443] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=pepolli
+            - generic [ref=e444]: Pepolli
+          - link "Pet Block" [ref=e445] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=pet-block
+            - generic [ref=e446]: Pet Block
+          - link "PlaqueOff" [ref=e447] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=plaqueoff
+            - generic [ref=e448]: PlaqueOff
+          - link "Playology" [ref=e449] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=playology
+            - generic [ref=e450]: Playology
+          - link "Probiocat" [ref=e451] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=probiocat
+            - generic [ref=e452]: Probiocat
+          - link "Puppy Cuddle" [ref=e453] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=puppy-cuddle
+            - generic [ref=e454]: Puppy Cuddle
+          - link "Purina Pro Plan":
+            - /url: /categoria/marcas?brand=purina-pro-plan
+            - img "Purina Pro Plan"
+          - link "Qchefs" [ref=e455] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=qchefs
+            - generic [ref=e456]: Qchefs
+          - link "Rahue" [ref=e457] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=rahue
+            - generic [ref=e458]: Rahue
+          - link "Remy Rocker" [ref=e459] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=remy-rocker
+            - generic [ref=e460]: Remy Rocker
+          - link "Revolution" [ref=e461] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=revolution
+            - generic [ref=e462]: Revolution
+          - link "Royal Canin":
+            - /url: /categoria/marcas?brand=royal-canin
+            - img "Royal Canin"
+          - link "Ruffwear" [ref=e463] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=ruffwear
+            - generic [ref=e464]: Ruffwear
+          - link "Salvaje" [ref=e465] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=salvaje
+            - generic [ref=e466]: Salvaje
+          - link "Senilpet" [ref=e467] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=senilpet
+            - generic [ref=e468]: Senilpet
+          - link "Seresto" [ref=e469] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=seresto
+            - generic [ref=e470]: Seresto
+          - link "Silimadrag" [ref=e471] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=silimadrag
+            - generic [ref=e472]: Silimadrag
+          - link "Simparica" [ref=e473] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=simparica
+            - generic [ref=e474]: Simparica
+          - link "Skouts Honor" [ref=e475] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=skouts-honor
+            - generic [ref=e476]: Skouts Honor
+          - link "Stay Happy" [ref=e477] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=stay-happy
+            - generic [ref=e478]: Stay Happy
+          - link "Stride Plus" [ref=e479] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=stride-plus
+            - generic [ref=e480]: Stride Plus
+          - link "Suava" [ref=e481] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=suava
+            - generic [ref=e482]: Suava
+          - link "Superpet" [ref=e483] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=superpet
+            - generic [ref=e484]: Superpet
+          - link "Taste of the Wild":
+            - /url: /categoria/marcas?brand=taste-of-the-wild
+            - img "Taste of the Wild"
+          - link "The Cat Band" [ref=e485] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=the-cat-band
+            - generic [ref=e486]: The Cat Band
+          - link "Tootoy" [ref=e487] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=tootoy
+            - generic [ref=e488]: Tootoy
+          - link "True Origins" [ref=e489] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=true-origins
+            - generic [ref=e490]: True Origins
+          - link "Vetlife":
+            - /url: /categoria/marcas?brand=vetlife
+            - img "Vetlife"
+          - link "Virbac" [ref=e491] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=virbac
+            - generic [ref=e492]: Virbac
+          - link "Vitakraft" [ref=e493] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=vitakraft
+            - generic [ref=e494]: Vitakraft
+          - link "Wanpy" [ref=e495] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=wanpy
+            - generic [ref=e496]: Wanpy
+          - link "Winga" [ref=e497] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=winga
+            - generic [ref=e498]: Winga
+          - link "Zeecat" [ref=e499] [cursor=pointer]:
+            - /url: /categoria/marcas?brand=zeecat
+            - generic [ref=e500]: Zeecat
+        - button "Siguiente" [ref=e501] [cursor=pointer]:
+          - img [ref=e502]
+      - generic [ref=e90]:
+        - link "🐶 Perros" [ref=e91] [cursor=pointer]:
+          - /url: /categoria/perro
+          - generic [ref=e92]: 🐶
+          - generic [ref=e93]: Perros
+        - link "🐱 Gatos" [ref=e94] [cursor=pointer]:
+          - /url: /categoria/gato
+          - generic [ref=e95]: 🐱
+          - generic [ref=e96]: Gatos
+        - link "💊 Farmacia" [ref=e97] [cursor=pointer]:
+          - /url: /categoria/farmacia
+          - generic [ref=e98]: 💊
+          - generic [ref=e99]: Farmacia
+        - link "✂️ Peluquería" [ref=e100] [cursor=pointer]:
+          - /url: /categoria/peluqueria
+          - generic [ref=e101]: ✂️
+          - generic [ref=e102]: Peluquería
+        - link "🏷️ Ofertas" [ref=e103] [cursor=pointer]:
+          - /url: /categoria/ofertas
+          - generic [ref=e104]: 🏷️
+          - generic [ref=e105]: Ofertas
+        - link "⭐ Marcas" [ref=e106] [cursor=pointer]:
+          - /url: /categoria/marcas
+          - generic [ref=e107]: ⭐
+          - generic [ref=e108]: Marcas
+      - link "Marcas líderes en nutrición Descubre todas las marcas Ver todas Acana Advance" [ref=e504] [cursor=pointer]:
+        - /url: /categoria/marcas
+        - generic [ref=e111]:
+          - generic [ref=e112]:
+            - paragraph [ref=e113]: Marcas líderes en nutrición
+            - heading "Descubre todas las marcas" [level=2] [ref=e114]
+            - generic [ref=e115]:
+              - text: Ver todas
+              - img [ref=e116]
+          - generic [ref=e505]:
+            - img "Acana" [ref=e507]
+            - img "Advance" [ref=e509]
+      - generic [ref=e118]:
+        - generic [ref=e119]:
+          - generic [ref=e120]:
+            - paragraph [ref=e121]: Destacados
+            - heading "Novedades" [level=2] [ref=e122]
+          - link "Ver todos" [ref=e123] [cursor=pointer]:
+            - /url: /productos
+            - text: Ver todos
+            - img [ref=e124]
+        - generic [ref=e126]:
+          - generic [ref=e511]:
+            - link "Shampoo Neutro para gatos 250 ML" [ref=e512] [cursor=pointer]:
+              - /url: /producto/shampoo-neutro-para-gatos-250-ml
+              - img "Shampoo Neutro para gatos 250 ML" [ref=e513]
+            - generic [ref=e514]:
+              - paragraph [ref=e515]: Peluqueria
+              - link "Shampoo Neutro para gatos 250 ML" [ref=e516] [cursor=pointer]:
+                - /url: /producto/shampoo-neutro-para-gatos-250-ml
+                - heading "Shampoo Neutro para gatos 250 ML" [level=3] [ref=e517]
+              - generic [ref=e519]: $12.990
+              - button "Agregar al carrito" [ref=e520] [cursor=pointer]:
+                - img [ref=e521]
+                - text: Agregar al carrito
+          - generic [ref=e526]:
+            - link "Waterless cat shampoo dander reducing 220 ML" [ref=e527] [cursor=pointer]:
+              - /url: /producto/waterless-cat-shampoo-dander-reducing-220-ml
+              - img "Waterless cat shampoo dander reducing 220 ML" [ref=e528]
+            - generic [ref=e529]:
+              - paragraph [ref=e530]: Peluqueria
+              - link "Waterless cat shampoo dander reducing 220 ML" [ref=e531] [cursor=pointer]:
+                - /url: /producto/waterless-cat-shampoo-dander-reducing-220-ml
+                - heading "Waterless cat shampoo dander reducing 220 ML" [level=3] [ref=e532]
+              - generic [ref=e534]: $18.990
+              - button "Agregar al carrito" [ref=e535] [cursor=pointer]:
+                - img [ref=e536]
+                - text: Agregar al carrito
+          - generic [ref=e541]:
+            - link "Pin brush black & blue" [ref=e542] [cursor=pointer]:
+              - /url: /producto/pin-brush-black-blue
+              - img "Pin brush black & blue" [ref=e543]
+            - generic [ref=e544]:
+              - paragraph [ref=e545]: Peluqueria
+              - link "Pin brush black & blue" [ref=e546] [cursor=pointer]:
+                - /url: /producto/pin-brush-black-blue
+                - heading "Pin brush black & blue" [level=3] [ref=e547]
+              - generic [ref=e549]: $8.990
+              - button "Agregar al carrito" [ref=e550] [cursor=pointer]:
+                - img [ref=e551]
+                - text: Agregar al carrito
+          - generic [ref=e556]:
+            - link "Skouts honor gato limpiador probiotico de oidos 118ML para gatos" [ref=e557] [cursor=pointer]:
+              - /url: /producto/skouts-honor-gato-limpiador-probiotico-de-oidos-118ml-para-gatos
+              - img "Skouts honor gato limpiador probiotico de oidos 118ML para gatos" [ref=e558]
+            - generic [ref=e559]:
+              - paragraph [ref=e561]: Skouts Honor
+              - link "Skouts honor gato limpiador probiotico de oidos 118ML para gatos" [ref=e562] [cursor=pointer]:
+                - /url: /producto/skouts-honor-gato-limpiador-probiotico-de-oidos-118ml-para-gatos
+                - heading "Skouts honor gato limpiador probiotico de oidos 118ML para gatos" [level=3] [ref=e563]
+              - generic [ref=e565]: $13.990
+              - button "Agregar al carrito" [ref=e566] [cursor=pointer]:
+                - img [ref=e567]
+                - text: Agregar al carrito
+          - generic [ref=e572]:
+            - link "Mpets Toalla de secado rápido para gatos" [ref=e573] [cursor=pointer]:
+              - /url: /producto/mpets-toalla-de-secado-rapido-para-gatos
+              - img "Mpets Toalla de secado rápido para gatos" [ref=e574]
+            - generic [ref=e575]:
+              - paragraph [ref=e577]: Mpets
+              - link "Mpets Toalla de secado rápido para gatos" [ref=e578] [cursor=pointer]:
+                - /url: /producto/mpets-toalla-de-secado-rapido-para-gatos
+                - heading "Mpets Toalla de secado rápido para gatos" [level=3] [ref=e579]
+              - generic [ref=e581]: $6.990
+              - button "Agregar al carrito" [ref=e582] [cursor=pointer]:
+                - img [ref=e583]
+                - text: Agregar al carrito
+          - generic [ref=e588]:
+            - link "Repelente indoor - gatos spray interiores 170 ML" [ref=e589] [cursor=pointer]:
+              - /url: /producto/repelente-indoor-gatos-spray-interiores-170-ml
+              - img "Repelente indoor - gatos spray interiores 170 ML" [ref=e590]
+            - generic [ref=e591]:
+              - paragraph [ref=e592]: Peluqueria
+              - link "Repelente indoor - gatos spray interiores 170 ML" [ref=e593] [cursor=pointer]:
+                - /url: /producto/repelente-indoor-gatos-spray-interiores-170-ml
+                - heading "Repelente indoor - gatos spray interiores 170 ML" [level=3] [ref=e594]
+              - generic [ref=e596]: $13.990
+              - button "Agregar al carrito" [ref=e597] [cursor=pointer]:
+                - img [ref=e598]
+                - text: Agregar al carrito
+          - generic [ref=e603]:
+            - link "Removedor De Olores Y Orina Antimicrobiano Con Nano Cobre Para Gatos" [ref=e604] [cursor=pointer]:
+              - /url: /producto/removedor-de-olores-y-orina-antimicrobiano-con-nano-cobre-para-gatos
+              - img "Removedor De Olores Y Orina Antimicrobiano Con Nano Cobre Para Gatos" [ref=e605]
+            - generic [ref=e606]:
+              - paragraph [ref=e607]: Peluqueria
+              - link "Removedor De Olores Y Orina Antimicrobiano Con Nano Cobre Para Gatos" [ref=e608] [cursor=pointer]:
+                - /url: /producto/removedor-de-olores-y-orina-antimicrobiano-con-nano-cobre-para-gatos
+                - heading "Removedor De Olores Y Orina Antimicrobiano Con Nano Cobre Para Gatos" [level=3] [ref=e609]
+              - generic [ref=e611]: $12.990
+              - button "Agregar al carrito" [ref=e612] [cursor=pointer]:
+                - img [ref=e613]
+                - text: Agregar al carrito
+          - generic [ref=e618]:
+            - link "Shampoo sin enjuague para gato" [ref=e619] [cursor=pointer]:
+              - /url: /producto/shampoo-sin-enjuague-para-gato
+              - img "Shampoo sin enjuague para gato" [ref=e620]
+            - generic [ref=e621]:
+              - paragraph [ref=e622]: Peluqueria
+              - link "Shampoo sin enjuague para gato" [ref=e623] [cursor=pointer]:
+                - /url: /producto/shampoo-sin-enjuague-para-gato
+                - heading "Shampoo sin enjuague para gato" [level=3] [ref=e624]
+              - generic [ref=e626]: $11.990
+              - button "Agregar al carrito" [ref=e627] [cursor=pointer]:
+                - img [ref=e628]
+                - text: Agregar al carrito
+      - generic [ref=e184]:
+        - link "Brit Care - Alimento súper premium para perros" [ref=e185] [cursor=pointer]:
+          - /url: /categoria/perro
+          - img "Brit Care - Alimento súper premium para perros" [ref=e186]
+        - link "Churu oferta Sección especial Ofertas y descuentos Hasta 40% off en productos seleccionados Ver ofertas →" [ref=e187] [cursor=pointer]:
+          - /url: /categoria/ofertas
+          - img "Churu oferta" [ref=e188]
+          - generic [ref=e190]:
+            - paragraph [ref=e191]: Sección especial
+            - heading "Ofertas y descuentos" [level=3] [ref=e192]
+            - paragraph [ref=e193]: Hasta 40% off en productos seleccionados
+            - generic [ref=e194]: Ver ofertas →
+      - generic [ref=e195]:
+        - generic [ref=e196]:
+          - generic [ref=e197]:
+            - paragraph [ref=e198]: Más populares en Perros
+            - heading "Productos más vendidos" [level=2] [ref=e199]
+          - link "Ver todos" [ref=e200] [cursor=pointer]:
+            - /url: /categoria/perro
+            - text: Ver todos
+            - img [ref=e201]
+        - generic [ref=e203]:
+          - generic [ref=e633]:
+            - link "Chew Baked Croissant mordedor con sonido para perros" [ref=e634] [cursor=pointer]:
+              - /url: /producto/chew-baked-croissant-mordedor-con-sonido-para-perros
+              - img "Chew Baked Croissant mordedor con sonido para perros" [ref=e635]
+            - generic [ref=e636]:
+              - paragraph [ref=e637]: Perro
+              - link "Chew Baked Croissant mordedor con sonido para perros" [ref=e638] [cursor=pointer]:
+                - /url: /producto/chew-baked-croissant-mordedor-con-sonido-para-perros
+                - heading "Chew Baked Croissant mordedor con sonido para perros" [level=3] [ref=e639]
+              - generic [ref=e641]: $4.990
+              - button "Agregar al carrito" [ref=e642] [cursor=pointer]:
+                - img [ref=e643]
+                - text: Agregar al carrito
+          - generic [ref=e648]:
+            - link "Juguete mordedor mariquita para perros" [ref=e649] [cursor=pointer]:
+              - /url: /producto/juguete-mordedor-mariquita-para-perros
+              - img "Juguete mordedor mariquita para perros" [ref=e650]
+            - generic [ref=e651]:
+              - paragraph [ref=e652]: Perro
+              - link "Juguete mordedor mariquita para perros" [ref=e653] [cursor=pointer]:
+                - /url: /producto/juguete-mordedor-mariquita-para-perros
+                - heading "Juguete mordedor mariquita para perros" [level=3] [ref=e654]
+              - generic [ref=e656]: $3.990
+              - button "Agregar al carrito" [ref=e657] [cursor=pointer]:
+                - img [ref=e658]
+                - text: Agregar al carrito
+          - generic [ref=e663]:
+            - link "Comfort Skinny mapache peluche con sonido crujiente para perros" [ref=e664] [cursor=pointer]:
+              - /url: /producto/comfort-skinny-mapache-peluche-con-sonido-crujiente-para-perros
+              - img "Comfort Skinny mapache peluche con sonido crujiente para perros" [ref=e665]
+            - generic [ref=e666]:
+              - paragraph [ref=e667]: Perro
+              - link "Comfort Skinny mapache peluche con sonido crujiente para perros" [ref=e668] [cursor=pointer]:
+                - /url: /producto/comfort-skinny-mapache-peluche-con-sonido-crujiente-para-perros
+                - heading "Comfort Skinny mapache peluche con sonido crujiente para perros" [level=3] [ref=e669]
+              - generic [ref=e671]: $7.990
+              - button "Agregar al carrito" [ref=e672] [cursor=pointer]:
+                - img [ref=e673]
+                - text: Agregar al carrito
+          - generic [ref=e678]:
+            - link "Peluche Burguer" [ref=e679] [cursor=pointer]:
+              - /url: /producto/peluche-burguer
+              - img "Peluche Burguer" [ref=e680]
+            - generic [ref=e681]:
+              - paragraph [ref=e682]: Perro
+              - link "Peluche Burguer" [ref=e683] [cursor=pointer]:
+                - /url: /producto/peluche-burguer
+                - heading "Peluche Burguer" [level=3] [ref=e684]
+              - generic [ref=e686]: $4.990
+              - button "Agregar al carrito" [ref=e687] [cursor=pointer]:
+                - img [ref=e688]
+                - text: Agregar al carrito
+          - generic [ref=e693]:
+            - link "Pelota de fútbol para perros" [ref=e694] [cursor=pointer]:
+              - /url: /producto/pelota-de-futbol-para-perros
+              - img "Pelota de fútbol para perros" [ref=e695]
+            - generic [ref=e696]:
+              - paragraph [ref=e697]: Perro
+              - link "Pelota de fútbol para perros" [ref=e698] [cursor=pointer]:
+                - /url: /producto/pelota-de-futbol-para-perros
+                - heading "Pelota de fútbol para perros" [level=3] [ref=e699]
+              - generic [ref=e701]: $4.990
+              - button "Agregar al carrito" [ref=e702] [cursor=pointer]:
+                - img [ref=e703]
+                - text: Agregar al carrito
+          - generic [ref=e708]:
+            - link "Minus One Folding T-Rex peluche de trapo para perros" [ref=e709] [cursor=pointer]:
+              - /url: /producto/minus-one-folding-t-rex-peluche-de-trapo-para-perros
+              - img "Minus One Folding T-Rex peluche de trapo para perros" [ref=e710]
+            - generic [ref=e711]:
+              - paragraph [ref=e713]: Minus One
+              - link "Minus One Folding T-Rex peluche de trapo para perros" [ref=e714] [cursor=pointer]:
+                - /url: /producto/minus-one-folding-t-rex-peluche-de-trapo-para-perros
+                - heading "Minus One Folding T-Rex peluche de trapo para perros" [level=3] [ref=e715]
+              - generic [ref=e717]: $4.990
+              - button "Agregar al carrito" [ref=e718] [cursor=pointer]:
+                - img [ref=e719]
+                - text: Agregar al carrito
+          - generic [ref=e724]:
+            - link "Bola para masticar con aroma a carne Oferta" [ref=e725] [cursor=pointer]:
+              - /url: /producto/bola-para-masticar-con-aroma-a-carne
+              - img "Bola para masticar con aroma a carne" [ref=e726]
+              - generic [ref=e728]: Oferta
+            - generic [ref=e729]:
+              - paragraph [ref=e730]: Perro
+              - link "Bola para masticar con aroma a carne" [ref=e731] [cursor=pointer]:
+                - /url: /producto/bola-para-masticar-con-aroma-a-carne
+                - heading "Bola para masticar con aroma a carne" [level=3] [ref=e732]
+              - generic [ref=e733]:
+                - generic [ref=e734]: $11.472
+                - generic [ref=e735]: $13.990
+              - button "Agregar al carrito" [ref=e736] [cursor=pointer]:
+                - img [ref=e737]
+                - text: Agregar al carrito
+          - generic [ref=e742]:
+            - link "Kong Gyro" [ref=e743] [cursor=pointer]:
+              - /url: /producto/kong-gyro
+              - img "Kong Gyro" [ref=e744]
+            - generic [ref=e745]:
+              - paragraph [ref=e747]: Kong
+              - link "Kong Gyro" [ref=e748] [cursor=pointer]:
+                - /url: /producto/kong-gyro
+                - heading "Kong Gyro" [level=3] [ref=e749]
+              - generic [ref=e751]: $14.990
+              - button "Agregar al carrito" [ref=e752] [cursor=pointer]:
+                - img [ref=e753]
+                - text: Agregar al carrito
+  - contentinfo [ref=e260]:
+    - generic [ref=e261]:
+      - generic [ref=e262]:
+        - generic [ref=e263]:
+          - generic [ref=e264]:
+            - generic [ref=e265]: 🐾
+            - generic [ref=e266]: Petshop
+          - paragraph [ref=e267]: Tu tienda de confianza para el cuidado y bienestar de tus mascotas. Productos de calidad, atención personalizada.
+          - generic [ref=e268]:
+            - link "Instagram" [ref=e269] [cursor=pointer]:
+              - /url: https://instagram.com
+              - img [ref=e270]
+            - link "Facebook" [ref=e273] [cursor=pointer]:
+              - /url: https://facebook.com
+              - img [ref=e274]
+            - link "TikTok" [ref=e276] [cursor=pointer]:
+              - /url: https://tiktok.com
+              - img [ref=e277]
+        - generic [ref=e279]:
+          - heading "Categorías" [level=4] [ref=e280]
+          - list [ref=e281]:
+            - listitem [ref=e282]:
+              - link "Perro" [ref=e283] [cursor=pointer]:
+                - /url: /categoria/perro
+            - listitem [ref=e284]:
+              - link "Gato" [ref=e285] [cursor=pointer]:
+                - /url: /categoria/gato
+            - listitem [ref=e286]:
+              - link "Farmacia" [ref=e287] [cursor=pointer]:
+                - /url: /categoria/farmacia
+            - listitem [ref=e288]:
+              - link "Peluquería" [ref=e289] [cursor=pointer]:
+                - /url: /categoria/peluqueria
+            - listitem [ref=e290]:
+              - link "Ofertas" [ref=e291] [cursor=pointer]:
+                - /url: /categoria/ofertas
+            - listitem [ref=e292]:
+              - link "Marcas" [ref=e293] [cursor=pointer]:
+                - /url: /categoria/marcas
+        - generic [ref=e294]:
+          - heading "Información" [level=4] [ref=e295]
+          - list [ref=e296]:
+            - listitem [ref=e297]:
+              - link "Política de privacidad" [ref=e298] [cursor=pointer]:
+                - /url: /privacidad
+            - listitem [ref=e299]:
+              - link "Términos y condiciones" [ref=e300] [cursor=pointer]:
+                - /url: /terminos
+            - listitem [ref=e301]:
+              - link "Cambios y devoluciones" [ref=e302] [cursor=pointer]:
+                - /url: /devoluciones
+        - generic [ref=e303]:
+          - heading "Contacto" [level=4] [ref=e304]
+          - list [ref=e305]:
+            - listitem [ref=e306]:
+              - link "Av. Libertad 535, Viña del Mar, Chile" [ref=e307] [cursor=pointer]:
+                - /url: https://maps.app.goo.gl/8wmBjrmk5d53DyXk9
+                - img [ref=e308]
+                - generic [ref=e311]: Av. Libertad 535, Viña del Mar, Chile
+            - listitem [ref=e312]:
+              - link "+56 9 1234 5678" [ref=e313] [cursor=pointer]:
+                - /url: tel:+56912345678
+                - img [ref=e314]
+                - text: +56 9 1234 5678
+            - listitem [ref=e316]:
+              - link "contacto@petshop.cl" [ref=e317] [cursor=pointer]:
+                - /url: mailto:contacto@petshop.cl
+                - img [ref=e318]
+                - text: contacto@petshop.cl
+          - iframe [ref=e322]
+      - paragraph [ref=e324]: © 2026 Petshop. Todos los derechos reservados.
