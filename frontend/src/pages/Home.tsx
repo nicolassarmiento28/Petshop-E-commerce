@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 import { ArrowRight } from 'lucide-react'
@@ -40,6 +40,11 @@ export default function Home() {
 
   const featured = featuredData?.products ?? []
   const bestSellers = bestSellerData?.products ?? []
+  const randomBrands = useMemo(() => {
+    if (!brands) return []
+    const shuffled = [...brands].sort(() => Math.random() - 0.5)
+    return shuffled.slice(0, 4)
+  }, [brands])
 
   return (
     <div className="bg-[#FAFAF8] dark:bg-[#111111] transition-colors duration-300">
@@ -149,7 +154,7 @@ export default function Home() {
               </span>
             </div>
             <div className="hidden sm:flex items-center gap-4 shrink-0">
-              {(brands ?? []).slice(0, 4).map((brand) =>
+              {randomBrands.map((brand) =>
                 brand.logoUrl ? (
                   <div key={brand.slug} className="bg-white/20 backdrop-blur-sm rounded-xl px-4 py-2.5 flex items-center justify-center">
                     <img

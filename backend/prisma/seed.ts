@@ -8,21 +8,21 @@ async function main() {
 
   // ── Brands ──────────────────────────────────────────────────────────────────
   const brandData = [
-    { name: 'Royal Canin', slug: 'royal-canin', logoUrl: '/brands/royal-canin.png' },
-    { name: "Hill's", slug: 'hills', logoUrl: '/brands/hills.png' },
-    { name: 'Advance', slug: 'advance', logoUrl: '/brands/advance.png' },
-    { name: 'Acana', slug: 'acana', logoUrl: '/brands/acana.png' },
-    { name: 'America Litter', slug: 'america-litter', logoUrl: '/brands/AMERICA_LITTER.png' },
-    { name: 'Applaws', slug: 'applaws', logoUrl: '/brands/applaws.png' },
-    { name: 'Bravery', slug: 'bravery', logoUrl: '/brands/bravery.png' },
-    { name: 'Brit Care', slug: 'brit-care', logoUrl: '/brands/brit-care.png' },
-    { name: 'Cat Extreme', slug: 'cat-extreme', logoUrl: '/brands/catextreme.png' },
-    { name: 'Churu', slug: 'churu', logoUrl: '/brands/churu.png' },
-    { name: 'Taste of the Wild', slug: 'taste-of-the-wild', logoUrl: '/brands/taste.png' },
-    { name: 'Vetlife', slug: 'vetlife', logoUrl: '/brands/vetlife.png' },
-    { name: 'Eukanuba', slug: 'eukanuba', logoUrl: '/brands/eukanuba.png' },
-    { name: 'Pedigree', slug: 'pedigree', logoUrl: '/brands/pedigree.png' },
-    { name: 'Purina Pro Plan', slug: 'purina-pro-plan', logoUrl: '/brands/purina-pro-plan.png' },
+    { name: 'Royal Canin', slug: 'royal-canin', logoUrl: 'https://www.superzoo.cl/on/demandware.static/-/Library-Sites-SuperZooSharedLibrary/default/dwd0b12a43/SuperZoo/marcas/Logo/logo-royalcanin.png' },
+    { name: "Hill's", slug: 'hills', logoUrl: 'https://www.superzoo.cl/on/demandware.static/-/Library-Sites-SuperZooSharedLibrary/default/dwbb42c782/SuperZoo/marcas/Logo/logo-hills.webp' },
+    { name: 'Advance', slug: 'advance', logoUrl: null },
+    { name: 'Acana', slug: 'acana', logoUrl: 'https://www.superzoo.cl/on/demandware.static/-/Library-Sites-SuperZooSharedLibrary/default/dwdab66a95/SuperZoo/homepage/2025/logo-bolitas/acana.webp' },
+    { name: 'America Litter', slug: 'america-litter', logoUrl: null },
+    { name: 'Applaws', slug: 'applaws', logoUrl: 'https://www.superzoo.cl/on/demandware.static/-/Library-Sites-SuperZooSharedLibrary/default/dw41ab42bb/SuperZoo/homepage/2026/logo-bolitas/applaws.webp' },
+    { name: 'Bravery', slug: 'bravery', logoUrl: 'https://www.superzoo.cl/on/demandware.static/-/Library-Sites-SuperZooSharedLibrary/default/dwd79fa74a/SuperZoo/marcas/Logo/logo-bravery.png' },
+    { name: 'Brit Care', slug: 'brit-care', logoUrl: null },
+    { name: 'Catxtreme', slug: 'catxtreme', logoUrl: 'https://www.superzoo.cl/on/demandware.static/-/Library-Sites-SuperZooSharedLibrary/default/dwc2ca71d6/SuperZoo/marcas/Logo/logo-catxtreme.jpg' },
+    { name: 'Churu', slug: 'churu', logoUrl: null },
+    { name: 'Taste of the Wild', slug: 'taste-of-the-wild', logoUrl: 'https://www.superzoo.cl/on/demandware.static/-/Library-Sites-SuperZooSharedLibrary/default/dwff7b3b70/SuperZoo/marcas/Logo/tasteofthewild-logo.png' },
+    { name: 'Vetlife', slug: 'vetlife', logoUrl: 'https://www.superzoo.cl/on/demandware.static/-/Library-Sites-SuperZooSharedLibrary/default/dw473af22a/SuperZoo/marcas/Logo/vetlife-logo.png' },
+    { name: 'Eukanuba', slug: 'eukanuba', logoUrl: null },
+    { name: 'Pedigree', slug: 'pedigree', logoUrl: null },
+    { name: 'Purina Pro Plan', slug: 'purina-pro-plan', logoUrl: null },
   ]
 
   for (const b of brandData) {

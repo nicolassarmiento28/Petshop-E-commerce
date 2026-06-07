@@ -53,7 +53,7 @@ export const getPublicBrands = async (
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const brands = await prisma.brand.findMany({ orderBy: { name: 'asc' } })
+    const brands = await prisma.brand.findMany({ where: { logoUrl: { not: null } }, orderBy: { name: 'asc' } })
     res.json(brands)
   } catch (error) {
     next(error)
