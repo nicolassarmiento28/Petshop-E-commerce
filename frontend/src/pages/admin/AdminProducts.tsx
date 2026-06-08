@@ -358,6 +358,7 @@ const AdminProducts = () => {
                   <th className="px-4 py-3 text-left">Categoría</th>
                   <th className="px-4 py-3 text-left">Precio</th>
                   <th className="px-4 py-3 text-left">Stock</th>
+                  <th className="px-4 py-3 text-left">Grupo</th>
                   <th className="px-4 py-3 text-left">Estado</th>
                   <th className="px-4 py-3 text-left">Acciones</th>
                 </tr>
@@ -390,6 +391,13 @@ const AdminProducts = () => {
                       )}
                     </td>
                     <td className="px-4 py-3 text-gray-700 dark:text-[#e8eaf0]">{product.stock}</td>
+                    <td className="px-4 py-3">
+                      {product.sizeGroup ? (
+                        <span className="text-xs text-blue-600 dark:text-blue-400 font-mono">{product.sizeGroup}</span>
+                      ) : (
+                        <span className="text-xs text-gray-300 dark:text-[#444]">—</span>
+                      )}
+                    </td>
                     <td className="px-4 py-3">
                       <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${product.isActive ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-500'}`}>
                         {product.isActive ? 'Activo' : 'Inactivo'}
