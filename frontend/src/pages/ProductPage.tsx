@@ -68,7 +68,12 @@ export default function ProductPage() {
   const isOnSale = !!product.salePrice && product.salePrice < product.price
   const outOfStock = product.stock === 0
 
-  const productImages = product.images.length > 0 ? product.images : [product.imageUrl].filter(Boolean)
+  const variantImages = (product.variants ?? [])
+    .map(v => v.imageUrl)
+    .filter((url): url is string => !!url)
+  const productImages = product.images.length > 0
+    ? product.images
+    : [...new Set([product.imageUrl, ...variantImages])].filter(Boolean) as string[]
   const thumbImage = productImages[selectedThumb] || product.imageUrl
 
   const decrement = () => setQty((q) => Math.max(1, q - 1))
@@ -120,7 +125,7 @@ export default function ProductPage() {
             )}
           </div>
           {/* Thumbnail strip */}
-          {productImages.length > 1 && (
+          {productImages.length > 0 && (
             <div className="grid grid-cols-4 gap-2">
               {productImages.slice(0, 4).map((img, i) => (
                 <button
