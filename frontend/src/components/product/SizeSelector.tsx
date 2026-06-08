@@ -8,7 +8,7 @@ interface SizeSelectorProps {
 }
 
 export default function SizeSelector({ variants, currentSlug }: SizeSelectorProps) {
-  if (variants.length <= 1) return null
+  const single = variants.length === 1
 
   return (
     <div>
@@ -19,6 +19,32 @@ export default function SizeSelector({ variants, currentSlug }: SizeSelectorProp
         {variants.map((v) => {
           const isSelected = v.slug === currentSlug
           const outOfStock = v.stock === 0
+
+          if (single) {
+            return (
+              <div
+                key={v.id}
+                className="flex items-center gap-2 px-3 py-2 rounded-xl border-2 border-gray-200 dark:border-[#2a2a2a] bg-white dark:bg-[#1a1a1a]"
+              >
+                {v.imageUrl ? (
+                  <img src={v.imageUrl} alt={v.sizeLabel} className="w-10 h-10 object-contain rounded-md" />
+                ) : (
+                  <div className="w-10 h-10 bg-gray-100 dark:bg-[#222222] rounded-md" />
+                )}
+                <div className="flex flex-col">
+                  <span className="text-xs font-semibold text-gray-700 dark:text-[#e8eaf0]">{v.sizeLabel}</span>
+                  <span className="text-[11px] text-gray-500 dark:text-[#8892a4]">
+                    {v.salePrice ? (
+                      <span className="flex items-center gap-1">
+                        <span className="line-through text-gray-400">${v.price.toLocaleString('es-CL')}</span>
+                        <span className="text-orange-500 font-semibold">${v.salePrice.toLocaleString('es-CL')}</span>
+                      </span>
+                    ) : `$${v.price.toLocaleString('es-CL')}`}
+                  </span>
+                </div>
+              </div>
+            )
+          }
 
           return (
             <Link

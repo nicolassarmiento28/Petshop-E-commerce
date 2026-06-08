@@ -168,7 +168,7 @@ export default function ProductPage() {
             )}
           </div>
 
-          {product.variants && product.variants.length > 1 && (
+          {product.variants && product.variants.length > 0 && (
             <SizeSelector variants={product.variants} currentSlug={product.slug} />
           )}
 
