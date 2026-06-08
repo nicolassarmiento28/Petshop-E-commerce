@@ -139,11 +139,19 @@ export const getProductBySlug = async (
         select: { id: true, name: true, slug: true, price: true, salePrice: true, stock: true, imageUrl: true },
       })
 
+      const baseSlug = product.sizeGroup
       variants = siblings
-        .map((s) => ({
-          ...s,
-          sizeLabel: s.name.match(SIZE_LABEL_REGEX)?.[0]?.toLowerCase() ?? s.name,
-        }))
+        .map((s) => {
+          let sizeLabel = s.name.match(SIZE_LABEL_REGEX)?.[0]?.toLowerCase()
+          if (!sizeLabel && baseSlug) {
+            const suffix = s.slug.slice(baseSlug.length).replace(/^-/, '')
+            sizeLabel = suffix
+              .replace(/-/g, ' ')
+              .replace(/(\d+) (\d+)/g, '$1,$2')
+              .toUpperCase()
+          }
+          return { ...s, sizeLabel: sizeLabel ?? s.name }
+        })
         .sort((a, b) => {
           const aNum = parseFloat(a.sizeLabel)
           const bNum = parseFloat(b.sizeLabel)
