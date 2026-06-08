@@ -116,7 +116,7 @@ export const updateProduct = async (
       return
     }
 
-    const { name, slug, description, price, salePrice, stock, imageUrl, images, isActive, isFeatured, categoryId, brandId } =
+    const { name, slug, description, price, salePrice, stock, imageUrl, images, isActive, isFeatured, categoryId, brandId, sizeGroup } =
       req.body as Record<string, unknown>
 
     const product = await prisma.product.update({
@@ -134,6 +134,7 @@ export const updateProduct = async (
         ...(isFeatured !== undefined && { isFeatured: Boolean(isFeatured) }),
         ...(categoryId !== undefined && { categoryId: Number(categoryId) }),
         ...(brandId !== undefined && { brandId: brandId !== null ? Number(brandId) : null }),
+        ...(sizeGroup !== undefined && { sizeGroup: sizeGroup !== null ? String(sizeGroup) : null }),
       },
       include: { category: true, brand: true },
     })
