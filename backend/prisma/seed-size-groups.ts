@@ -42,29 +42,34 @@ async function fetchCategoryProducts(categoryUrl: string): Promise<{ name: strin
 
 async function extractSizesFromSuperZoo(
   searchTerm: string,
-  _categorySlug: string,
+  brandName: string | null,
 ): Promise<{ label: string; price: number; imageUrl?: string }[]> {
   try {
-    const baseName = searchTerm.toLowerCase().trim()
+    const baseWords = searchTerm.toLowerCase().trim().split(/\s+/).filter(w => w.length > 2)
+    const brandWords = (brandName ?? '').toLowerCase().split(/\s+/).filter(w => w.length > 2)
+
     const categoryUrls = [
       'https://www.superzoo.cl/perro/alimentos/alimentos-seco/',
       'https://www.superzoo.cl/gato/alimentos/',
     ]
 
-    const allMatches: { name: string; price: number; imageUrl: string }[] = []
+    const allProducts: { name: string; price: number; imageUrl: string }[] = []
     for (const url of categoryUrls) {
       const products = await fetchCategoryProducts(url)
-      allMatches.push(...products)
+      allProducts.push(...products)
     }
 
-    // Find products whose name starts with or contains the base search term
-    const matchedProducts = allMatches.filter(p => {
+    // Match: all brand words + at least half of base words must be present
+    const matchedProducts = allProducts.filter(p => {
       const lower = p.name.toLowerCase()
-      return lower.includes(baseName) || baseName.includes(lower) ||
-        lower.split(' ').some((w: string) => w.length > 3 && baseName.includes(w))
+      const everyWord = (words: string[]) => words.every(w => lower.includes(w))
+      const someWords = (words: string[]) => {
+        const matches = words.filter(w => lower.includes(w))
+        return matches.length >= Math.ceil(words.length / 2)
+      }
+      return everyWord(brandWords) && someWords(baseWords)
     })
 
-    // Only return those with a size label
     return matchedProducts
       .filter(p => SIZE_REGEX.test(p.name))
       .map(p => ({
@@ -124,6 +129,11 @@ async function main() {
     const sizeGroupSlug = computeSizeGroupSlug(baseName)
     const representative = groupProducts[0]
     const categorySlug = categoryMap[representative.categoryId] || 'perro'
+    let brandName: string | null = null
+    if (representative.brandId) {
+      const brand = await prisma.brand.findUnique({ where: { id: representative.brandId }, select: { name: true } })
+      brandName = brand?.name ?? null
+    }
 
     const existingLabels = new Set(
       groupProducts.map(p => p.name.match(SIZE_REGEX)?.[0]?.toLowerCase()).filter(Boolean),
@@ -141,7 +151,7 @@ async function main() {
     }
 
     try {
-      const superZooSizes = await extractSizesFromSuperZoo(baseName, categorySlug)
+      const superZooSizes = await extractSizesFromSuperZoo(baseName, brandName)
       const missingSizes = superZooSizes.filter(s => !existingLabels.has(s.label))
 
       if (missingSizes.length > 0) {
