@@ -1,7 +1,7 @@
 import type { Request, Response, NextFunction } from 'express'
 import { prisma } from '../lib/prisma'
 
-const SIZE_LABEL_REGEX = /(\d+(?:\.\d+)?)\s*kg/i
+const SIZE_LABEL_REGEX = /(\d+(?:[.,]\d+)?)\s*kg/i
 
 interface VariantItem {
   id: number
