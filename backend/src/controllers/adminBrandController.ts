@@ -3,7 +3,7 @@ import type { AuthRequest } from '../middleware/authMiddleware'
 import { prisma } from '../lib/prisma'
 import { z, ZodError } from 'zod'
 
-const createBrandSchema = z.object({ name: z.string().min(2), slug: z.string().min(2).regex(/^[a-z0-9-]+$/), logoUrl: z.string().url().optional() })
+const createBrandSchema = z.object({ name: z.string().min(2), slug: z.string().min(2).regex(/^[a-z0-9-]+$/), logoUrl: z.string().url().optional(), sku: z.string().optional() })
 
 export const getBrands = async (
   req: AuthRequest,
@@ -44,7 +44,7 @@ export const createBrand = async (
   next: NextFunction,
 ): Promise<void> => {
   try {
-    let parsed: { name: string; slug: string; logoUrl?: string }
+    let parsed: { name: string; slug: string; logoUrl?: string; sku?: string }
     try {
       parsed = createBrandSchema.parse(req.body)
     } catch (error) {
@@ -54,7 +54,7 @@ export const createBrand = async (
       }
       throw error
     }
-    const { name, slug, logoUrl } = parsed
+    const { name, slug, logoUrl, sku } = parsed
 
     const existing = await prisma.brand.findUnique({ where: { slug: String(slug) } })
     if (existing) {
@@ -67,6 +67,7 @@ export const createBrand = async (
         name: String(name),
         slug: String(slug),
         logoUrl: logoUrl !== undefined ? String(logoUrl) : undefined,
+        sku: sku !== undefined && sku !== '' ? String(sku) : undefined,
       },
     })
 
@@ -90,7 +91,7 @@ export const updateBrand = async (
       return
     }
 
-    const { name, slug, logoUrl } = req.body as Record<string, unknown>
+    const { name, slug, logoUrl, sku } = req.body as Record<string, unknown>
 
     const brand = await prisma.brand.update({
       where: { id },
@@ -98,6 +99,7 @@ export const updateBrand = async (
         ...(name !== undefined && { name: String(name) }),
         ...(slug !== undefined && { slug: String(slug) }),
         ...(logoUrl !== undefined && { logoUrl: logoUrl !== null ? String(logoUrl) : null }),
+        ...(sku !== undefined && { sku: sku !== null && sku !== '' ? String(sku) : null }),
       },
     })
 

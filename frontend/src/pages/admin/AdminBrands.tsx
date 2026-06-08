@@ -30,6 +30,7 @@ const brandSchema = z.object({
   name: z.string().min(2, 'Mínimo 2 caracteres'),
   slug: z.string().min(2, 'Mínimo 2 caracteres').regex(/^[a-z0-9-]+$/, 'Solo minúsculas, números y guiones'),
   logoUrl: z.string().url('URL inválida').optional().or(z.literal('')),
+  sku: z.string().optional(),
 })
 
 type BrandFormValues = z.infer<typeof brandSchema>
@@ -56,6 +57,7 @@ const BrandModal = ({ brand, onClose }: BrandModalProps) => {
           name: brand.name,
           slug: brand.slug,
           logoUrl: brand.logoUrl ?? '',
+          sku: brand.sku ?? '',
         }
       : {},
   })
@@ -96,6 +98,10 @@ const BrandModal = ({ brand, onClose }: BrandModalProps) => {
             <label className="block text-sm font-medium text-gray-700 dark:text-[#e8eaf0] mb-1">URL Logo</label>
             <input {...register('logoUrl')} placeholder="https://..." className={inputClass} />
             {errors.logoUrl && <p className="text-red-500 text-xs mt-1">{errors.logoUrl.message}</p>}
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-[#e8eaf0] mb-1">SKU</label>
+            <input {...register('sku')} placeholder="ej: ACA-BRAND" className={inputClass} />
           </div>
           {mutation.isError && <p className="text-red-500 text-sm">Error al guardar. Intenta de nuevo.</p>}
           <div className="flex justify-end gap-3 pt-2">
@@ -281,6 +287,7 @@ const AdminBrands = () => {
                   <th className="px-4 py-3 text-left">Logo</th>
                   <th className="px-4 py-3 text-left">Nombre</th>
                   <th className="px-4 py-3 text-left">Slug</th>
+                  <th className="px-4 py-3 text-left">SKU</th>
                   <th className="px-4 py-3 text-left">Productos</th>
                   <th className="px-4 py-3 text-left">Acciones</th>
                 </tr>
@@ -297,6 +304,13 @@ const AdminBrands = () => {
                     </td>
                     <td className="px-4 py-3 font-medium text-gray-800 dark:text-[#e8eaf0]">{brand.name}</td>
                     <td className="px-4 py-3 text-gray-500 dark:text-[#8892a4] text-xs">{brand.slug}</td>
+                    <td className="px-4 py-3">
+                      {brand.sku ? (
+                        <span className="font-mono text-xs text-gray-500 dark:text-[#8892a4]">{brand.sku}</span>
+                      ) : (
+                        <span className="text-xs text-gray-300 dark:text-[#444]">—</span>
+                      )}
+                    </td>
                     <td className="px-4 py-3 text-gray-700 dark:text-[#e8eaf0]">{brand._count.products}</td>
                     <td className="px-4 py-3">
                       <div className="flex gap-2">

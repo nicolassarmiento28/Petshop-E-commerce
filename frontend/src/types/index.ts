@@ -29,6 +29,7 @@ export interface BrandType {
   name: string
   slug: string
   logoUrl?: string
+  sku?: string
 }
 
 export interface ProductVariant {
