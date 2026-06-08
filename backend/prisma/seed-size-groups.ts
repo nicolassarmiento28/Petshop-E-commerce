@@ -13,43 +13,69 @@ function computeSizeGroupSlug(productName: string): string {
     .replace(/^-|-$/g, '')
 }
 
-async function extractSizesFromSuperZoo(
-  searchTerm: string,
-  categorySlug: string,
-): Promise<{ label: string; price: number; imageUrl?: string }[]> {
+async function fetchCategoryProducts(categoryUrl: string): Promise<{ name: string; price: number; imageUrl: string }[]> {
   const browser = await chromium.launch({ headless: true })
   const page = await browser.newPage()
+  await page.goto(categoryUrl, { waitUntil: 'networkidle', timeout: 30000 })
+  await page.waitForSelector('div.product', { timeout: 15000 }).catch(() => {})
 
+  const products = await page.evaluate(() => {
+    const tiles = document.querySelectorAll('div.product')
+    return Array.from(tiles).map(tile => {
+      const nameEl = tile.querySelector('.product-name, .pdp-link a')
+      const name = nameEl?.textContent?.trim() ?? ''
+
+      const priceEl = tile.querySelector('.sales .value, .price .sales')
+      const priceText = priceEl?.textContent?.trim() ?? ''
+      const price = parseFloat(priceText.replace(/[^0-9,]/g, '').replace(',', '.'))
+
+      const imgEl = tile.querySelector('.tile-image')
+      const imgSrc = imgEl?.getAttribute('src') ?? ''
+
+      return { name, price: isNaN(price) ? 0 : price, imageUrl: imgSrc.startsWith('/') ? `https://www.superzoo.cl${imgSrc}` : imgSrc }
+    }).filter(p => p.name && p.price > 0)
+  })
+
+  await browser.close()
+  return products
+}
+
+async function extractSizesFromSuperZoo(
+  searchTerm: string,
+  _categorySlug: string,
+): Promise<{ label: string; price: number; imageUrl?: string }[]> {
   try {
-    const searchUrl = `https://www.superzoo.cl/${categorySlug}/?q=${encodeURIComponent(searchTerm)}`
-    await page.goto(searchUrl, { waitUntil: 'networkidle', timeout: 30000 })
+    const baseName = searchTerm.toLowerCase().trim()
+    const categoryUrls = [
+      'https://www.superzoo.cl/perro/alimentos/alimentos-seco/',
+      'https://www.superzoo.cl/gato/alimentos/',
+    ]
 
-    await page.waitForSelector('[class*="product"]', { timeout: 15000 }).catch(() => {})
+    const allMatches: { name: string; price: number; imageUrl: string }[] = []
+    for (const url of categoryUrls) {
+      const products = await fetchCategoryProducts(url)
+      allMatches.push(...products)
+    }
 
-    const sizes = await page.evaluate(() => {
-      const tiles = document.querySelectorAll('[class*="product-tile"], [class*="grid-tile"], [data-productid], [class*="product-grid"] > div')
-      return Array.from(tiles).slice(0, 15).map(tile => {
-        const nameEl = tile.querySelector('[class*="product-name"], .pdp-link a, [class*="name"]')
-        const name = nameEl?.textContent?.trim() ?? ''
-        const priceEl = tile.querySelector('[class*="price"] [class*="sales"], [class*="price"] .value, [class*="sales-price"]')
-        const priceText = priceEl?.textContent?.trim() ?? ''
-        const price = parseFloat(priceText.replace(/[^0-9,]/g, '').replace(',', '.'))
-        const imgEl = tile.querySelector('img')
-        const imageUrl = imgEl ? (imgEl as HTMLImageElement).src : undefined
-        return { name, price: isNaN(price) ? 0 : price, imageUrl }
-      }).filter(p => p.name && p.price > 0)
+    // Find products whose name starts with or contains the base search term
+    const matchedProducts = allMatches.filter(p => {
+      const lower = p.name.toLowerCase()
+      return lower.includes(baseName) || baseName.includes(lower) ||
+        lower.split(' ').some((w: string) => w.length > 3 && baseName.includes(w))
     })
 
-    return sizes
-      .filter(s => SIZE_REGEX.test(s.name))
-      .map(s => ({
-        label: s.name.match(SIZE_REGEX)![0].toLowerCase(),
-        price: s.price,
-        imageUrl: s.imageUrl,
+    // Only return those with a size label
+    return matchedProducts
+      .filter(p => SIZE_REGEX.test(p.name))
+      .map(p => ({
+        label: p.name.match(SIZE_REGEX)![0].toLowerCase(),
+        price: p.price,
+        imageUrl: p.imageUrl,
       }))
       .filter((s, i, arr) => arr.findIndex(x => x.label === s.label) === i)
-  } finally {
-    await browser.close()
+  } catch (err) {
+    console.log(`  ⚠️  SuperZoo scraping failed: ${err instanceof Error ? err.message : err}`)
+    return []
   }
 }
 
