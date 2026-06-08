@@ -46,7 +46,7 @@ export default function SizeSelector({ variants, currentSlug }: SizeSelectorProp
               )}
               <div className="flex-1 min-w-0">
                 <p className={`text-sm font-bold ${isSelected ? 'text-blue-700 dark:text-blue-300' : 'text-gray-800 dark:text-[#e8eaf0]'}`}>
-                  {v.name}
+                  {v.sizeLabel}
                 </p>
                 {pricePerKg && (
                   <p className="text-xs text-gray-400 dark:text-[#8892a4]">
