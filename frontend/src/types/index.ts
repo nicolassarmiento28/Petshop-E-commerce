@@ -31,6 +31,17 @@ export interface BrandType {
   logoUrl?: string
 }
 
+export interface ProductVariant {
+  id: number
+  name: string
+  slug: string
+  price: number
+  salePrice?: number
+  stock: number
+  imageUrl?: string
+  sizeLabel: string
+}
+
 export interface ProductType {
   id: number
   name: string
@@ -43,12 +54,14 @@ export interface ProductType {
   images: string[]
   isActive: boolean
   isFeatured: boolean
+  sizeGroup?: string
   categoryId: number
   category?: CategoryType
   brandId?: number
   brand?: BrandType
   createdAt: string
   updatedAt: string
+  variants?: ProductVariant[]
 }
 
 export interface CartItemType {
