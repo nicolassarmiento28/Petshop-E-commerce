@@ -68,7 +68,8 @@ export default function ProductPage() {
   const isOnSale = !!product.salePrice && product.salePrice < product.price
   const outOfStock = product.stock === 0
 
-  const thumbImage = product.imageUrl
+  const productImages = product.images.length > 0 ? product.images : [product.imageUrl].filter(Boolean)
+  const thumbImage = productImages[selectedThumb] || product.imageUrl
 
   const decrement = () => setQty((q) => Math.max(1, q - 1))
   const increment = () => setQty((q) => Math.min(product.stock, q + 1))
@@ -118,24 +119,22 @@ export default function ProductPage() {
               <div className="w-full h-full flex items-center justify-center text-[8rem]">🐾</div>
             )}
           </div>
-          {/* Thumbnail strip — 4 slots, all same image */}
-          <div className="grid grid-cols-4 gap-2">
-            {[0, 1, 2, 3].map((i) => (
-              <button
-                key={i}
-                onClick={() => setSelectedThumb(i)}
-                className={`aspect-square rounded-lg overflow-hidden border-2 transition-colors ${
-                  selectedThumb === i ? 'border-blue-600' : 'border-transparent'
-                }`}
-              >
-                {thumbImage ? (
-                  <img src={thumbImage} alt={`${product.name} ${i + 1}`} loading="lazy" className="w-full h-full object-cover" />
-                ) : (
-                  <div className="w-full h-full bg-blue-50 dark:bg-[#1a1a1a] flex items-center justify-center text-2xl">🐾</div>
-                )}
-              </button>
-            ))}
-          </div>
+          {/* Thumbnail strip */}
+          {productImages.length > 1 && (
+            <div className="grid grid-cols-4 gap-2">
+              {productImages.slice(0, 4).map((img, i) => (
+                <button
+                  key={i}
+                  onClick={() => setSelectedThumb(i)}
+                  className={`aspect-square rounded-lg overflow-hidden border-2 transition-colors ${
+                    selectedThumb === i ? 'border-blue-600' : 'border-transparent'
+                  }`}
+                >
+                  <img src={img} alt={`${product.name} ${i + 1}`} loading="lazy" className="w-full h-full object-cover" />
+                </button>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Right — product info */}
