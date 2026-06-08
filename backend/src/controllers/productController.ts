@@ -1,6 +1,17 @@
 import type { Request, Response, NextFunction } from 'express'
 import { prisma } from '../lib/prisma'
 
+interface VariantItem {
+  id: number
+  name: string
+  slug: string
+  price: number
+  salePrice: number | null
+  stock: number
+  imageUrl: string | null
+  sizeLabel: string
+}
+
 export const getProducts = async (
   req: Request,
   res: Response,
@@ -118,7 +129,30 @@ export const getProductBySlug = async (
       res.status(404).json({ error: 'Product not found' })
       return
     }
-    res.json(product)
+
+    let variants: VariantItem[] | undefined
+    if (product.sizeGroup) {
+      const siblings = await prisma.product.findMany({
+        where: { sizeGroup: product.sizeGroup, isActive: true },
+        select: { id: true, name: true, slug: true, price: true, salePrice: true, stock: true, imageUrl: true },
+        orderBy: { name: 'asc' },
+      })
+
+      const sizeLabelRegex = /(\d+(?:\.\d+)?)\s*kg/i
+      variants = siblings
+        .map((s) => ({
+          ...s,
+          sizeLabel: s.name.match(sizeLabelRegex)?.[0]?.toLowerCase() ?? s.name,
+        }))
+        .sort((a, b) => {
+          const aNum = parseFloat(a.sizeLabel)
+          const bNum = parseFloat(b.sizeLabel)
+          if (!isNaN(aNum) && !isNaN(bNum)) return aNum - bNum
+          return a.sizeLabel.localeCompare(b.sizeLabel)
+        })
+    }
+
+    res.json({ ...product, variants })
   } catch (error) {
     next(error)
   }
