@@ -85,3 +85,120 @@ export const getCustomers = async (
     next(error)
   }
 }
+
+export const exportCustomersCsv = async (
+  _req: AuthRequest,
+  res: Response,
+  next: NextFunction,
+): Promise<void> => {
+  try {
+    const rows = await prisma.$queryRawUnsafe<Array<Record<string, unknown>>>(
+      `SELECT
+        (array_agg("customerName" ORDER BY "createdAt" DESC))[1] as "customerName",
+        "customerEmail",
+        (array_agg("customerPhone" ORDER BY "createdAt" DESC))[1] as "customerPhone",
+        COUNT(*)::int as "orderCount",
+        SUM("total")::float as "totalSpent",
+        MAX("createdAt") as "lastOrderDate"
+      FROM "Order"
+      GROUP BY "customerEmail"
+      ORDER BY "totalSpent" DESC`,
+    )
+
+    const escapeCsv = (val: unknown): string => {
+      const str = String(val ?? '')
+      if (str.includes(',') || str.includes('"') || str.includes('\n')) return `"${str.replace(/"/g, '""')}"`
+      return str
+    }
+
+    const bom = '\uFEFF'
+    const headers = 'Nombre,Email,Teléfono,Órdenes,Total Gastado,Última Orden'
+    const data = (rows as Array<{
+      customerName: string
+      customerEmail: string
+      customerPhone: string | null
+      orderCount: number
+      totalSpent: number
+      lastOrderDate: Date
+    }>).map((r) =>
+      [
+        escapeCsv(r.customerName),
+        escapeCsv(r.customerEmail),
+        escapeCsv(r.customerPhone ?? ''),
+        r.orderCount,
+        r.totalSpent,
+        r.lastOrderDate.toISOString().slice(0, 10),
+      ].join(','),
+    )
+
+    const dateStr = new Date().toISOString().slice(0, 10)
+    res.setHeader('Content-Type', 'text/csv; charset=utf-8')
+    res.setHeader('Content-Disposition', `attachment; filename="clientes-${dateStr}.csv"`)
+    res.send(bom + headers + '\n' + data.join('\n'))
+  } catch (error) {
+    next(error)
+  }
+}
+
+export const exportCustomersXlsx = async (
+  _req: AuthRequest,
+  res: Response,
+  next: NextFunction,
+): Promise<void> => {
+  try {
+    const ExcelJS = require('exceljs')
+    const rows = await prisma.$queryRawUnsafe<Array<Record<string, unknown>>>(
+      `SELECT
+        (array_agg("customerName" ORDER BY "createdAt" DESC))[1] as "customerName",
+        "customerEmail",
+        (array_agg("customerPhone" ORDER BY "createdAt" DESC))[1] as "customerPhone",
+        COUNT(*)::int as "orderCount",
+        SUM("total")::float as "totalSpent",
+        MAX("createdAt") as "lastOrderDate"
+      FROM "Order"
+      GROUP BY "customerEmail"
+      ORDER BY "totalSpent" DESC`,
+    )
+
+    const workbook = new ExcelJS.Workbook()
+    const sheet = workbook.addWorksheet('Clientes')
+
+    sheet.columns = [
+      { header: 'Nombre', key: 'name', width: 30 },
+      { header: 'Email', key: 'email', width: 35 },
+      { header: 'Teléfono', key: 'phone', width: 18 },
+      { header: 'Órdenes', key: 'orderCount', width: 10 },
+      { header: 'Total Gastado', key: 'totalSpent', width: 16 },
+      { header: 'Última Orden', key: 'lastOrderDate', width: 16 },
+    ]
+
+    for (const r of rows as Array<{
+      customerName: string
+      customerEmail: string
+      customerPhone: string | null
+      orderCount: number
+      totalSpent: number
+      lastOrderDate: Date
+    }>) {
+      sheet.addRow({
+        name: r.customerName,
+        email: r.customerEmail,
+        phone: r.customerPhone ?? '',
+        orderCount: r.orderCount,
+        totalSpent: r.totalSpent,
+        lastOrderDate: r.lastOrderDate.toISOString().slice(0, 10),
+      })
+    }
+
+    sheet.getRow(1).font = { bold: true }
+
+    const dateStr = new Date().toISOString().slice(0, 10)
+    res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    res.setHeader('Content-Disposition', `attachment; filename="clientes-${dateStr}.xlsx"`)
+
+    await workbook.xlsx.write(res)
+    res.end()
+  } catch (error) {
+    next(error)
+  }
+}

@@ -16,7 +16,7 @@ import { getAdminOrders, updateOrderStatus, getOrderStats, exportOrdersCsv, expo
 import { getRevenue } from '../controllers/adminRevenueController'
 import { getSalesByCategory, getMonthComparison, getRecentOrdersFeed } from '../controllers/adminAnalyticsController'
 import { getBrands, createBrand, updateBrand, deleteBrand, autoAssignBrands } from '../controllers/adminBrandController'
-import { getCustomers } from '../controllers/adminCustomerController'
+import { getCustomers, exportCustomersCsv, exportCustomersXlsx } from '../controllers/adminCustomerController'
 import { getCoupons, createCoupon, updateCoupon, deleteCoupon } from '../controllers/adminCouponController'
 
 const router = Router()
@@ -46,6 +46,8 @@ router.delete('/brands/:id', authMiddleware, deleteBrand)
 router.post('/brands/auto-assign', authMiddleware, autoAssignBrands)
 
 // Protected — customers
+router.get('/customers/export/csv', authMiddleware, exportCustomersCsv)
+router.get('/customers/export/xlsx', authMiddleware, exportCustomersXlsx)
 router.get('/customers', authMiddleware, getCustomers)
 
 // Protected — coupons

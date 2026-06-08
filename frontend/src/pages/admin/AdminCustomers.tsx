@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useQuery } from '@tanstack/react-query'
-import { Search } from 'lucide-react'
+import { Search, Download } from 'lucide-react'
 import AdminLayout from '@/components/admin/AdminLayout'
 import { formatCLP } from '@/utils/formatters'
 import api from '@/services/api'
@@ -43,6 +43,22 @@ const AdminCustomers = () => {
     }, 350)
   }
 
+  const handleExport = async (format: 'csv' | 'xlsx') => {
+    try {
+      const response = await api.get(`/admin/customers/export/${format}`, { responseType: 'blob' })
+      const url = window.URL.createObjectURL(new Blob([response.data]))
+      const link = document.createElement('a')
+      link.href = url
+      link.setAttribute('download', `clientes-${new Date().toISOString().slice(0, 10)}.${format}`)
+      document.body.appendChild(link)
+      link.click()
+      link.remove()
+      window.URL.revokeObjectURL(url)
+    } catch {
+      // Silently handle
+    }
+  }
+
   const { data, isLoading } = useQuery({
     queryKey: ['admin', 'customers', page, search],
     queryFn: () => fetchCustomers(page, search || undefined),
@@ -55,6 +71,20 @@ const AdminCustomers = () => {
       </Helmet>
       <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
         <h1 className="text-2xl font-bold text-gray-900 dark:text-[#e8eaf0]">Clientes</h1>
+        <div className="flex gap-2">
+          <button
+            onClick={() => handleExport('csv')}
+            className="flex items-center gap-1.5 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg text-sm transition-colors"
+          >
+            <Download size={14} /> CSV
+          </button>
+          <button
+            onClick={() => handleExport('xlsx')}
+            className="flex items-center gap-1.5 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-lg text-sm transition-colors"
+          >
+            <Download size={14} /> XLSX
+          </button>
+        </div>
       </div>
 
       <div className="relative max-w-xs mb-4">
