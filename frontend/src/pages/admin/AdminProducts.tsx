@@ -47,6 +47,7 @@ const productSchema = z.object({
     z.coerce.number().positive().optional(),
   ),
   isFeatured: z.boolean().optional(),
+  sizeGroup: z.string().optional(),
   isActive: z.boolean().optional(),
 })
 
@@ -90,6 +91,7 @@ const ProductModal = ({ product, categories, brands, onClose }: ProductModalProp
           categoryId: product.categoryId,
           brandId: product.brandId ?? undefined,
           isFeatured: product.isFeatured,
+          sizeGroup: product.sizeGroup ?? '',
           isActive: product.isActive,
         }
       : { isFeatured: false, isActive: true },
@@ -159,6 +161,12 @@ const ProductModal = ({ product, categories, brands, onClose }: ProductModalProp
             <label className="block text-sm font-medium text-gray-700 dark:text-[#e8eaf0] mb-1">URL Imagen</label>
             <input {...register('imageUrl')} placeholder="https://..." className={inputClass} />
             {errors.imageUrl && <p className="text-red-500 text-xs mt-1">{errors.imageUrl.message}</p>}
+          </div>
+          {/* Size Group */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-[#e8eaf0] mb-1">Grupo de tamaños</label>
+            <input {...register('sizeGroup')} placeholder="ej: royal-canin-adult-maxi" className={inputClass} />
+            <p className="text-xs text-gray-400 dark:text-[#8892a4] mt-1">Productos con el mismo valor se agrupan como variantes de tamaño</p>
           </div>
           {/* Category */}
           <div>
