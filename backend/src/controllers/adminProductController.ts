@@ -14,6 +14,7 @@ const createProductSchema = z.object({
   categoryId: z.number(),
   brandId: z.number().optional(),
   isFeatured: z.boolean().optional(),
+  sizeGroup: z.string().optional(),
 })
 
 export const getAdminProducts = async (
@@ -60,7 +61,7 @@ export const createProduct = async (
   next: NextFunction,
 ): Promise<void> => {
   try {
-    let parsed: { name: string; slug: string; price: number; stock: number; description?: string; salePrice?: number; imageUrl?: string; categoryId: number; brandId?: number; isFeatured?: boolean }
+    let parsed: { name: string; slug: string; price: number; stock: number; description?: string; salePrice?: number; imageUrl?: string; categoryId: number; brandId?: number; isFeatured?: boolean; sizeGroup?: string }
     try {
       parsed = createProductSchema.parse(req.body)
     } catch (error) {
@@ -70,7 +71,7 @@ export const createProduct = async (
       }
       throw error
     }
-    const { name, slug, description, price, salePrice, stock, imageUrl, categoryId, brandId, isFeatured } = parsed
+    const { name, slug, description, price, salePrice, stock, imageUrl, categoryId, brandId, isFeatured, sizeGroup } = parsed
 
     const existing = await prisma.product.findUnique({ where: { slug: String(slug) } })
     if (existing) {
@@ -92,6 +93,7 @@ export const createProduct = async (
         isFeatured: isFeatured !== undefined ? Boolean(isFeatured) : false,
         categoryId: Number(categoryId),
         brandId: brandId !== undefined && brandId !== null ? Number(brandId) : undefined,
+        sizeGroup: sizeGroup !== undefined && sizeGroup !== '' ? String(sizeGroup) : undefined,
       },
       include: { category: true, brand: true },
     })

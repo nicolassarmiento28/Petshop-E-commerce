@@ -43,7 +43,12 @@ export default function SizeSelector({ variants, currentSlug }: SizeSelectorProp
                 {v.sizeLabel}
               </span>
               <span className={`text-[11px] ${isSelected ? 'text-blue-600 dark:text-blue-300' : 'text-gray-500 dark:text-[#8892a4]'}`}>
-                {outOfStock ? 'Sin stock' : `$${v.price.toLocaleString('es-CL')}`}
+                {outOfStock ? 'Sin stock' : v.salePrice ? (
+                  <span className="flex flex-col items-center">
+                    <span className="line-through text-gray-400">${v.price.toLocaleString('es-CL')}</span>
+                    <span className="text-orange-500 font-semibold">${v.salePrice.toLocaleString('es-CL')}</span>
+                  </span>
+                ) : `$${v.price.toLocaleString('es-CL')}`}
               </span>
               {isSelected && (
                 <span className="absolute -top-2 -right-2 w-5 h-5 bg-blue-600 text-white rounded-full flex items-center justify-center">
