@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { Download } from 'lucide-react'
 import AdminLayout from '@/components/admin/AdminLayout'
 import { formatCLP } from '@/utils/formatters'
 import api from '@/services/api'
@@ -91,15 +92,15 @@ const AdminOrders = () => {
         <div className="flex items-center gap-3">
           <button
             onClick={() => handleExport('csv')}
-            className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition-colors"
+            className="flex items-center gap-1.5 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg text-sm transition-colors"
           >
-            Exportar CSV
+            <Download size={14} /> CSV
           </button>
           <button
             onClick={() => handleExport('xlsx')}
-            className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-medium rounded-lg transition-colors"
+            className="flex items-center gap-1.5 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-lg text-sm transition-colors"
           >
-            Exportar XLSX
+            <Download size={14} /> XLSX
           </button>
           {/* Status filter */}
           <select
