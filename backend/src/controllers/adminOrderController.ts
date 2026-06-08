@@ -146,3 +146,68 @@ export const getOrderStats = async (
     next(error)
   }
 }
+
+export const exportOrdersXlsx = async (
+  _req: AuthRequest,
+  res: Response,
+  next: NextFunction,
+): Promise<void> => {
+  try {
+    const ExcelJS = require('exceljs')
+    const orders = await prisma.order.findMany({
+      orderBy: { createdAt: 'desc' },
+      include: {
+        items: { include: { product: { select: { name: true, sku: true } } } },
+      },
+    })
+
+    const workbook = new ExcelJS.Workbook()
+    const sheet = workbook.addWorksheet('Órdenes')
+
+    sheet.columns = [
+      { header: 'N° Orden', key: 'orderNumber', width: 20 },
+      { header: 'Cliente', key: 'customerName', width: 25 },
+      { header: 'Email', key: 'customerEmail', width: 30 },
+      { header: 'Teléfono', key: 'customerPhone', width: 15 },
+      { header: 'Dirección', key: 'shippingAddress', width: 35 },
+      { header: 'Total', key: 'total', width: 12 },
+      { header: 'Estado', key: 'status', width: 15 },
+      { header: 'Productos', key: 'items', width: 60 },
+      { header: 'Fecha', key: 'createdAt', width: 20 },
+    ]
+
+    const STATUS_LABELS: Record<string, string> = {
+      PENDING: 'Pendiente', PAID: 'Pagado', PROCESSING: 'En proceso',
+      SHIPPED: 'Enviado', DELIVERED: 'Entregado', CANCELLED: 'Cancelado', REFUNDED: 'Reembolsado',
+    }
+
+    for (const o of orders) {
+      const itemsStr = o.items
+        .map((i) => `${i.product?.name ?? `#${i.productId}`} (SKU: ${i.product?.sku ?? '—'}) × ${i.quantity} = $${i.subtotal}`)
+        .join('; ')
+
+      sheet.addRow({
+        orderNumber: o.orderNumber,
+        customerName: o.customerName,
+        customerEmail: o.customerEmail,
+        customerPhone: o.customerPhone ?? '',
+        shippingAddress: o.shippingAddress ?? '',
+        total: o.total,
+        status: STATUS_LABELS[o.status] ?? o.status,
+        items: itemsStr,
+        createdAt: o.createdAt.toISOString(),
+      })
+    }
+
+    sheet.getRow(1).font = { bold: true }
+
+    const dateStr = new Date().toISOString().slice(0, 10)
+    res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    res.setHeader('Content-Disposition', `attachment; filename="ordenes-${dateStr}.xlsx"`)
+
+    await workbook.xlsx.write(res)
+    res.end()
+  } catch (error) {
+    next(error)
+  }
+}

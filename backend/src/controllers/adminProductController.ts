@@ -226,3 +226,108 @@ export const getTopSellingProducts = async (
     next(error)
   }
 }
+
+export const exportProductsCsv = async (
+  _req: AuthRequest,
+  res: Response,
+  next: NextFunction,
+): Promise<void> => {
+  try {
+    const products = await prisma.product.findMany({
+      orderBy: { name: 'asc' },
+      include: { category: { select: { name: true } }, brand: { select: { name: true } } },
+    })
+
+    const escapeCsv = (val: unknown): string => {
+      const str = String(val ?? '')
+      if (str.includes(',') || str.includes('"') || str.includes('\n')) return `"${str.replace(/"/g, '""')}"`
+      return str
+    }
+
+    const bom = '\uFEFF'
+    const headers = 'ID,Nombre,Slug,SKU,Precio,Precio Oferta,Stock,Categoría,Marca,Grupo Tamaño,Activo,Destacado'
+    const rows = products.map((p) =>
+      [
+        p.id,
+        escapeCsv(p.name),
+        escapeCsv(p.slug),
+        escapeCsv(p.sku),
+        p.price,
+        p.salePrice ?? '',
+        p.stock,
+        escapeCsv(p.category?.name ?? ''),
+        escapeCsv(p.brand?.name ?? ''),
+        escapeCsv(p.sizeGroup ?? ''),
+        p.isActive ? 'Sí' : 'No',
+        p.isFeatured ? 'Sí' : 'No',
+      ].join(','),
+    )
+
+    const dateStr = new Date().toISOString().slice(0, 10)
+    res.setHeader('Content-Type', 'text/csv; charset=utf-8')
+    res.setHeader('Content-Disposition', `attachment; filename="productos-${dateStr}.csv"`)
+    res.send(bom + headers + '\n' + rows.join('\n'))
+  } catch (error) {
+    next(error)
+  }
+}
+
+export const exportProductsXlsx = async (
+  _req: AuthRequest,
+  res: Response,
+  next: NextFunction,
+): Promise<void> => {
+  try {
+    const ExcelJS = require('exceljs')
+    const products = await prisma.product.findMany({
+      orderBy: { name: 'asc' },
+      include: { category: { select: { name: true } }, brand: { select: { name: true } } },
+    })
+
+    const workbook = new ExcelJS.Workbook()
+    const sheet = workbook.addWorksheet('Productos')
+
+    sheet.columns = [
+      { header: 'ID', key: 'id', width: 8 },
+      { header: 'Nombre', key: 'name', width: 50 },
+      { header: 'Slug', key: 'slug', width: 40 },
+      { header: 'SKU', key: 'sku', width: 15 },
+      { header: 'Precio', key: 'price', width: 12 },
+      { header: 'Precio Oferta', key: 'salePrice', width: 14 },
+      { header: 'Stock', key: 'stock', width: 8 },
+      { header: 'Categoría', key: 'category', width: 20 },
+      { header: 'Marca', key: 'brand', width: 20 },
+      { header: 'Grupo Tamaño', key: 'sizeGroup', width: 25 },
+      { header: 'Activo', key: 'isActive', width: 8 },
+      { header: 'Destacado', key: 'isFeatured', width: 10 },
+    ]
+
+    for (const p of products) {
+      sheet.addRow({
+        id: p.id,
+        name: p.name,
+        slug: p.slug,
+        sku: p.sku ?? '',
+        price: p.price,
+        salePrice: p.salePrice ?? '',
+        stock: p.stock,
+        category: p.category?.name ?? '',
+        brand: p.brand?.name ?? '',
+        sizeGroup: p.sizeGroup ?? '',
+        isActive: p.isActive ? 'Sí' : 'No',
+        isFeatured: p.isFeatured ? 'Sí' : 'No',
+      })
+    }
+
+    sheet.getRow(1).font = { bold: true }
+
+    const dateStr = new Date().toISOString().slice(0, 10)
+    res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    res.setHeader('Content-Disposition', `attachment; filename="productos-${dateStr}.xlsx"`)
+
+    await workbook.xlsx.write(res)
+    res.end()
+  } catch (error) {
+    next(error)
+  }
+}

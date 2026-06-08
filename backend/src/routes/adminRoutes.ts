@@ -9,8 +9,10 @@ import {
   deleteProduct,
   getLowStockProducts,
   getTopSellingProducts,
+  exportProductsCsv,
+  exportProductsXlsx,
 } from '../controllers/adminProductController'
-import { getAdminOrders, updateOrderStatus, getOrderStats, exportOrdersCsv } from '../controllers/adminOrderController'
+import { getAdminOrders, updateOrderStatus, getOrderStats, exportOrdersCsv, exportOrdersXlsx } from '../controllers/adminOrderController'
 import { getRevenue } from '../controllers/adminRevenueController'
 import { getSalesByCategory, getMonthComparison, getRecentOrdersFeed } from '../controllers/adminAnalyticsController'
 import { getBrands, createBrand, updateBrand, deleteBrand, autoAssignBrands } from '../controllers/adminBrandController'
@@ -28,6 +30,8 @@ router.get('/products/top-selling', authMiddleware, getTopSellingProducts) // mu
 router.get('/products', authMiddleware, getAdminProducts)
 router.post('/products', authMiddleware, createProduct)
 router.put('/products/:id', authMiddleware, updateProduct)
+router.get('/products/export/csv', authMiddleware, exportProductsCsv)
+router.get('/products/export/xlsx', authMiddleware, exportProductsXlsx)
 router.delete('/products/:id', authMiddleware, deleteProduct)
 
 // Protected — analytics
@@ -52,7 +56,8 @@ router.delete('/coupons/:id', authMiddleware, deleteCoupon)
 
 // Protected — orders (specific routes must precede /orders/:id)
 router.get('/orders/recent-feed', authMiddleware, getRecentOrdersFeed)
-router.get('/orders/export', authMiddleware, exportOrdersCsv)
+router.get('/orders/export/csv', authMiddleware, exportOrdersCsv)
+router.get('/orders/export/xlsx', authMiddleware, exportOrdersXlsx)
 router.get('/orders/stats', authMiddleware, getOrderStats)
 router.get('/orders', authMiddleware, getAdminOrders)
 router.put('/orders/:id/status', authMiddleware, updateOrderStatus)

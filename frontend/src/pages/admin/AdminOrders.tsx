@@ -65,13 +65,13 @@ const AdminOrders = () => {
     setPage(1)
   }
 
-  const handleExport = async () => {
+  const handleExport = async (format: 'csv' | 'xlsx') => {
     try {
-      const response = await api.get('/admin/orders/export', { responseType: 'blob' })
+      const response = await api.get(`/admin/orders/export/${format}`, { responseType: 'blob' })
       const url = window.URL.createObjectURL(new Blob([response.data]))
       const link = document.createElement('a')
       link.href = url
-      link.setAttribute('download', `ordenes-${new Date().toISOString().slice(0, 10)}.csv`)
+      link.setAttribute('download', `ordenes-${new Date().toISOString().slice(0, 10)}.${format}`)
       document.body.appendChild(link)
       link.click()
       link.remove()
@@ -90,10 +90,16 @@ const AdminOrders = () => {
         <h1 className="text-2xl font-bold text-gray-900 dark:text-[#e8eaf0]">Órdenes</h1>
         <div className="flex items-center gap-3">
           <button
-            onClick={handleExport}
+            onClick={() => handleExport('csv')}
             className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition-colors"
           >
             Exportar CSV
+          </button>
+          <button
+            onClick={() => handleExport('xlsx')}
+            className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-medium rounded-lg transition-colors"
+          >
+            Exportar XLSX
           </button>
           {/* Status filter */}
           <select

@@ -4,7 +4,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Search } from 'lucide-react'
+import { Search, Download } from 'lucide-react'
 import AdminLayout from '@/components/admin/AdminLayout'
 import { formatCLP } from '@/utils/formatters'
 import api from '@/services/api'
@@ -287,6 +287,22 @@ const AdminProducts = () => {
     }, 350)
   }
 
+  const handleExport = async (format: 'csv' | 'xlsx') => {
+    try {
+      const response = await api.get(`/admin/products/export/${format}`, { responseType: 'blob' })
+      const url = window.URL.createObjectURL(new Blob([response.data]))
+      const link = document.createElement('a')
+      link.href = url
+      link.setAttribute('download', `productos-${new Date().toISOString().slice(0, 10)}.${format}`)
+      document.body.appendChild(link)
+      link.click()
+      link.remove()
+      window.URL.revokeObjectURL(url)
+    } catch {
+      // Silently handle
+    }
+  }
+
   const { data, isLoading } = useQuery({
     queryKey: ['admin', 'products', page, search],
     queryFn: () => fetchProducts(page, search || undefined),
@@ -332,12 +348,26 @@ const AdminProducts = () => {
 
       <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
         <h1 className="text-2xl font-bold text-gray-900 dark:text-[#e8eaf0]">Productos</h1>
-        <button
-          onClick={() => setModalProduct('new')}
-          className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-lg text-sm transition-colors"
-        >
-          + Nuevo producto
-        </button>
+        <div className="flex gap-2">
+          <button
+            onClick={() => handleExport('csv')}
+            className="flex items-center gap-1.5 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg text-sm transition-colors"
+          >
+            <Download size={14} /> CSV
+          </button>
+          <button
+            onClick={() => handleExport('xlsx')}
+            className="flex items-center gap-1.5 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-lg text-sm transition-colors"
+          >
+            <Download size={14} /> XLSX
+          </button>
+          <button
+            onClick={() => setModalProduct('new')}
+            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-lg text-sm transition-colors"
+          >
+            + Nuevo producto
+          </button>
+        </div>
       </div>
 
       {/* Search bar */}
