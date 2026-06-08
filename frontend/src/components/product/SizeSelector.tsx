@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-import { Check } from 'lucide-react'
 import type { ProductVariant } from '@/types'
 
 interface SizeSelectorProps {
@@ -7,80 +6,66 @@ interface SizeSelectorProps {
   currentSlug: string
 }
 
-export default function SizeSelector({ variants, currentSlug }: SizeSelectorProps) {
-  const single = variants.length === 1
+function parseKg(label: string): number {
+  const num = parseFloat(label.replace(',', '.').replace(/[^0-9.,]/g, ''))
+  return isNaN(num) ? 0 : num
+}
 
+function formatPrice(n: number): string {
+  return '$' + Math.round(n).toLocaleString('es-CL')
+}
+
+export default function SizeSelector({ variants, currentSlug }: SizeSelectorProps) {
   return (
     <div>
       <p className="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-[#8892a4] mb-3">
-        Tamaño
+        Seleccionar Peso
       </p>
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-col gap-2">
         {variants.map((v) => {
           const isSelected = v.slug === currentSlug
           const outOfStock = v.stock === 0
-
-          if (single) {
-            return (
-              <div
-                key={v.id}
-                className="flex items-center gap-2 px-3 py-2 rounded-xl border-2 border-gray-200 dark:border-[#2a2a2a] bg-white dark:bg-[#1a1a1a]"
-              >
-                {v.imageUrl ? (
-                  <img src={v.imageUrl} alt={v.sizeLabel} className="w-10 h-10 object-contain rounded-md" />
-                ) : (
-                  <div className="w-10 h-10 bg-gray-100 dark:bg-[#222222] rounded-md" />
-                )}
-                <div className="flex flex-col">
-                  <span className="text-xs font-semibold text-gray-700 dark:text-[#e8eaf0]">{v.sizeLabel}</span>
-                  <span className="text-[11px] text-gray-500 dark:text-[#8892a4]">
-                    {v.salePrice ? (
-                      <span className="flex items-center gap-1">
-                        <span className="line-through text-gray-400">${v.price.toLocaleString('es-CL')}</span>
-                        <span className="text-orange-500 font-semibold">${v.salePrice.toLocaleString('es-CL')}</span>
-                      </span>
-                    ) : `$${v.price.toLocaleString('es-CL')}`}
-                  </span>
-                </div>
-              </div>
-            )
-          }
+          const kg = parseKg(v.sizeLabel)
+          const displayPrice = v.salePrice ?? v.price
+          const pricePerKg = kg > 0 ? formatPrice(displayPrice / kg) : null
 
           return (
             <Link
               key={v.id}
               to={`/producto/${v.slug}`}
-              className={`relative flex flex-col items-center gap-1.5 px-3 py-2.5 rounded-xl border-2 transition-all w-[88px] ${
+              className={`flex items-center gap-3 px-4 py-3 rounded-xl border-2 transition-all ${
                 isSelected
                   ? 'border-blue-600 bg-blue-50 dark:bg-blue-900/20'
                   : 'border-gray-200 dark:border-[#2a2a2a] bg-white dark:bg-[#1a1a1a] hover:border-blue-300 dark:hover:border-blue-700'
-              } ${outOfStock ? 'opacity-45' : ''}`}
+              } ${outOfStock ? 'opacity-45 pointer-events-none' : ''}`}
             >
               {v.imageUrl ? (
-                <img
-                  src={v.imageUrl}
-                  alt={v.sizeLabel}
-                  className="w-12 h-12 object-contain rounded-md"
-                />
+                <img src={v.imageUrl} alt={v.sizeLabel} className="w-10 h-10 object-contain rounded-md shrink-0" />
               ) : (
-                <div className="w-12 h-12 bg-gray-100 dark:bg-[#222222] rounded-md" />
+                <div className="w-10 h-10 bg-gray-100 dark:bg-[#222222] rounded-md shrink-0" />
               )}
-              <span className={`text-xs font-semibold ${isSelected ? 'text-blue-700 dark:text-blue-300' : 'text-gray-700 dark:text-[#e8eaf0]'}`}>
-                {v.sizeLabel}
-              </span>
-              <span className={`text-[11px] ${isSelected ? 'text-blue-600 dark:text-blue-300' : 'text-gray-500 dark:text-[#8892a4]'}`}>
-                {outOfStock ? 'Sin stock' : v.salePrice ? (
-                  <span className="flex flex-col items-center">
-                    <span className="line-through text-gray-400">${v.price.toLocaleString('es-CL')}</span>
-                    <span className="text-orange-500 font-semibold">${v.salePrice.toLocaleString('es-CL')}</span>
-                  </span>
-                ) : `$${v.price.toLocaleString('es-CL')}`}
-              </span>
-              {isSelected && (
-                <span className="absolute -top-2 -right-2 w-5 h-5 bg-blue-600 text-white rounded-full flex items-center justify-center">
-                  <Check size={12} strokeWidth={3} />
-                </span>
-              )}
+              <div className="flex-1 min-w-0">
+                <p className={`text-sm font-bold ${isSelected ? 'text-blue-700 dark:text-blue-300' : 'text-gray-800 dark:text-[#e8eaf0]'}`}>
+                  {v.sizeLabel}
+                </p>
+                {pricePerKg && (
+                  <p className="text-xs text-gray-400 dark:text-[#8892a4]">
+                    {pricePerKg}x KG
+                  </p>
+                )}
+              </div>
+              <div className="text-right shrink-0">
+                {outOfStock ? (
+                  <span className="text-xs text-red-500 font-medium">Sin stock</span>
+                ) : v.salePrice ? (
+                  <div>
+                    <p className="text-xs text-gray-400 dark:text-[#8892a4] line-through">{formatPrice(v.price)}</p>
+                    <p className="text-sm font-bold text-orange-500">{formatPrice(v.salePrice)}</p>
+                  </div>
+                ) : (
+                  <p className="text-sm font-bold text-gray-800 dark:text-[#e8eaf0]">{formatPrice(v.price)}</p>
+                )}
+              </div>
             </Link>
           )
         })}
