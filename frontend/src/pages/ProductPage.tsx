@@ -9,6 +9,7 @@ import { useCartStore } from '@/store/cartStore'
 import { useUiStore } from '@/store/uiStore'
 import Breadcrumbs from '@/components/layout/Breadcrumbs'
 import ProductGrid from '@/components/product/ProductGrid'
+import SizeSelector from '@/components/product/SizeSelector'
 
 export default function ProductPage() {
   const { slug } = useParams<{ slug: string }>()
@@ -166,6 +167,10 @@ export default function ProductPage() {
               </>
             )}
           </div>
+
+          {product.variants && product.variants.length > 1 && (
+            <SizeSelector variants={product.variants} currentSlug={product.slug} />
+          )}
 
           {/* Badges */}
           <div className="flex flex-wrap gap-2">
