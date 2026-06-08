@@ -1,6 +1,8 @@
 import type { Request, Response, NextFunction } from 'express'
 import { prisma } from '../lib/prisma'
 
+const SIZE_LABEL_REGEX = /(\d+(?:\.\d+)?)\s*kg/i
+
 interface VariantItem {
   id: number
   name: string
@@ -135,14 +137,12 @@ export const getProductBySlug = async (
       const siblings = await prisma.product.findMany({
         where: { sizeGroup: product.sizeGroup, isActive: true },
         select: { id: true, name: true, slug: true, price: true, salePrice: true, stock: true, imageUrl: true },
-        orderBy: { name: 'asc' },
       })
 
-      const sizeLabelRegex = /(\d+(?:\.\d+)?)\s*kg/i
       variants = siblings
         .map((s) => ({
           ...s,
-          sizeLabel: s.name.match(sizeLabelRegex)?.[0]?.toLowerCase() ?? s.name,
+          sizeLabel: s.name.match(SIZE_LABEL_REGEX)?.[0]?.toLowerCase() ?? s.name,
         }))
         .sort((a, b) => {
           const aNum = parseFloat(a.sizeLabel)
