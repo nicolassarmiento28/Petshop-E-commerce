@@ -151,6 +151,13 @@ export default function ProductPage() {
             </p>
           )}
 
+          {/* SKU */}
+          {product.sku && (
+            <p className="text-xs text-gray-400 dark:text-[#8892a4] font-mono">
+              SKU: {product.sku}
+            </p>
+          )}
+
           {/* Name */}
           <h1
             className="text-3xl font-bold text-gray-900 dark:text-[#e8eaf0] leading-tight"

@@ -11,6 +11,7 @@ const createProductSchema = z.object({
   description: z.string().optional(),
   salePrice: z.number().optional(),
   imageUrl: z.string().optional(),
+  sku: z.string().optional(),
   categoryId: z.number(),
   brandId: z.number().optional(),
   isFeatured: z.boolean().optional(),
@@ -61,7 +62,7 @@ export const createProduct = async (
   next: NextFunction,
 ): Promise<void> => {
   try {
-    let parsed: { name: string; slug: string; price: number; stock: number; description?: string; salePrice?: number; imageUrl?: string; categoryId: number; brandId?: number; isFeatured?: boolean; sizeGroup?: string }
+    let parsed: { name: string; slug: string; price: number; stock: number; description?: string; salePrice?: number; imageUrl?: string; sku?: string; categoryId: number; brandId?: number; isFeatured?: boolean; sizeGroup?: string }
     try {
       parsed = createProductSchema.parse(req.body)
     } catch (error) {
@@ -71,7 +72,7 @@ export const createProduct = async (
       }
       throw error
     }
-    const { name, slug, description, price, salePrice, stock, imageUrl, categoryId, brandId, isFeatured, sizeGroup } = parsed
+    const { name, slug, description, price, salePrice, stock, imageUrl, sku, categoryId, brandId, isFeatured, sizeGroup } = parsed
 
     const existing = await prisma.product.findUnique({ where: { slug: String(slug) } })
     if (existing) {
@@ -88,6 +89,7 @@ export const createProduct = async (
         salePrice: salePrice !== undefined && salePrice !== null ? Number(salePrice) : undefined,
         stock: Number(stock),
         imageUrl: imageUrl !== undefined ? String(imageUrl) : undefined,
+        sku: sku !== undefined && sku !== '' ? String(sku) : undefined,
         images: [],
         isActive: true,
         isFeatured: isFeatured !== undefined ? Boolean(isFeatured) : false,
@@ -118,7 +120,7 @@ export const updateProduct = async (
       return
     }
 
-    const { name, slug, description, price, salePrice, stock, imageUrl, images, isActive, isFeatured, categoryId, brandId, sizeGroup } =
+    const { name, slug, description, price, salePrice, stock, imageUrl, images, sku, isActive, isFeatured, categoryId, brandId, sizeGroup } =
       req.body as Record<string, unknown>
 
     const product = await prisma.product.update({
@@ -132,6 +134,7 @@ export const updateProduct = async (
         ...(stock !== undefined && { stock: Number(stock) }),
         ...(imageUrl !== undefined && { imageUrl: imageUrl !== null ? String(imageUrl) : null }),
         ...(images !== undefined && { images: images as string[] }),
+        ...(sku !== undefined && { sku: sku !== null && sku !== '' ? String(sku) : null }),
         ...(isActive !== undefined && { isActive: Boolean(isActive) }),
         ...(isFeatured !== undefined && { isFeatured: Boolean(isFeatured) }),
         ...(categoryId !== undefined && { categoryId: Number(categoryId) }),

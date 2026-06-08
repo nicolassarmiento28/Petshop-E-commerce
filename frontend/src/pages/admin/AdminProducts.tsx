@@ -41,6 +41,7 @@ const productSchema = z.object({
   ),
   stock: z.coerce.number().int().min(0),
   imageUrl: z.string().url('URL inválida').optional().or(z.literal('')),
+  sku: z.string().optional(),
   categoryId: z.coerce.number().positive('Selecciona una categoría'),
   brandId: z.preprocess(
     (v) => (v === '' || v === null || v === undefined ? undefined : v),
@@ -88,6 +89,7 @@ const ProductModal = ({ product, categories, brands, onClose }: ProductModalProp
           salePrice: product.salePrice ?? undefined,
           stock: product.stock,
           imageUrl: product.imageUrl ?? '',
+          sku: product.sku ?? '',
           categoryId: product.categoryId,
           brandId: product.brandId ?? undefined,
           isFeatured: product.isFeatured,
@@ -161,6 +163,11 @@ const ProductModal = ({ product, categories, brands, onClose }: ProductModalProp
             <label className="block text-sm font-medium text-gray-700 dark:text-[#e8eaf0] mb-1">URL Imagen</label>
             <input {...register('imageUrl')} placeholder="https://..." className={inputClass} />
             {errors.imageUrl && <p className="text-red-500 text-xs mt-1">{errors.imageUrl.message}</p>}
+          </div>
+          {/* SKU */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-[#e8eaf0] mb-1">SKU</label>
+            <input {...register('sku')} placeholder="ej: ACA-RFP-11KG" className={inputClass} />
           </div>
           {/* Size Group */}
           <div>
@@ -355,6 +362,7 @@ const AdminProducts = () => {
                 <tr>
                   <th className="px-4 py-3 text-left">Imagen</th>
                   <th className="px-4 py-3 text-left">Nombre</th>
+                  <th className="px-4 py-3 text-left">SKU</th>
                   <th className="px-4 py-3 text-left">Categoría</th>
                   <th className="px-4 py-3 text-left">Precio</th>
                   <th className="px-4 py-3 text-left">Stock</th>
@@ -376,6 +384,13 @@ const AdminProducts = () => {
                     <td className="px-4 py-3">
                       <p className="font-medium text-gray-800 dark:text-[#e8eaf0]">{product.name}</p>
                       <p className="text-gray-400 dark:text-[#8892a4] text-xs">{product.slug}</p>
+                    </td>
+                    <td className="px-4 py-3">
+                      {product.sku ? (
+                        <span className="font-mono text-xs text-gray-500 dark:text-[#8892a4]">{product.sku}</span>
+                      ) : (
+                        <span className="text-xs text-gray-300 dark:text-[#444]">—</span>
+                      )}
                     </td>
                     <td className="px-4 py-3 text-gray-600 dark:text-[#e8eaf0]">
                       {flatCats.find((c) => c.id === product.categoryId)?.label.trim() ?? product.categoryId}

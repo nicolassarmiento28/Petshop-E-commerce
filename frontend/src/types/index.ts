@@ -52,6 +52,7 @@ export interface ProductType {
   stock: number
   imageUrl?: string
   images: string[]
+  sku?: string
   isActive: boolean
   isFeatured: boolean
   sizeGroup?: string

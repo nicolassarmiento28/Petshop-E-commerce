@@ -43,6 +43,7 @@ model Product {
   sizeGroup   String?
   imageUrl    String?
   images      String[]
+  sku         String?
   isActive    Boolean     @default(true)
   isFeatured  Boolean     @default(false)
   categoryId  Int
