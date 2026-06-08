@@ -26,6 +26,16 @@ Thumbs.db
 # Playwright MCP artifacts
 .playwright-mcp/
 
+# Brainstorming / visual companion session files
+.superpowers/
+
+# Working notes / snapshots
+*.md
+!**/README.md
+!AGENTS.md
+!PLAN.md
+!CONTEXT.md
+
 # Server output
 server-out.txt
 
