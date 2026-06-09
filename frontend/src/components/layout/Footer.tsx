@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { MapPin, Phone, Mail, Instagram, Facebook } from 'lucide-react'
+import { MapPin, Phone, Mail, Instagram, Facebook, PawPrint } from 'lucide-react'
 
 export default function Footer() {
   return (
@@ -9,7 +9,7 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <span className="text-2xl">🐾</span>
+              <PawPrint size={28} className="text-orange-500 shrink-0" />
               <span
                 className="text-xl font-bold text-white dark:text-[#e8eaf0]"
                 style={{ fontFamily: "'Fraunces', Georgia, serif" }}
