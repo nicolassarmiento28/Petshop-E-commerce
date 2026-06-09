@@ -98,7 +98,7 @@ const AdminCustomers = () => {
         />
       </div>
 
-      <div className="bg-white dark:bg-[#1a1a1a] rounded-xl border border-gray-200 dark:border-[#2a2a2a] overflow-hidden">
+      <div className="bg-white dark:bg-[#1a1a1a] rounded-xl border border-gray-200 dark:border-[#2a2a2a]">
         {isLoading ? (
           <p className="p-6 text-gray-500 dark:text-[#8892a4]">Cargando...</p>
         ) : (

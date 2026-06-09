@@ -37,6 +37,7 @@
     background-color: #FAFAF8;
     color: #111827;
     font-family: 'DM Sans', system-ui, sans-serif;
+    overflow-x: hidden;
   }
   .dark body {
     background-color: #111111;
