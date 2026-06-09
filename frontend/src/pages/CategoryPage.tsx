@@ -4,7 +4,8 @@ import { Helmet } from 'react-helmet-async'
 import { Search } from 'lucide-react'
 import Breadcrumbs from '@/components/layout/Breadcrumbs'
 import ProductGrid from '@/components/product/ProductGrid'
-import { useProductsInfinite, useCategories, useBrands } from '@/hooks/useProducts'
+import { useProductsInfinite, useCategories, useBrands, usePriceRange } from '@/hooks/useProducts'
+import { formatCLP } from '@/utils/formatters'
 import type { ProductFilters, CategoryType } from '@/types'
 
 // ── helpers ────────────────────────────────────────────────────────────────────
@@ -30,12 +31,33 @@ export default function CategoryPage() {
   const [minPrice, setMinPrice] = useState('')
   const [maxPrice, setMaxPrice] = useState('')
 
-  const { data: allCategories = [] } = useCategories()
-  const { data: allBrands = [] } = useBrands()
-
   const isOfertas = slug === 'ofertas'
   const isMarcas = slug === 'marcas'
   const effectiveSlug = sub ?? slug ?? ''
+
+  const { data: allCategories = [] } = useCategories()
+  const { data: allBrands = [] } = useBrands()
+  const { data: priceRange } = usePriceRange(
+    isOfertas ? { category: 'ofertas' } : isMarcas ? undefined : { category: effectiveSlug },
+  )
+
+  const priceOptions = useMemo(() => {
+    if (!priceRange) return [] as number[]
+    const { minPrice, maxPrice } = priceRange
+    if (minPrice === maxPrice) return [minPrice]
+    const range = maxPrice - minPrice
+    const stepCount = 6
+    const rawStep = range / stepCount
+    const magnitude = Math.pow(10, Math.floor(Math.log10(rawStep)))
+    const niceStep = Math.ceil(rawStep / magnitude) * magnitude
+    const options: number[] = []
+    let current = Math.ceil(minPrice / niceStep) * niceStep
+    while (current < maxPrice) {
+      options.push(current)
+      current += niceStep
+    }
+    return options
+  }, [priceRange])
 
   // Build query filters
   const filters = useMemo<Omit<ProductFilters, 'cursor'>>(() => {
@@ -204,20 +226,26 @@ export default function CategoryPage() {
           )}
 
           {/* Price range */}
-          <input
-            type="number"
+          <select
             value={minPrice}
             onChange={(e) => setMinPrice(e.target.value)}
-            placeholder="Precio mínimo"
-            className="w-full sm:w-28 px-3 py-2 border border-gray-200 dark:border-[#2a2a2a] rounded-xl text-sm text-gray-600 dark:text-[#e8eaf0] bg-white dark:bg-[#222222] focus:outline-none focus:border-blue-400 transition-colors"
-          />
-          <input
-            type="number"
+            className="w-full sm:w-auto px-3 py-2 border border-gray-200 dark:border-[#2a2a2a] rounded-xl text-sm text-gray-600 dark:text-[#e8eaf0] bg-white dark:bg-[#222222] hover:border-blue-300 transition-colors outline-none"
+          >
+            <option value="">Precio mín.</option>
+            {priceOptions.map((p) => (
+              <option key={p} value={p}>{formatCLP(p)}</option>
+            ))}
+          </select>
+          <select
             value={maxPrice}
             onChange={(e) => setMaxPrice(e.target.value)}
-            placeholder="Precio máximo"
-            className="w-full sm:w-28 px-3 py-2 border border-gray-200 dark:border-[#2a2a2a] rounded-xl text-sm text-gray-600 dark:text-[#e8eaf0] bg-white dark:bg-[#222222] focus:outline-none focus:border-blue-400 transition-colors"
-          />
+            className="w-full sm:w-auto px-3 py-2 border border-gray-200 dark:border-[#2a2a2a] rounded-xl text-sm text-gray-600 dark:text-[#e8eaf0] bg-white dark:bg-[#222222] hover:border-blue-300 transition-colors outline-none"
+          >
+            <option value="">Precio máx.</option>
+            {priceOptions.map((p) => (
+              <option key={p} value={p}>{formatCLP(p)}</option>
+            ))}
+          </select>
 
           {/* Sort */}
           <select

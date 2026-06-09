@@ -5,6 +5,7 @@ import {
   fetchCategories,
   fetchBrands,
   fetchRelatedProducts,
+  fetchPriceRange,
 } from '@/services/productService'
 import type { ProductsResponse } from '@/services/productService'
 import type { ProductFilters } from '@/types'
@@ -53,4 +54,10 @@ export const useRelatedProducts = (slug: string) =>
     queryKey: ['related', slug],
     queryFn: () => fetchRelatedProducts(slug),
     enabled: !!slug,
+  })
+
+export const usePriceRange = (params?: { category?: string; brand?: string }) =>
+  useQuery({
+    queryKey: ['price-range', params],
+    queryFn: () => fetchPriceRange(params),
   })

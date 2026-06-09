@@ -31,3 +31,13 @@ export const fetchRelatedProducts = async (slug: string): Promise<ProductType[]>
   const { data } = await api.get<ProductType[]>(`/products/${slug}/related`)
   return data
 }
+
+export interface PriceRange {
+  minPrice: number
+  maxPrice: number
+}
+
+export const fetchPriceRange = async (params?: { category?: string; brand?: string }): Promise<PriceRange> => {
+  const { data } = await api.get<PriceRange>('/products/price-range', { params })
+  return data
+}

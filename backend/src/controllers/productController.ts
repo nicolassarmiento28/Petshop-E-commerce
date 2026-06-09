@@ -166,6 +166,54 @@ export const getProductBySlug = async (
   }
 }
 
+export const getPriceRange = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): Promise<void> => {
+  try {
+    const { category, brand } = req.query as Record<string, string | undefined>
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const where: any = { isActive: true }
+
+    if (category) {
+      const cat = await prisma.category.findUnique({
+        where: { slug: category },
+        select: { id: true, children: { select: { id: true } } },
+      })
+      const ids = cat ? [cat.id, ...cat.children.map((c) => c.id)] : []
+      where.categoryId = { in: ids }
+    }
+    if (brand) {
+      where.brand = { slug: brand }
+    }
+
+    const [minResult, maxResult] = await Promise.all([
+      prisma.product.findFirst({
+        where,
+        orderBy: { price: 'asc' },
+        select: { price: true, salePrice: true },
+      }),
+      prisma.product.findFirst({
+        where,
+        orderBy: { price: 'desc' },
+        select: { price: true, salePrice: true },
+      }),
+    ])
+
+    const allPrices = [minResult?.price, minResult?.salePrice, maxResult?.price, maxResult?.salePrice]
+      .filter((p): p is number => p !== null && p !== undefined)
+
+    const minPrice = Math.min(...allPrices)
+    const maxPrice = Math.max(...allPrices)
+
+    res.json({ minPrice, maxPrice })
+  } catch (error) {
+    next(error)
+  }
+}
+
 export const getRelatedProducts = async (
   req: Request,
   res: Response,
