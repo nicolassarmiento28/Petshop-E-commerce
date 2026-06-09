@@ -1,10 +1,10 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 import { Search } from 'lucide-react'
 import Breadcrumbs from '@/components/layout/Breadcrumbs'
 import ProductGrid from '@/components/product/ProductGrid'
-import { useProductsInfinite, useCategories, useBrands, usePriceRange } from '@/hooks/useProducts'
+import { useProductsInfinite, useCategories, useBrands } from '@/hooks/useProducts'
 import { formatCLP } from '@/utils/formatters'
 import type { ProductFilters, CategoryType } from '@/types'
 
@@ -36,18 +36,73 @@ export default function CategoryPage() {
 
   const { data: allCategories = [] } = useCategories()
   const { data: allBrands = [] } = useBrands()
-  const { data: priceRange } = usePriceRange(
-    isOfertas ? { sale: true } : isMarcas ? undefined : { category: effectiveSlug },
+
+  // Derive min/max from the priceRangeFilter label string
+  const selectedPriceRange = useMemo(() => {
+    if (!priceRangeFilter) return null
+    const parts = priceRangeFilter.split(' - ')
+    if (parts.length === 2) {
+      const min = Number(parts[0].replace(/[^0-9]/g, ''))
+      const raw = parts[1]
+      if (raw.endsWith('+')) {
+        return { min, max: undefined as number | undefined }
+      }
+      const max = Number(raw.replace(/[^0-9]/g, ''))
+      return { min, max }
+    }
+    return null
+  }, [priceRangeFilter])
+
+  // Build query filters (no dependency on priceBuckets)
+  const filters = useMemo<Omit<ProductFilters, 'cursor'>>(() => {
+    const f: Omit<ProductFilters, 'cursor'> = { limit: 100 }
+    if (isOfertas) {
+      f.sale = true
+    } else if (!isMarcas) {
+      f.category = effectiveSlug
+    }
+    if (sort) f.sort = sort
+    if (search) f.search = search
+    if (brandFilter) f.brand = brandFilter
+    if (selectedPriceRange) {
+      f.minPrice = selectedPriceRange.min
+      if (selectedPriceRange.max !== undefined) f.maxPrice = selectedPriceRange.max
+    }
+    return f
+  }, [isOfertas, isMarcas, effectiveSlug, sort, search, brandFilter, selectedPriceRange])
+
+  const {
+    data,
+    isLoading,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useProductsInfinite(filters)
+
+  const products = useMemo(
+    () => data?.pages.flatMap((p) => p.products) ?? [],
+    [data],
   )
+  const total = data?.pages[0]?.total ?? 0
+
+  const [cachedPriceRange, setCachedPriceRange] = useState<{ min: number; max: number } | null>(null)
+  useEffect(() => {
+    if (!cachedPriceRange && products.length > 0) {
+      const prices = products.flatMap(p => [p.price, p.salePrice].filter((v): v is number => v != null))
+      if (prices.length) {
+        setCachedPriceRange({ min: Math.min(...prices), max: Math.max(...prices) })
+      }
+    }
+  }, [products, cachedPriceRange])
 
   type PriceBucket = { label: string; min: number; max?: number }
   const priceBuckets = useMemo(() => {
-    if (!priceRange) return [] as PriceBucket[]
-    const { minPrice: rawMin, maxPrice: rawMax } = priceRange
+    if (!cachedPriceRange) return [] as PriceBucket[]
+    const { min: rawMin, max: rawMax } = cachedPriceRange
     if (rawMin === rawMax) return [{ label: formatCLP(rawMin), min: rawMin }]
-    const range = rawMax - rawMin
+    const spread = rawMax - rawMin
     const stepCount = 6
-    const rawStep = range / stepCount
+    const rawStep = spread / stepCount
     const magnitude = Math.pow(10, Math.floor(Math.log10(rawStep)))
     const niceStep = Math.ceil(rawStep / magnitude) * magnitude
     const breaks: number[] = []
@@ -64,42 +119,7 @@ export default function CategoryPage() {
     }
     buckets.push({ label: `${formatCLP(prev)}+`, min: prev })
     return buckets
-  }, [priceRange])
-
-  // Build query filters
-  const filters = useMemo<Omit<ProductFilters, 'cursor'>>(() => {
-    const f: Omit<ProductFilters, 'cursor'> = { limit: 100 }
-    if (isOfertas) {
-      f.sale = true
-    } else if (!isMarcas) {
-      f.category = effectiveSlug
-    }
-    if (sort) f.sort = sort
-    if (search) f.search = search
-    if (brandFilter) f.brand = brandFilter
-    if (priceRangeFilter) {
-      const bucket = priceBuckets.find((b) => b.label === priceRangeFilter)
-      if (bucket) {
-        f.minPrice = bucket.min
-        if (bucket.max !== undefined) f.maxPrice = bucket.max
-      }
-    }
-    return f
-  }, [isOfertas, isMarcas, effectiveSlug, sort, search, brandFilter, priceRangeFilter, priceBuckets])
-
-  const {
-    data,
-    isLoading,
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
-  } = useProductsInfinite(filters)
-
-  const products = useMemo(
-    () => data?.pages.flatMap((p) => p.products) ?? [],
-    [data],
-  )
-  const total = data?.pages[0]?.total ?? 0
+  }, [cachedPriceRange])
 
   // Subcategories of current parent (for nav pills)
   const parentCat = useMemo(() => {
