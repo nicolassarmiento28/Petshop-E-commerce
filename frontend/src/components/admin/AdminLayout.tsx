@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { LayoutDashboard, Package, ShoppingCart, Users, Tag, Percent, LogOut, Menu, X } from 'lucide-react'
+import { LayoutDashboard, Package, ShoppingCart, Users, Tag, Percent, LogOut, Menu, X, PawPrint } from 'lucide-react'
 
 const navItems = [
   { label: 'Dashboard', href: '/admin/dashboard', icon: LayoutDashboard },
@@ -29,7 +29,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
     <aside className="w-60 bg-white dark:bg-[#1a1a1a] border-r border-gray-200 dark:border-[#2a2a2a] flex flex-col shrink-0 h-full">
       <div className="px-6 py-5 bg-[#2b44d4] dark:bg-[#1e33a8]">
         <Link to="/admin/dashboard" className="flex items-center gap-2" onClick={() => setSidebarOpen(false)}>
-          <span className="text-lg font-bold text-white">🐾</span>
+          <PawPrint size={24} className="text-orange-500 shrink-0" />
           <span className="text-lg font-bold text-white">Petshop</span>
         </Link>
         <p className="text-xs text-blue-200 mt-0.5">Panel de administración</p>
