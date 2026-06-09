@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { ShoppingCart, Menu, X, Search, Shield, Sun, Moon, Pill } from 'lucide-react'
+import { ShoppingCart, Menu, X, Search, User, Sun, Moon, Pill } from 'lucide-react'
 import { useCartStore } from '@/store/cartStore'
 import { useThemeStore } from '@/store/themeStore'
 import { useUiStore } from '@/store/uiStore'
@@ -95,7 +95,7 @@ export default function Navbar() {
                 className="p-2 text-gray-500 dark:text-[#8892a4] hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-[#222222] rounded-lg transition-colors"
                 aria-label="Panel de administración"
               >
-                <Shield size={20} />
+                <User size={20} />
               </Link>
 
               <button

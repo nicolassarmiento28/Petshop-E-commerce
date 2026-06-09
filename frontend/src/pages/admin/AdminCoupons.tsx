@@ -237,7 +237,8 @@ const AdminCoupons = () => {
           <p className="p-6 text-gray-500 dark:text-[#8892a4]">Cargando...</p>
         ) : (
           <>
-            <table className="w-full text-sm">
+            <div className="overflow-x-auto">
+            <table className="w-full text-sm whitespace-nowrap">
               <thead className="bg-gray-50 dark:bg-[#222222] text-gray-500 dark:text-[#8892a4] text-xs uppercase">
                 <tr>
                   <th className="px-4 py-3 text-left">Código</th>
@@ -308,6 +309,7 @@ const AdminCoupons = () => {
                 ))}
               </tbody>
             </table>
+            </div>
             {/* Pagination */}
             {data && data.totalPages > 1 && (
               <div className="px-4 py-3 border-t border-gray-100 dark:border-[#2a2a2a] flex items-center justify-between text-sm text-gray-500 dark:text-[#8892a4]">

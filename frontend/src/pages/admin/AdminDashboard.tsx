@@ -362,7 +362,8 @@ const AdminDashboard = () => {
               <div className="px-6 py-4 border-b border-gray-100 dark:border-[#2a2a2a]">
                 <h2 className="font-semibold text-gray-800 dark:text-[#e8eaf0]">Órdenes recientes</h2>
               </div>
-              <table className="w-full text-sm">
+              <div className="overflow-x-auto">
+              <table className="w-full text-sm whitespace-nowrap">
                 <thead className="bg-gray-50 dark:bg-[#222222] text-gray-500 dark:text-[#8892a4] text-xs uppercase">
                   <tr>
                     <th className="px-6 py-3 text-left">N° Orden</th>
@@ -393,6 +394,7 @@ const AdminDashboard = () => {
                   )}
                 </tbody>
               </table>
+              </div>
             </div>
           </div>
 
