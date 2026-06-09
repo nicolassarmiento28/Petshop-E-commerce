@@ -1,6 +1,6 @@
 # PLAN.md — Tienda de Mascotas (Pet Shop)
 Plan de implementación completo por fases. Leer CONTEXT.md y AGENTS.md antes de ejecutar.
-Última actualización: 2026-06-06 — Limpieza de código muerto (useCart.ts, PaymentReturn.tsx), agregado getCategoryBySlug.
+Última actualización: 2026-06-09 — SKU en productos/marcas, export CSV/XLSX, admin responsive, filtro precio por rangos, icono PawPrint.
 ---
 ## FASE 1 — Base del proyecto
 **Goal:** Scaffold completo del monorepo con toda la configuración base lista.
@@ -127,6 +127,39 @@ Plan de implementación completo por fases. Leer CONTEXT.md y AGENTS.md antes de
 - [x] Agregar `getCategoryBySlug` a `backend/src/controllers/categoryController.ts` y `GET /:slug` a `backend/src/routes/categoryRoutes.ts`
 - [ ] Verificar que no haya más archivos huérfanos en frontend/src y backend/src
 ---
+---
+## FASE 8 — SKU, exportación, responsive, rangos de precio, iconografía (2026-06-09)
+**Goal:** SKU en productos y marcas, exportación CSV/XLSX, admin responsive, filtro de precio con rangos dinámicos, sustitución de emojis por SVG.
+**Resultado esperado:** Admin panel exportable y responsivo, productos con SKU visible, selector de rangos de precio client-side.
+### Productos y Marcas
+- [x] Campo `sku String?` en modelos Product y Brand (schema + migración)
+- [x] Admin: SKU visible en tabla Productos y Marcas, editable en formularios create/edit
+- [x] Frontend: SKU visible en ProductPage.tsx
+- [x] SKUs generados para productos (~1019) y marcas existentes vía SQL directo (seed-sku.sql)
+### Órdenes de prueba
+- [x] 15 órdenes creadas en DB con timestamps en últimas 24h, estados variados (PAID, PROCESSING, SHIPPED, DELIVERED, CANCELLED)
+### Export CSV/XLSX
+- [x] Backend: endpoints en adminProductController, adminOrderController, adminCustomerController (ExcelJS)
+- [x] Frontend: botones con icono Download + "CSV"/"XLSX" en AdminProducts, AdminOrders, AdminCustomers
+### Admin responsivo
+- [x] AdminLayout: sidebar colapsable en mobile (hamburguesa + overlay + botón cerrar), padding responsivo `p-4 sm:p-6 lg:p-8`
+- [x] Tablas con `overflow-x-auto` + `whitespace-nowrap`, scroll horizontal funcional
+- [x] `overflow-hidden` removido de contenedores de tabla (bloqueaba scroll)
+- [x] Body con `overflow-x: hidden` en index.css
+- [x] Navbar: icono User para acceso al admin visible en todos los tamaños
+### Filtro de precio por rangos
+- [x] Select único "Todos los precios" con rangos combinados (ej: `$1.290 - $30.000`, `$120.000+`)
+- [x] Rangos calculados client-side desde los productos cargados (sin dependencia de API)
+- [x] Funciona para todas las categorías del catálogo (perro, gato, ofertas, etc.)
+### Iconografía
+- [x] Reemplazar emoji 🐾 por `PawPrint` de lucide-react con `text-orange-500` en:
+  - Navbar (logo)
+  - Footer (logo)
+  - AdminLayout (sidebar)
+  - AdminLogin
+- [x] Consistente en web, celular y todos los tamaños de pantalla
+---
+
 ## Convenciones globales (aplicar en todas las fases)
 - Todo en TypeScript estricto — nunca `any`
 - Backend: todo handler async con try/catch y `next(error)`
