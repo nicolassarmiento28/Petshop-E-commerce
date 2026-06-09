@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { ShoppingCart, Menu, X, Search, User, Sun, Moon, Pill } from 'lucide-react'
+import { ShoppingCart, Menu, X, Search, User, Sun, Moon, Pill, PawPrint } from 'lucide-react'
 import { useCartStore } from '@/store/cartStore'
 import { useThemeStore } from '@/store/themeStore'
 import { useUiStore } from '@/store/uiStore'
@@ -49,8 +49,8 @@ export default function Navbar() {
           <div className="flex items-center gap-2 sm:gap-4 h-14 sm:h-16">
 
             {/* Logo */}
-            <Link to="/" className="flex items-center gap-2 shrink-0">
-              <span className="text-xl sm:text-2xl">🐾</span>
+<Link to="/" className="flex items-center gap-2 shrink-0">
+  <PawPrint size={24} className="text-orange-500 shrink-0" />
               <span
                 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-[#e8eaf0] tracking-tight"
                 style={{ fontFamily: "'Fraunces', Georgia, serif" }}
