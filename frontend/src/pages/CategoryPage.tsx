@@ -28,8 +28,7 @@ export default function CategoryPage() {
   const [sort, setSort] = useState('name_asc')
   const [search, setSearch] = useState('')
   const [brandFilter, setBrandFilter] = useState('')
-  const [minPrice, setMinPrice] = useState('')
-  const [maxPrice, setMaxPrice] = useState('')
+  const [priceRangeFilter, setPriceRangeFilter] = useState('')
 
   const isOfertas = slug === 'ofertas'
   const isMarcas = slug === 'marcas'
@@ -41,22 +40,30 @@ export default function CategoryPage() {
     isOfertas ? { sale: true } : isMarcas ? undefined : { category: effectiveSlug },
   )
 
-  const priceOptions = useMemo(() => {
-    if (!priceRange) return [] as number[]
-    const { minPrice, maxPrice } = priceRange
-    if (minPrice === maxPrice) return [minPrice]
-    const range = maxPrice - minPrice
+  type PriceBucket = { label: string; min: number; max?: number }
+  const priceBuckets = useMemo(() => {
+    if (!priceRange) return [] as PriceBucket[]
+    const { minPrice: rawMin, maxPrice: rawMax } = priceRange
+    if (rawMin === rawMax) return [{ label: formatCLP(rawMin), min: rawMin }]
+    const range = rawMax - rawMin
     const stepCount = 6
     const rawStep = range / stepCount
     const magnitude = Math.pow(10, Math.floor(Math.log10(rawStep)))
     const niceStep = Math.ceil(rawStep / magnitude) * magnitude
-    const options: number[] = []
-    let current = Math.ceil(minPrice / niceStep) * niceStep
-    while (current < maxPrice) {
-      options.push(current)
+    const breaks: number[] = []
+    let current = Math.ceil(rawMin / niceStep) * niceStep
+    while (current < rawMax) {
+      breaks.push(current)
       current += niceStep
     }
-    return options
+    const buckets: PriceBucket[] = []
+    let prev = rawMin
+    for (const b of breaks) {
+      buckets.push({ label: `${formatCLP(prev)} - ${formatCLP(b)}`, min: prev, max: b })
+      prev = b
+    }
+    buckets.push({ label: `${formatCLP(prev)}+`, min: prev })
+    return buckets
   }, [priceRange])
 
   // Build query filters
@@ -70,10 +77,15 @@ export default function CategoryPage() {
     if (sort) f.sort = sort
     if (search) f.search = search
     if (brandFilter) f.brand = brandFilter
-    if (minPrice) f.minPrice = Number(minPrice)
-    if (maxPrice) f.maxPrice = Number(maxPrice)
+    if (priceRangeFilter) {
+      const bucket = priceBuckets.find((b) => b.label === priceRangeFilter)
+      if (bucket) {
+        f.minPrice = bucket.min
+        if (bucket.max !== undefined) f.maxPrice = bucket.max
+      }
+    }
     return f
-  }, [isOfertas, isMarcas, effectiveSlug, sort, search, brandFilter, minPrice, maxPrice])
+  }, [isOfertas, isMarcas, effectiveSlug, sort, search, brandFilter, priceRangeFilter, priceBuckets])
 
   const {
     data,
@@ -227,23 +239,13 @@ export default function CategoryPage() {
 
           {/* Price range */}
           <select
-            value={minPrice}
-            onChange={(e) => setMinPrice(e.target.value)}
+            value={priceRangeFilter}
+            onChange={(e) => setPriceRangeFilter(e.target.value)}
             className="w-full sm:w-auto px-3 py-2 border border-gray-200 dark:border-[#2a2a2a] rounded-xl text-sm text-gray-600 dark:text-[#e8eaf0] bg-white dark:bg-[#222222] hover:border-blue-300 transition-colors outline-none"
           >
-            <option value="">Precio mín.</option>
-            {priceOptions.map((p) => (
-              <option key={p} value={p}>{formatCLP(p)}</option>
-            ))}
-          </select>
-          <select
-            value={maxPrice}
-            onChange={(e) => setMaxPrice(e.target.value)}
-            className="w-full sm:w-auto px-3 py-2 border border-gray-200 dark:border-[#2a2a2a] rounded-xl text-sm text-gray-600 dark:text-[#e8eaf0] bg-white dark:bg-[#222222] hover:border-blue-300 transition-colors outline-none"
-          >
-            <option value="">Precio máx.</option>
-            {priceOptions.map((p) => (
-              <option key={p} value={p}>{formatCLP(p)}</option>
+            <option value="">Todos los precios</option>
+            {priceBuckets.map((b) => (
+              <option key={b.label} value={b.label}>{b.label}</option>
             ))}
           </select>
 
@@ -261,14 +263,13 @@ export default function CategoryPage() {
           </select>
 
           {/* Clear filters */}
-          {(search || brandFilter || sort !== 'name_asc') && (
+          {(search || brandFilter || sort !== 'name_asc' || priceRangeFilter) && (
             <button
               onClick={() => {
                 setSearch('')
                 setBrandFilter('')
                 setSort('name_asc')
-                setMinPrice('')
-                setMaxPrice('')
+                setPriceRangeFilter('')
               }}
               className="px-3 py-2 text-sm text-red-500 hover:text-red-600 border border-red-200 rounded-xl hover:bg-red-50 transition-colors"
             >
