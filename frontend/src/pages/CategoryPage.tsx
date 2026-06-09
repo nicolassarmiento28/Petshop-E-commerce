@@ -38,7 +38,7 @@ export default function CategoryPage() {
   const { data: allCategories = [] } = useCategories()
   const { data: allBrands = [] } = useBrands()
   const { data: priceRange } = usePriceRange(
-    isOfertas ? { category: 'ofertas' } : isMarcas ? undefined : { category: effectiveSlug },
+    isOfertas ? { sale: true } : isMarcas ? undefined : { category: effectiveSlug },
   )
 
   const priceOptions = useMemo(() => {

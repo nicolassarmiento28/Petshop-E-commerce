@@ -56,7 +56,7 @@ export const useRelatedProducts = (slug: string) =>
     enabled: !!slug,
   })
 
-export const usePriceRange = (params?: { category?: string; brand?: string }) =>
+export const usePriceRange = (params?: { category?: string; brand?: string; sale?: boolean }) =>
   useQuery({
     queryKey: ['price-range', params],
     queryFn: () => fetchPriceRange(params),

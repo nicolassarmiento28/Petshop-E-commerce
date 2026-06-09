@@ -172,7 +172,7 @@ export const getPriceRange = async (
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const { category, brand } = req.query as Record<string, string | undefined>
+    const { category, brand, sale } = req.query as Record<string, string | undefined>
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const where: any = { isActive: true }
@@ -187,6 +187,9 @@ export const getPriceRange = async (
     }
     if (brand) {
       where.brand = { slug: brand }
+    }
+    if (sale === 'true') {
+      where.salePrice = { not: null }
     }
 
     const [minResult, maxResult] = await Promise.all([

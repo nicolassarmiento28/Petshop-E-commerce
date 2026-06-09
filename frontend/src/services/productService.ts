@@ -37,7 +37,7 @@ export interface PriceRange {
   maxPrice: number
 }
 
-export const fetchPriceRange = async (params?: { category?: string; brand?: string }): Promise<PriceRange> => {
+export const fetchPriceRange = async (params?: { category?: string; brand?: string; sale?: boolean }): Promise<PriceRange> => {
   const { data } = await api.get<PriceRange>('/products/price-range', { params })
   return data
 }
