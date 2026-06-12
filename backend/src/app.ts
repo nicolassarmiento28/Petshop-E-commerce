@@ -1,6 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import helmet from 'helmet'
+import { prisma } from './lib/prisma'
 import dotenv from 'dotenv'
 import productRoutes from './routes/productRoutes'
 import categoryRoutes from './routes/categoryRoutes'
@@ -30,8 +31,13 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 // Health check
-app.get('/api/health', (_req, res) => {
-  res.json({ status: 'ok' })
+app.get('/api/health', async (_req, res) => {
+  try {
+    await prisma.$queryRaw`SELECT 1`
+    res.json({ status: 'ok', db: 'connected' })
+  } catch {
+    res.status(503).json({ status: 'error', db: 'disconnected' })
+  }
 })
 
 // Routes
