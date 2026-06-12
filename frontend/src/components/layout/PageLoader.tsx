@@ -1,6 +1,20 @@
+import { useEffect, useState } from 'react'
 import { LoaderCircle } from 'lucide-react'
 
-export default function PageLoader({ text = 'Cargando...' }: { text?: string }) {
+export default function PageLoader({ isLoading, text = 'Cargando...', delay = 300 }: { isLoading: boolean; text?: string; delay?: number }) {
+  const [visible, setVisible] = useState(false)
+
+  useEffect(() => {
+    if (!isLoading) {
+      setVisible(false)
+      return
+    }
+    const timer = setTimeout(() => setVisible(true), delay)
+    return () => clearTimeout(timer)
+  }, [isLoading, delay])
+
+  if (!visible) return null
+
   return (
     <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
       <LoaderCircle size={40} className="text-blue-600 animate-spin" />

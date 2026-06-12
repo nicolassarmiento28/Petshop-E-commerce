@@ -24,7 +24,7 @@ export default function ProductPage() {
   const serifStyle = { fontFamily: "'Fraunces', Georgia, serif" } as const
 
   if (isLoading) {
-    return <PageLoader text="Cargando producto..." />
+    return <PageLoader isLoading text="Cargando producto..." />
   }
 
   if (isError || !product) {
