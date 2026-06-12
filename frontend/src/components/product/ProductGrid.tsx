@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { LoaderCircle, PawPrint } from 'lucide-react'
 import ProductCard from './ProductCard'
 import type { ProductType } from '@/types'
 
@@ -8,20 +9,6 @@ interface ProductGridProps {
   emptyMessage?: string
 }
 
-function SkeletonCard() {
-  return (
-    <div className="bg-white dark:bg-[#1a1a1a] rounded-2xl overflow-hidden border border-gray-100 dark:border-[#2a2a2a] animate-pulse">
-      <div className="aspect-square bg-gray-100 dark:bg-[#222222]" />
-      <div className="p-4 space-y-3">
-        <div className="h-3 bg-gray-100 dark:bg-[#222222] rounded w-1/3" />
-        <div className="h-4 bg-gray-100 dark:bg-[#222222] rounded w-full" />
-        <div className="h-4 bg-gray-100 dark:bg-[#222222] rounded w-3/4" />
-        <div className="h-8 bg-gray-100 dark:bg-[#222222] rounded-xl mt-2" />
-      </div>
-    </div>
-  )
-}
-
 export default function ProductGrid({
   products,
   isLoading = false,
@@ -29,10 +16,9 @@ export default function ProductGrid({
 }: ProductGridProps) {
   if (isLoading) {
     return (
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6">
-        {Array.from({ length: 8 }).map((_, i) => (
-          <SkeletonCard key={i} />
-        ))}
+      <div className="flex flex-col items-center justify-center min-h-[40vh] gap-4">
+        <LoaderCircle size={36} className="text-blue-600 animate-spin" />
+        <p className="text-sm text-gray-500 dark:text-[#8892a4]">Cargando productos...</p>
       </div>
     )
   }
@@ -40,7 +26,7 @@ export default function ProductGrid({
   if (!products || products.length === 0) {
     return (
       <div className="text-center py-20">
-        <p className="text-6xl mb-4">🐾</p>
+        <div className="flex justify-center mb-4"><PawPrint size={48} className="text-orange-500" /></div>
         <p className="text-gray-500 dark:text-[#8892a4] text-sm">{emptyMessage}</p>
       </div>
     )

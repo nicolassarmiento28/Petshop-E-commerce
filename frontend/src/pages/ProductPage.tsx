@@ -10,6 +10,7 @@ import { useUiStore } from '@/store/uiStore'
 import Breadcrumbs from '@/components/layout/Breadcrumbs'
 import ProductGrid from '@/components/product/ProductGrid'
 import SizeSelector from '@/components/product/SizeSelector'
+import PageLoader from '@/components/layout/PageLoader'
 
 export default function ProductPage() {
   const { slug } = useParams<{ slug: string }>()
@@ -23,27 +24,7 @@ export default function ProductPage() {
   const serifStyle = { fontFamily: "'Fraunces', Georgia, serif" } as const
 
   if (isLoading) {
-    return (
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 dark:bg-[#111111]">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 animate-pulse">
-          <div>
-            <div className="aspect-square bg-gray-100 dark:bg-[#1a1a1a] rounded-3xl mb-3" />
-            <div className="grid grid-cols-4 gap-2">
-              {[0, 1, 2, 3].map((i) => (
-                <div key={i} className="aspect-square bg-gray-100 dark:bg-[#1a1a1a] rounded-lg" />
-              ))}
-            </div>
-          </div>
-          <div className="flex flex-col gap-4">
-            <div className="h-4 bg-gray-100 dark:bg-[#1a1a1a] rounded w-24" />
-            <div className="h-8 bg-gray-100 dark:bg-[#1a1a1a] rounded w-3/4" />
-            <div className="h-8 bg-gray-100 dark:bg-[#1a1a1a] rounded w-1/3" />
-            <div className="h-20 bg-gray-100 dark:bg-[#1a1a1a] rounded" />
-            <div className="h-12 bg-gray-100 dark:bg-[#1a1a1a] rounded-xl" />
-          </div>
-        </div>
-      </div>
-    )
+    return <PageLoader text="Cargando producto..." />
   }
 
   if (isError || !product) {
