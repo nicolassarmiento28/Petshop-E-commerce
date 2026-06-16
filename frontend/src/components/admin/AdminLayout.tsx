@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { LayoutDashboard, Package, ShoppingCart, Users, Tag, Percent, LogOut, Menu, X, PawPrint } from 'lucide-react'
+import { LayoutDashboard, Package, ShoppingCart, Users, Tag, Percent, QrCode, LogOut, Menu, X, PawPrint } from 'lucide-react'
 
 const navItems = [
   { label: 'Dashboard', href: '/admin/dashboard', icon: LayoutDashboard },
@@ -9,6 +9,7 @@ const navItems = [
   { label: 'Marcas', href: '/admin/marcas', icon: Tag },
   { label: 'Clientes', href: '/admin/clientes', icon: Users },
   { label: 'Cupones', href: '/admin/cupones', icon: Percent },
+  { label: 'Código QR', href: '/admin/qr', icon: QrCode },
 ]
 
 interface AdminLayoutProps {

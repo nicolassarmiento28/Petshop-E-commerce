@@ -21,6 +21,7 @@ import AdminOrders from '@/pages/admin/AdminOrders'
 import AdminBrands from '@/pages/admin/AdminBrands'
 import AdminCustomers from '@/pages/admin/AdminCustomers'
 import AdminCoupons from '@/pages/admin/AdminCoupons'
+import AdminQr from '@/pages/admin/AdminQr'
 import PrivateRoute from '@/components/admin/PrivateRoute'
 
 function AppContent() {
@@ -58,6 +59,7 @@ function AppContent() {
         <Route element={<PrivateRoute><AdminBrands /></PrivateRoute>} path="/admin/marcas" />
         <Route element={<PrivateRoute><AdminCustomers /></PrivateRoute>} path="/admin/clientes" />
         <Route element={<PrivateRoute><AdminCoupons /></PrivateRoute>} path="/admin/cupones" />
+        <Route element={<PrivateRoute><AdminQr /></PrivateRoute>} path="/admin/qr" />
         </Routes>
       </motion.div>
     </AnimatePresence>
