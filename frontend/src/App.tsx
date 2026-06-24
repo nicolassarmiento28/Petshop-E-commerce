@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import Layout from '@/components/layout/Layout'
+import WarmupProvider from '@/components/layout/WarmupProvider'
 import Home from '@/pages/Home'
 import CategoryPage from '@/pages/CategoryPage'
 import ProductPage from '@/pages/ProductPage'
@@ -69,7 +70,9 @@ function AppContent() {
 function App() {
   return (
     <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-      <AppContent />
+      <WarmupProvider>
+        <AppContent />
+      </WarmupProvider>
     </BrowserRouter>
   )
 }
