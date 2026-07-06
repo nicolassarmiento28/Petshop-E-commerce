@@ -41,14 +41,16 @@ const AdminLogin = () => {
       </Helmet>
 
       {/* Panel izquierdo — marca */}
-      <div
-        className="hidden lg:flex relative w-1/2 flex-col justify-between overflow-hidden bg-gradient-to-br from-blue-800 to-blue-600 dark:from-blue-900 dark:to-blue-700 p-10"
-        style={{
-          backgroundImage:
-            'radial-gradient(rgba(255,255,255,0.15) 1px, transparent 1px)',
-          backgroundSize: '20px 20px',
-        }}
-      >
+      <div className="hidden lg:flex relative w-1/2 flex-col justify-between overflow-hidden bg-gradient-to-br from-blue-800 to-blue-600 dark:from-blue-900 dark:to-blue-700 p-10">
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            backgroundImage:
+              'radial-gradient(rgba(255,255,255,0.15) 1px, transparent 1px)',
+            backgroundSize: '20px 20px',
+          }}
+        />
+
         <Link
           to="/"
           className="relative z-10 inline-flex items-center gap-2 text-orange-300 hover:text-orange-200 text-sm font-medium w-fit"
