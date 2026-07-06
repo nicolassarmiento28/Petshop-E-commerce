@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { X } from 'lucide-react'
+import { X, PawPrint } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useCartStore } from '@/store/cartStore'
 import CartItem from './CartItem'
@@ -77,7 +77,7 @@ export default function CartDrawer({ open, onClose }: CartDrawerProps) {
         ref={panelRef}
         tabIndex={-1}
         onKeyDown={handleKeyDown}
-        className={`fixed top-0 right-0 h-full w-full sm:w-96 bg-white dark:bg-[#1a1a1a] z-50 flex flex-col shadow-2xl transition-transform duration-300 outline-none ${
+        className={`fixed top-0 right-0 h-full w-full sm:w-96 bg-white dark:bg-dark-bg z-50 flex flex-col shadow-2xl transition-transform duration-300 outline-none ${
           open ? 'translate-x-0' : 'translate-x-full'
         }`}
         role="dialog"
@@ -85,11 +85,14 @@ export default function CartDrawer({ open, onClose }: CartDrawerProps) {
         aria-label="Tu carrito"
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100 dark:border-[#2a2a2a]">
-          <h2 className="text-lg font-bold text-gray-900 dark:text-[#e8eaf0]">Tu carrito</h2>
+        <div className="flex items-center justify-between px-5 py-4 border-b border-gray-200 dark:border-dark-border">
+          <h2 className="flex items-center gap-2 text-lg font-bold text-gray-900 dark:text-[#e8eaf0]">
+            <PawPrint size={20} className="text-orange-500 shrink-0" />
+            Tu carrito
+          </h2>
           <button
             onClick={onClose}
-            className="p-1.5 text-gray-400 hover:text-gray-700 hover:bg-gray-100 dark:text-[#8892a4] dark:hover:text-[#e8eaf0] dark:hover:bg-[#222222] rounded-lg transition-colors"
+            className="p-1.5 text-gray-400 hover:text-gray-700 hover:bg-gray-100 dark:text-gray-500 dark:hover:text-[#e8eaf0] dark:hover:bg-[#222222] rounded-lg transition-colors"
             aria-label="Cerrar carrito"
           >
             <X size={20} />
@@ -99,14 +102,14 @@ export default function CartDrawer({ open, onClose }: CartDrawerProps) {
         {/* Body */}
         {items.length === 0 ? (
           <div className="flex-1 flex flex-col items-center justify-center gap-4 px-5 text-center">
-            <span className="text-5xl">🐾</span>
-            <p className="text-gray-500 dark:text-[#8892a4] font-medium">Tu carrito está vacío</p>
+            <PawPrint size={40} className="text-gray-300 dark:text-gray-600 opacity-60" />
+            <p className="text-gray-500 dark:text-gray-400 font-medium">Tu carrito está vacío</p>
             <Link
-              to="/"
+              to="/productos"
               onClick={onClose}
-              className="text-blue-600 hover:text-blue-700 font-semibold text-sm underline underline-offset-2"
+              className="px-4 py-2 rounded-lg border border-blue-600 text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/20 font-semibold text-sm transition-colors"
             >
-              Seguir comprando
+              Ver productos
             </Link>
           </div>
         ) : (
@@ -119,9 +122,7 @@ export default function CartDrawer({ open, onClose }: CartDrawerProps) {
             </div>
 
             {/* Summary — sticky bottom */}
-            <div className="px-5 pb-6 pt-3 bg-white dark:bg-[#1a1a1a] border-t border-gray-100 dark:border-[#2a2a2a]">
-              <CartSummary onCheckout={handleCheckout} />
-            </div>
+            <CartSummary onCheckout={handleCheckout} />
           </>
         )}
       </div>

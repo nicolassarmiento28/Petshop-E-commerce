@@ -24,9 +24,9 @@ export default function CartItem({ item }: CartItemProps) {
   }
 
   return (
-    <div className="flex items-center gap-3 py-3 border-b border-gray-100 dark:border-[#2a2a2a] last:border-0">
+    <div className="flex items-center gap-3 py-3 border-b border-gray-100 dark:border-[#1a1f2b] last:border-0">
       {/* Image */}
-      <div className="w-14 h-14 rounded-lg overflow-hidden bg-blue-50 flex items-center justify-center shrink-0">
+      <div className="w-14 h-14 rounded-lg overflow-hidden bg-gray-100 dark:bg-dark-surface dark:border dark:border-dark-border flex items-center justify-center shrink-0">
         {item.imageUrl ? (
           <img src={item.imageUrl} alt={item.name} className="w-full h-full object-cover" />
         ) : (
@@ -37,22 +37,22 @@ export default function CartItem({ item }: CartItemProps) {
       {/* Info */}
       <div className="flex-1 min-w-0">
         <p className="text-sm font-medium text-gray-800 dark:text-[#e8eaf0] truncate">{item.name}</p>
-        <p className="text-sm text-blue-600 font-semibold mt-0.5">{formatCLP(item.unitPrice)}</p>
+        <p className="text-sm text-blue-600 dark:text-blue-400 font-medium mt-0.5">{formatCLP(item.unitPrice)}</p>
       </div>
 
       {/* Quantity controls */}
-      <div className="flex items-center gap-1 shrink-0">
+      <div className="inline-flex items-center rounded-full border border-blue-200 dark:border-[#1e3a5f] overflow-hidden shrink-0">
         <button
           onClick={handleDecrement}
-          className="w-7 h-7 flex items-center justify-center rounded-full border border-gray-200 dark:border-[#2a2a2a] text-gray-500 dark:text-[#8892a4] hover:border-blue-500 hover:text-blue-600 dark:hover:border-blue-400 dark:hover:text-blue-400 transition-colors"
+          className="w-7 h-7 flex items-center justify-center text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors"
           aria-label="Disminuir cantidad"
         >
           <Minus size={12} />
         </button>
-        <span className="w-6 text-center text-sm font-medium text-gray-800 dark:text-[#e8eaf0]">{item.quantity}</span>
+        <span className="w-6 text-center text-sm font-medium text-gray-900 dark:text-zinc-100">{item.quantity}</span>
         <button
           onClick={handleIncrement}
-          className="w-7 h-7 flex items-center justify-center rounded-full border border-gray-200 dark:border-[#2a2a2a] text-gray-500 dark:text-[#8892a4] hover:border-blue-500 hover:text-blue-600 dark:hover:border-blue-400 dark:hover:text-blue-400 transition-colors"
+          className="w-7 h-7 flex items-center justify-center text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors"
           aria-label="Aumentar cantidad"
         >
           <Plus size={12} />
@@ -62,7 +62,7 @@ export default function CartItem({ item }: CartItemProps) {
       {/* Delete */}
       <button
         onClick={() => removeItem(item.id)}
-        className="p-1.5 text-gray-400 dark:text-[#8892a4] hover:text-red-500 dark:hover:text-red-400 transition-colors shrink-0"
+        className="p-1.5 text-gray-300 dark:text-gray-600 hover:text-red-500 dark:hover:text-red-400 transition-colors shrink-0"
         aria-label="Eliminar producto"
       >
         <Trash2 size={15} />

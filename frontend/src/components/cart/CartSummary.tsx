@@ -11,10 +11,10 @@ export default function CartSummary({ onCheckout }: CartSummaryProps) {
   const isEmpty = items.length === 0
 
   return (
-    <div className="border-t border-gray-100 dark:border-[#2a2a2a] pt-4 space-y-3">
-      <div className="flex justify-between text-base font-semibold text-gray-900 dark:text-[#e8eaf0]">
-        <span>Total</span>
-        <span className="text-blue-600">{formatCLP(totalPrice)}</span>
+    <div className="bg-blue-50 dark:bg-dark-surface border-t border-gray-200 dark:border-dark-border px-5 pt-4 pb-6 space-y-3">
+      <div className="flex justify-between items-baseline">
+        <span className="text-sm text-gray-500 dark:text-gray-400">Total</span>
+        <span className="text-lg font-medium text-gray-900 dark:text-zinc-100">{formatCLP(totalPrice)}</span>
       </div>
       <button
         onClick={onCheckout}
