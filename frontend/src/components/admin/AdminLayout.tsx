@@ -27,15 +27,28 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
   }
 
   const sidebar = (
-    <aside className="w-60 bg-white dark:bg-[#1a1a1a] border-r border-gray-200 dark:border-[#2a2a2a] flex flex-col shrink-0 h-full">
-      <div className="px-6 py-5 bg-[#2b44d4] dark:bg-[#1e33a8]">
+    <aside className="relative w-60 overflow-hidden bg-gradient-to-br from-blue-800 to-blue-600 dark:from-blue-900 dark:to-blue-700 flex flex-col shrink-0 h-full">
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage:
+            'radial-gradient(rgba(255,255,255,0.15) 1px, transparent 1px)',
+          backgroundSize: '20px 20px',
+        }}
+      />
+
+      <div className="relative z-10 px-6 py-5">
         <Link to="/admin/dashboard" className="flex items-center gap-2" onClick={() => setSidebarOpen(false)}>
-          <PawPrint size={24} className="text-orange-500 shrink-0" />
+          <div className="relative w-fit">
+            <div className="hidden dark:block absolute inset-0 -m-2 rounded-full bg-orange-500/30 blur-xl" />
+            <PawPrint size={24} className="relative text-orange-500 shrink-0" />
+          </div>
           <span className="text-lg font-bold text-white">Petshop</span>
         </Link>
-        <p className="text-xs text-blue-200 mt-0.5">Panel de administración</p>
+        <p className="text-xs text-white/70 mt-0.5">Panel de administración</p>
       </div>
-      <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
+
+      <nav className="relative z-10 flex-1 px-3 py-4 space-y-1 overflow-y-auto">
         {navItems.map((item) => {
           const active = location.pathname === item.href
           return (
@@ -46,21 +59,22 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
               onClick={() => setSidebarOpen(false)}
               className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                 active
-                  ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-400'
-                  : 'text-gray-600 dark:text-[#e8eaf0] hover:bg-gray-100 dark:hover:bg-[#222222]'
+                  ? 'bg-white/15 text-white'
+                  : 'text-white/70 hover:bg-white/10 hover:text-white'
               }`}
             >
-              <item.icon size={18} className={active ? 'text-blue-600 dark:text-blue-400' : ''} />
+              <item.icon size={18} />
               {item.label}
             </Link>
           )
         })}
       </nav>
-      <div className="px-3 py-4 border-t border-gray-200 dark:border-[#2a2a2a]">
+
+      <div className="relative z-10 px-3 py-4 border-t border-white/10">
         <button
           onClick={logout}
           title="Cerrar sesión"
-          className="flex items-center gap-3 w-full px-3 py-2.5 rounded-lg text-sm text-gray-500 dark:text-[#8892a4] hover:bg-gray-100 dark:hover:bg-[#222222] transition-colors"
+          className="flex items-center gap-3 w-full px-3 py-2.5 rounded-lg text-sm text-white/70 hover:bg-white/10 hover:text-white transition-colors"
         >
           <LogOut size={18} />
           Cerrar sesión
@@ -70,7 +84,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
   )
 
   return (
-    <div className="min-h-screen flex bg-gray-50 dark:bg-[#111111]">
+    <div className="min-h-screen flex bg-gray-50 dark:bg-dark-bg">
       {/* Desktop sidebar */}
       <div className="hidden lg:flex">{sidebar}</div>
 
@@ -92,7 +106,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
       )}
 
       {/* Main */}
-      <main className="flex-1 overflow-auto p-4 sm:p-6 lg:p-8 dark:bg-[#111111] min-w-0">
+      <main className="flex-1 overflow-auto p-4 sm:p-6 lg:p-8 dark:bg-dark-bg min-w-0">
         {/* Mobile top bar */}
         <div className="flex items-center gap-3 mb-4 lg:hidden">
           <button

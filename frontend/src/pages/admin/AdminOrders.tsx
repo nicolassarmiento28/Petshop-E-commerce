@@ -4,6 +4,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { Download } from 'lucide-react'
 import AdminLayout from '@/components/admin/AdminLayout'
 import { formatCLP } from '@/utils/formatters'
+import { ORDER_STATUS_LABELS, ORDER_STATUS_BADGE_CLASSES, ORDER_STATUS_BADGE_BASE } from '@/utils/orderStatus'
 import api from '@/services/api'
 import type { OrderType, OrderStatus } from '@/types'
 
@@ -17,26 +18,6 @@ interface OrdersResponse {
 const ORDER_STATUSES: OrderStatus[] = [
   'PENDING', 'PAID', 'PROCESSING', 'SHIPPED', 'DELIVERED', 'CANCELLED', 'REFUNDED',
 ]
-
-const STATUS_LABELS: Record<OrderStatus, string> = {
-  PENDING: 'Pendiente',
-  PAID: 'Pagado',
-  PROCESSING: 'En proceso',
-  SHIPPED: 'Enviado',
-  DELIVERED: 'Entregado',
-  CANCELLED: 'Cancelado',
-  REFUNDED: 'Reembolsado',
-}
-
-const STATUS_COLORS: Record<OrderStatus, string> = {
-  PENDING: 'bg-yellow-100 text-yellow-700',
-  PAID: 'bg-green-100 text-green-700',
-  PROCESSING: 'bg-blue-100 text-blue-700',
-  SHIPPED: 'bg-indigo-100 text-indigo-700',
-  DELIVERED: 'bg-green-100 text-green-700',
-  CANCELLED: 'bg-red-100 text-red-600',
-  REFUNDED: 'bg-gray-100 text-gray-600',
-}
 
 const fetchOrders = (page: number, status?: string) => {
   const params = new URLSearchParams({ page: String(page), limit: '20' })
@@ -106,17 +87,17 @@ const AdminOrders = () => {
           <select
           value={statusFilter}
           onChange={(e) => handleFilterChange(e.target.value)}
-          className="border border-gray-300 dark:border-[#2a2a2a] rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-[#222222] dark:text-[#e8eaf0]"
+          className="border border-gray-300 dark:border-dark-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-[#222222] dark:text-[#e8eaf0]"
         >
           <option value="">Todos los estados</option>
             {ORDER_STATUSES.map((s) => (
-            <option key={s} value={s}>{STATUS_LABELS[s]}</option>
+            <option key={s} value={s}>{ORDER_STATUS_LABELS[s]}</option>
           ))}
         </select>
         </div>
       </div>
 
-      <div className="bg-white dark:bg-[#1a1a1a] rounded-xl border border-gray-200 dark:border-[#2a2a2a]">
+      <div className="bg-white dark:bg-dark-surface rounded-xl border border-gray-200 dark:border-dark-border">
         {isLoading ? (
           <p className="p-6 text-gray-500 dark:text-[#8892a4]">Cargando...</p>
         ) : (
@@ -144,8 +125,8 @@ const AdminOrders = () => {
                       </td>
                       <td className="px-4 py-3 text-gray-700 dark:text-[#e8eaf0]">{formatCLP(order.total)}</td>
                       <td className="px-4 py-3">
-                        <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${STATUS_COLORS[order.status]}`}>
-                          {STATUS_LABELS[order.status]}
+                        <span className={`${ORDER_STATUS_BADGE_BASE} ${ORDER_STATUS_BADGE_CLASSES[order.status]}`}>
+                          {ORDER_STATUS_LABELS[order.status]}
                         </span>
                       </td>
                       <td className="px-4 py-3">
@@ -154,24 +135,24 @@ const AdminOrders = () => {
                           onChange={(e) =>
                             updateStatusMutation.mutate({ id: order.id, status: e.target.value as OrderStatus })
                           }
-                          className="border border-gray-300 dark:border-[#2a2a2a] rounded-lg px-2 py-1 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-[#222222] dark:text-[#e8eaf0]"
+                          className="border border-gray-300 dark:border-dark-border rounded-lg px-2 py-1 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-[#222222] dark:text-[#e8eaf0]"
                         >
                           {ORDER_STATUSES.map((s) => (
-                            <option key={s} value={s}>{STATUS_LABELS[s]}</option>
+                            <option key={s} value={s}>{ORDER_STATUS_LABELS[s]}</option>
                           ))}
                         </select>
                       </td>
                       <td className="px-4 py-3">
                         <button
                           onClick={() => setExpandedId(expandedId === order.id ? null : order.id)}
-                          className="text-xs px-3 py-1 rounded-lg border border-gray-300 dark:border-[#2a2a2a] text-gray-600 dark:text-[#e8eaf0] hover:bg-gray-50 dark:hover:bg-[#222222] transition-colors"
+                          className="text-xs px-3 py-1 rounded-lg border border-gray-300 dark:border-dark-border text-gray-600 dark:text-[#e8eaf0] hover:bg-gray-50 dark:hover:bg-[#222222] transition-colors"
                         >
                           {expandedId === order.id ? 'Ocultar' : 'Ver items'}
                         </button>
                       </td>
                     </tr>
                     {expandedId === order.id && (
-                      <tr key={`${order.id}-detail`} className="bg-blue-50 dark:bg-[#1a1a1a]">
+                      <tr key={`${order.id}-detail`} className="bg-blue-50 dark:bg-dark-surface">
                         <td colSpan={6} className="px-8 py-4">
                           <p className="text-xs font-semibold text-gray-500 dark:text-[#8892a4] uppercase mb-2">Items del pedido</p>
                           <div className="space-y-1">
@@ -202,20 +183,20 @@ const AdminOrders = () => {
             </div>
             {/* Pagination */}
             {data && data.totalPages > 1 && (
-              <div className="px-4 py-3 border-t border-gray-100 dark:border-[#2a2a2a] flex items-center justify-between text-sm text-gray-500 dark:text-[#8892a4]">
+              <div className="px-4 py-3 border-t border-gray-100 dark:border-dark-border flex items-center justify-between text-sm text-gray-500 dark:text-[#8892a4]">
                 <span>Página {data.page} de {data.totalPages} ({data.total} órdenes)</span>
                 <div className="flex gap-2">
                   <button
                     disabled={page === 1}
                     onClick={() => setPage((p) => p - 1)}
-                    className="px-3 py-1 rounded-lg border border-gray-300 dark:border-[#2a2a2a] dark:text-[#e8eaf0] disabled:opacity-40 hover:bg-gray-50 dark:hover:bg-[#222222] transition-colors"
+                    className="px-3 py-1 rounded-lg border border-gray-300 dark:border-dark-border dark:text-[#e8eaf0] disabled:opacity-40 hover:bg-gray-50 dark:hover:bg-[#222222] transition-colors"
                   >
                     Anterior
                   </button>
                   <button
                     disabled={page === data.totalPages}
                     onClick={() => setPage((p) => p + 1)}
-                    className="px-3 py-1 rounded-lg border border-gray-300 dark:border-[#2a2a2a] dark:text-[#e8eaf0] disabled:opacity-40 hover:bg-gray-50 dark:hover:bg-[#222222] transition-colors"
+                    className="px-3 py-1 rounded-lg border border-gray-300 dark:border-dark-border dark:text-[#e8eaf0] disabled:opacity-40 hover:bg-gray-50 dark:hover:bg-[#222222] transition-colors"
                   >
                     Siguiente
                   </button>

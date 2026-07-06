@@ -8,6 +8,8 @@ import {
 } from 'recharts'
 import AdminLayout from '@/components/admin/AdminLayout'
 import { formatCLP } from '@/utils/formatters'
+import { ORDER_STATUS_LABELS, ORDER_STATUS_BADGE_CLASSES, ORDER_STATUS_BADGE_BASE } from '@/utils/orderStatus'
+import { useThemeStore } from '@/store/themeStore'
 import api from '@/services/api'
 import type { OrderType, OrderStatus } from '@/types'
 
@@ -63,14 +65,14 @@ interface RecentOrdersFeedResponse {
   orders: { id: number; orderNumber: string; customerName: string; total: number; status: string; createdAt: string }[]
 }
 
-const STATUS_META: { status: OrderStatus; label: string; color: string }[] = [
-  { status: 'PENDING',    label: 'Pendiente',   color: 'bg-yellow-50 border-yellow-200 text-yellow-700 dark:bg-yellow-900/20 dark:border-yellow-800 dark:text-yellow-400' },
-  { status: 'PAID',       label: 'Pagado',       color: 'bg-green-50 border-green-200 text-green-700 dark:bg-green-900/20 dark:border-green-800 dark:text-green-400' },
-  { status: 'PROCESSING', label: 'En proceso',   color: 'bg-blue-50 border-blue-200 text-blue-700 dark:bg-blue-900/20 dark:border-blue-800 dark:text-blue-400' },
-  { status: 'SHIPPED',    label: 'Enviado',      color: 'bg-indigo-50 border-indigo-200 text-indigo-700 dark:bg-indigo-900/20 dark:border-indigo-800 dark:text-indigo-400' },
-  { status: 'DELIVERED',  label: 'Entregado',    color: 'bg-emerald-50 border-emerald-200 text-emerald-700 dark:bg-emerald-900/20 dark:border-emerald-800 dark:text-emerald-400' },
-  { status: 'CANCELLED',  label: 'Cancelado',    color: 'bg-red-50 border-red-200 text-red-700 dark:bg-red-900/20 dark:border-red-800 dark:text-red-400' },
-  { status: 'REFUNDED',   label: 'Reembolsado',  color: 'bg-gray-50 border-gray-200 text-gray-600 dark:bg-gray-900/20 dark:border-gray-700 dark:text-gray-400' },
+const STATUS_META: { status: OrderStatus; label: string }[] = [
+  { status: 'PENDING',    label: 'Pendiente' },
+  { status: 'PAID',       label: 'Pagado' },
+  { status: 'PROCESSING', label: 'En proceso' },
+  { status: 'SHIPPED',    label: 'Enviado' },
+  { status: 'DELIVERED',  label: 'Entregado' },
+  { status: 'CANCELLED',  label: 'Cancelado' },
+  { status: 'REFUNDED',   label: 'Reembolsado' },
 ]
 
 const fetchSummary = async () => {
@@ -123,41 +125,27 @@ function timeAgo(date: string): string {
 
 const DONUT_COLORS = ['#f97316', '#059669', '#fbbf24', '#3b82f6', '#a855f7', '#ec4899']
 
-const STATUS_LABELS: Record<string, string> = {
-  PENDING: 'Pendiente',
-  PAID: 'Pagado',
-  PROCESSING: 'En proceso',
-  SHIPPED: 'Enviado',
-  DELIVERED: 'Entregado',
-  CANCELLED: 'Cancelado',
-  REFUNDED: 'Reembolsado',
-}
-
-const STATUS_COLORS: Record<string, string> = {
-  PENDING: 'bg-yellow-100 text-yellow-700',
-  PAID: 'bg-green-100 text-green-700',
-  PROCESSING: 'bg-blue-100 text-blue-700',
-  SHIPPED: 'bg-indigo-100 text-indigo-700',
-  DELIVERED: 'bg-green-100 text-green-700',
-  CANCELLED: 'bg-red-100 text-red-700',
-  REFUNDED: 'bg-gray-100 text-gray-600',
-}
-
 const StatCard = ({ label, value, icon: Icon }: { label: string; value: string; icon?: typeof DollarSign }) => (
-  <div className="bg-white dark:bg-[#1a1a1a] rounded-xl border border-gray-200 dark:border-[#2a2a2a] p-6 flex items-center justify-between">
+  <div className="bg-white dark:bg-dark-surface rounded-xl border border-gray-200 dark:border-dark-border p-6 flex items-center justify-between">
     <div>
       <p className="text-sm text-gray-500 dark:text-[#8892a4] mb-1">{label}</p>
       <p className="text-2xl font-bold text-gray-900 dark:text-[#e8eaf0]">{value}</p>
     </div>
-    {Icon && (
-      <div className="p-3 rounded-lg bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400">
-        <Icon size={22} />
-      </div>
-    )}
+    {Icon && <Icon size={22} className="text-gray-400 dark:text-[#8892a4]" />}
+  </div>
+)
+
+const HighlightStatCard = ({ label, value }: { label: string; value: string }) => (
+  <div className="bg-gradient-to-br from-blue-800 to-blue-600 dark:from-blue-900 dark:to-blue-700 rounded-xl p-6 flex flex-col justify-center">
+    <p className="text-sm text-white/80 mb-1">{label}</p>
+    <p className="text-2xl font-bold text-white">{value}</p>
   </div>
 )
 
 const AdminDashboard = () => {
+  const theme = useThemeStore((s) => s.theme)
+  const chartColor = theme === 'dark' ? '#60a5fa' : '#2563eb'
+
   const { data, isLoading, isError } = useQuery({
     queryKey: ['admin', 'summary'],
     queryFn: fetchSummary,
@@ -212,7 +200,7 @@ const AdminDashboard = () => {
           <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-6">
             <StatCard label="Órdenes totales" value={String(data.totalOrders)} icon={ShoppingCart} />
             <StatCard label="Productos activos" value={String(data.totalProducts)} icon={Package} />
-            <StatCard label="Ingresos totales" value={formatCLP(data.revenue)} icon={DollarSign} />
+            <HighlightStatCard label="Ingresos totales" value={formatCLP(data.revenue)} />
             <StatCard
               label="Ingresos (30 días)"
               value={formatCLP(revenueData?.totalRevenue ?? 0)}
@@ -232,7 +220,7 @@ const AdminDashboard = () => {
                 {STATUS_META.filter((m) => orderStats[m.status] > 0).map((m) => (
                   <div
                     key={m.status}
-                    className={`flex items-center gap-2 px-4 py-2 rounded-xl border text-sm font-medium ${m.color}`}
+                    className={`flex items-center gap-2 px-4 py-2 rounded-full border text-sm font-medium ${ORDER_STATUS_BADGE_CLASSES[m.status]}`}
                   >
                     <span className="text-lg font-bold">{orderStats[m.status]}</span>
                     <span>{m.label}</span>
@@ -248,7 +236,7 @@ const AdminDashboard = () => {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
             {/* Revenue chart */}
             {revenueData && revenueData.daily.length > 0 && (
-              <div className="lg:col-span-2 bg-white dark:bg-[#1a1a1a] rounded-xl border border-gray-200 dark:border-[#2a2a2a] p-6">
+              <div className="lg:col-span-2 bg-white dark:bg-dark-surface rounded-xl border border-gray-200 dark:border-dark-border p-6">
                 <div className="flex items-center justify-between mb-4">
                   <h2 className="font-semibold text-gray-800 dark:text-[#e8eaf0]">Ingresos (últimos 30 días)</h2>
                   <span className="text-xs text-gray-400 dark:text-[#8892a4]">{revenueData.orderCount} órdenes</span>
@@ -257,8 +245,8 @@ const AdminDashboard = () => {
                   <AreaChart data={revenueData.daily} margin={{ top: 5, right: 5, left: -20, bottom: 0 }}>
                     <defs>
                       <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#2b44d4" stopOpacity={0.3} />
-                        <stop offset="95%" stopColor="#2b44d4" stopOpacity={0} />
+                        <stop offset="5%" stopColor={chartColor} stopOpacity={0.3} />
+                        <stop offset="95%" stopColor={chartColor} stopOpacity={0} />
                       </linearGradient>
                     </defs>
                     <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
@@ -286,11 +274,11 @@ const AdminDashboard = () => {
                     <Area
                       type="monotone"
                       dataKey="revenue"
-                      stroke="#2b44d4"
+                      stroke={chartColor}
                       strokeWidth={2}
                       fill="url(#colorRevenue)"
                       dot={false}
-                      activeDot={{ r: 4, fill: '#2b44d4', stroke: '#fff', strokeWidth: 2 }}
+                      activeDot={{ r: 4, fill: chartColor, stroke: '#fff', strokeWidth: 2 }}
                     />
                   </AreaChart>
                 </ResponsiveContainer>
@@ -299,7 +287,7 @@ const AdminDashboard = () => {
 
             {/* Top selling products */}
             {topSelling && topSelling.length > 0 && (
-              <div className="bg-white dark:bg-[#1a1a1a] rounded-xl border border-gray-200 dark:border-[#2a2a2a] p-6">
+              <div className="bg-white dark:bg-dark-surface rounded-xl border border-gray-200 dark:border-dark-border p-6">
                 <h2 className="font-semibold text-gray-800 dark:text-[#e8eaf0] mb-4">Más vendidos</h2>
                 <div className="space-y-3">
                   {topSelling.slice(0, 6).map((item, i) => (
@@ -328,7 +316,7 @@ const AdminDashboard = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
             {/* Low stock */}
             {lowStock && lowStock.products.length > 0 && (
-              <div className="bg-white dark:bg-[#1a1a1a] rounded-xl border border-orange-200 dark:border-orange-800 overflow-hidden">
+              <div className="bg-white dark:bg-dark-surface rounded-xl border border-orange-200 dark:border-orange-800 overflow-hidden">
                 <div className="px-6 py-4 border-b border-orange-100 dark:border-orange-800 flex items-center gap-2">
                   <AlertTriangle size={16} className="text-orange-500" />
                   <h2 className="font-semibold text-orange-700 dark:text-orange-400">Stock bajo ({lowStock.total})</h2>
@@ -358,8 +346,8 @@ const AdminDashboard = () => {
             )}
 
             {/* Recent orders */}
-            <div className="bg-white dark:bg-[#1a1a1a] rounded-xl border border-gray-200 dark:border-[#2a2a2a] overflow-hidden">
-              <div className="px-6 py-4 border-b border-gray-100 dark:border-[#2a2a2a]">
+            <div className="bg-white dark:bg-dark-surface rounded-xl border border-gray-200 dark:border-dark-border overflow-hidden">
+              <div className="px-6 py-4 border-b border-gray-100 dark:border-dark-border">
                 <h2 className="font-semibold text-gray-800 dark:text-[#e8eaf0]">Órdenes recientes</h2>
               </div>
               <div className="overflow-x-auto">
@@ -379,8 +367,8 @@ const AdminDashboard = () => {
                       <td className="px-6 py-3 text-gray-700 dark:text-[#e8eaf0]">{order.customerName}</td>
                       <td className="px-6 py-3 text-gray-700 dark:text-[#e8eaf0]">{formatCLP(order.total)}</td>
                       <td className="px-6 py-3">
-                        <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${STATUS_COLORS[order.status] ?? 'bg-gray-100 text-gray-600'}`}>
-                          {STATUS_LABELS[order.status] ?? order.status}
+                        <span className={`${ORDER_STATUS_BADGE_BASE} ${ORDER_STATUS_BADGE_CLASSES[order.status]}`}>
+                          {ORDER_STATUS_LABELS[order.status]}
                         </span>
                       </td>
                     </tr>
@@ -475,8 +463,8 @@ const AdminDashboard = () => {
                     </div>
                     <div className="text-right">
                       <p className="text-sm font-medium text-gray-900">{formatCLP(order.total)}</p>
-                      <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${STATUS_COLORS[order.status] ?? 'bg-gray-100 text-gray-600'}`}>
-                        {STATUS_LABELS[order.status] ?? order.status}
+                      <span className={`${ORDER_STATUS_BADGE_BASE} ${ORDER_STATUS_BADGE_CLASSES[order.status as OrderStatus]}`}>
+                        {ORDER_STATUS_LABELS[order.status as OrderStatus] ?? order.status}
                       </span>
                     </div>
                   </div>
