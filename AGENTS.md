@@ -633,6 +633,7 @@ Text:       gris oscuro          → gray-900 / gray-700
 - Carrito lateral (drawer): implementación propia con overlay + focus trap + tecla Escape
 - Megamenú de categorías: implementación propia
 - Modales de confirmación, badges de descuento/"Nuevo", inputs de formularios: todos elementos HTML nativos estilizados con Tailwind
+- **Patrón estándar de tarjetas (`ProductCard.tsx`) — estado hover en dark mode:** en reposo, borde `dark-border`; en hover, el borde pasa a `dark-border-hover` y aparece una sombra oscura (`dark:hover:shadow-lg dark:hover:shadow-black/30`) para dar sensación de elevación — no basta con solo apagar la sombra de modo claro (`hover:shadow-none`) como se hacía antes. Replicar este patrón (borde + sombra en hover) en cualquier tarjeta nueva del catálogo o del admin para mantener consistencia.
 
 ### Iconografía
 - `PawPrint` de `lucide-react` con `text-orange-500` para el logo — usado en Navbar, Footer, AdminLayout sidebar y AdminLogin. No usar el emoji 🐾.
@@ -646,37 +647,30 @@ Text:       gris oscuro          → gray-900 / gray-700
 
 ### Dark mode — tokens de color
 
-> ⚠️ **Discrepancia detectada al verificar contra el código (2026-07):** hoy conviven **dos paletas dark distintas** que no coinciden entre sí. Documentamos ambas tal como existen realmente — no se inventó ni promedió ningún valor.
+> Actualizado y verificado línea por línea contra el código (2026-07): los dos sistemas dark separados que existían antes (tokens neutros de `tailwind.config.ts` vs. hex sueltos de `AdminLogin.tsx`) **se unificaron en un solo set de tokens con matiz azulado**, ya aplicado en los componentes listados abajo.
 
-**Sistema 1 — tokens en `tailwind.config.ts` (`dark.*`), usado en la mayoría del sitio:**
+**Tokens reales en `tailwind.config.ts` → `theme.extend.colors.dark`:**
 
-| Token (`tailwind.config.ts`) | Valor hex | Uso real verificado |
+| Token (clase Tailwind) | Valor hex | Uso real verificado en el código |
 |---|---|---|
-| `dark.bg` | `#111111` | Fondo de página — Navbar (barra de envío), Home, AdminLayout main |
-| `dark.surface` | `#1a1a1a` | Header/Navbar, ProductCard, secciones de Home, AdminLayout sidebar |
-| `dark.surface2` | `#222222` | Inputs, imagen placeholder de ProductCard, botones secundarios, hover backgrounds |
-| `dark.border` | `#2a2a2a` | Bordes por defecto de Navbar, ProductCard, Home, AdminLayout |
-| `dark.text` | `#e8eaf0` | Texto principal |
-| `dark.muted` | `#8892a4` | Texto secundario / placeholders |
+| `dark-bg` (`bg-dark-bg` / `border-dark-bg`) | `#0b0f19` | Fondo de página: `Layout.tsx` (raíz de toda la app), `Home.tsx` (root + Hero), `AdminLogin.tsx` (panel del formulario) |
+| `dark-surface` (`bg-dark-surface`) | `#12161f` | Nivel 1 — `ProductCard.tsx` (tarjeta en reposo), `Home.tsx` (sección carrusel de marcas, cards de categorías, botón "Ver ofertas"), `AdminLogin.tsx` (tarjeta del formulario) |
+| `dark-surface-elevated` (`bg-dark-surface-elevated`) | `#181d29` | Nivel 2 — `Navbar.tsx` (header sticky y menú mobile), `AdminLogin.tsx` (inputs y bloque de credenciales de prueba), `Home.tsx` (hover del botón "Ver ofertas") |
+| `dark-border` (`border-dark-border`) | `#232838` | Borde por defecto — `Navbar.tsx`, `Home.tsx`, `ProductCard.tsx`, `AdminLogin.tsx` (tarjeta e inputs en reposo) |
+| `dark-border-hover` (`border-dark-border-hover`) | `#3b4358` | Borde en hover/focus — `ProductCard.tsx` (hover de la tarjeta completa), `AdminLogin.tsx` (hover de inputs) |
 
-Componentes confirmados usando este sistema: `Navbar.tsx`, `Footer.tsx`, `ProductCard.tsx`, `Home.tsx`, `AdminLayout.tsx`.
+`dark.text` (`#e8eaf0`) y `dark.muted` (`#8892a4`) se mantienen sin cambio de valor — no eran parte de este pedido. El token `dark.surface2` (`#222222`) que existía antes **se eliminó** de `tailwind.config.ts` al implementar este set; algunos usos puntuales no migrados (ver nota de discrepancias abajo) siguen con el hex literal `#222222` porque quedaban fuera del alcance pedido para este cambio.
 
-**Sistema 2 — hex arbitrarios inline en `AdminLogin.tsx`, NO registrados en `tailwind.config.ts`:**
+**Dónde se aplica cada uno, confirmado archivo por archivo:**
+- **`Layout.tsx`** (raíz de la app): `dark:bg-dark-bg` en el `<div>` que envuelve Navbar + `<main>` + Footer.
+- **`Navbar.tsx`**: header sticky y menú mobile en `dark:bg-dark-surface-elevated`; bordes (`border-b`, divisor de nav, tarjeta mobile) en `dark:border-dark-border`. El fondo/borde del input de búsqueda y sus estados hover de ícono **no se migraron** — siguen en hex literal (`#222222`), ver nota abajo.
+- **`Home.tsx`** (Hero): la sección Hero usa `dark:bg-dark-bg dark:bg-[radial-gradient(ellipse_at_top,_rgba(37,99,235,0.12),_transparent_60%)]` — un degradado radial azul sutil (12% de opacidad) centrado arriba, superpuesto sobre `dark-bg`, implementado como clase Tailwind arbitraria de `background-image` (no `style` inline — evita el bug de sobreescritura de fondo ya corregido antes en `AdminLogin.tsx`). El resto de secciones de Home (carrusel de marcas, cards de categoría, botón "Ver ofertas") usan `dark-surface` / `dark-border`.
+- **`ProductCard.tsx`**: en reposo, `dark:bg-dark-surface` + `dark:border-dark-border`. En hover: `dark:hover:border-dark-border-hover` + `dark:hover:shadow-lg dark:hover:shadow-black/30` (reemplaza el `dark:hover:shadow-none` que existía antes — ahora sí hay una sombra visible en hover, no solo se apaga la del modo claro). La imagen placeholder y el estado "sin stock" **no se migraron** — siguen con `dark:bg-[#222222]` literal, fuera del alcance pedido.
+- **`AdminLogin.tsx`**: panel del formulario en `dark:bg-dark-bg`, tarjeta en `dark:bg-dark-surface` + `dark:border-dark-border`, inputs y bloque de credenciales en `dark:bg-dark-surface-elevated` + `dark:border-dark-border`, con `dark:hover:border-dark-border-hover` en los inputs. El texto sigue en `dark:text-zinc-100` / `dark:text-zinc-400` (paleta `zinc` de Tailwind, no `dark.text`/`dark.muted`) — no se tocó porque no era parte de los 5 tokens pedidos; queda como inconsistencia menor pendiente.
 
-| Clase real en el código | Valor hex | Uso |
-|---|---|---|
-| `dark:bg-[#0b0f19]` | `#0b0f19` | Fondo de página del login |
-| `dark:bg-[#12161f]` | `#12161f` | Tarjeta del formulario (nivel 1, elevada sobre el fondo) |
-| `dark:bg-[#1a1f2b]` | `#1a1f2b` | Inputs y bloque de credenciales de prueba (nivel 2, un paso más claro que la tarjeta) |
-| `dark:border-[#1f2430]` | `#1f2430` | Borde de la tarjeta |
-| `dark:border-[#2a2f3d]` | `#2a2f3d` | Borde de inputs |
-| `dark:text-zinc-*` | (paleta zinc de Tailwind, no hex custom) | Texto principal (`zinc-100`) y secundario (`zinc-400`) |
+> ⚠️ **Discrepancias/pendientes anotadas, no corregidas silenciosamente:** `Footer.tsx`, `AdminLayout.tsx` y las páginas de admin (`AdminProducts`, `AdminOrders`, etc.) siguen usando el set de hex anterior (`#111111` / `#1a1a1a` / `#222222` / `#2a2a2a`) sin migrar a los tokens nuevos — quedaron fuera del alcance explícito de este cambio (que pedía solo Layout/body, Navbar, Home, ProductCard y AdminLogin). Mientras no se migren, esas páginas mostrarán un fondo (`#111111`) ligeramente distinto al nuevo `dark-bg` (`#0b0f19`) al navegar entre secciones — visualmente sutil pero real, no asumir que ya están unificadas.
 
-> ⚠️ La tabla de tokens `dark-surface-elevated (#181d29)` y `dark-border-hover (#3b4358)` solicitada para esta actualización **no existe en ningún archivo del código real** (ni en `tailwind.config.ts` ni en componentes) — no se documenta como implementada porque no lo está. `AdminLogin.tsx` sí logra 3 niveles de profundidad (`#0b0f19` → `#12161f` → `#1a1f2b`), pero con valores distintos a los pedidos y sin nombre de token, solo como clases `dark:bg-[#hex]` sueltas.
-
-**Principio de diseño (válido y aplicado, aunque con dos paletas distintas):** nunca un solo negro plano para todo — página, tarjeta/superficie e inputs deben ser 3 tonos progresivamente más claros para dar sensación de profundidad. Azul y naranjo **no cambian de familia** en dark mode salvo los casos puntuales ya implementados: el gradiente `blue-900 → blue-700` y el glow naranjo (`bg-orange-500/30 blur-2xl`) del panel de marca en `AdminLogin.tsx`.
-
-**Recomendación (no aplicada automáticamente, pendiente de decisión):** unificar ambos sistemas — o se extiende `tailwind.config.ts` con los tokens azulados de `AdminLogin.tsx` (`dark.bg2`, `dark.surface3`, etc., con nombres a definir) para que el resto del admin los reutilice, o se migra `AdminLogin.tsx` a los tokens `dark.*` ya existentes. Mientras no se decida, no asumir que un tono "dark" nuevo en otra página coincide con ninguno de los dos sistemas de arriba sin verificarlo en el código.
+**Principio de diseño (aplicado):** nunca un solo negro plano para todo el dark mode — página (`dark-bg`), superficie/tarjeta (`dark-surface` o `dark-surface-elevated`) e inputs deben diferenciarse en tonos progresivamente más claros para dar sensación de profundidad. Azul (`blue-600`) y naranjo (`orange-500`) no cambian de familia en dark mode salvo los casos puntuales ya documentados: el gradiente `blue-900 → blue-700` y el glow naranjo (`bg-orange-500/30 blur-2xl`) del panel de marca en `AdminLogin.tsx`, y el degradado radial azul del Hero en `Home.tsx`.
 
 ---
 

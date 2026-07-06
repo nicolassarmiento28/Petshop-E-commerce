@@ -21,7 +21,7 @@ export default function Layout({ children }: LayoutProps) {
   }, [theme])
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FAFAF8] dark:bg-[#111111] transition-colors duration-300">
+    <div className="min-h-screen flex flex-col bg-[#FAFAF8] dark:bg-dark-bg transition-colors duration-300">
       <Toaster position="top-center" richColors closeButton />
       <Navbar />
       <main className="flex-1">{children}</main>

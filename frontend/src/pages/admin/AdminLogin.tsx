@@ -35,7 +35,7 @@ const AdminLogin = () => {
   }
 
   return (
-    <div className="min-h-screen flex bg-white dark:bg-[#0b0f19]">
+    <div className="min-h-screen flex bg-white dark:bg-dark-bg">
       <Helmet>
         <title>Admin - Iniciar sesión | Petshop</title>
       </Helmet>
@@ -86,7 +86,7 @@ const AdminLogin = () => {
             Volver a la tienda
           </Link>
 
-          <div className="dark:bg-[#12161f] dark:border dark:border-[#1f2430] dark:rounded-xl dark:p-8">
+          <div className="dark:bg-dark-surface dark:border dark:border-dark-border dark:rounded-xl dark:p-8">
             <div className="flex items-center gap-2 mb-2">
               <PawPrint size={20} className="text-orange-500 shrink-0" />
               <span className="text-sm font-medium text-gray-500 dark:text-zinc-400">Petshop</span>
@@ -105,7 +105,7 @@ const AdminLogin = () => {
                   type="email"
                   autoComplete="email"
                   {...register('email')}
-                  className="w-full border border-gray-300 dark:border-[#2a2f3d] rounded-lg px-3 py-2 text-sm text-gray-900 dark:text-zinc-100 dark:bg-[#1a1f2b] focus:outline-none focus:ring-2 focus:ring-orange-500/30 focus:border-orange-500"
+                  className="w-full border border-gray-300 dark:border-dark-border dark:hover:border-dark-border-hover rounded-lg px-3 py-2 text-sm text-gray-900 dark:text-zinc-100 dark:bg-dark-surface-elevated focus:outline-none focus:ring-2 focus:ring-orange-500/30 focus:border-orange-500"
                 />
                 {errors.email && (
                   <p className="text-red-500 dark:text-red-400 text-xs mt-1">{errors.email.message}</p>
@@ -120,7 +120,7 @@ const AdminLogin = () => {
                   type="password"
                   autoComplete="current-password"
                   {...register('password')}
-                  className="w-full border border-gray-300 dark:border-[#2a2f3d] rounded-lg px-3 py-2 text-sm text-gray-900 dark:text-zinc-100 dark:bg-[#1a1f2b] focus:outline-none focus:ring-2 focus:ring-orange-500/30 focus:border-orange-500"
+                  className="w-full border border-gray-300 dark:border-dark-border dark:hover:border-dark-border-hover rounded-lg px-3 py-2 text-sm text-gray-900 dark:text-zinc-100 dark:bg-dark-surface-elevated focus:outline-none focus:ring-2 focus:ring-orange-500/30 focus:border-orange-500"
                 />
                 {errors.password && (
                   <p className="text-red-500 dark:text-red-400 text-xs mt-1">{errors.password.message}</p>
@@ -134,7 +134,7 @@ const AdminLogin = () => {
               )}
 
               {import.meta.env.DEV && (
-                <details className="rounded-lg bg-gray-100 dark:bg-[#1a1f2b] border border-gray-200 dark:border-[#2a2f3d] p-3 text-xs text-gray-500 dark:text-zinc-400">
+                <details className="rounded-lg bg-gray-100 dark:bg-dark-surface-elevated border border-gray-200 dark:border-dark-border p-3 text-xs text-gray-500 dark:text-zinc-400">
                   <summary className="cursor-pointer font-medium">Credenciales de prueba</summary>
                   <p className="font-mono mt-1">admin@petshop.cl / admin123</p>
                 </details>

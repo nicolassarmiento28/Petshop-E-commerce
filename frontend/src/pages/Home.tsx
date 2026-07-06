@@ -47,14 +47,14 @@ export default function Home() {
   }, [brands])
 
   return (
-    <div className="bg-[#FAFAF8] dark:bg-[#111111] transition-colors duration-300">
+    <div className="bg-[#FAFAF8] dark:bg-dark-bg transition-colors duration-300">
       <Helmet>
         <title>Petshop | Tienda de Mascotas</title>
         <meta name="description" content="Tienda de mascotas online. Encuentra alimentos, accesorios, juguetes y más para perros y gatos." />
       </Helmet>
 
       {/* ── 1. Hero ───────────────────────────────────────────────────── */}
-      <section className="w-full bg-gradient-to-r from-blue-50 to-blue-100 dark:from-[#111111] dark:to-[#1a1a1a] overflow-hidden transition-colors duration-300">
+      <section className="w-full bg-gradient-to-r from-blue-50 to-blue-100 dark:bg-dark-bg dark:bg-[radial-gradient(ellipse_at_top,_rgba(37,99,235,0.12),_transparent_60%)] overflow-hidden transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between min-h-[260px] sm:min-h-[320px] lg:min-h-[400px] gap-4 sm:gap-8">
             <div className="py-8 sm:py-12 max-w-lg flex-1">
@@ -80,7 +80,7 @@ export default function Home() {
                 </Link>
                 <Link
                   to="/categoria/ofertas"
-                  className="inline-flex items-center gap-2 bg-white dark:bg-[#222222] hover:bg-blue-50 dark:hover:bg-[#2a2a2a] text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-[#2a2a2a] font-semibold px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl transition-colors text-sm sm:text-base"
+                  className="inline-flex items-center gap-2 bg-white dark:bg-dark-surface hover:bg-blue-50 dark:hover:bg-dark-surface-elevated text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-dark-border font-semibold px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl transition-colors text-sm sm:text-base"
                 >
                   Ver ofertas
                 </Link>
@@ -110,7 +110,7 @@ export default function Home() {
 
       {/* ── 3. Carrusel de marcas ─────────────────────────────────────── */}
       {brands && brands.length > 0 && (
-        <section className="bg-white dark:bg-[#1a1a1a] border-y border-gray-100 dark:border-[#2a2a2a] py-4 transition-colors duration-300">
+        <section className="bg-white dark:bg-dark-surface border-y border-gray-100 dark:border-dark-border py-4 transition-colors duration-300">
           <div className="max-w-7xl mx-auto px-8 sm:px-12 lg:px-16">
             <BrandsCarousel brands={brands} />
           </div>
@@ -124,7 +124,7 @@ export default function Home() {
             <Link
               key={cat.slug}
               to={`/categoria/${cat.slug}`}
-              className="group flex flex-col items-center gap-2 p-3 sm:p-4 rounded-2xl bg-white dark:bg-[#1a1a1a] border border-gray-100 dark:border-[#2a2a2a] hover:border-blue-200 dark:hover:border-blue-500 hover:shadow-md hover:shadow-blue-50 dark:hover:shadow-none transition-all duration-200"
+              className="group flex flex-col items-center gap-2 p-3 sm:p-4 rounded-2xl bg-white dark:bg-dark-surface border border-gray-100 dark:border-dark-border hover:border-blue-200 dark:hover:border-blue-500 hover:shadow-md hover:shadow-blue-50 dark:hover:shadow-none transition-all duration-200"
             >
               <span className="text-4xl group-hover:scale-110 transition-transform duration-200">
                 {cat.emoji}

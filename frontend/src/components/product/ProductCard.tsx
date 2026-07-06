@@ -25,7 +25,7 @@ export default function ProductCard({ product }: ProductCardProps) {
   }
 
   return (
-    <div className="group bg-white dark:bg-[#1a1a1a] rounded-2xl overflow-hidden border border-gray-100 dark:border-[#2a2a2a] shadow-sm hover:shadow-md hover:shadow-blue-100/60 dark:hover:shadow-none transition-all duration-300 flex flex-col">
+    <div className="group bg-white dark:bg-dark-surface rounded-2xl overflow-hidden border border-gray-100 dark:border-dark-border shadow-sm hover:shadow-md hover:shadow-blue-100/60 dark:hover:border-dark-border-hover dark:hover:shadow-lg dark:hover:shadow-black/30 transition-all duration-300 flex flex-col">
       {/* Image */}
       <Link to={`/producto/${product.slug}`} className="relative block aspect-square overflow-hidden bg-gray-50 dark:bg-[#222222]">
         {product.imageUrl ? (

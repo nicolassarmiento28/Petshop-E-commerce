@@ -44,7 +44,7 @@ export default function Navbar() {
         </div>
       </div>
 
-      <header className="sticky top-0 z-50 bg-white dark:bg-[#1a1a1a] border-b border-gray-200 dark:border-[#2a2a2a] shadow-sm transition-colors duration-300">
+      <header className="sticky top-0 z-50 bg-white dark:bg-dark-surface-elevated border-b border-gray-200 dark:border-dark-border shadow-sm transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-2 sm:gap-4 h-14 sm:h-16">
 
@@ -68,7 +68,7 @@ export default function Navbar() {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Buscar productos, marcas..."
-                  className="w-full pl-4 pr-12 py-2.5 border border-gray-300 dark:border-[#2a2a2a] rounded-xl text-sm text-gray-700 dark:text-[#e8eaf0] bg-gray-50 dark:bg-[#222222] focus:bg-white dark:focus:bg-[#111111] focus:outline-none focus:border-blue-400 dark:focus:border-blue-500 transition-colors placeholder:text-gray-400 dark:placeholder:text-[#8892a4]"
+                  className="w-full pl-4 pr-12 py-2.5 border border-gray-300 dark:border-dark-border rounded-xl text-sm text-gray-700 dark:text-[#e8eaf0] bg-gray-50 dark:bg-[#222222] focus:bg-white dark:focus:bg-dark-bg focus:outline-none focus:border-blue-400 dark:focus:border-blue-500 transition-colors placeholder:text-gray-400 dark:placeholder:text-[#8892a4]"
                 />
                 <button
                   type="submit"
@@ -131,7 +131,7 @@ export default function Navbar() {
           </div>
 
           {/* Desktop nav links strip */}
-          <nav className="hidden lg:flex items-center gap-1 border-t border-gray-100 dark:border-[#2a2a2a] py-1.5 overflow-x-auto">
+          <nav className="hidden lg:flex items-center gap-1 border-t border-gray-100 dark:border-dark-border py-1.5 overflow-x-auto">
             {NAV_LINKS.map((item) => (
               <Link
                 key={item.to}
@@ -151,7 +151,7 @@ export default function Navbar() {
 
         {/* Mobile menu */}
         {mobileOpen && (
-          <div className="lg:hidden border-t border-gray-100 dark:border-[#2a2a2a] bg-white dark:bg-[#1a1a1a]">
+          <div className="lg:hidden border-t border-gray-100 dark:border-dark-border bg-white dark:bg-dark-surface-elevated">
             <div className="max-w-7xl mx-auto px-4 py-4 space-y-2">
               {/* Mobile search */}
               <form onSubmit={handleSearch} className="flex gap-2 mb-3">
@@ -160,7 +160,7 @@ export default function Navbar() {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Buscar productos..."
-                  className="flex-1 px-3 py-2 text-sm border border-gray-200 dark:border-[#2a2a2a] rounded-xl outline-none focus:border-blue-400 bg-gray-50 dark:bg-[#222222] text-gray-700 dark:text-[#e8eaf0] placeholder:text-gray-400 dark:placeholder:text-[#8892a4]"
+                  className="flex-1 px-3 py-2 text-sm border border-gray-200 dark:border-dark-border rounded-xl outline-none focus:border-blue-400 bg-gray-50 dark:bg-[#222222] text-gray-700 dark:text-[#e8eaf0] placeholder:text-gray-400 dark:placeholder:text-[#8892a4]"
                 />
                 <button type="submit" className="px-3 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors">
                   <Search size={16} />
