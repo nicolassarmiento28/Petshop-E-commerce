@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { LayoutDashboard, Package, ShoppingCart, Users, Tag, Percent, QrCode, LogOut, Menu, X, PawPrint } from 'lucide-react'
+import ConfirmDialog from './ConfirmDialog'
 
 const navItems = [
   { label: 'Dashboard', href: '/admin/dashboard', icon: LayoutDashboard },
@@ -20,6 +21,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
   const location = useLocation()
   const navigate = useNavigate()
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [confirmLogoutOpen, setConfirmLogoutOpen] = useState(false)
 
   const logout = () => {
     localStorage.removeItem('admin_token')
@@ -72,7 +74,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
 
       <div className="relative z-10 px-3 py-4 border-t border-white/10">
         <button
-          onClick={logout}
+          onClick={() => setConfirmLogoutOpen(true)}
           title="Cerrar sesión"
           className="flex items-center gap-3 w-full px-3 py-2.5 rounded-lg text-sm text-white/70 hover:bg-white/10 hover:text-white transition-colors"
         >
@@ -119,6 +121,15 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
         </div>
         {children}
       </main>
+
+      <ConfirmDialog
+        open={confirmLogoutOpen}
+        title="Cerrar sesión"
+        message="¿Seguro que quieres cerrar sesión?"
+        confirmLabel="Cerrar sesión"
+        onConfirm={logout}
+        onCancel={() => setConfirmLogoutOpen(false)}
+      />
     </div>
   )
 }
