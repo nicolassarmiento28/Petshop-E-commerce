@@ -1,3 +1,4 @@
+import { Receipt } from 'lucide-react'
 import { useCartStore } from '@/store/cartStore'
 import { formatCLP } from '@/utils/formatters'
 import type { CouponValidation } from '@/types'
@@ -26,23 +27,26 @@ export default function OrderSummary({
   const items = useCartStore((s) => s.items)
 
   return (
-    <div className="lg:w-80 bg-white dark:bg-[#1a1a1a] rounded-2xl shadow-sm p-6">
-      <h2 className="text-lg font-semibold text-gray-800 dark:text-[#e8eaf0] mb-4">Resumen del pedido</h2>
+    <div className="lg:w-80 border border-gray-200 dark:border-dark-border rounded-xl dark:bg-dark-surface p-6">
+      <h2 className="flex items-center gap-2 text-lg font-semibold text-gray-800 dark:text-[#e8eaf0] mb-4">
+        <Receipt size={20} className="text-blue-600 dark:text-blue-400" />
+        Resumen del pedido
+      </h2>
 
-      <div className="mb-4 pb-4 border-b border-gray-100 dark:border-[#2a2a2a]">
-        <label className="block text-sm font-medium text-gray-700 dark:text-[#e8eaf0] mb-2">Cupón de descuento</label>
+      <div className="mb-4 pb-4 border-b border-gray-100 dark:border-[#1a1f2b]">
+        <label className="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">Cupón de descuento</label>
         <div className="flex gap-2">
           <input
             type="text"
             value={couponCode}
             onChange={(e) => onCouponCodeChange(e.target.value)}
             placeholder="Código"
-            className="min-w-0 flex-1 px-3 py-2 border border-gray-200 dark:border-[#2a2a2a] rounded-xl text-sm bg-white dark:bg-[#222222] text-gray-900 dark:text-[#e8eaf0] focus:outline-none focus:border-blue-400 transition-colors"
+            className="min-w-0 flex-1 px-3 py-2 border border-gray-200 dark:border-[#2a2f3d] rounded-xl text-sm bg-white dark:bg-[#1a1f2b] text-gray-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 transition-colors"
           />
           <button
             onClick={onValidateCoupon}
             disabled={validating || !couponCode.trim()}
-            className="shrink-0 px-4 py-2 text-sm font-medium bg-blue-600 text-white rounded-xl hover:bg-blue-700 disabled:opacity-50 transition-colors"
+            className="shrink-0 px-4 py-2 text-sm font-medium border border-blue-600 text-blue-600 bg-transparent rounded-xl hover:bg-blue-50 dark:border-blue-400 dark:text-blue-400 dark:hover:bg-blue-950/30 disabled:opacity-50 transition-colors"
           >
             {validating ? '...' : 'Validar'}
           </button>
@@ -68,7 +72,7 @@ export default function OrderSummary({
           </li>
         ))}
       </ul>
-      <hr className="border-gray-100 dark:border-[#2a2a2a] mb-4" />
+      <hr className="border-gray-200 dark:border-dark-border mb-4" />
       {discountAmount > 0 && (
         <div className="flex justify-between text-sm text-green-600 mb-2">
           <span>Descuento</span>
@@ -77,7 +81,7 @@ export default function OrderSummary({
       )}
       <div className="flex justify-between font-semibold text-gray-800 dark:text-[#e8eaf0]">
         <span>Total</span>
-        <span className="text-blue-600">{formatCLP(finalTotal)}</span>
+        <span className="text-blue-600 dark:text-blue-400">{formatCLP(finalTotal)}</span>
       </div>
     </div>
   )

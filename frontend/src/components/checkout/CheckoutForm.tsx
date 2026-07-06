@@ -8,7 +8,7 @@ interface CheckoutFormProps {
 }
 
 const inputBase =
-  'w-full border border-gray-200 dark:border-[#2a2a2a] rounded-xl px-4 py-3 outline-none focus:border-blue-500 text-sm bg-white dark:bg-[#222222] text-gray-900 dark:text-[#e8eaf0] placeholder:text-gray-400 dark:placeholder:text-[#8892a4]'
+  'w-full border border-gray-200 dark:border-[#2a2f3d] rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 text-sm bg-white dark:bg-[#1a1f2b] text-gray-900 dark:text-zinc-100 placeholder:text-gray-400 dark:placeholder-gray-500'
 const inputError = 'border-red-400'
 
 export function CheckoutForm({ onSubmit, isSubmitting }: CheckoutFormProps) {
@@ -24,7 +24,7 @@ export function CheckoutForm({ onSubmit, isSubmitting }: CheckoutFormProps) {
     <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-5">
       {/* customerName */}
       <div>
-        <label htmlFor="customerName" className="block text-sm font-medium text-gray-700 dark:text-[#e8eaf0] mb-1">
+        <label htmlFor="customerName" className="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">
           Nombre completo
         </label>
         <input
@@ -40,7 +40,7 @@ export function CheckoutForm({ onSubmit, isSubmitting }: CheckoutFormProps) {
 
       {/* customerEmail */}
       <div>
-        <label htmlFor="customerEmail" className="block text-sm font-medium text-gray-700 dark:text-[#e8eaf0] mb-1">
+        <label htmlFor="customerEmail" className="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">
           Correo electrónico
         </label>
         <input
@@ -56,7 +56,7 @@ export function CheckoutForm({ onSubmit, isSubmitting }: CheckoutFormProps) {
 
       {/* customerPhone */}
       <div>
-        <label htmlFor="customerPhone" className="block text-sm font-medium text-gray-700 dark:text-[#e8eaf0] mb-1">
+        <label htmlFor="customerPhone" className="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">
           Teléfono (opcional)
         </label>
         <input
@@ -72,7 +72,7 @@ export function CheckoutForm({ onSubmit, isSubmitting }: CheckoutFormProps) {
 
       {/* shippingAddress */}
       <div>
-        <label htmlFor="shippingAddress" className="block text-sm font-medium text-gray-700 dark:text-[#e8eaf0] mb-1">
+        <label htmlFor="shippingAddress" className="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">
           Dirección de envío
         </label>
         <input

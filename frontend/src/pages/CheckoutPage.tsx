@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
+import { Package, CreditCard } from 'lucide-react'
 import { CheckoutForm } from '@/components/checkout/CheckoutForm'
 import OrderSummary from '@/components/checkout/OrderSummary'
 import type { CheckoutFormData } from '@/components/checkout/checkoutSchema'
@@ -103,7 +104,7 @@ export default function CheckoutPage() {
   if (!ready) return null
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-[#111111] py-10">
+    <div className="min-h-screen bg-gray-50 dark:bg-dark-bg py-10">
       <div className="max-w-5xl mx-auto px-4">
         <Helmet>
           <title>Checkout | Petshop</title>
@@ -111,12 +112,18 @@ export default function CheckoutPage() {
         <h1 className="text-2xl font-bold text-gray-800 dark:text-[#e8eaf0] mb-8">Checkout</h1>
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Left — form */}
-          <div className="flex-1 bg-white dark:bg-[#1a1a1a] rounded-2xl shadow-sm p-6">
-            <h2 className="text-lg font-semibold text-gray-800 dark:text-[#e8eaf0] mb-6">Datos del pedido</h2>
+          <div className="flex-1 border border-gray-200 dark:border-dark-border rounded-xl dark:bg-dark-surface p-6">
+            <h2 className="flex items-center gap-2 text-lg font-semibold text-gray-800 dark:text-[#e8eaf0] mb-6">
+              <Package size={20} className="text-blue-600 dark:text-blue-400" />
+              Datos del pedido
+            </h2>
 
             {/* Test card info */}
-            <div className="rounded-xl border border-yellow-300 dark:border-yellow-700 bg-yellow-50 dark:bg-yellow-900/20 p-3 text-xs text-yellow-800 dark:text-yellow-300 space-y-1 mb-5">
-              <p className="font-semibold">🧪 Datos de tarjeta de prueba</p>
+            <div className="rounded-xl border border-amber-200 dark:border-[#453410] bg-amber-50 dark:bg-[#241d0d] p-3 text-xs text-amber-700 dark:text-[#d4a017] space-y-1 mb-5">
+              <p className="flex items-center gap-1.5 font-semibold text-amber-800 dark:text-amber-400">
+                <CreditCard size={14} />
+                Datos de tarjeta de prueba
+              </p>
               <p>Número: <span className="font-mono">{TEST_CARD.number}</span></p>
               <p>Vencimiento: <span className="font-mono">{TEST_CARD.expiry}</span> · CVV: <span className="font-mono">{TEST_CARD.cvv}</span></p>
               <p>RUT: <span className="font-mono">{TEST_CARD.rut}</span> · Clave: <span className="font-mono">{TEST_CARD.clave}</span></p>
