@@ -133,13 +133,6 @@ const AdminLogin = () => {
                 </p>
               )}
 
-              {import.meta.env.DEV && (
-                <details className="rounded-lg bg-gray-100 dark:bg-dark-surface-elevated border border-gray-200 dark:border-dark-border p-3 text-xs text-gray-500 dark:text-zinc-400">
-                  <summary className="cursor-pointer font-medium">Credenciales de prueba</summary>
-                  <p className="font-mono mt-1">admin@petshop.cl / admin123</p>
-                </details>
-              )}
-
               <button
                 type="submit"
                 disabled={isSubmitting}
@@ -147,6 +140,11 @@ const AdminLogin = () => {
               >
                 {isSubmitting ? 'Ingresando…' : 'Ingresar'}
               </button>
+
+              <div className="rounded-lg bg-gray-50 dark:bg-dark-surface-elevated border border-gray-200 dark:border-dark-border p-3">
+                <p className="text-xs text-gray-500 dark:text-zinc-400">Credenciales de prueba</p>
+                <p className="font-mono text-xs mt-1 text-gray-700 dark:text-zinc-300">admin@petshop.cl / admin123</p>
+              </div>
             </form>
           </div>
         </div>
