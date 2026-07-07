@@ -3,7 +3,12 @@ import type { AuthRequest } from '../middleware/authMiddleware'
 import { prisma } from '../lib/prisma'
 import { z, ZodError } from 'zod'
 
-const createBrandSchema = z.object({ name: z.string().min(2), slug: z.string().min(2).regex(/^[a-z0-9-]+$/), logoUrl: z.string().url().optional(), sku: z.string().optional() })
+const createBrandSchema = z.object({
+  name: z.string().min(2),
+  slug: z.string().min(2).regex(/^[a-z0-9-]+$/),
+  logoUrl: z.string().url().optional().or(z.literal('')),
+  sku: z.string().optional(),
+})
 
 export const getBrands = async (
   req: AuthRequest,
@@ -66,7 +71,7 @@ export const createBrand = async (
       data: {
         name: String(name),
         slug: String(slug),
-        logoUrl: logoUrl !== undefined ? String(logoUrl) : undefined,
+        logoUrl: logoUrl !== undefined && logoUrl !== '' ? String(logoUrl) : undefined,
         sku: sku !== undefined && sku !== '' ? String(sku) : undefined,
       },
     })
@@ -98,7 +103,7 @@ export const updateBrand = async (
       data: {
         ...(name !== undefined && { name: String(name) }),
         ...(slug !== undefined && { slug: String(slug) }),
-        ...(logoUrl !== undefined && { logoUrl: logoUrl !== null ? String(logoUrl) : null }),
+        ...(logoUrl !== undefined && { logoUrl: logoUrl !== null && logoUrl !== '' ? String(logoUrl) : null }),
         ...(sku !== undefined && { sku: sku !== null && sku !== '' ? String(sku) : null }),
       },
     })

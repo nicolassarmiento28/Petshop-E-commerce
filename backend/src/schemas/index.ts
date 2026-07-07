@@ -26,7 +26,7 @@ export const updateProductSchema = z.object({
 export const updateBrandSchema = z.object({
   name: z.string().min(2).optional(),
   slug: z.string().min(2).regex(/^[a-z0-9-]+$/).optional(),
-  logoUrl: z.string().url().nullable().optional(),
+  logoUrl: z.string().url().nullable().optional().or(z.literal('')),
   sku: z.string().nullable().optional(),
 })
 
