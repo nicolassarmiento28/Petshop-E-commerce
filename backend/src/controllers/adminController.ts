@@ -29,7 +29,7 @@ export const adminLogin = async (
       return
     }
 
-    const options: SignOptions = { expiresIn: (process.env.JWT_EXPIRES_IN ?? '7d') as SignOptions['expiresIn'] }
+    const options: SignOptions = { expiresIn: (process.env.JWT_EXPIRES_IN ?? '8h') as SignOptions['expiresIn'] }
     const token = jwt.sign({ adminId: admin.id }, process.env.JWT_SECRET!, options)
 
     res.status(200).json({
