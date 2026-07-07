@@ -25,6 +25,9 @@ import AdminBrands from '@/pages/admin/AdminBrands'
 import AdminCustomers from '@/pages/admin/AdminCustomers'
 import AdminCoupons from '@/pages/admin/AdminCoupons'
 import AdminQr from '@/pages/admin/AdminQr'
+import AdminVetAppointments from '@/pages/admin/AdminVetAppointments'
+import AdminVetServices from '@/pages/admin/AdminVetServices'
+import AdminVetAvailability from '@/pages/admin/AdminVetAvailability'
 import PrivateRoute from '@/components/admin/PrivateRoute'
 
 function AppContent() {
@@ -66,6 +69,9 @@ function AppContent() {
         <Route element={<PrivateRoute><AdminCustomers /></PrivateRoute>} path="/admin/clientes" />
         <Route element={<PrivateRoute><AdminCoupons /></PrivateRoute>} path="/admin/cupones" />
         <Route element={<PrivateRoute><AdminQr /></PrivateRoute>} path="/admin/qr" />
+        <Route element={<PrivateRoute><AdminVetAppointments /></PrivateRoute>} path="/admin/veterinaria" />
+        <Route element={<PrivateRoute><AdminVetServices /></PrivateRoute>} path="/admin/veterinaria/servicios" />
+        <Route element={<PrivateRoute><AdminVetAvailability /></PrivateRoute>} path="/admin/veterinaria/disponibilidad" />
         </Routes>
       </motion.div>
     </AnimatePresence>
