@@ -103,7 +103,7 @@ export default function VetBookingPage() {
       <Helmet>
         <title>Agenda tu hora | Petshop</title>
       </Helmet>
-      <div className="max-w-2xl mx-auto px-4">
+      <div className={`mx-auto px-4 ${step === 3 ? 'max-w-4xl' : 'max-w-2xl'}`}>
         <div className="flex items-center gap-2 mb-2">
           <PawPrint size={28} className="text-orange-500 shrink-0" />
           <h1 className="text-2xl font-bold text-gray-800 dark:text-[#e8eaf0]">Agenda tu hora</h1>
@@ -146,7 +146,7 @@ export default function VetBookingPage() {
 
         {/* Step 1 — Service */}
         {step === 1 && (
-          <div>
+          <div className="max-w-2xl">
             {loadingServices && <p className="text-gray-500 dark:text-[#8892a4]">Cargando servicios…</p>}
             {!loadingServices && services?.length === 0 && (
               <p className="text-gray-500 dark:text-[#8892a4] text-sm">
@@ -185,7 +185,7 @@ export default function VetBookingPage() {
 
         {/* Step 2 — Date & time */}
         {step === 2 && selectedService && (
-          <div>
+          <div className="max-w-2xl">
             <label className="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Fecha</label>
             <input
               type="date"
@@ -242,7 +242,8 @@ export default function VetBookingPage() {
 
         {/* Step 3 — Owner/pet data */}
         {step === 3 && selectedService && selectedSlot && (
-          <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-4">
+          <div className="flex flex-col lg:flex-row gap-6 items-start">
+          <form onSubmit={handleSubmit(onSubmit)} noValidate className="flex-1 min-w-0 space-y-4">
             <div className="rounded-xl border border-gray-200 dark:border-dark-border bg-white dark:bg-dark-surface p-4 mb-2 text-sm">
               <p className="font-semibold text-gray-800 dark:text-[#e8eaf0]">{selectedService.name}</p>
               <p className="text-gray-500 dark:text-[#8892a4]">
@@ -301,8 +302,6 @@ export default function VetBookingPage() {
               <textarea id="notes" rows={3} className={inputClass} {...register('notes')} />
             </div>
 
-            <TestCardInfo />
-
             {submitError && <p className="text-red-500 text-sm">{submitError}</p>}
 
             <div className="flex gap-3 pt-2">
@@ -322,6 +321,11 @@ export default function VetBookingPage() {
               </button>
             </div>
           </form>
+
+          <aside className="w-full lg:w-72 shrink-0 lg:sticky lg:top-20">
+            <TestCardInfo />
+          </aside>
+          </div>
         )}
       </div>
     </div>
