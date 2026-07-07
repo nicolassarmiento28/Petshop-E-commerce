@@ -7,11 +7,11 @@ export interface AppError extends Error {
 
 export const errorHandler = (
   err: AppError,
-  _req: Request,
+  req: Request,
   res: Response,
   _next: NextFunction,
 ): void => {
   const statusCode = err.statusCode ?? 500
-  logger.error(err.message, err.stack)
+  logger.error(`${req.method} ${req.originalUrl} → ${err.message}`, err.stack, err)
   res.status(statusCode).json({ error: err.message ?? 'Internal server error' })
 }
