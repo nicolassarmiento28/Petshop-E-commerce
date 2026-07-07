@@ -60,7 +60,7 @@ export default function SizeSelector({ variants, currentSlug }: SizeSelectorProp
               className={`flex items-center gap-3 px-4 py-3 rounded-xl border-2 transition-all ${
                 isSelected
                   ? 'border-blue-600 bg-blue-50 dark:bg-blue-900/20'
-                  : 'border-gray-200 dark:border-[#2a2a2a] bg-white dark:bg-[#1a1a1a] hover:border-blue-300 dark:hover:border-blue-700'
+                  : 'border-gray-200 dark:border-dark-border bg-white dark:bg-dark-surface hover:border-blue-300 dark:hover:border-blue-700'
               } ${outOfStock ? 'opacity-45 pointer-events-none' : ''} ${
                 isNavigating ? 'pointer-events-none opacity-60' : ''
               }`}
@@ -68,7 +68,7 @@ export default function SizeSelector({ variants, currentSlug }: SizeSelectorProp
               {v.imageUrl ? (
                 <img src={v.imageUrl} alt={v.sizeLabel} className="w-10 h-10 object-contain rounded-md shrink-0" />
               ) : (
-                <div className="w-10 h-10 bg-gray-100 dark:bg-[#222222] rounded-md shrink-0" />
+                <div className="w-10 h-10 bg-gray-100 dark:bg-dark-surface-elevated rounded-md shrink-0" />
               )}
               <div className="flex-1 min-w-0">
                 <p className={`text-sm font-bold ${isSelected ? 'text-blue-700 dark:text-blue-300' : 'text-gray-800 dark:text-[#e8eaf0]'}`}>
@@ -98,7 +98,7 @@ export default function SizeSelector({ variants, currentSlug }: SizeSelectorProp
       </div>
 
       {showSpinner && (
-        <div className="absolute inset-0 bg-white/60 dark:bg-[#111111]/60 backdrop-blur-sm flex items-center justify-center rounded-xl z-10">
+        <div className="absolute inset-0 bg-white/60 dark:bg-dark-bg/60 backdrop-blur-sm flex items-center justify-center rounded-xl z-10">
           <LoaderCircle className="w-6 h-6 text-blue-600 animate-spin" />
         </div>
       )}

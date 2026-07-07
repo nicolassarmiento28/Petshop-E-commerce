@@ -27,7 +27,7 @@ export default function ProductCard({ product }: ProductCardProps) {
   return (
     <div className="group bg-white dark:bg-dark-surface rounded-2xl overflow-hidden border border-gray-100 dark:border-dark-border shadow-sm hover:shadow-md hover:shadow-blue-100/60 dark:hover:border-dark-border-hover dark:hover:shadow-lg dark:hover:shadow-black/30 transition-all duration-300 flex flex-col">
       {/* Image */}
-      <Link to={`/producto/${product.slug}`} className="relative block aspect-square overflow-hidden bg-gray-50 dark:bg-[#222222]">
+      <Link to={`/producto/${product.slug}`} className="relative block aspect-square overflow-hidden bg-gray-50 dark:bg-dark-surface-elevated">
         {product.imageUrl ? (
           <img
             src={product.imageUrl}
@@ -36,7 +36,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center text-6xl bg-blue-50 dark:bg-[#222222]">
+          <div className="w-full h-full flex items-center justify-center text-6xl bg-blue-50 dark:bg-dark-surface-elevated">
             🐾
           </div>
         )}
@@ -111,7 +111,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           className={cn(
             'mt-2 w-full flex items-center justify-center gap-2 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-all duration-200',
             outOfStock
-              ? 'bg-gray-100 dark:bg-[#222222] text-gray-400 dark:text-[#8892a4] cursor-not-allowed'
+              ? 'bg-gray-100 dark:bg-dark-surface-elevated text-gray-400 dark:text-[#8892a4] cursor-not-allowed'
               : 'bg-blue-600 hover:bg-blue-700 text-white active:scale-95',
           )}
         >

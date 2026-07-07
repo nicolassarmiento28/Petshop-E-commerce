@@ -259,8 +259,8 @@ const AdminDashboard = () => {
                     <YAxis tick={{ fontSize: 11, fill: '#9ca3af' }} tickFormatter={(v: number) => `$${(v / 1000).toFixed(0)}k`} />
                     <Tooltip
                       contentStyle={{
-                        backgroundColor: '#1a1a1a',
-                        border: '1px solid #2a2a2a',
+                        backgroundColor: '#181a13',
+                        border: '1px solid #282b1e',
                         borderRadius: '8px',
                         color: '#e8eaf0',
                         fontSize: '13px',
@@ -295,7 +295,7 @@ const AdminDashboard = () => {
                       {item.product?.imageUrl ? (
                         <img src={item.product.imageUrl} alt="" className="w-8 h-8 rounded object-cover" />
                       ) : (
-                        <div className="w-8 h-8 rounded bg-gray-100 dark:bg-[#222222]" />
+                        <div className="w-8 h-8 rounded bg-gray-100 dark:bg-dark-surface-elevated" />
                       )}
                       <div className="flex-1 min-w-0">
                         <p className="text-sm text-gray-700 dark:text-[#e8eaf0] truncate">
@@ -321,7 +321,7 @@ const AdminDashboard = () => {
                   <AlertTriangle size={16} className="text-orange-500" />
                   <h2 className="font-semibold text-orange-700 dark:text-orange-400">Stock bajo ({lowStock.total})</h2>
                 </div>
-                <div className="divide-y divide-gray-100 dark:divide-[#2a2a2a]">
+                <div className="divide-y divide-gray-100 dark:divide-dark-border">
                   {lowStock.products.slice(0, 8).map((p) => (
                     <div key={p.id} className="px-6 py-3 flex items-center justify-between">
                       <div>
@@ -352,7 +352,7 @@ const AdminDashboard = () => {
               </div>
               <div className="overflow-x-auto">
               <table className="w-full text-sm whitespace-nowrap">
-                <thead className="bg-gray-50 dark:bg-[#222222] text-gray-500 dark:text-[#8892a4] text-xs uppercase">
+                <thead className="bg-gray-50 dark:bg-dark-surface-elevated text-gray-500 dark:text-[#8892a4] text-xs uppercase">
                   <tr>
                     <th className="px-6 py-3 text-left">N° Orden</th>
                     <th className="px-6 py-3 text-left">Cliente</th>
@@ -360,9 +360,9 @@ const AdminDashboard = () => {
                     <th className="px-6 py-3 text-left">Estado</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-100 dark:divide-[#2a2a2a]">
+                <tbody className="divide-y divide-gray-100 dark:divide-dark-border">
                   {data.recentOrders.map((order) => (
-                    <tr key={order.id} className="hover:bg-gray-50 dark:hover:bg-[#222222]">
+                    <tr key={order.id} className="hover:bg-gray-50 dark:hover:bg-dark-surface-elevated">
                       <td className="px-6 py-3 font-mono text-gray-700 dark:text-[#e8eaf0]">{order.orderNumber}</td>
                       <td className="px-6 py-3 text-gray-700 dark:text-[#e8eaf0]">{order.customerName}</td>
                       <td className="px-6 py-3 text-gray-700 dark:text-[#e8eaf0]">{formatCLP(order.total)}</td>

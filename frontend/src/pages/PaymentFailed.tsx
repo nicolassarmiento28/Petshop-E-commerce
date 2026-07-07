@@ -8,11 +8,11 @@ export default function PaymentFailed() {
   const orderNumber = searchParams.get('order')
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-[#111111] flex flex-col items-center justify-center">
+    <div className="min-h-screen bg-gray-50 dark:bg-dark-bg flex flex-col items-center justify-center">
       <Helmet>
         <title>Pago rechazado | Petshop</title>
       </Helmet>
-      <div className="bg-white dark:bg-[#1a1a1a] rounded-3xl shadow-sm p-8 max-w-md w-full mx-auto mt-20 flex flex-col items-center gap-5 text-center">
+      <div className="bg-white dark:bg-dark-surface rounded-3xl shadow-sm p-8 max-w-md w-full mx-auto mt-20 flex flex-col items-center gap-5 text-center">
         <XCircle size={64} className="text-red-500" />
 
         <h1 className="text-3xl font-bold text-gray-900 dark:text-[#e8eaf0]" style={{ fontFamily: 'Fraunces, serif' }}>
@@ -34,7 +34,7 @@ export default function PaymentFailed() {
           </button>
           <Link
             to="/"
-            className="bg-gray-100 hover:bg-gray-200 dark:bg-[#222222] dark:hover:bg-[#2a2a2a] text-gray-700 dark:text-[#e8eaf0] font-semibold px-5 py-3 rounded-xl transition-colors"
+            className="bg-gray-100 hover:bg-gray-200 dark:bg-dark-surface-elevated dark:hover:bg-dark-surface-elevated text-gray-700 dark:text-[#e8eaf0] font-semibold px-5 py-3 rounded-xl transition-colors"
           >
             Volver al inicio
           </Link>

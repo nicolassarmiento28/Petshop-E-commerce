@@ -87,7 +87,7 @@ const AdminOrders = () => {
           <select
           value={statusFilter}
           onChange={(e) => handleFilterChange(e.target.value)}
-          className="border border-gray-300 dark:border-dark-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-[#222222] dark:text-[#e8eaf0]"
+          className="border border-gray-300 dark:border-dark-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-dark-surface-elevated dark:text-[#e8eaf0]"
         >
           <option value="">Todos los estados</option>
             {ORDER_STATUSES.map((s) => (
@@ -104,7 +104,7 @@ const AdminOrders = () => {
           <>
             <div className="overflow-x-auto">
             <table className="w-full text-sm whitespace-nowrap">
-              <thead className="bg-gray-50 dark:bg-[#222222] text-gray-500 dark:text-[#8892a4] text-xs uppercase">
+              <thead className="bg-gray-50 dark:bg-dark-surface-elevated text-gray-500 dark:text-[#8892a4] text-xs uppercase">
                 <tr>
                   <th className="px-4 py-3 text-left">N° Orden</th>
                   <th className="px-4 py-3 text-left">Cliente</th>
@@ -114,10 +114,10 @@ const AdminOrders = () => {
                   <th className="px-4 py-3 text-left">Detalle</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100 dark:divide-[#2a2a2a]">
+              <tbody className="divide-y divide-gray-100 dark:divide-dark-border">
                 {data?.orders.map((order) => (
                   <>
-                    <tr key={order.id} className="hover:bg-gray-50 dark:hover:bg-[#222222]">
+                    <tr key={order.id} className="hover:bg-gray-50 dark:hover:bg-dark-surface-elevated">
                       <td className="px-4 py-3 font-mono text-gray-700 dark:text-[#e8eaf0]">{order.orderNumber}</td>
                       <td className="px-4 py-3">
                         <p className="text-gray-800 dark:text-[#e8eaf0]">{order.customerName}</p>
@@ -135,7 +135,7 @@ const AdminOrders = () => {
                           onChange={(e) =>
                             updateStatusMutation.mutate({ id: order.id, status: e.target.value as OrderStatus })
                           }
-                          className="border border-gray-300 dark:border-dark-border rounded-lg px-2 py-1 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-[#222222] dark:text-[#e8eaf0]"
+                          className="border border-gray-300 dark:border-dark-border rounded-lg px-2 py-1 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-dark-surface-elevated dark:text-[#e8eaf0]"
                         >
                           {ORDER_STATUSES.map((s) => (
                             <option key={s} value={s}>{ORDER_STATUS_LABELS[s]}</option>
@@ -145,7 +145,7 @@ const AdminOrders = () => {
                       <td className="px-4 py-3">
                         <button
                           onClick={() => setExpandedId(expandedId === order.id ? null : order.id)}
-                          className="text-xs px-3 py-1 rounded-lg border border-gray-300 dark:border-dark-border text-gray-600 dark:text-[#e8eaf0] hover:bg-gray-50 dark:hover:bg-[#222222] transition-colors"
+                          className="text-xs px-3 py-1 rounded-lg border border-gray-300 dark:border-dark-border text-gray-600 dark:text-[#e8eaf0] hover:bg-gray-50 dark:hover:bg-dark-surface-elevated transition-colors"
                         >
                           {expandedId === order.id ? 'Ocultar' : 'Ver items'}
                         </button>
@@ -189,14 +189,14 @@ const AdminOrders = () => {
                   <button
                     disabled={page === 1}
                     onClick={() => setPage((p) => p - 1)}
-                    className="px-3 py-1 rounded-lg border border-gray-300 dark:border-dark-border dark:text-[#e8eaf0] disabled:opacity-40 hover:bg-gray-50 dark:hover:bg-[#222222] transition-colors"
+                    className="px-3 py-1 rounded-lg border border-gray-300 dark:border-dark-border dark:text-[#e8eaf0] disabled:opacity-40 hover:bg-gray-50 dark:hover:bg-dark-surface-elevated transition-colors"
                   >
                     Anterior
                   </button>
                   <button
                     disabled={page === data.totalPages}
                     onClick={() => setPage((p) => p + 1)}
-                    className="px-3 py-1 rounded-lg border border-gray-300 dark:border-dark-border dark:text-[#e8eaf0] disabled:opacity-40 hover:bg-gray-50 dark:hover:bg-[#222222] transition-colors"
+                    className="px-3 py-1 rounded-lg border border-gray-300 dark:border-dark-border dark:text-[#e8eaf0] disabled:opacity-40 hover:bg-gray-50 dark:hover:bg-dark-surface-elevated transition-colors"
                   >
                     Siguiente
                   </button>

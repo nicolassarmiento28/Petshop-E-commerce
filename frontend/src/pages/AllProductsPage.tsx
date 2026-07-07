@@ -57,7 +57,7 @@ export default function AllProductsPage() {
     }, [])
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 dark:bg-[#111111]">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 dark:bg-dark-bg">
       <Helmet>
         <title>Todos los productos | Petshop</title>
       </Helmet>
@@ -87,14 +87,14 @@ export default function AllProductsPage() {
             value={search}
             onChange={(e) => applyFilter(() => setSearch(e.target.value))}
             placeholder="Buscar productos..."
-            className="w-full pl-8 pr-3 py-2.5 border border-gray-200 dark:border-[#2a2a2a] rounded-xl text-sm text-gray-700 dark:text-[#e8eaf0] bg-white dark:bg-[#222222] focus:outline-none focus:border-blue-400 transition-colors"
+            className="w-full pl-8 pr-3 py-2.5 border border-gray-200 dark:border-dark-border rounded-xl text-sm text-gray-700 dark:text-[#e8eaf0] bg-white dark:bg-dark-surface-elevated focus:outline-none focus:border-blue-400 transition-colors"
           />
         </div>
 
         <select
           value={brandFilter}
           onChange={(e) => applyFilter(() => setBrandFilter(e.target.value))}
-          className="px-3 py-2.5 border border-gray-200 dark:border-[#2a2a2a] rounded-xl text-sm text-gray-600 dark:text-[#e8eaf0] bg-white dark:bg-[#222222] hover:border-blue-300 transition-colors outline-none"
+          className="px-3 py-2.5 border border-gray-200 dark:border-dark-border rounded-xl text-sm text-gray-600 dark:text-[#e8eaf0] bg-white dark:bg-dark-surface-elevated hover:border-blue-300 transition-colors outline-none"
         >
           <option value="">Todas las marcas</option>
           {allBrands.map((b) => (
@@ -105,7 +105,7 @@ export default function AllProductsPage() {
         <select
           value={sort}
           onChange={(e) => applyFilter(() => setSort(e.target.value))}
-          className="px-3 py-2.5 border border-gray-200 dark:border-[#2a2a2a] rounded-xl text-sm text-gray-600 dark:text-[#e8eaf0] bg-white dark:bg-[#222222] hover:border-blue-300 transition-colors outline-none"
+          className="px-3 py-2.5 border border-gray-200 dark:border-dark-border rounded-xl text-sm text-gray-600 dark:text-[#e8eaf0] bg-white dark:bg-dark-surface-elevated hover:border-blue-300 transition-colors outline-none"
         >
           <option value="">Más relevantes</option>
           <option value="price_asc">Menor precio</option>
@@ -126,7 +126,7 @@ export default function AllProductsPage() {
         <select
           value={pageSize}
           onChange={(e) => { setPageSize(Number(e.target.value)); setPage(1) }}
-          className="px-3 py-2.5 border border-gray-200 dark:border-[#2a2a2a] rounded-xl text-sm text-gray-600 dark:text-[#e8eaf0] bg-white dark:bg-[#222222] hover:border-blue-300 transition-colors outline-none"
+          className="px-3 py-2.5 border border-gray-200 dark:border-dark-border rounded-xl text-sm text-gray-600 dark:text-[#e8eaf0] bg-white dark:bg-dark-surface-elevated hover:border-blue-300 transition-colors outline-none"
         >
           {PAGE_SIZES.map((s) => (
             <option key={s} value={s}>{s} por página</option>
@@ -151,7 +151,7 @@ export default function AllProductsPage() {
           <button
             onClick={() => goToPage(page - 1)}
             disabled={page === 1}
-            className="p-2 rounded-xl border border-gray-200 dark:border-[#2a2a2a] hover:border-blue-300 disabled:opacity-30 disabled:cursor-not-allowed transition-colors bg-white dark:bg-[#1a1a1a] dark:text-[#e8eaf0]"
+            className="p-2 rounded-xl border border-gray-200 dark:border-dark-border hover:border-blue-300 disabled:opacity-30 disabled:cursor-not-allowed transition-colors bg-white dark:bg-dark-surface dark:text-[#e8eaf0]"
           >
             <ChevronLeft size={18} />
           </button>
@@ -167,7 +167,7 @@ export default function AllProductsPage() {
                   'min-w-[36px] h-9 rounded-xl text-sm font-medium border transition-colors',
                   page === p
                     ? 'bg-blue-600 text-white border-blue-600'
-                    : 'bg-white dark:bg-[#1a1a1a] text-gray-700 dark:text-[#e8eaf0] border-gray-200 dark:border-[#2a2a2a] hover:border-blue-300',
+                    : 'bg-white dark:bg-dark-surface text-gray-700 dark:text-[#e8eaf0] border-gray-200 dark:border-dark-border hover:border-blue-300',
                 )}
               >
                 {p}
@@ -178,7 +178,7 @@ export default function AllProductsPage() {
           <button
             onClick={() => goToPage(page + 1)}
             disabled={page === totalPages}
-            className="p-2 rounded-xl border border-gray-200 dark:border-[#2a2a2a] hover:border-blue-300 disabled:opacity-30 disabled:cursor-not-allowed transition-colors bg-white dark:bg-[#1a1a1a] dark:text-[#e8eaf0]"
+            className="p-2 rounded-xl border border-gray-200 dark:border-dark-border hover:border-blue-300 disabled:opacity-30 disabled:cursor-not-allowed transition-colors bg-white dark:bg-dark-surface dark:text-[#e8eaf0]"
           >
             <ChevronRight size={18} />
           </button>

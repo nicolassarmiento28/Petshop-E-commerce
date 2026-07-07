@@ -49,9 +49,9 @@ export default function BrandsCarousel({ brands }: BrandsCarouselProps) {
         disabled={!canScrollLeft}
         aria-label="Anterior"
         className="absolute left-0 top-1/2 -translate-y-1/2 z-10 -translate-x-4
-          w-9 h-9 rounded-full bg-white dark:bg-[#222222] shadow-md border border-gray-200 dark:border-[#2a2a2a]
+          w-9 h-9 rounded-full bg-white dark:bg-dark-surface-elevated shadow-md border border-gray-200 dark:border-dark-border
           flex items-center justify-center text-gray-600 dark:text-[#8892a4]
-          hover:bg-blue-600 dark:hover:bg-[#2a2a2a] hover:text-white hover:border-blue-600
+          hover:bg-blue-600 dark:hover:bg-dark-surface-elevated hover:text-white hover:border-blue-600
           disabled:opacity-0 disabled:pointer-events-none
           transition-all duration-200"
       >
@@ -93,9 +93,9 @@ export default function BrandsCarousel({ brands }: BrandsCarouselProps) {
         disabled={!canScrollRight}
         aria-label="Siguiente"
         className="absolute right-0 top-1/2 -translate-y-1/2 z-10 translate-x-4
-          w-9 h-9 rounded-full bg-white dark:bg-[#222222] shadow-md border border-gray-200 dark:border-[#2a2a2a]
+          w-9 h-9 rounded-full bg-white dark:bg-dark-surface-elevated shadow-md border border-gray-200 dark:border-dark-border
           flex items-center justify-center text-gray-600 dark:text-[#8892a4]
-          hover:bg-blue-600 dark:hover:bg-[#2a2a2a] hover:text-white hover:border-blue-600
+          hover:bg-blue-600 dark:hover:bg-dark-surface-elevated hover:text-white hover:border-blue-600
           disabled:opacity-0 disabled:pointer-events-none
           transition-all duration-200"
       >

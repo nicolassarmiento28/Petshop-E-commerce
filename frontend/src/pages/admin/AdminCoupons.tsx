@@ -66,7 +66,7 @@ interface CouponModalProps {
   onClose: () => void
 }
 
-const inputClass = 'w-full border border-gray-300 dark:border-[#2a2a2a] rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-[#222222] dark:text-[#e8eaf0] dark:placeholder:text-[#8892a4]'
+const inputClass = 'w-full border border-gray-300 dark:border-dark-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-dark-surface-elevated dark:text-[#e8eaf0] dark:placeholder:text-[#8892a4]'
 
 const CouponModal = ({ coupon, onClose }: CouponModalProps) => {
   const queryClient = useQueryClient()
@@ -104,8 +104,8 @@ const CouponModal = ({ coupon, onClose }: CouponModalProps) => {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       <div className="absolute inset-0 bg-black/40" onClick={onClose} />
-      <div className="relative bg-white dark:bg-[#1a1a1a] rounded-2xl shadow-xl w-full max-w-lg mx-4 max-h-[90vh] overflow-y-auto">
-        <div className="px-6 py-4 border-b border-gray-100 dark:border-[#2a2a2a] flex items-center justify-between">
+      <div className="relative bg-white dark:bg-dark-surface rounded-2xl shadow-xl w-full max-w-lg mx-4 max-h-[90vh] overflow-y-auto">
+        <div className="px-6 py-4 border-b border-gray-100 dark:border-dark-border flex items-center justify-between">
           <h2 className="text-lg font-bold text-gray-900 dark:text-[#e8eaf0]">
             {isEdit ? 'Editar cupón' : 'Nuevo cupón'}
           </h2>
@@ -150,7 +150,7 @@ const CouponModal = ({ coupon, onClose }: CouponModalProps) => {
           </div>
           {mutation.isError && <p className="text-red-500 text-sm">Error al guardar. Intenta de nuevo.</p>}
           <div className="flex justify-end gap-3 pt-2">
-            <button type="button" onClick={onClose} className="px-4 py-2 text-sm rounded-lg border border-gray-300 dark:border-[#2a2a2a] text-gray-600 dark:text-[#e8eaf0] hover:bg-gray-50 dark:hover:bg-[#222222] transition-colors">
+            <button type="button" onClick={onClose} className="px-4 py-2 text-sm rounded-lg border border-gray-300 dark:border-dark-border text-gray-600 dark:text-[#e8eaf0] hover:bg-gray-50 dark:hover:bg-dark-surface-elevated transition-colors">
               Cancelar
             </button>
             <button type="submit" disabled={isSubmitting || mutation.isPending} className="px-4 py-2 text-sm rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700 disabled:opacity-50 transition-colors">
@@ -228,18 +228,18 @@ const AdminCoupons = () => {
           value={searchInput}
           onChange={(e) => handleSearch(e.target.value)}
           placeholder="Buscar por código..."
-          className="w-full pl-9 pr-3 py-2 border border-gray-200 dark:border-[#2a2a2a] rounded-xl text-sm text-gray-700 dark:text-[#e8eaf0] bg-white dark:bg-[#222222] focus:outline-none focus:border-blue-400 transition-colors placeholder:text-gray-400 dark:placeholder:text-[#8892a4]"
+          className="w-full pl-9 pr-3 py-2 border border-gray-200 dark:border-dark-border rounded-xl text-sm text-gray-700 dark:text-[#e8eaf0] bg-white dark:bg-dark-surface-elevated focus:outline-none focus:border-blue-400 transition-colors placeholder:text-gray-400 dark:placeholder:text-[#8892a4]"
         />
       </div>
 
-      <div className="bg-white dark:bg-[#1a1a1a] rounded-xl border border-gray-200 dark:border-[#2a2a2a]">
+      <div className="bg-white dark:bg-dark-surface rounded-xl border border-gray-200 dark:border-dark-border">
         {isLoading ? (
           <p className="p-6 text-gray-500 dark:text-[#8892a4]">Cargando...</p>
         ) : (
           <>
             <div className="overflow-x-auto">
             <table className="w-full text-sm whitespace-nowrap">
-              <thead className="bg-gray-50 dark:bg-[#222222] text-gray-500 dark:text-[#8892a4] text-xs uppercase">
+              <thead className="bg-gray-50 dark:bg-dark-surface-elevated text-gray-500 dark:text-[#8892a4] text-xs uppercase">
                 <tr>
                   <th className="px-4 py-3 text-left">Código</th>
                   <th className="px-4 py-3 text-left">Tipo</th>
@@ -251,9 +251,9 @@ const AdminCoupons = () => {
                   <th className="px-4 py-3 text-left">Acciones</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100 dark:divide-[#2a2a2a]">
+              <tbody className="divide-y divide-gray-100 dark:divide-dark-border">
                 {data?.coupons.map((coupon) => (
-                  <tr key={coupon.id} className="hover:bg-gray-50 dark:hover:bg-[#222222]">
+                  <tr key={coupon.id} className="hover:bg-gray-50 dark:hover:bg-dark-surface-elevated">
                     <td className="px-4 py-3 font-medium text-gray-800 dark:text-[#e8eaf0]">{coupon.code}</td>
                     <td className="px-4 py-3 text-gray-600 dark:text-[#e8eaf0]">
                       {coupon.discountType === 'PERCENTAGE' ? '%' : '$'}
@@ -287,7 +287,7 @@ const AdminCoupons = () => {
                       <div className="flex gap-2">
                         <button
                           onClick={() => setModalCoupon(coupon)}
-                          className="text-xs px-3 py-1 rounded-lg border border-gray-300 dark:border-[#2a2a2a] text-gray-600 dark:text-[#e8eaf0] hover:bg-gray-50 dark:hover:bg-[#222222] transition-colors"
+                          className="text-xs px-3 py-1 rounded-lg border border-gray-300 dark:border-dark-border text-gray-600 dark:text-[#e8eaf0] hover:bg-gray-50 dark:hover:bg-dark-surface-elevated transition-colors"
                         >
                           Editar
                         </button>
@@ -312,20 +312,20 @@ const AdminCoupons = () => {
             </div>
             {/* Pagination */}
             {data && data.totalPages > 1 && (
-              <div className="px-4 py-3 border-t border-gray-100 dark:border-[#2a2a2a] flex items-center justify-between text-sm text-gray-500 dark:text-[#8892a4]">
+              <div className="px-4 py-3 border-t border-gray-100 dark:border-dark-border flex items-center justify-between text-sm text-gray-500 dark:text-[#8892a4]">
                 <span>Página {data.page} de {data.totalPages} ({data.total} cupones)</span>
                 <div className="flex gap-2">
                   <button
                     disabled={page === 1}
                     onClick={() => setPage((p) => p - 1)}
-                    className="px-3 py-1 rounded-lg border border-gray-300 dark:border-[#2a2a2a] dark:text-[#e8eaf0] disabled:opacity-40 hover:bg-gray-50 dark:hover:bg-[#222222] transition-colors"
+                    className="px-3 py-1 rounded-lg border border-gray-300 dark:border-dark-border dark:text-[#e8eaf0] disabled:opacity-40 hover:bg-gray-50 dark:hover:bg-dark-surface-elevated transition-colors"
                   >
                     Anterior
                   </button>
                   <button
                     disabled={page === data.totalPages}
                     onClick={() => setPage((p) => p + 1)}
-                    className="px-3 py-1 rounded-lg border border-gray-300 dark:border-[#2a2a2a] dark:text-[#e8eaf0] disabled:opacity-40 hover:bg-gray-50 dark:hover:bg-[#222222] transition-colors"
+                    className="px-3 py-1 rounded-lg border border-gray-300 dark:border-dark-border dark:text-[#e8eaf0] disabled:opacity-40 hover:bg-gray-50 dark:hover:bg-dark-surface-elevated transition-colors"
                   >
                     Siguiente
                   </button>

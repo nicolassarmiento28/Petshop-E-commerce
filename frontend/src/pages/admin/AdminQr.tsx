@@ -20,7 +20,7 @@ export default function AdminQr() {
         <title>Admin - Código QR | Petshop</title>
       </Helmet>
       <h1 className="text-2xl font-bold text-gray-900 dark:text-[#e8eaf0] mb-6">Código QR</h1>
-      <div className="bg-white dark:bg-[#1a1a1a] rounded-xl border border-gray-200 dark:border-[#2a2a2a] p-8 max-w-md">
+      <div className="bg-white dark:bg-dark-surface rounded-xl border border-gray-200 dark:border-dark-border p-8 max-w-md">
         <img
           src={qrUrl}
           alt="Código QR Petshop"

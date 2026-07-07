@@ -92,7 +92,7 @@ export default function CartDrawer({ open, onClose }: CartDrawerProps) {
           </h2>
           <button
             onClick={onClose}
-            className="p-1.5 text-gray-400 hover:text-gray-700 hover:bg-gray-100 dark:text-gray-500 dark:hover:text-[#e8eaf0] dark:hover:bg-[#222222] rounded-lg transition-colors"
+            className="p-1.5 text-gray-400 hover:text-gray-700 hover:bg-gray-100 dark:text-gray-500 dark:hover:text-[#e8eaf0] dark:hover:bg-dark-surface-elevated rounded-lg transition-colors"
             aria-label="Cerrar carrito"
           >
             <X size={20} />

@@ -25,7 +25,7 @@ export default function Footer() {
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 rounded-lg bg-gray-800 dark:bg-[#222222] hover:bg-blue-600 hover:text-white text-gray-400 dark:text-[#8892a4] transition-colors"
+                className="p-2 rounded-lg bg-gray-800 dark:bg-dark-surface-elevated hover:bg-blue-600 hover:text-white text-gray-400 dark:text-[#8892a4] transition-colors"
                 aria-label="Instagram"
               >
                 <Instagram size={16} />
@@ -34,7 +34,7 @@ export default function Footer() {
                 href="https://facebook.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 rounded-lg bg-gray-800 dark:bg-[#222222] hover:bg-blue-600 hover:text-white text-gray-400 dark:text-[#8892a4] transition-colors"
+                className="p-2 rounded-lg bg-gray-800 dark:bg-dark-surface-elevated hover:bg-blue-600 hover:text-white text-gray-400 dark:text-[#8892a4] transition-colors"
                 aria-label="Facebook"
               >
                 <Facebook size={16} />
@@ -43,7 +43,7 @@ export default function Footer() {
                 href="https://wa.me/56912345678"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 rounded-lg bg-gray-800 dark:bg-[#222222] hover:bg-green-500 hover:text-white text-gray-400 dark:text-[#8892a4] transition-colors"
+                className="p-2 rounded-lg bg-gray-800 dark:bg-dark-surface-elevated hover:bg-green-500 hover:text-white text-gray-400 dark:text-[#8892a4] transition-colors"
                 aria-label="WhatsApp"
               >
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
@@ -133,13 +133,13 @@ export default function Footer() {
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 title="Ubicación Petshop Viña del Mar"
-                className="bg-gray-800 dark:bg-[#222222]"
+                className="bg-gray-800 dark:bg-dark-surface-elevated"
               />
             </div>
           </div>
         </div>
 
-        <div className="border-t border-gray-800 dark:border-[#2a2a2a] mt-12 pt-6 flex flex-col sm:flex-row justify-between items-center gap-2">
+        <div className="border-t border-gray-800 dark:border-dark-border mt-12 pt-6 flex flex-col sm:flex-row justify-between items-center gap-2">
           <p className="text-xs text-gray-500">© {new Date().getFullYear()} Petshop. Todos los derechos reservados.</p>
         </div>
       </div>

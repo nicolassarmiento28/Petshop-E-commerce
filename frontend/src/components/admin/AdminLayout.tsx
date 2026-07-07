@@ -113,7 +113,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
         <div className="flex items-center gap-3 mb-4 lg:hidden">
           <button
             onClick={() => setSidebarOpen(true)}
-            className="p-2 text-gray-500 dark:text-[#8892a4] hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-[#222222] rounded-lg transition-colors"
+            className="p-2 text-gray-500 dark:text-[#8892a4] hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-dark-surface-elevated rounded-lg transition-colors"
             aria-label="Abrir menú"
           >
             <Menu size={20} />

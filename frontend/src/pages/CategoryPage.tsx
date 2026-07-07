@@ -141,7 +141,7 @@ export default function CategoryPage() {
   const breadcrumb = sub ? capitalize(slug ?? '') : null
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 dark:bg-[#111111]">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 dark:bg-dark-bg">
       <Helmet>
         <title>{pageTitle} | Petshop</title>
       </Helmet>
@@ -190,7 +190,7 @@ export default function CategoryPage() {
             <Link
               key={sub.slug}
               to={`/categoria/${slug}/${sub.slug}`}
-              className="px-3 py-1.5 rounded-full text-sm font-medium border border-gray-200 dark:border-[#2a2a2a] text-gray-600 dark:text-[#e8eaf0] hover:border-blue-400 hover:text-blue-600 transition-colors bg-white dark:bg-[#1a1a1a]"
+              className="px-3 py-1.5 rounded-full text-sm font-medium border border-gray-200 dark:border-dark-border text-gray-600 dark:text-[#e8eaf0] hover:border-blue-400 hover:text-blue-600 transition-colors bg-white dark:bg-dark-surface"
             >
               {sub.name}
             </Link>
@@ -206,7 +206,7 @@ export default function CategoryPage() {
               key={brand.id}
               to={`/categoria/marcas?brand=${brand.slug}`}
               onClick={() => setBrandFilter(brand.slug)}
-              className="group flex items-center justify-center p-5 rounded-2xl border border-gray-100 dark:border-[#2a2a2a] hover:border-blue-300 hover:shadow-lg hover:shadow-blue-50 transition-all duration-200 bg-white dark:bg-[#1a1a1a]"
+              className="group flex items-center justify-center p-5 rounded-2xl border border-gray-100 dark:border-dark-border hover:border-blue-300 hover:shadow-lg hover:shadow-blue-50 transition-all duration-200 bg-white dark:bg-dark-surface"
             >
               <div className="h-16 flex items-center justify-center px-2">
                 {brand.logoUrl ? (
@@ -227,7 +227,7 @@ export default function CategoryPage() {
       )}
 
       {/* Filters bar */}
-      <div className="sticky top-16 z-10 bg-[#FAFAF8] dark:bg-[#111111] py-3 -mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8 mb-3 border-b border-gray-100 dark:border-[#2a2a2a]">
+      <div className="sticky top-16 z-10 bg-[#FAFAF8] dark:bg-dark-bg py-3 -mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8 mb-3 border-b border-gray-100 dark:border-dark-border">
         <div className="flex flex-wrap items-center gap-3">
           {/* Search */}
           <div className="relative flex-1 min-w-[180px] max-w-xs">
@@ -237,7 +237,7 @@ export default function CategoryPage() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Buscar en esta categoría..."
-              className="w-full pl-8 pr-3 py-2 border border-gray-200 dark:border-[#2a2a2a] rounded-xl text-sm text-gray-700 dark:text-[#e8eaf0] bg-white dark:bg-[#222222] focus:outline-none focus:border-blue-400 transition-colors"
+              className="w-full pl-8 pr-3 py-2 border border-gray-200 dark:border-dark-border rounded-xl text-sm text-gray-700 dark:text-[#e8eaf0] bg-white dark:bg-dark-surface-elevated focus:outline-none focus:border-blue-400 transition-colors"
             />
           </div>
 
@@ -246,7 +246,7 @@ export default function CategoryPage() {
             <select
               value={brandFilter}
               onChange={(e) => setBrandFilter(e.target.value)}
-              className="w-full sm:w-auto px-3 py-2 border border-gray-200 dark:border-[#2a2a2a] rounded-xl text-sm text-gray-600 dark:text-[#e8eaf0] bg-white dark:bg-[#222222] hover:border-blue-300 transition-colors outline-none"
+              className="w-full sm:w-auto px-3 py-2 border border-gray-200 dark:border-dark-border rounded-xl text-sm text-gray-600 dark:text-[#e8eaf0] bg-white dark:bg-dark-surface-elevated hover:border-blue-300 transition-colors outline-none"
             >
               <option value="">Todas las marcas</option>
               {allBrands.map((b) => (
@@ -261,7 +261,7 @@ export default function CategoryPage() {
           <select
             value={priceRangeFilter}
             onChange={(e) => setPriceRangeFilter(e.target.value)}
-            className="w-full sm:w-auto px-3 py-2 border border-gray-200 dark:border-[#2a2a2a] rounded-xl text-sm text-gray-600 dark:text-[#e8eaf0] bg-white dark:bg-[#222222] hover:border-blue-300 transition-colors outline-none"
+            className="w-full sm:w-auto px-3 py-2 border border-gray-200 dark:border-dark-border rounded-xl text-sm text-gray-600 dark:text-[#e8eaf0] bg-white dark:bg-dark-surface-elevated hover:border-blue-300 transition-colors outline-none"
           >
             <option value="">Todos los precios</option>
             {priceBuckets.map((b) => (
@@ -273,7 +273,7 @@ export default function CategoryPage() {
           <select
             value={sort}
             onChange={(e) => setSort(e.target.value)}
-            className="w-full sm:w-auto px-3 py-2 border border-gray-200 dark:border-[#2a2a2a] rounded-xl text-sm text-gray-600 dark:text-[#e8eaf0] bg-white dark:bg-[#222222] hover:border-blue-300 transition-colors outline-none"
+            className="w-full sm:w-auto px-3 py-2 border border-gray-200 dark:border-dark-border rounded-xl text-sm text-gray-600 dark:text-[#e8eaf0] bg-white dark:bg-dark-surface-elevated hover:border-blue-300 transition-colors outline-none"
           >
             <option value="name_asc">Nombre (A-Z)</option>
             <option value="name_desc">Nombre (Z-A)</option>

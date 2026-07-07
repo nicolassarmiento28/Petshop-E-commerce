@@ -68,7 +68,7 @@ export default function Navbar() {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Buscar productos, marcas..."
-                  className="w-full pl-4 pr-12 py-2.5 border border-gray-300 dark:border-dark-border rounded-xl text-sm text-gray-700 dark:text-[#e8eaf0] bg-gray-50 dark:bg-[#222222] focus:bg-white dark:focus:bg-dark-bg focus:outline-none focus:border-blue-400 dark:focus:border-blue-500 transition-colors placeholder:text-gray-400 dark:placeholder:text-[#8892a4]"
+                  className="w-full pl-4 pr-12 py-2.5 border border-gray-300 dark:border-dark-border rounded-xl text-sm text-gray-700 dark:text-[#e8eaf0] bg-gray-50 dark:bg-dark-surface-elevated focus:bg-white dark:focus:bg-dark-bg focus:outline-none focus:border-blue-400 dark:focus:border-blue-500 transition-colors placeholder:text-gray-400 dark:placeholder:text-[#8892a4]"
                 />
                 <button
                   type="submit"
@@ -84,7 +84,7 @@ export default function Navbar() {
               {/* Dark mode toggle */}
               <button
                 onClick={toggle}
-                className="p-2 text-gray-500 dark:text-[#8892a4] hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-[#222222] rounded-lg transition-colors"
+                className="p-2 text-gray-500 dark:text-[#8892a4] hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-dark-surface-elevated rounded-lg transition-colors"
                 aria-label={theme === 'dark' ? 'Activar modo claro' : 'Activar modo oscuro'}
               >
                 {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
@@ -92,7 +92,7 @@ export default function Navbar() {
 
               <Link
                 to="/admin"
-                className="p-2 text-gray-500 dark:text-[#8892a4] hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-[#222222] rounded-lg transition-colors"
+                className="p-2 text-gray-500 dark:text-[#8892a4] hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-dark-surface-elevated rounded-lg transition-colors"
                 aria-label="Panel de administración"
               >
                 <User size={20} />
@@ -100,7 +100,7 @@ export default function Navbar() {
 
               <button
                 onClick={() => openCart()}
-                className="relative flex items-center gap-1.5 px-2.5 sm:px-3 py-2 text-gray-700 dark:text-[#e8eaf0] hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-[#222222] rounded-lg transition-colors"
+                className="relative flex items-center gap-1.5 px-2.5 sm:px-3 py-2 text-gray-700 dark:text-[#e8eaf0] hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-dark-surface-elevated rounded-lg transition-colors"
                 aria-label="Ver carrito"
               >
                 <ShoppingCart size={20} />
@@ -113,7 +113,7 @@ export default function Navbar() {
 
               {/* Mobile search button */}
               <button
-                className="sm:hidden p-2 text-gray-500 dark:text-[#8892a4] hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-[#222222] rounded-lg transition-colors"
+                className="sm:hidden p-2 text-gray-500 dark:text-[#8892a4] hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-dark-surface-elevated rounded-lg transition-colors"
                 onClick={() => setMobileOpen((o) => !o)}
                 aria-label="Buscar"
               >
@@ -121,7 +121,7 @@ export default function Navbar() {
               </button>
 
               <button
-                className="lg:hidden p-2 text-gray-500 dark:text-[#8892a4] hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-[#222222] rounded-lg transition-colors"
+                className="lg:hidden p-2 text-gray-500 dark:text-[#8892a4] hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-dark-surface-elevated rounded-lg transition-colors"
                 onClick={() => setMobileOpen(!mobileOpen)}
                 aria-label="Menú"
               >
@@ -139,7 +139,7 @@ export default function Navbar() {
                 className={`whitespace-nowrap px-3 py-1.5 text-sm font-medium rounded-lg transition-colors ${
                   item.label === 'Ofertas'
                     ? 'text-gray-600 dark:text-white hover:text-white hover:bg-red-500'
-                    : 'text-gray-600 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-[#222222]'
+                    : 'text-gray-600 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-dark-surface-elevated'
                 }`}
               >
                 {item.icon && <item.icon size={14} className="inline mr-1" />}
@@ -160,7 +160,7 @@ export default function Navbar() {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Buscar productos..."
-                  className="flex-1 px-3 py-2 text-sm border border-gray-200 dark:border-dark-border rounded-xl outline-none focus:border-blue-400 bg-gray-50 dark:bg-[#222222] text-gray-700 dark:text-[#e8eaf0] placeholder:text-gray-400 dark:placeholder:text-[#8892a4]"
+                  className="flex-1 px-3 py-2 text-sm border border-gray-200 dark:border-dark-border rounded-xl outline-none focus:border-blue-400 bg-gray-50 dark:bg-dark-surface-elevated text-gray-700 dark:text-[#e8eaf0] placeholder:text-gray-400 dark:placeholder:text-[#8892a4]"
                 />
                 <button type="submit" className="px-3 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors">
                   <Search size={16} />
@@ -170,7 +170,7 @@ export default function Navbar() {
                 <Link
                   key={item.to}
                   to={item.to}
-                  className="block px-3 py-2.5 text-sm font-medium text-gray-700 dark:text-[#e8eaf0] rounded-lg hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-[#222222] transition-colors"
+                  className="block px-3 py-2.5 text-sm font-medium text-gray-700 dark:text-[#e8eaf0] rounded-lg hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-dark-surface-elevated transition-colors"
                   onClick={() => setMobileOpen(false)}
                 >
                   {item.icon && <item.icon size={14} className="inline mr-1.5" />}

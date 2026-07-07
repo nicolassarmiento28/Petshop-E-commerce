@@ -29,7 +29,7 @@ export default function ProductPage() {
 
   if (isError || !product) {
     return (
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center dark:bg-[#111111]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center dark:bg-dark-bg">
         <p className="text-6xl mb-4">🐾</p>
         <h2
           className="text-2xl font-bold text-gray-800 dark:text-[#e8eaf0] mb-2"
@@ -77,7 +77,7 @@ export default function ProductPage() {
         : { text: `${product.stock} unidades disponibles`, className: 'text-gray-500 dark:text-[#8892a4]' }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 dark:bg-[#111111]">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 dark:bg-dark-bg">
       <Helmet>
         <title>{product.name} | Petshop</title>
         <meta name="description" content={product.description ? product.description.slice(0, 160) : `${product.name} en Petshop`} />
@@ -93,7 +93,7 @@ export default function ProductPage() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
         {/* Left — image + thumbnail strip */}
         <div>
-          <div className="aspect-square bg-blue-50 dark:bg-[#1a1a1a] rounded-3xl overflow-hidden mb-3">
+          <div className="aspect-square bg-blue-50 dark:bg-dark-surface rounded-3xl overflow-hidden mb-3">
             {thumbImage ? (
               <img
                 src={thumbImage}
@@ -172,7 +172,7 @@ export default function ProductPage() {
               </span>
             )}
             {product.category && (
-              <span className="bg-gray-100 dark:bg-[#222222] text-gray-600 dark:text-[#e8eaf0] text-xs font-semibold px-2.5 py-1 rounded-full">
+              <span className="bg-gray-100 dark:bg-dark-surface-elevated text-gray-600 dark:text-[#e8eaf0] text-xs font-semibold px-2.5 py-1 rounded-full">
                 {product.category.name}
               </span>
             )}
@@ -192,11 +192,11 @@ export default function ProductPage() {
           {/* Quantity selector + Add to cart */}
           <div className="flex flex-col gap-3 mt-2">
             {/* Qty selector */}
-            <div className="flex items-center border border-gray-200 dark:border-[#2a2a2a] rounded-xl overflow-hidden dark:bg-[#222222]">
+            <div className="flex items-center border border-gray-200 dark:border-dark-border rounded-xl overflow-hidden dark:bg-dark-surface-elevated">
                 <button
                   onClick={decrement}
                   disabled={outOfStock || qty <= 1}
-                  className="px-4 py-3 text-gray-600 dark:text-[#e8eaf0] hover:bg-gray-50 dark:hover:bg-[#2a2a2a] disabled:opacity-30 disabled:cursor-not-allowed transition-colors font-medium"
+                  className="px-4 py-3 text-gray-600 dark:text-[#e8eaf0] hover:bg-gray-50 dark:hover:bg-dark-surface-elevated disabled:opacity-30 disabled:cursor-not-allowed transition-colors font-medium"
                 >
                   −
                 </button>
@@ -204,7 +204,7 @@ export default function ProductPage() {
                 <button
                   onClick={increment}
                   disabled={outOfStock || qty >= product.stock}
-                  className="px-4 py-3 text-gray-600 dark:text-[#e8eaf0] hover:bg-gray-50 dark:hover:bg-[#2a2a2a] disabled:opacity-30 disabled:cursor-not-allowed transition-colors font-medium"
+                  className="px-4 py-3 text-gray-600 dark:text-[#e8eaf0] hover:bg-gray-50 dark:hover:bg-dark-surface-elevated disabled:opacity-30 disabled:cursor-not-allowed transition-colors font-medium"
                 >
                 +
                 </button>

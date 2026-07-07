@@ -33,7 +33,7 @@ export default function CartPage() {
       ) : (
         <div className="flex flex-col lg:flex-row gap-10">
           {/* Items list */}
-          <div className="flex-1 bg-white dark:bg-[#1a1a1a] rounded-2xl border border-gray-100 dark:border-[#2a2a2a] shadow-sm px-6 py-4">
+          <div className="flex-1 bg-white dark:bg-dark-surface rounded-2xl border border-gray-100 dark:border-dark-border shadow-sm px-6 py-4">
             {items.map((item) => (
               <CartItem key={item.id} item={item} />
             ))}
@@ -48,7 +48,7 @@ export default function CartPage() {
           </div>
 
           {/* Summary */}
-          <div className="lg:w-80 bg-white dark:bg-[#1a1a1a] rounded-2xl border border-gray-100 dark:border-[#2a2a2a] shadow-sm px-6 py-5 h-fit">
+          <div className="lg:w-80 bg-white dark:bg-dark-surface rounded-2xl border border-gray-100 dark:border-dark-border shadow-sm px-6 py-5 h-fit">
             <h2 className="text-lg font-bold text-gray-900 dark:text-[#e8eaf0] mb-4">Resumen</h2>
             <CartSummary onCheckout={handleCheckout} />
           </div>

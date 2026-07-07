@@ -40,7 +40,7 @@ interface BrandModalProps {
   onClose: () => void
 }
 
-const inputClass = 'w-full border border-gray-300 dark:border-[#2a2a2a] rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-[#222222] dark:text-[#e8eaf0] dark:placeholder:text-[#8892a4]'
+const inputClass = 'w-full border border-gray-300 dark:border-dark-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-dark-surface-elevated dark:text-[#e8eaf0] dark:placeholder:text-[#8892a4]'
 
 const BrandModal = ({ brand, onClose }: BrandModalProps) => {
   const queryClient = useQueryClient()
@@ -76,8 +76,8 @@ const BrandModal = ({ brand, onClose }: BrandModalProps) => {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       <div className="absolute inset-0 bg-black/40" onClick={onClose} />
-      <div className="relative bg-white dark:bg-[#1a1a1a] rounded-2xl shadow-xl w-full max-w-lg mx-4 max-h-[90vh] overflow-y-auto">
-        <div className="px-6 py-4 border-b border-gray-100 dark:border-[#2a2a2a] flex items-center justify-between">
+      <div className="relative bg-white dark:bg-dark-surface rounded-2xl shadow-xl w-full max-w-lg mx-4 max-h-[90vh] overflow-y-auto">
+        <div className="px-6 py-4 border-b border-gray-100 dark:border-dark-border flex items-center justify-between">
           <h2 className="text-lg font-bold text-gray-900 dark:text-[#e8eaf0]">
             {isEdit ? 'Editar marca' : 'Nueva marca'}
           </h2>
@@ -105,7 +105,7 @@ const BrandModal = ({ brand, onClose }: BrandModalProps) => {
           </div>
           {mutation.isError && <p className="text-red-500 text-sm">Error al guardar. Intenta de nuevo.</p>}
           <div className="flex justify-end gap-3 pt-2">
-            <button type="button" onClick={onClose} className="px-4 py-2 text-sm rounded-lg border border-gray-300 dark:border-[#2a2a2a] text-gray-600 dark:text-[#e8eaf0] hover:bg-gray-50 dark:hover:bg-[#222222] transition-colors">
+            <button type="button" onClick={onClose} className="px-4 py-2 text-sm rounded-lg border border-gray-300 dark:border-dark-border text-gray-600 dark:text-[#e8eaf0] hover:bg-gray-50 dark:hover:bg-dark-surface-elevated transition-colors">
               Cancelar
             </button>
             <button type="submit" disabled={isSubmitting || mutation.isPending} className="px-4 py-2 text-sm rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700 disabled:opacity-50 transition-colors">
@@ -139,14 +139,14 @@ const ConfirmDialog = ({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       <div className="absolute inset-0 bg-black/40" onClick={onCancel} />
-      <div className="relative bg-white dark:bg-[#1a1a1a] rounded-2xl shadow-xl w-full max-w-sm mx-4 p-6">
+      <div className="relative bg-white dark:bg-dark-surface rounded-2xl shadow-xl w-full max-w-sm mx-4 p-6">
         <h3 className="text-lg font-bold text-gray-900 dark:text-[#e8eaf0] mb-2">{title}</h3>
         <p className="text-sm text-gray-500 dark:text-[#8892a4] mb-6">{message}</p>
         {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
         <div className="flex justify-end gap-3">
           <button
             onClick={onCancel}
-            className="px-4 py-2 text-sm rounded-lg border border-gray-300 dark:border-[#2a2a2a] text-gray-600 dark:text-[#e8eaf0] hover:bg-gray-50 dark:hover:bg-[#222222] transition-colors"
+            className="px-4 py-2 text-sm rounded-lg border border-gray-300 dark:border-dark-border text-gray-600 dark:text-[#e8eaf0] hover:bg-gray-50 dark:hover:bg-dark-surface-elevated transition-colors"
           >
             Cancelar
           </button>
@@ -257,7 +257,7 @@ const AdminBrands = () => {
       </div>
 
       {assignResult && !assignMutation.isPending && (
-        <div className={`mb-4 px-4 py-3 rounded-xl text-sm ${assignResult.assigned > 0 ? 'bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800' : 'bg-gray-50 dark:bg-[#222222] text-gray-500 dark:text-[#8892a4] border border-gray-200 dark:border-[#2a2a2a]'}`}>
+        <div className={`mb-4 px-4 py-3 rounded-xl text-sm ${assignResult.assigned > 0 ? 'bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800' : 'bg-gray-50 dark:bg-dark-surface-elevated text-gray-500 dark:text-[#8892a4] border border-gray-200 dark:border-dark-border'}`}>
           {assignResult.assigned > 0
             ? `✅ ${assignResult.assigned} productos asignados a sus marcas. ${assignResult.remaining > 0 ? `Quedan ${assignResult.remaining} sin asignar.` : '¡Todos los productos tienen marca!'}`
             : `No se encontraron productos para asignar. Quedan ${assignResult.remaining} sin marca.`}
@@ -272,18 +272,18 @@ const AdminBrands = () => {
           value={searchInput}
           onChange={(e) => handleSearch(e.target.value)}
           placeholder="Buscar por nombre..."
-          className="w-full pl-9 pr-3 py-2 border border-gray-200 dark:border-[#2a2a2a] rounded-xl text-sm text-gray-700 dark:text-[#e8eaf0] bg-white dark:bg-[#222222] focus:outline-none focus:border-blue-400 transition-colors placeholder:text-gray-400 dark:placeholder:text-[#8892a4]"
+          className="w-full pl-9 pr-3 py-2 border border-gray-200 dark:border-dark-border rounded-xl text-sm text-gray-700 dark:text-[#e8eaf0] bg-white dark:bg-dark-surface-elevated focus:outline-none focus:border-blue-400 transition-colors placeholder:text-gray-400 dark:placeholder:text-[#8892a4]"
         />
       </div>
 
-      <div className="bg-white dark:bg-[#1a1a1a] rounded-xl border border-gray-200 dark:border-[#2a2a2a]">
+      <div className="bg-white dark:bg-dark-surface rounded-xl border border-gray-200 dark:border-dark-border">
         {isLoading ? (
           <p className="p-6 text-gray-500 dark:text-[#8892a4]">Cargando...</p>
         ) : (
           <>
             <div className="overflow-x-auto">
             <table className="w-full text-sm whitespace-nowrap">
-              <thead className="bg-gray-50 dark:bg-[#222222] text-gray-500 dark:text-[#8892a4] text-xs uppercase">
+              <thead className="bg-gray-50 dark:bg-dark-surface-elevated text-gray-500 dark:text-[#8892a4] text-xs uppercase">
                 <tr>
                   <th className="px-4 py-3 text-left">Logo</th>
                   <th className="px-4 py-3 text-left">Nombre</th>
@@ -293,14 +293,14 @@ const AdminBrands = () => {
                   <th className="px-4 py-3 text-left">Acciones</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100 dark:divide-[#2a2a2a]">
+              <tbody className="divide-y divide-gray-100 dark:divide-dark-border">
                 {data?.brands.map((brand) => (
-                  <tr key={brand.id} className="hover:bg-gray-50 dark:hover:bg-[#222222]">
+                  <tr key={brand.id} className="hover:bg-gray-50 dark:hover:bg-dark-surface-elevated">
                     <td className="px-4 py-3">
                       {brand.logoUrl ? (
                         <img src={brand.logoUrl} alt={brand.name} className="w-10 h-10 object-contain rounded-lg" />
                       ) : (
-                        <div className="w-10 h-10 bg-gray-100 dark:bg-[#222222] rounded-lg" />
+                        <div className="w-10 h-10 bg-gray-100 dark:bg-dark-surface-elevated rounded-lg" />
                       )}
                     </td>
                     <td className="px-4 py-3 font-medium text-gray-800 dark:text-[#e8eaf0]">{brand.name}</td>
@@ -317,7 +317,7 @@ const AdminBrands = () => {
                       <div className="flex gap-2">
                         <button
                           onClick={() => setModalBrand(brand)}
-                          className="text-xs px-3 py-1 rounded-lg border border-gray-300 dark:border-[#2a2a2a] text-gray-600 dark:text-[#e8eaf0] hover:bg-gray-50 dark:hover:bg-[#222222] transition-colors"
+                          className="text-xs px-3 py-1 rounded-lg border border-gray-300 dark:border-dark-border text-gray-600 dark:text-[#e8eaf0] hover:bg-gray-50 dark:hover:bg-dark-surface-elevated transition-colors"
                         >
                           Editar
                         </button>
@@ -335,20 +335,20 @@ const AdminBrands = () => {
             </table>
             </div>
             {data && data.totalPages > 1 && (
-              <div className="px-4 py-3 border-t border-gray-100 dark:border-[#2a2a2a] flex items-center justify-between text-sm text-gray-500 dark:text-[#8892a4]">
+              <div className="px-4 py-3 border-t border-gray-100 dark:border-dark-border flex items-center justify-between text-sm text-gray-500 dark:text-[#8892a4]">
                 <span>Página {data.page} de {data.totalPages} ({data.total} marcas)</span>
                 <div className="flex gap-2">
                   <button
                     disabled={page === 1}
                     onClick={() => setPage((p) => p - 1)}
-                    className="px-3 py-1 rounded-lg border border-gray-300 dark:border-[#2a2a2a] dark:text-[#e8eaf0] disabled:opacity-40 hover:bg-gray-50 dark:hover:bg-[#222222] transition-colors"
+                    className="px-3 py-1 rounded-lg border border-gray-300 dark:border-dark-border dark:text-[#e8eaf0] disabled:opacity-40 hover:bg-gray-50 dark:hover:bg-dark-surface-elevated transition-colors"
                   >
                     Anterior
                   </button>
                   <button
                     disabled={page === data.totalPages}
                     onClick={() => setPage((p) => p + 1)}
-                    className="px-3 py-1 rounded-lg border border-gray-300 dark:border-[#2a2a2a] dark:text-[#e8eaf0] disabled:opacity-40 hover:bg-gray-50 dark:hover:bg-[#222222] transition-colors"
+                    className="px-3 py-1 rounded-lg border border-gray-300 dark:border-dark-border dark:text-[#e8eaf0] disabled:opacity-40 hover:bg-gray-50 dark:hover:bg-dark-surface-elevated transition-colors"
                   >
                     Siguiente
                   </button>
