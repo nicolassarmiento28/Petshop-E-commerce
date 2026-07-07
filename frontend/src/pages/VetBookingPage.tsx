@@ -142,6 +142,11 @@ export default function VetBookingPage() {
         {step === 1 && (
           <div>
             {loadingServices && <p className="text-gray-500 dark:text-[#8892a4]">Cargando servicios…</p>}
+            {!loadingServices && services?.length === 0 && (
+              <p className="text-gray-500 dark:text-[#8892a4] text-sm">
+                No hay servicios configurados por el momento. Vuelve a intentarlo más tarde.
+              </p>
+            )}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {services?.map((service, i) => {
                 const Icon = iconForService(service, i)

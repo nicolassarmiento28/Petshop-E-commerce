@@ -38,6 +38,6 @@
     "typescript": "^5.6.2"
   },
   "prisma": {
-    "seed": "node prisma/seed-scraper.js && node prisma/seed-orders.js"
+    "seed": "node prisma/seed-scraper.js && node prisma/seed-orders.js && node prisma/seed-vet.js"
   }
 }
