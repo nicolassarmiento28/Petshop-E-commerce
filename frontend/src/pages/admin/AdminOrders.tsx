@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { Fragment, useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { Download } from 'lucide-react'
@@ -38,7 +38,7 @@ const AdminOrders = () => {
 
   const updateStatusMutation = useMutation({
     mutationFn: ({ id, status }: { id: number; status: OrderStatus }) =>
-      api.patch(`/admin/orders/${id}/status`, { status }),
+      api.put(`/admin/orders/${id}/status`, { status }),
     onSuccess: () => void queryClient.invalidateQueries({ queryKey: ['admin', 'orders'] }),
   })
 
@@ -116,8 +116,8 @@ const AdminOrders = () => {
               </thead>
               <tbody className="divide-y divide-gray-100 dark:divide-dark-border">
                 {data?.orders.map((order) => (
-                  <>
-                    <tr key={order.id} className="hover:bg-gray-50 dark:hover:bg-dark-surface-elevated">
+                  <Fragment key={order.id}>
+                    <tr className="hover:bg-gray-50 dark:hover:bg-dark-surface-elevated">
                       <td className="px-4 py-3 font-mono text-gray-700 dark:text-[#e8eaf0]">{order.orderNumber}</td>
                       <td className="px-4 py-3">
                         <p className="text-gray-800 dark:text-[#e8eaf0]">{order.customerName}</p>
@@ -169,7 +169,7 @@ const AdminOrders = () => {
                         </td>
                       </tr>
                     )}
-                  </>
+                  </Fragment>
                 ))}
                 {data?.orders.length === 0 && (
                   <tr>

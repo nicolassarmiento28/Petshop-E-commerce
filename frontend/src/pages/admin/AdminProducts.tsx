@@ -102,7 +102,7 @@ const ProductModal = ({ product, categories, brands, onClose }: ProductModalProp
   const mutation = useMutation({
     mutationFn: (values: ProductFormValues) =>
       isEdit
-        ? api.patch(`/admin/products/${product.id}`, values)
+        ? api.put(`/admin/products/${product.id}`, values)
         : api.post('/admin/products', values),
     onSuccess: () => {
       void queryClient.invalidateQueries({ queryKey: ['admin', 'products'] })
