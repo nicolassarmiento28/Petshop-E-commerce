@@ -18,6 +18,19 @@ import { getSalesByCategory, getMonthComparison, getRecentOrdersFeed } from '../
 import { getBrands, createBrand, updateBrand, deleteBrand, autoAssignBrands } from '../controllers/adminBrandController'
 import { getCustomers, exportCustomersCsv, exportCustomersXlsx } from '../controllers/adminCustomerController'
 import { getCoupons, createCoupon, updateCoupon, deleteCoupon } from '../controllers/adminCouponController'
+import {
+  getVetServices,
+  createVetService,
+  updateVetService,
+  deleteVetService,
+  getVetAvailability,
+  createVetAvailability,
+  getVetExceptions,
+  createVetException,
+  deleteVetException,
+  getAdminAppointments,
+  updateAppointmentStatus,
+} from '../controllers/adminVetController'
 
 const router = Router()
 
@@ -66,5 +79,24 @@ router.put('/orders/:id/status', authMiddleware, updateOrderStatus)
 
 // Protected — revenue
 router.get('/revenue', authMiddleware, getRevenue)
+
+// Protected — vet services
+router.get('/vet/services', authMiddleware, getVetServices)
+router.post('/vet/services', authMiddleware, createVetService)
+router.put('/vet/services/:id', authMiddleware, updateVetService)
+router.delete('/vet/services/:id', authMiddleware, deleteVetService)
+
+// Protected — vet availability (horario recurrente)
+router.get('/vet/availability', authMiddleware, getVetAvailability)
+router.post('/vet/availability', authMiddleware, createVetAvailability)
+
+// Protected — vet exceptions (bloqueos/aperturas puntuales)
+router.get('/vet/exceptions', authMiddleware, getVetExceptions)
+router.post('/vet/exceptions', authMiddleware, createVetException)
+router.delete('/vet/exceptions/:id', authMiddleware, deleteVetException)
+
+// Protected — vet appointments
+router.get('/vet/appointments', authMiddleware, getAdminAppointments)
+router.put('/vet/appointments/:id/status', authMiddleware, updateAppointmentStatus)
 
 export default router

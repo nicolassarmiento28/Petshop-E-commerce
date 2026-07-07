@@ -137,3 +137,77 @@ enum PaymentStatus {
   CANCELLED
   TIMEOUT
 }
+
+model VetService {
+  id           Int           @id @default(autoincrement())
+  name         String
+  description  String?
+  durationMin  Int
+  price        Float
+  isActive     Boolean       @default(true)
+  appointments Appointment[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+model VetAvailability {
+  id        Int      @id @default(autoincrement())
+  dayOfWeek Int // 0 = domingo ... 6 = sábado
+  startTime String // "09:00"
+  endTime   String // "18:00"
+  isActive  Boolean  @default(true)
+}
+
+model VetException {
+  id        Int      @id @default(autoincrement())
+  date      DateTime // fecha específica afectada
+  type      String // "BLOCKED_FULL_DAY" | "BLOCKED_SLOT" | "EXTRA_SLOT"
+  startTime String? // requerido si type != BLOCKED_FULL_DAY
+  endTime   String?
+  reason    String?
+  createdAt DateTime @default(now())
+}
+
+model Appointment {
+  id                Int                  @id @default(autoincrement())
+  appointmentNumber String               @unique // ej: "CITA-04829"
+  status            AppointmentStatus    @default(PENDING)
+  serviceId         Int
+  service           VetService           @relation(fields: [serviceId], references: [id])
+  date              DateTime
+  startTime         String
+  endTime           String
+  ownerName         String
+  ownerEmail        String
+  ownerPhone        String
+  petName           String
+  petType           String?
+  notes             String?
+  payment           AppointmentPayment?
+  createdAt         DateTime             @default(now())
+  updatedAt         DateTime             @updatedAt
+}
+
+model AppointmentPayment {
+  id              Int           @id @default(autoincrement())
+  appointmentId   Int           @unique
+  appointment     Appointment   @relation(fields: [appointmentId], references: [id])
+  status          PaymentStatus
+  tbkToken        String?
+  tbkBuyOrder     String?
+  tbkSessionId    String?
+  tbkAmount       Float?
+  tbkAuthCode     String?
+  tbkResponseCode Int?
+  tbkCardNumber   String?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+}
+
+enum AppointmentStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+  NO_SHOW
+}
