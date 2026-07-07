@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
+import { isAxiosError } from 'axios'
 import { PawPrint, Stethoscope, Syringe, HeartHandshake, Scissors, Bone, Check } from 'lucide-react'
 import { useVetServices, useAvailableSlots, useCreateAppointment, useVetPayment } from '@/hooks/useVet'
 import { formatCLP } from '@/utils/formatters'
@@ -87,8 +88,12 @@ export default function VetBookingPage() {
       })
       const { token, url } = await vetPayment.mutateAsync(appointmentId)
       vetPayment.submitToTransbank(token, url)
-    } catch {
-      setSubmitError('Hubo un error al agendar tu hora. Intenta nuevamente.')
+    } catch (error) {
+      const backendMessage =
+        isAxiosError<{ error?: string }>(error) && error.response && error.response.status < 500
+          ? error.response.data?.error
+          : undefined
+      setSubmitError(backendMessage ?? 'Hubo un error al agendar tu hora. Intenta nuevamente.')
     }
   }
 
