@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
-import { Package, CreditCard } from 'lucide-react'
+import { Package } from 'lucide-react'
 import { CheckoutForm } from '@/components/checkout/CheckoutForm'
+import { TestCardInfo } from '@/components/checkout/TestCardInfo'
 import OrderSummary from '@/components/checkout/OrderSummary'
 import type { CheckoutFormData } from '@/components/checkout/checkoutSchema'
 import { useCartStore } from '@/store/cartStore'
@@ -10,14 +11,6 @@ import { createOrder } from '@/services/orderService'
 import { usePayment } from '@/hooks/usePayment'
 import api from '@/services/api'
 import type { CouponValidation } from '@/types'
-
-const TEST_CARD = {
-  number: '4051 8856 0044 6623',
-  expiry: '12/26',
-  cvv: '123',
-  rut: '11.111.111-1',
-  clave: '123',
-}
 
 export default function CheckoutPage() {
   const navigate = useNavigate()
@@ -118,15 +111,8 @@ export default function CheckoutPage() {
               Datos del pedido
             </h2>
 
-            {/* Test card info */}
-            <div className="rounded-xl border border-amber-200 dark:border-[#453410] bg-amber-50 dark:bg-[#241d0d] p-3 text-xs text-amber-700 dark:text-[#d4a017] space-y-1 mb-5">
-              <p className="flex items-center gap-1.5 font-semibold text-amber-800 dark:text-amber-400">
-                <CreditCard size={14} />
-                Datos de tarjeta de prueba
-              </p>
-              <p>Número: <span className="font-mono">{TEST_CARD.number}</span></p>
-              <p>Vencimiento: <span className="font-mono">{TEST_CARD.expiry}</span> · CVV: <span className="font-mono">{TEST_CARD.cvv}</span></p>
-              <p>RUT: <span className="font-mono">{TEST_CARD.rut}</span> · Clave: <span className="font-mono">{TEST_CARD.clave}</span></p>
+            <div className="mb-5">
+              <TestCardInfo />
             </div>
 
             <CheckoutForm onSubmit={handleSubmit} isSubmitting={isSubmitting} />

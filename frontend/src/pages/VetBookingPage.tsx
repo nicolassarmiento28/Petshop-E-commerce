@@ -6,6 +6,7 @@ import { z } from 'zod'
 import { isAxiosError } from 'axios'
 import { PawPrint, Stethoscope, Syringe, HeartHandshake, Scissors, Bone, Check } from 'lucide-react'
 import { useVetServices, useAvailableSlots, useCreateAppointment, useVetPayment } from '@/hooks/useVet'
+import { TestCardInfo } from '@/components/checkout/TestCardInfo'
 import { formatCLP } from '@/utils/formatters'
 import type { VetServiceType } from '@/types'
 
@@ -299,6 +300,8 @@ export default function VetBookingPage() {
               </label>
               <textarea id="notes" rows={3} className={inputClass} {...register('notes')} />
             </div>
+
+            <TestCardInfo />
 
             {submitError && <p className="text-red-500 text-sm">{submitError}</p>}
 

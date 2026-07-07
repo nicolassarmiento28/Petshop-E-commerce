@@ -96,13 +96,18 @@ export async function sendAppointmentConfirmation(
     return
   }
   try {
-    await resend.emails.send({
+    const { error, data } = await resend.emails.send({
       from: EMAIL_FROM,
       to: appointment.ownerEmail,
       subject: `Cita confirmada — ${appointment.appointmentNumber}`,
       html: buildConfirmationHtml(appointment, service),
     })
+    if (error) {
+      logger.error(`Resend rejected appointment confirmation email for ${appointment.appointmentNumber}`, error)
+      return
+    }
+    logger.info(`Appointment confirmation email sent for ${appointment.appointmentNumber} (resend id: ${data?.id})`)
   } catch (error) {
-    logger.error('Failed to send appointment confirmation email', error)
+    logger.error(`Failed to send appointment confirmation email for ${appointment.appointmentNumber}`, error)
   }
 }
