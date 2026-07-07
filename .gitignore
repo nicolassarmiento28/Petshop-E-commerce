@@ -34,7 +34,7 @@ Thumbs.db
 !**/README.md
 !AGENTS.md
 !PLAN.md
-!CONTEXT.md
+!CLAUDE.md
 
 # Server output
 server-out.txt
@@ -49,3 +49,6 @@ coverage/
 # Windows reserved-name placeholders
 nul
 frontend/nul
+
+.vercel
+.env*

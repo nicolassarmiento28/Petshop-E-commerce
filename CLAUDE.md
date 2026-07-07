@@ -1,4 +1,4 @@
-# AGENTS.md —Tienda de Mascotas (Pet Shop)
+# CLAUDE.md — Tienda de Mascotas (Pet Shop)
 
 Documento único de contexto y convenciones para agentes de código. Refleja el estado *actual* verificado línea por línea contra el código (2026-07-07). `PLAN.md` es la bitácora histórica de fases.
 > Mantener este archivo actualizado con cada decisión arquitectural que cambie algo aquí descrito.
@@ -798,5 +798,3 @@ Login/registro de clientes · reseñas de productos · blog · múltiples métod
 - **Antes de asumir que algo del código existe**, verificar contra el repo real — este documento puede quedar desactualizado igual que sus predecesores.
 - `PLAN.md` cubre solo hasta Fase 8 (2026-06-09) — la feature de veterinaria completa y el hardening de seguridad descrito en §20 son posteriores y no están loggeados ahí todavía. Si se retoma el hábito de loggear fases, la próxima entrada debería cubrir ambas.
 - Cada vez que se agregue una feature o se cierre una ronda de auditoría, revisar si cambió algo descrito aquí (stack, schema, endpoints, componentes UI, seguridad) y actualizar este archivo en el mismo commit.
-
-
