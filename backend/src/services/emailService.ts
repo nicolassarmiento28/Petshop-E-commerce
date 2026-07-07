@@ -9,6 +9,15 @@ function formatCLP(amount: number): string {
   return new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP' }).format(amount)
 }
 
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
+}
+
 function buildConfirmationHtml(appointment: Appointment, service: VetService): string {
   const dateLabel = new Date(appointment.date).toLocaleDateString('es-CL', {
     weekday: 'long',
@@ -47,7 +56,7 @@ function buildConfirmationHtml(appointment: Appointment, service: VetService): s
                 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #e5e7eb;border-radius:12px;">
                   <tr>
                     <td style="padding:12px 16px;font-size:13px;color:#6b7280;border-bottom:1px solid #e5e7eb;">Servicio</td>
-                    <td style="padding:12px 16px;font-size:13px;color:#111827;text-align:right;border-bottom:1px solid #e5e7eb;font-weight:bold;">${service.name}</td>
+                    <td style="padding:12px 16px;font-size:13px;color:#111827;text-align:right;border-bottom:1px solid #e5e7eb;font-weight:bold;">${escapeHtml(service.name)}</td>
                   </tr>
                   <tr>
                     <td style="padding:12px 16px;font-size:13px;color:#6b7280;border-bottom:1px solid #e5e7eb;">Fecha</td>
@@ -59,7 +68,7 @@ function buildConfirmationHtml(appointment: Appointment, service: VetService): s
                   </tr>
                   <tr>
                     <td style="padding:12px 16px;font-size:13px;color:#6b7280;border-bottom:1px solid #e5e7eb;">Mascota</td>
-                    <td style="padding:12px 16px;font-size:13px;color:#111827;text-align:right;border-bottom:1px solid #e5e7eb;">${appointment.petName}</td>
+                    <td style="padding:12px 16px;font-size:13px;color:#111827;text-align:right;border-bottom:1px solid #e5e7eb;">${escapeHtml(appointment.petName)}</td>
                   </tr>
                   <tr>
                     <td style="padding:12px 16px;font-size:13px;color:#6b7280;">Monto pagado</td>
@@ -125,7 +134,7 @@ function buildCancellationHtml(appointment: Appointment, service: VetService, re
                 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #e5e7eb;border-radius:12px;">
                   <tr>
                     <td style="padding:12px 16px;font-size:13px;color:#6b7280;border-bottom:1px solid #e5e7eb;">Servicio</td>
-                    <td style="padding:12px 16px;font-size:13px;color:#111827;text-align:right;border-bottom:1px solid #e5e7eb;font-weight:bold;">${service.name}</td>
+                    <td style="padding:12px 16px;font-size:13px;color:#111827;text-align:right;border-bottom:1px solid #e5e7eb;font-weight:bold;">${escapeHtml(service.name)}</td>
                   </tr>
                   <tr>
                     <td style="padding:12px 16px;font-size:13px;color:#6b7280;border-bottom:1px solid #e5e7eb;">Fecha</td>
@@ -141,7 +150,7 @@ function buildCancellationHtml(appointment: Appointment, service: VetService, re
             <tr>
               <td style="padding:0 24px 24px 24px;">
                 <p style="margin:0 0 4px 0;font-size:13px;color:#6b7280;">Motivo:</p>
-                <p style="margin:0;font-size:13px;color:#111827;background-color:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:10px 12px;">${reason}</p>
+                <p style="margin:0;font-size:13px;color:#111827;background-color:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:10px 12px;">${escapeHtml(reason)}</p>
               </td>
             </tr>
             <tr>
@@ -207,7 +216,7 @@ function buildRescheduleHtml(
                 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #e5e7eb;border-radius:12px;">
                   <tr>
                     <td style="padding:12px 16px;font-size:13px;color:#6b7280;border-bottom:1px solid #e5e7eb;">Servicio</td>
-                    <td style="padding:12px 16px;font-size:13px;color:#111827;text-align:right;border-bottom:1px solid #e5e7eb;font-weight:bold;">${service.name}</td>
+                    <td style="padding:12px 16px;font-size:13px;color:#111827;text-align:right;border-bottom:1px solid #e5e7eb;font-weight:bold;">${escapeHtml(service.name)}</td>
                   </tr>
                   <tr>
                     <td style="padding:12px 16px;font-size:13px;color:#6b7280;border-bottom:1px solid #e5e7eb;">Antes</td>
@@ -223,7 +232,7 @@ function buildRescheduleHtml(
             <tr>
               <td style="padding:0 24px 24px 24px;">
                 <p style="margin:0 0 4px 0;font-size:13px;color:#6b7280;">Motivo del cambio:</p>
-                <p style="margin:0;font-size:13px;color:#111827;background-color:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:10px 12px;">${reason}</p>
+                <p style="margin:0;font-size:13px;color:#111827;background-color:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:10px 12px;">${escapeHtml(reason)}</p>
               </td>
             </tr>
             <tr>

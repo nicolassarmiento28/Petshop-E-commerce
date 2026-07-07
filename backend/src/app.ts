@@ -13,6 +13,7 @@ import vetRoutes from './routes/vetRoutes'
 import vetPaymentRoutes from './routes/vetPaymentRoutes'
 import adminRoutes from './routes/adminRoutes'
 import { errorHandler } from './middleware/errorHandler'
+import { generalLimiter } from './middleware/rateLimiter'
 
 dotenv.config()
 
@@ -31,6 +32,7 @@ app.use(
 )
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+app.use('/api', generalLimiter)
 
 // Health check
 app.get('/api/health', async (_req, res) => {

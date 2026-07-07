@@ -1,4 +1,5 @@
 import type { Request, Response, NextFunction } from 'express'
+import { randomBytes } from 'crypto'
 import { prisma } from '../lib/prisma'
 
 export const createOrder = async (
@@ -58,7 +59,7 @@ export const createOrder = async (
     }
 
     const finalTotal = total - discount
-    const orderNumber = 'ORD-' + Date.now()
+    const orderNumber = `ORD-${Date.now()}${randomBytes(3).toString('hex')}`
 
     const [order] = await prisma.$transaction([
       prisma.order.create({

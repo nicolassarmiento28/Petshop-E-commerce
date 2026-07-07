@@ -13,5 +13,8 @@ export const errorHandler = (
 ): void => {
   const statusCode = err.statusCode ?? 500
   logger.error(`${req.method} ${req.originalUrl} → ${err.message}`, err.stack, err)
-  res.status(statusCode).json({ error: err.message ?? 'Internal server error' })
+
+  const isProduction = process.env.NODE_ENV === 'production'
+  const message = !isProduction || statusCode < 500 ? (err.message ?? 'Internal server error') : 'Internal server error'
+  res.status(statusCode).json({ error: message })
 }

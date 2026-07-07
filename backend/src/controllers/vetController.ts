@@ -1,4 +1,5 @@
 import type { Request, Response, NextFunction } from 'express'
+import { randomBytes } from 'crypto'
 import { prisma } from '../lib/prisma'
 import { getAvailableSlots, parseDateOnly } from '../services/vetAvailabilityService'
 
@@ -101,7 +102,7 @@ export const createAppointment = async (
     const endMinutes = h * 60 + m + service.durationMin
     const endTime = `${String(Math.floor(endMinutes / 60)).padStart(2, '0')}:${String(endMinutes % 60).padStart(2, '0')}`
 
-    const appointmentNumber = `CITA-${String(Date.now()).slice(-8)}`
+    const appointmentNumber = `CITA-${Date.now()}${randomBytes(3).toString('hex')}`
 
     const appointment = await prisma.$transaction(async (tx) => {
       // Re-chequeo dentro de la transacción para cerrar la ventana de condición de carrera

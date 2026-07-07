@@ -7,3 +7,11 @@ export const loginLimiter = rateLimit({
   standardHeaders: true,
   legacyHeaders: false,
 })
+
+export const generalLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 300,
+  message: { error: 'Demasiadas solicitudes. Intenta de nuevo más tarde.' },
+  standardHeaders: true,
+  legacyHeaders: false,
+})
