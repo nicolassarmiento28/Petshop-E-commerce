@@ -10,9 +10,6 @@ node_modules/
 frontend/dist/
 backend/dist/
 
-# Prisma migrations (single-developer project)
-backend/prisma/migrations/
-
 # Logs
 *.log
 npm-debug.log*
@@ -29,12 +26,7 @@ Thumbs.db
 # Brainstorming / visual companion session files
 .superpowers/
 
-# Working notes / snapshots
-*.md
-!**/README.md
-!AGENTS.md
-!PLAN.md
-!CLAUDE.md
+
 
 # Server output
 server-out.txt
