@@ -65,7 +65,11 @@ function subtractWindow(windows: TimeWindow[], blocked: TimeWindow): TimeWindow[
  * más excepciones extra, menos citas ya reservadas (PENDING/CONFIRMED),
  * dividido en bloques según la duración del servicio.
  */
-export async function getAvailableSlots(date: Date, serviceId: number): Promise<string[]> {
+export async function getAvailableSlots(
+  date: Date,
+  serviceId: number,
+  excludeAppointmentId?: number,
+): Promise<string[]> {
   const service = await prisma.vetService.findUnique({ where: { id: serviceId } })
   if (!service || !service.isActive) return []
 
@@ -79,6 +83,7 @@ export async function getAvailableSlots(date: Date, serviceId: number): Promise<
       where: {
         date: { gte: start, lt: end },
         status: { in: ['PENDING', 'CONFIRMED'] },
+        ...(excludeAppointmentId !== undefined && { id: { not: excludeAppointmentId } }),
       },
     }),
   ])

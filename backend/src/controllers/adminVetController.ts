@@ -1,10 +1,23 @@
 import type { Response, NextFunction } from 'express'
+import { z, ZodError } from 'zod'
 import { AppointmentStatus } from '@prisma/client'
 import type { AuthRequest } from '../middleware/authMiddleware'
 import { prisma } from '../lib/prisma'
-import { parseDateOnly } from '../services/vetAvailabilityService'
+import { getAvailableSlots, parseDateOnly } from '../services/vetAvailabilityService'
+import { sendAppointmentCancellation, sendAppointmentReschedule } from '../services/emailService'
+import { logger } from '../utils/logger'
 
 const validAppointmentStatuses = new Set<string>(Object.values(AppointmentStatus))
+
+const cancelAppointmentSchema = z.object({
+  reason: z.string().min(5, 'El motivo debe tener al menos 5 caracteres'),
+})
+
+const rescheduleAppointmentSchema = z.object({
+  newDate: z.string().min(1, 'newDate es requerido'),
+  newStartTime: z.string().min(1, 'newStartTime es requerido'),
+  reason: z.string().min(5, 'El motivo debe tener al menos 5 caracteres'),
+})
 
 // ── VetService CRUD ─────────────────────────────────────────────────────────
 
@@ -293,6 +306,147 @@ export const updateAppointmentStatus = async (
     })
     res.json(appointment)
   } catch (error) {
+    next(error)
+  }
+}
+
+export const cancelAppointment = async (
+  req: AuthRequest,
+  res: Response,
+  next: NextFunction,
+): Promise<void> => {
+  try {
+    const id = parseInt(String(req.params.id), 10)
+
+    let reason: string
+    try {
+      reason = cancelAppointmentSchema.parse(req.body).reason
+    } catch (error) {
+      if (error instanceof ZodError) {
+        res.status(400).json({ error: error.errors.map((e) => e.message).join(', ') })
+        return
+      }
+      throw error
+    }
+
+    const existing = await prisma.appointment.findUnique({ where: { id }, include: { service: true } })
+    if (!existing) {
+      res.status(404).json({ error: 'Appointment not found' })
+      return
+    }
+    if (existing.status === 'CANCELLED') {
+      res.status(400).json({ error: 'Appointment is already cancelled' })
+      return
+    }
+
+    const appointment = await prisma.appointment.update({
+      where: { id },
+      data: { status: 'CANCELLED', changeReason: reason, changedByAdmin: true },
+    })
+
+    res.json(appointment)
+
+    try {
+      await sendAppointmentCancellation(appointment, existing.service, reason)
+    } catch (error) {
+      logger.error(`Unexpected error sending appointment cancellation email for ${appointment.appointmentNumber}`, error)
+    }
+  } catch (error) {
+    next(error)
+  }
+}
+
+export const rescheduleAppointment = async (
+  req: AuthRequest,
+  res: Response,
+  next: NextFunction,
+): Promise<void> => {
+  try {
+    const id = parseInt(String(req.params.id), 10)
+
+    let body: { newDate: string; newStartTime: string; reason: string }
+    try {
+      body = rescheduleAppointmentSchema.parse(req.body)
+    } catch (error) {
+      if (error instanceof ZodError) {
+        res.status(400).json({ error: error.errors.map((e) => e.message).join(', ') })
+        return
+      }
+      throw error
+    }
+    const { newDate, newStartTime, reason } = body
+
+    const existing = await prisma.appointment.findUnique({ where: { id }, include: { service: true, payment: true } })
+    if (!existing) {
+      res.status(404).json({ error: 'Appointment not found' })
+      return
+    }
+    if (existing.status === 'CANCELLED' || existing.status === 'COMPLETED') {
+      res.status(400).json({ error: 'Cannot reschedule a cancelled or completed appointment' })
+      return
+    }
+
+    const parsedNewDate = parseDateOnly(newDate)
+    if (Number.isNaN(parsedNewDate.getTime())) {
+      res.status(400).json({ error: 'Invalid newDate' })
+      return
+    }
+
+    const availableSlots = await getAvailableSlots(parsedNewDate, existing.serviceId, id)
+    if (!availableSlots.includes(newStartTime)) {
+      res.status(409).json({ error: 'El nuevo horario ya no está disponible' })
+      return
+    }
+
+    const [h, m] = newStartTime.split(':').map((n) => parseInt(n, 10))
+    const endMinutes = h * 60 + m + existing.service.durationMin
+    const newEndTime = `${String(Math.floor(endMinutes / 60)).padStart(2, '0')}:${String(endMinutes % 60).padStart(2, '0')}`
+
+    const oldDate = existing.date
+    const oldStartTime = existing.startTime
+    const wasPaid = existing.payment?.status === 'APPROVED'
+
+    const appointment = await prisma.$transaction(async (tx) => {
+      const conflicting = await tx.appointment.findFirst({
+        where: {
+          id: { not: id },
+          serviceId: existing.serviceId,
+          date: parsedNewDate,
+          startTime: newStartTime,
+          status: { in: ['PENDING', 'CONFIRMED'] },
+        },
+      })
+      if (conflicting) {
+        throw Object.assign(new Error('El nuevo horario ya no está disponible'), { statusCode: 409 })
+      }
+
+      return tx.appointment.update({
+        where: { id },
+        data: {
+          date: parsedNewDate,
+          startTime: newStartTime,
+          endTime: newEndTime,
+          status: wasPaid ? 'CONFIRMED' : 'PENDING',
+          rescheduledFrom: oldDate,
+          rescheduledFromTime: oldStartTime,
+          changeReason: reason,
+          changedByAdmin: true,
+        },
+      })
+    })
+
+    res.json(appointment)
+
+    try {
+      await sendAppointmentReschedule(appointment, existing.service, oldDate, oldStartTime, reason)
+    } catch (error) {
+      logger.error(`Unexpected error sending appointment reschedule email for ${appointment.appointmentNumber}`, error)
+    }
+  } catch (error) {
+    if (error instanceof Error && 'statusCode' in error) {
+      res.status((error as Error & { statusCode: number }).statusCode).json({ error: error.message })
+      return
+    }
     next(error)
   }
 }

@@ -183,6 +183,10 @@ export interface AppointmentType {
   petName: string
   petType?: string
   notes?: string
+  rescheduledFrom?: string | null
+  rescheduledFromTime?: string | null
+  changeReason?: string | null
+  changedByAdmin?: boolean
   payment?: AppointmentPaymentType | null
   createdAt: string
   updatedAt: string

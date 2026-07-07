@@ -30,6 +30,8 @@ import {
   deleteVetException,
   getAdminAppointments,
   updateAppointmentStatus,
+  cancelAppointment,
+  rescheduleAppointment,
 } from '../controllers/adminVetController'
 
 const router = Router()
@@ -98,5 +100,7 @@ router.delete('/vet/exceptions/:id', authMiddleware, deleteVetException)
 // Protected — vet appointments
 router.get('/vet/appointments', authMiddleware, getAdminAppointments)
 router.put('/vet/appointments/:id/status', authMiddleware, updateAppointmentStatus)
+router.put('/vet/appointments/:id/cancel', authMiddleware, cancelAppointment)
+router.put('/vet/appointments/:id/reschedule', authMiddleware, rescheduleAppointment)
 
 export default router

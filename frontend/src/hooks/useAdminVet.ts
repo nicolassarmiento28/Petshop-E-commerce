@@ -10,6 +10,8 @@ import {
   deleteAdminVetException,
   fetchAdminAppointments,
   updateAppointmentStatus,
+  cancelAppointment,
+  rescheduleAppointment,
 } from '@/services/adminVetService'
 import type { AppointmentStatus } from '@/types'
 
@@ -73,6 +75,32 @@ export const useUpdateAppointmentStatus = () => {
   const queryClient = useQueryClient()
   return useMutation({
     mutationFn: ({ id, status }: { id: number; status: AppointmentStatus }) => updateAppointmentStatus(id, status),
+    onSuccess: () => void queryClient.invalidateQueries({ queryKey: ['admin', 'appointments'] }),
+  })
+}
+
+export const useCancelAppointment = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: ({ id, reason }: { id: number; reason: string }) => cancelAppointment(id, reason),
+    onSuccess: () => void queryClient.invalidateQueries({ queryKey: ['admin', 'appointments'] }),
+  })
+}
+
+export const useRescheduleAppointment = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: ({
+      id,
+      newDate,
+      newStartTime,
+      reason,
+    }: {
+      id: number
+      newDate: string
+      newStartTime: string
+      reason: string
+    }) => rescheduleAppointment(id, { newDate, newStartTime, reason }),
     onSuccess: () => void queryClient.invalidateQueries({ queryKey: ['admin', 'appointments'] }),
   })
 }

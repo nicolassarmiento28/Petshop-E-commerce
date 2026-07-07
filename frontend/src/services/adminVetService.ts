@@ -67,3 +67,11 @@ export const fetchAdminAppointments = (params: { page: number; status?: string; 
 
 export const updateAppointmentStatus = (id: number, status: AppointmentStatus) =>
   api.put<AppointmentType>(`/admin/vet/appointments/${id}/status`, { status }).then((r) => r.data)
+
+export const cancelAppointment = (id: number, reason: string) =>
+  api.put<AppointmentType>(`/admin/vet/appointments/${id}/cancel`, { reason }).then((r) => r.data)
+
+export const rescheduleAppointment = (
+  id: number,
+  data: { newDate: string; newStartTime: string; reason: string },
+) => api.put<AppointmentType>(`/admin/vet/appointments/${id}/reschedule`, data).then((r) => r.data)

@@ -1,26 +1,182 @@
-import { useState } from 'react'
+import { Fragment, useState } from 'react'
 import { Helmet } from 'react-helmet-async'
+import { X, CalendarClock } from 'lucide-react'
 import AdminLayout from '@/components/admin/AdminLayout'
 import VetSubNav from '@/components/admin/VetSubNav'
+import { SlotPicker } from '@/components/vet/SlotPicker'
 import { formatDate } from '@/utils/formatters'
-import { useAdminAppointments, useUpdateAppointmentStatus } from '@/hooks/useAdminVet'
+import {
+  useAdminAppointments,
+  useUpdateAppointmentStatus,
+  useCancelAppointment,
+  useRescheduleAppointment,
+} from '@/hooks/useAdminVet'
 import {
   APPOINTMENT_STATUS_LABELS,
   APPOINTMENT_STATUS_BADGE_CLASSES,
   APPOINTMENT_STATUS_BADGE_BASE,
 } from '@/utils/appointmentStatus'
-import type { AppointmentStatus } from '@/types'
+import type { AppointmentStatus, AppointmentType } from '@/types'
 
 const APPOINTMENT_STATUSES: AppointmentStatus[] = ['PENDING', 'CONFIRMED', 'COMPLETED', 'CANCELLED', 'NO_SHOW']
 
 const inputClass =
   'border border-gray-300 dark:border-dark-border rounded-lg px-2 py-1.5 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-dark-surface-elevated dark:text-[#e8eaf0]'
 
+const textareaClass =
+  'w-full border border-gray-300 dark:border-dark-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-dark-surface-elevated dark:text-[#e8eaf0] dark:placeholder:text-[#8892a4]'
+
+function todayISO(): string {
+  const d = new Date()
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
+}
+
+// ── Cancel modal ─────────────────────────────────────────────────────────────
+interface CancelModalProps {
+  appointment: AppointmentType
+  onClose: () => void
+  onSuccess: () => void
+}
+
+const CancelModal = ({ appointment, onClose, onSuccess }: CancelModalProps) => {
+  const [reason, setReason] = useState('')
+  const mutation = useCancelAppointment()
+  const canSubmit = reason.trim().length >= 5
+
+  const handleConfirm = () => {
+    if (!canSubmit) return
+    mutation.mutate(
+      { id: appointment.id, reason: reason.trim() },
+      { onSuccess: () => { onSuccess(); onClose() } },
+    )
+  }
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center">
+      <div className="absolute inset-0 bg-black/40" onClick={onClose} />
+      <div className="relative bg-white dark:bg-dark-surface rounded-2xl shadow-xl w-full max-w-md mx-4 p-6">
+        <h3 className="text-lg font-bold text-gray-900 dark:text-[#e8eaf0] mb-1">Cancelar cita</h3>
+        <p className="text-sm text-gray-500 dark:text-[#8892a4] mb-4">
+          {appointment.appointmentNumber} · {appointment.ownerName} · {appointment.petName}
+        </p>
+        <label className="block text-sm font-medium text-gray-700 dark:text-[#e8eaf0] mb-1">
+          Motivo de la cancelación *
+        </label>
+        <textarea
+          value={reason}
+          onChange={(e) => setReason(e.target.value)}
+          rows={3}
+          className={textareaClass}
+          placeholder="Ej: el cliente solicitó cancelar por indisponibilidad"
+        />
+        {mutation.isError && (
+          <p className="text-red-500 text-xs mt-2">Hubo un error al cancelar la cita. Intenta nuevamente.</p>
+        )}
+        <div className="flex justify-end gap-3 mt-6">
+          <button
+            onClick={onClose}
+            className="px-4 py-2 text-sm rounded-lg border border-gray-300 dark:border-dark-border text-gray-600 dark:text-[#e8eaf0] hover:bg-gray-50 dark:hover:bg-dark-surface-elevated transition-colors"
+          >
+            Volver
+          </button>
+          <button
+            onClick={handleConfirm}
+            disabled={!canSubmit || mutation.isPending}
+            className="px-4 py-2 text-sm rounded-lg bg-red-600 text-white font-semibold hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          >
+            {mutation.isPending ? 'Cancelando…' : 'Confirmar cancelación'}
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// ── Reschedule modal ─────────────────────────────────────────────────────────
+interface RescheduleModalProps {
+  appointment: AppointmentType
+  onClose: () => void
+  onSuccess: () => void
+}
+
+const RescheduleModal = ({ appointment, onClose, onSuccess }: RescheduleModalProps) => {
+  const [date, setDate] = useState(todayISO())
+  const [slot, setSlot] = useState<string | null>(null)
+  const [reason, setReason] = useState('')
+  const mutation = useRescheduleAppointment()
+  const canSubmit = Boolean(date) && Boolean(slot) && reason.trim().length >= 5
+
+  const handleConfirm = () => {
+    if (!canSubmit || !slot) return
+    mutation.mutate(
+      { id: appointment.id, newDate: date, newStartTime: slot, reason: reason.trim() },
+      { onSuccess: () => { onSuccess(); onClose() } },
+    )
+  }
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center">
+      <div className="absolute inset-0 bg-black/40" onClick={onClose} />
+      <div className="relative bg-white dark:bg-dark-surface rounded-2xl shadow-xl w-full max-w-lg mx-4 max-h-[90vh] overflow-y-auto p-6">
+        <h3 className="text-lg font-bold text-gray-900 dark:text-[#e8eaf0] mb-1">Reagendar cita</h3>
+        <p className="text-sm text-gray-500 dark:text-[#8892a4] mb-4">
+          {appointment.appointmentNumber} · {appointment.ownerName} · {appointment.petName} — actualmente{' '}
+          {formatDate(appointment.date)} · {appointment.startTime}
+        </p>
+
+        <div className="mb-4">
+          <SlotPicker
+            serviceId={appointment.serviceId}
+            date={date}
+            minDate={todayISO()}
+            onDateChange={(d) => { setDate(d); setSlot(null) }}
+            slot={slot}
+            onSlotChange={setSlot}
+          />
+        </div>
+
+        <label className="block text-sm font-medium text-gray-700 dark:text-[#e8eaf0] mb-1">
+          Motivo del cambio *
+        </label>
+        <textarea
+          value={reason}
+          onChange={(e) => setReason(e.target.value)}
+          rows={3}
+          className={textareaClass}
+          placeholder="Ej: el veterinario no estará disponible en el horario original"
+        />
+        {mutation.isError && (
+          <p className="text-red-500 text-xs mt-2">Hubo un error al reagendar la cita. Intenta nuevamente.</p>
+        )}
+        <div className="flex justify-end gap-3 mt-6">
+          <button
+            onClick={onClose}
+            className="px-4 py-2 text-sm rounded-lg border border-gray-300 dark:border-dark-border text-gray-600 dark:text-[#e8eaf0] hover:bg-gray-50 dark:hover:bg-dark-surface-elevated transition-colors"
+          >
+            Volver
+          </button>
+          <button
+            onClick={handleConfirm}
+            disabled={!canSubmit || mutation.isPending}
+            className="px-4 py-2 text-sm rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          >
+            {mutation.isPending ? 'Reagendando…' : 'Confirmar reagendamiento'}
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// ── Page ───────────────────────────────────────────────────────────────────
 export default function AdminVetAppointments() {
   const [page, setPage] = useState(1)
   const [statusFilter, setStatusFilter] = useState('')
   const [dateFilter, setDateFilter] = useState('')
   const [expandedId, setExpandedId] = useState<number | null>(null)
+  const [cancelTarget, setCancelTarget] = useState<AppointmentType | null>(null)
+  const [rescheduleTarget, setRescheduleTarget] = useState<AppointmentType | null>(null)
+  const [successMessage, setSuccessMessage] = useState<string | null>(null)
 
   const { data, isLoading } = useAdminAppointments({
     page,
@@ -34,6 +190,11 @@ export default function AdminVetAppointments() {
     setPage(1)
   }
 
+  function showSuccess(message: string) {
+    setSuccessMessage(message)
+    setTimeout(() => setSuccessMessage(null), 4000)
+  }
+
   return (
     <AdminLayout>
       <Helmet>
@@ -41,6 +202,12 @@ export default function AdminVetAppointments() {
       </Helmet>
       <h1 className="text-2xl font-bold text-gray-900 dark:text-[#e8eaf0] mb-2">Veterinaria</h1>
       <VetSubNav />
+
+      {successMessage && (
+        <div className="mb-4 rounded-lg border border-green-200 dark:border-[#164028] bg-green-50 dark:bg-[#0f2b1a] text-green-800 dark:text-green-400 text-sm px-4 py-2">
+          {successMessage}
+        </div>
+      )}
 
       <div className="flex flex-wrap items-center gap-3 mb-4">
         <select
@@ -85,13 +252,16 @@ export default function AdminVetAppointments() {
                     <th className="px-4 py-3 text-left">Fecha/Hora</th>
                     <th className="px-4 py-3 text-left">Estado</th>
                     <th className="px-4 py-3 text-left">Cambiar estado</th>
+                    <th className="px-4 py-3 text-left">Acciones</th>
                     <th className="px-4 py-3 text-left">Detalle</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-100 dark:divide-dark-border">
-                  {data?.appointments.map((appt) => (
-                    <>
-                      <tr key={appt.id} className="hover:bg-gray-50 dark:hover:bg-dark-surface-elevated">
+                  {data?.appointments.map((appt) => {
+                    const canModify = appt.status === 'PENDING' || appt.status === 'CONFIRMED'
+                    return (
+                    <Fragment key={appt.id}>
+                      <tr className="hover:bg-gray-50 dark:hover:bg-dark-surface-elevated">
                         <td className="px-4 py-3 font-mono text-gray-700 dark:text-[#e8eaf0]">{appt.appointmentNumber}</td>
                         <td className="px-4 py-3 text-gray-800 dark:text-[#e8eaf0]">{appt.ownerName}</td>
                         <td className="px-4 py-3 text-gray-700 dark:text-[#e8eaf0]">{appt.petName}</td>
@@ -118,6 +288,26 @@ export default function AdminVetAppointments() {
                           </select>
                         </td>
                         <td className="px-4 py-3">
+                          {canModify && (
+                            <div className="flex items-center gap-1">
+                              <button
+                                onClick={() => setRescheduleTarget(appt)}
+                                title="Reagendar"
+                                className="p-1.5 rounded-lg text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-950/30 transition-colors"
+                              >
+                                <CalendarClock size={16} />
+                              </button>
+                              <button
+                                onClick={() => setCancelTarget(appt)}
+                                title="Cancelar"
+                                className="p-1.5 rounded-lg text-red-600 hover:bg-red-50 dark:hover:bg-red-950/30 transition-colors"
+                              >
+                                <X size={16} />
+                              </button>
+                            </div>
+                          )}
+                        </td>
+                        <td className="px-4 py-3">
                           <button
                             onClick={() => setExpandedId(expandedId === appt.id ? null : appt.id)}
                             className="text-xs px-3 py-1 rounded-lg border border-gray-300 dark:border-dark-border text-gray-600 dark:text-[#e8eaf0] hover:bg-gray-50 dark:hover:bg-dark-surface-elevated transition-colors"
@@ -128,7 +318,7 @@ export default function AdminVetAppointments() {
                       </tr>
                       {expandedId === appt.id && (
                         <tr key={`${appt.id}-detail`} className="bg-blue-50 dark:bg-dark-surface">
-                          <td colSpan={8} className="px-8 py-4">
+                          <td colSpan={9} className="px-8 py-4">
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
                               <div>
                                 <p className="text-xs font-semibold text-gray-500 dark:text-[#8892a4] uppercase mb-1">Contacto</p>
@@ -143,14 +333,27 @@ export default function AdminVetAppointments() {
                                 )}
                               </div>
                             </div>
+                            {appt.changedByAdmin && appt.changeReason && (
+                              <div className="mt-3 pt-3 border-t border-blue-100 dark:border-dark-border text-xs text-gray-500 dark:text-[#8892a4]">
+                                {appt.rescheduledFrom ? (
+                                  <p>
+                                    Reagendada desde {formatDate(appt.rescheduledFrom)} · {appt.rescheduledFromTime} — Motivo:{' '}
+                                    {appt.changeReason}
+                                  </p>
+                                ) : (
+                                  <p>Cancelada por el admin — Motivo: {appt.changeReason}</p>
+                                )}
+                              </div>
+                            )}
                           </td>
                         </tr>
                       )}
-                    </>
-                  ))}
+                    </Fragment>
+                    )
+                  })}
                   {data?.appointments.length === 0 && (
                     <tr>
-                      <td colSpan={8} className="px-6 py-8 text-center text-gray-400 dark:text-[#8892a4]">
+                      <td colSpan={9} className="px-6 py-8 text-center text-gray-400 dark:text-[#8892a4]">
                         No hay citas
                       </td>
                     </tr>
@@ -182,6 +385,21 @@ export default function AdminVetAppointments() {
           </>
         )}
       </div>
+
+      {cancelTarget && (
+        <CancelModal
+          appointment={cancelTarget}
+          onClose={() => setCancelTarget(null)}
+          onSuccess={() => showSuccess(`Cita ${cancelTarget.appointmentNumber} cancelada correctamente.`)}
+        />
+      )}
+      {rescheduleTarget && (
+        <RescheduleModal
+          appointment={rescheduleTarget}
+          onClose={() => setRescheduleTarget(null)}
+          onSuccess={() => showSuccess(`Cita ${rescheduleTarget.appointmentNumber} reagendada correctamente.`)}
+        />
+      )}
     </AdminLayout>
   )
 }

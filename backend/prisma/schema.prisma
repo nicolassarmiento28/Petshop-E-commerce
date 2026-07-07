@@ -168,24 +168,32 @@ model VetException {
   createdAt DateTime @default(now())
 }
 
+// changeReason/rescheduledFrom* guardan solo el ÚLTIMO cambio, no un historial completo de
+// múltiples reagendamientos — suficiente para el caso de uso actual (mostrar "reagendada desde X"
+// en el admin). Si más adelante se necesita auditar cambios repetidos sobre la misma cita, migrar
+// a un modelo AppointmentHistory (appointmentId, previousDate, previousStartTime, reason, changedAt).
 model Appointment {
-  id                Int                  @id @default(autoincrement())
-  appointmentNumber String               @unique // ej: "CITA-04829"
-  status            AppointmentStatus    @default(PENDING)
-  serviceId         Int
-  service           VetService           @relation(fields: [serviceId], references: [id])
-  date              DateTime
-  startTime         String
-  endTime           String
-  ownerName         String
-  ownerEmail        String
-  ownerPhone        String
-  petName           String
-  petType           String?
-  notes             String?
-  payment           AppointmentPayment?
-  createdAt         DateTime             @default(now())
-  updatedAt         DateTime             @updatedAt
+  id                  Int                  @id @default(autoincrement())
+  appointmentNumber   String               @unique // ej: "CITA-04829"
+  status              AppointmentStatus    @default(PENDING)
+  serviceId           Int
+  service             VetService           @relation(fields: [serviceId], references: [id])
+  date                DateTime
+  startTime           String
+  endTime             String
+  ownerName           String
+  ownerEmail          String
+  ownerPhone          String
+  petName             String
+  petType             String?
+  notes               String?
+  rescheduledFrom     DateTime?
+  rescheduledFromTime String?
+  changeReason        String?
+  changedByAdmin      Boolean              @default(false)
+  payment             AppointmentPayment?
+  createdAt           DateTime             @default(now())
+  updatedAt           DateTime             @updatedAt
 }
 
 model AppointmentPayment {

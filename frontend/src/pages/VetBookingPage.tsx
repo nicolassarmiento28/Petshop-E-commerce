@@ -5,8 +5,9 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { isAxiosError } from 'axios'
 import { PawPrint, Stethoscope, Syringe, HeartHandshake, Scissors, Bone, Check } from 'lucide-react'
-import { useVetServices, useAvailableSlots, useCreateAppointment, useVetPayment } from '@/hooks/useVet'
+import { useVetServices, useCreateAppointment, useVetPayment } from '@/hooks/useVet'
 import { TestCardInfo } from '@/components/checkout/TestCardInfo'
+import { SlotPicker } from '@/components/vet/SlotPicker'
 import { formatCLP } from '@/utils/formatters'
 import type { VetServiceType } from '@/types'
 
@@ -48,10 +49,6 @@ export default function VetBookingPage() {
   const [submitError, setSubmitError] = useState<string | null>(null)
 
   const { data: services, isLoading: loadingServices } = useVetServices()
-  const { data: availability, isLoading: loadingSlots } = useAvailableSlots(
-    selectedDate,
-    selectedService?.id,
-  )
   const createAppointmentMutation = useCreateAppointment()
   const vetPayment = useVetPayment()
 
@@ -186,40 +183,18 @@ export default function VetBookingPage() {
         {/* Step 2 — Date & time */}
         {step === 2 && selectedService && (
           <div className="max-w-2xl">
-            <label className="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Fecha</label>
-            <input
-              type="date"
-              value={selectedDate}
-              min={todayISO()}
-              onChange={(e) => {
-                setSelectedDate(e.target.value)
-                setSelectedSlot(null)
-              }}
-              className={`${inputClass} mb-5 max-w-xs`}
-            />
-
-            <label className="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">Horario disponible</label>
-            {loadingSlots && <p className="text-gray-500 dark:text-[#8892a4] text-sm">Cargando horarios…</p>}
-            {!loadingSlots && availability?.slots.length === 0 && (
-              <p className="text-gray-500 dark:text-[#8892a4] text-sm">No hay horarios disponibles para esta fecha.</p>
-            )}
-            <div className="flex flex-wrap gap-2 mb-6">
-              {availability?.slots.map((slot) => {
-                const selected = selectedSlot === slot
-                return (
-                  <button
-                    key={slot}
-                    onClick={() => setSelectedSlot(slot)}
-                    className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                      selected
-                        ? 'bg-blue-600 text-white'
-                        : 'border border-gray-300 dark:border-dark-border text-gray-700 dark:text-[#e8eaf0] hover:border-blue-600'
-                    }`}
-                  >
-                    {slot}
-                  </button>
-                )
-              })}
+            <div className="mb-6">
+              <SlotPicker
+                serviceId={selectedService.id}
+                date={selectedDate}
+                minDate={todayISO()}
+                onDateChange={(date) => {
+                  setSelectedDate(date)
+                  setSelectedSlot(null)
+                }}
+                slot={selectedSlot}
+                onSlotChange={setSelectedSlot}
+              />
             </div>
 
             <div className="flex gap-3">
