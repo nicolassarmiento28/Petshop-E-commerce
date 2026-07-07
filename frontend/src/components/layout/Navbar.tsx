@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { ShoppingCart, Menu, X, Search, User, Sun, Moon, Pill, PawPrint } from 'lucide-react'
+import { ShoppingCart, Menu, X, Search, User, Sun, Moon, Pill, PawPrint, Stethoscope } from 'lucide-react'
 import { useCartStore } from '@/store/cartStore'
 import { useThemeStore } from '@/store/themeStore'
 import { useUiStore } from '@/store/uiStore'
@@ -14,6 +14,7 @@ const NAV_LINKS = [
   { label: 'Peluquería', to: '/categoria/peluqueria' },
   { label: 'Ofertas', to: '/categoria/ofertas' },
   { label: 'Marcas', to: '/categoria/marcas' },
+  { label: 'Veterinaria', to: '/veterinaria', icon: Stethoscope, isNew: true },
 ]
 
 export default function Navbar() {
@@ -144,6 +145,11 @@ export default function Navbar() {
               >
                 {item.icon && <item.icon size={14} className="inline mr-1" />}
                 {item.label}
+                {item.isNew && (
+                  <span className="ml-1.5 align-middle bg-orange-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">
+                    Nuevo
+                  </span>
+                )}
               </Link>
           ))}
         </nav>
@@ -175,6 +181,11 @@ export default function Navbar() {
                 >
                   {item.icon && <item.icon size={14} className="inline mr-1.5" />}
                   {item.label}
+                  {item.isNew && (
+                    <span className="ml-1.5 align-middle bg-orange-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">
+                      Nuevo
+                    </span>
+                  )}
                 </Link>
               ))}
             </div>

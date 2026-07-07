@@ -142,3 +142,66 @@ export interface CreateOrderInput {
   items: { productId: number; quantity: number }[]
   couponCode?: string
 }
+
+export type AppointmentStatus =
+  | 'PENDING'
+  | 'CONFIRMED'
+  | 'CANCELLED'
+  | 'COMPLETED'
+  | 'NO_SHOW'
+
+export interface VetServiceType {
+  id: number
+  name: string
+  description?: string
+  durationMin: number
+  price: number
+  isActive: boolean
+  createdAt: string
+  updatedAt: string
+}
+
+export interface AppointmentPaymentType {
+  status: PaymentStatus
+  tbkAuthCode?: string | null
+  tbkCardNumber?: string | null
+  tbkAmount?: number | null
+}
+
+export interface AppointmentType {
+  id: number
+  appointmentNumber: string
+  status: AppointmentStatus
+  serviceId: number
+  service?: VetServiceType
+  date: string
+  startTime: string
+  endTime: string
+  ownerName: string
+  ownerEmail: string
+  ownerPhone: string
+  petName: string
+  petType?: string
+  notes?: string
+  payment?: AppointmentPaymentType | null
+  createdAt: string
+  updatedAt: string
+}
+
+export interface AvailableSlotType {
+  date: string
+  serviceId: number
+  slots: string[]
+}
+
+export interface CreateAppointmentInput {
+  serviceId: number
+  date: string
+  startTime: string
+  ownerName: string
+  ownerEmail: string
+  ownerPhone: string
+  petName: string
+  petType?: string
+  notes?: string
+}

@@ -9,6 +9,9 @@ import CheckoutPage from '@/pages/CheckoutPage'
 import PaymentSuccess from '@/pages/PaymentSuccess'
 import PaymentFailed from '@/pages/PaymentFailed'
 import AllProductsPage from '@/pages/AllProductsPage'
+import VetBookingPage from '@/pages/VetBookingPage'
+import VetAppointmentSuccess from '@/pages/VetAppointmentSuccess'
+import VetAppointmentFailed from '@/pages/VetAppointmentFailed'
 import PrivacyPage from '@/pages/PrivacyPage'
 import TermsPage from '@/pages/TermsPage'
 import ReturnsPage from '@/pages/ReturnsPage'
@@ -46,6 +49,9 @@ function AppContent() {
         <Route element={<Layout><PaymentSuccess /></Layout>} path="/pago/exito" />
         <Route element={<Layout><PaymentFailed /></Layout>} path="/pago/fallido" />
         <Route element={<Layout><AllProductsPage /></Layout>} path="/productos" />
+        <Route element={<Layout><VetBookingPage /></Layout>} path="/veterinaria" />
+        <Route element={<Layout><VetAppointmentSuccess /></Layout>} path="/veterinaria/exito" />
+        <Route element={<Layout><VetAppointmentFailed /></Layout>} path="/veterinaria/fallido" />
         <Route element={<PrivacyPage />} path="/privacidad" />
         <Route element={<TermsPage />} path="/terminos" />
         <Route element={<Layout><AboutPage /></Layout>} path="/nosotros" />

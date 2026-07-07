@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, Stethoscope } from 'lucide-react'
 import ProductGrid from '@/components/product/ProductGrid'
 import BrandsCarousel from '@/components/product/BrandsCarousel'
 import { useProducts, useBrands } from '@/hooks/useProducts'
@@ -165,6 +165,29 @@ export default function Home() {
                   </div>
                 ) : null
               )}
+            </div>
+          </div>
+        </Link>
+      </section>
+
+      {/* ── 5b. Banner de veterinaria agendable ──────────────────────── */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10">
+        <Link to="/veterinaria" className="block rounded-2xl overflow-hidden bg-gradient-to-r from-blue-600 to-blue-800 hover:opacity-95 transition-opacity">
+          <div className="flex items-center justify-between px-10 py-8">
+            <div className="text-white">
+              <p className="text-blue-200 dark:text-white text-sm font-medium mb-1">Cuidado veterinario</p>
+              <h2
+                className="text-3xl font-bold mb-3"
+                style={{ fontFamily: "'Fraunces', Georgia, serif" }}
+              >
+                Agenda una consulta para tu mascota
+              </h2>
+              <span className="inline-flex items-center gap-2 bg-white text-blue-700 font-semibold px-5 py-2.5 rounded-xl text-sm hover:bg-blue-50 transition-colors">
+                Agenda tu hora <ArrowRight size={15} />
+              </span>
+            </div>
+            <div className="hidden sm:flex items-center justify-center shrink-0 w-24 h-24 rounded-full bg-white/20 backdrop-blur-sm">
+              <Stethoscope size={44} className="text-white" />
             </div>
           </div>
         </Link>

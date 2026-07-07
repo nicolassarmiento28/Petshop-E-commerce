@@ -1,40 +1,34 @@
-import { useEffect } from 'react'
 import { useSearchParams, useNavigate } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 import { useQuery } from '@tanstack/react-query'
-import { getPaymentStatus } from '@/services/paymentService'
-import { useCartStore } from '@/store/cartStore'
-import { formatCLP } from '@/utils/formatters'
+import { useEffect } from 'react'
+import { getVetPaymentStatus } from '@/services/vetService'
+import { formatCLP, formatDate } from '@/utils/formatters'
 import PaymentResultCard from '@/components/payment/PaymentResultCard'
 
-export default function PaymentSuccess() {
+export default function VetAppointmentSuccess() {
   const [searchParams] = useSearchParams()
   const navigate = useNavigate()
-  const orderNumber = searchParams.get('order') ?? ''
-  const clearCart = useCartStore((s) => s.clearCart)
+  const appointmentNumber = searchParams.get('cita') ?? ''
 
   useEffect(() => {
-    clearCart()
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
-
-  useEffect(() => {
-    if (!orderNumber) navigate('/', { replace: true })
-  }, [orderNumber, navigate])
+    if (!appointmentNumber) navigate('/', { replace: true })
+  }, [appointmentNumber, navigate])
 
   const { data, isLoading, isError } = useQuery({
-    queryKey: ['paymentStatus', orderNumber],
-    queryFn: () => getPaymentStatus(orderNumber),
-    enabled: Boolean(orderNumber),
+    queryKey: ['vetPaymentStatus', appointmentNumber],
+    queryFn: () => getVetPaymentStatus(appointmentNumber),
+    enabled: Boolean(appointmentNumber),
   })
 
-  if (!orderNumber) return null
+  if (!appointmentNumber) return null
 
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gray-50 dark:bg-dark-bg flex flex-col items-center justify-center">
         <div className="bg-white dark:bg-dark-surface dark:border dark:border-dark-border rounded-3xl shadow-sm p-8 max-w-md w-full mx-auto mt-20 flex flex-col items-center gap-6 text-center">
           <div className="w-16 h-16 rounded-full border-4 border-blue-600 border-t-transparent animate-spin" />
-          <p className="text-gray-600 dark:text-[#8892a4]">Cargando información del pago…</p>
+          <p className="text-gray-600 dark:text-[#8892a4]">Cargando información de tu cita…</p>
         </div>
       </div>
     )
@@ -44,7 +38,7 @@ export default function PaymentSuccess() {
     return (
       <div className="min-h-screen bg-gray-50 dark:bg-dark-bg flex flex-col items-center justify-center">
         <div className="bg-white dark:bg-dark-surface dark:border dark:border-dark-border rounded-3xl shadow-sm p-8 max-w-md w-full mx-auto mt-20 text-center space-y-4">
-          <p className="text-gray-700 dark:text-[#e8eaf0]">No se pudo obtener el estado del pago.</p>
+          <p className="text-gray-700 dark:text-[#e8eaf0]">No se pudo obtener el estado de tu cita.</p>
           <a href="/" className="text-blue-600 hover:underline font-medium">
             Volver al inicio
           </a>
@@ -53,27 +47,24 @@ export default function PaymentSuccess() {
     )
   }
 
-  const lastFour = data.payment?.tbkCardNumber
-    ? data.payment.tbkCardNumber.slice(-4)
-    : null
-
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-dark-bg flex flex-col items-center justify-center">
       <Helmet>
-        <title>Pago exitoso | Petshop</title>
+        <title>Cita confirmada | Petshop</title>
       </Helmet>
       <PaymentResultCard
         variant="success"
-        title="¡Pago aprobado!"
-        identifier={`Orden #${orderNumber}`}
+        title="¡Cita confirmada!"
+        identifier={`Cita #${appointmentNumber}`}
         details={[
-          ...(lastFour ? [{ label: 'Tarjeta terminada en', value: lastFour }] : []),
-          ...(data.payment?.tbkAuthCode
-            ? [{ label: 'Código de autorización', value: data.payment.tbkAuthCode }]
-            : []),
+          { label: 'Servicio', value: data.service.name },
+          { label: 'Fecha', value: formatDate(data.date) },
+          { label: 'Hora', value: `${data.startTime} - ${data.endTime}` },
+          { label: 'Mascota', value: data.petName },
         ]}
-        amountValue={formatCLP(data.total)}
-        primaryAction={{ label: 'Seguir comprando', to: '/' }}
+        amountLabel="Monto pagado"
+        amountValue={formatCLP(data.service.price)}
+        primaryAction={{ label: 'Volver al inicio', to: '/' }}
       />
     </div>
   )
