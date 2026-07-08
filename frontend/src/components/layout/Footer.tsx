@@ -61,6 +61,7 @@ export default function Footer() {
                 'Perro', 'Gato', 'Farmacia',
                 { label: 'Peluquería', to: '/categoria/peluqueria' },
                 'Ofertas', 'Marcas',
+                { label: 'Veterinaria', to: '/veterinaria' },
               ].map((cat) => {
                 const label = typeof cat === 'string' ? cat : cat.label
                 const to = typeof cat === 'string'
