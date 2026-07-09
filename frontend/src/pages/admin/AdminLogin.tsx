@@ -76,15 +76,33 @@ const AdminLogin = () => {
       </div>
 
       {/* Panel derecho / formulario */}
-      <div className="flex flex-1 items-center justify-center p-6">
+      <div className="flex flex-1 flex-col">
+        {/* Banner de marca — mobile/tablet */}
+        <div className="lg:hidden relative overflow-hidden bg-gradient-to-br from-blue-800 to-blue-600 dark:from-blue-900 dark:to-blue-700 p-6">
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              backgroundImage: 'radial-gradient(rgba(255,255,255,0.15) 1px, transparent 1px)',
+              backgroundSize: '20px 20px',
+            }}
+          />
+          <div className="relative z-10">
+            <Link
+              to="/"
+              className="inline-flex items-center gap-2 text-orange-300 hover:text-orange-200 text-sm font-medium w-fit mb-4"
+            >
+              <ArrowLeft size={18} />
+              Volver a la tienda
+            </Link>
+            <div className="flex items-center gap-2">
+              <PawPrint size={28} className="text-orange-500 shrink-0" />
+              <h2 className="text-xl font-bold text-white tracking-tight">Panel de administración</h2>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex flex-1 items-center justify-center p-6">
         <div className="w-full max-w-sm">
-          <Link
-            to="/"
-            className="lg:hidden inline-flex items-center gap-2 text-gray-500 dark:text-zinc-400 hover:text-gray-700 dark:hover:text-zinc-300 text-sm font-medium mb-6"
-          >
-            <ArrowLeft size={18} />
-            Volver a la tienda
-          </Link>
 
           <div className="dark:bg-dark-surface dark:border dark:border-dark-border dark:rounded-xl dark:p-8">
             <div className="flex items-center gap-2 mb-2">
@@ -147,6 +165,7 @@ const AdminLogin = () => {
               </div>
             </form>
           </div>
+        </div>
         </div>
       </div>
     </div>
