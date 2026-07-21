@@ -27,27 +27,21 @@ E-commerce tipo SPA con catálogo de productos, carrito de compras, cupones de d
 - [💳 Flujo de pago — Transbank Webpay Plus](#-flujo-de-pago--transbank-webpay-plus)
 - [🔑 Credenciales de prueba](#-credenciales-de-prueba)
 - [⚙️ Comandos útiles](#️-comandos-útiles)
-- [📄 Licencia](#-licencia)
 
 ---
 
 ## 📸 Capturas de pantalla
 
-| Home | Detalle de producto |
+| Home | Dark mode |
 |---|---|
-| ![Home](./screenshots/home.png) <!-- TODO: reemplazar --> | ![Detalle de producto](./screenshots/product.png) <!-- TODO: reemplazar --> |
+| ![Home](./screenshots/hero.png) | ![Dark mode](./screenshots/dark-mode.png) |
 
-| Carrito | Checkout |
-|---|---|
-| ![Carrito](./screenshots/cart.png) <!-- TODO: reemplazar --> | ![Checkout](./screenshots/checkout.png) <!-- TODO: reemplazar --> |
+| Login admin |
+|---|
+| ![Login admin](./screenshots/admin-login.png) |
 
-| Pago exitoso | Login admin |
-|---|---|
-| ![Pago exitoso](./screenshots/payment-success.png) <!-- TODO: reemplazar --> | ![Login admin](./screenshots/admin-login.png) <!-- TODO: reemplazar --> |
+> Capturas de producto, carrito, checkout, pago y dashboard admin pendientes: requieren datos de catálogo, que hoy no existen en la base de datos usada para este README. <!-- TODO: reemplazar cuando la DB tenga productos -->
 
-| Dashboard admin | Dark mode |
-|---|---|
-| ![Dashboard admin](./screenshots/admin-dashboard.png) <!-- TODO: reemplazar --> | ![Dark mode](./screenshots/dark-mode.png) <!-- TODO: reemplazar --> |
 
 ---
 
@@ -299,20 +293,3 @@ npx prisma migrate dev --name <nombre_descriptivo>
 npx prisma db seed
 ```
 
----
-
-## 📄 Licencia
-
-Este proyecto no incluye actualmente un archivo `LICENSE`. Se sugiere licenciarlo bajo **MIT** si se planea distribuir o abrir el código:
-
-```
-MIT License
-
-Copyright (c) 2026 Nicolas Sarmiento
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction...
-```
-
-Para aplicarla, crea un archivo `LICENSE` en la raíz con el texto completo de la [licencia MIT](https://opensource.org/license/mit/).
