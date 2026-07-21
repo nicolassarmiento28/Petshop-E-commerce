@@ -1,38 +1,105 @@
-# Petshop
+# 🐾 Petshop — E-commerce de Mascotas
 
-E-commerce de mascotas tipo SPA con catálogo de productos, carrito de compras y pago integrado con **Transbank Webpay Plus**. Panel de administración incluido.
+![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white&labelColor=20232a)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-20+-339933?logo=node.js&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15+-4169E1?logo=postgresql&logoColor=white)
+![Vercel](https://img.shields.io/badge/Vercel-Frontend-000000?logo=vercel&logoColor=white)
+![Railway](https://img.shields.io/badge/Railway-Backend-0B0D0E?logo=railway&logoColor=white)
+
+E-commerce tipo SPA con catálogo de productos, carrito de compras, cupones de descuento, pago integrado con **Transbank Webpay Plus** y un módulo completo de **reserva de citas veterinarias** con su propio flujo de pago. Incluye panel de administración con CRUD completo, analytics y exportación de datos.
+
+**🔗 Demo en vivo:** [petshop-e-commerce.vercel.app](https://petshop-e-commerce.vercel.app)
+
+![Hero](./screenshots/hero.png)
 
 ---
 
-## Stack
+## 📑 Tabla de contenidos
+
+- [📸 Capturas de pantalla](#-capturas-de-pantalla)
+- [✨ Funcionalidades](#-funcionalidades)
+- [🛠 Stack tecnológico](#-stack-tecnológico)
+- [📁 Estructura del proyecto](#-estructura-del-proyecto)
+- [🚀 Instalación](#-instalación)
+- [🔐 Variables de entorno](#-variables-de-entorno)
+- [📡 API — Endpoints principales](#-api--endpoints-principales)
+- [💳 Flujo de pago — Transbank Webpay Plus](#-flujo-de-pago--transbank-webpay-plus)
+- [🔑 Credenciales de prueba](#-credenciales-de-prueba)
+- [⚙️ Comandos útiles](#️-comandos-útiles)
+- [📄 Licencia](#-licencia)
+
+---
+
+## 📸 Capturas de pantalla
+
+| Home | Detalle de producto |
+|---|---|
+| ![Home](./screenshots/home.png) <!-- TODO: reemplazar --> | ![Detalle de producto](./screenshots/product.png) <!-- TODO: reemplazar --> |
+
+| Carrito | Checkout |
+|---|---|
+| ![Carrito](./screenshots/cart.png) <!-- TODO: reemplazar --> | ![Checkout](./screenshots/checkout.png) <!-- TODO: reemplazar --> |
+
+| Pago exitoso | Login admin |
+|---|---|
+| ![Pago exitoso](./screenshots/payment-success.png) <!-- TODO: reemplazar --> | ![Login admin](./screenshots/admin-login.png) <!-- TODO: reemplazar --> |
+
+| Dashboard admin | Dark mode |
+|---|---|
+| ![Dashboard admin](./screenshots/admin-dashboard.png) <!-- TODO: reemplazar --> | ![Dark mode](./screenshots/dark-mode.png) <!-- TODO: reemplazar --> |
+
+---
+
+## ✨ Funcionalidades
+
+- Catálogo organizado en 6 secciones principales (Perro, Gato, Farmacia, Pequeñas Mascotas, Ofertas, Marcas) + Peluquería
+- Carrito de compras persistente (drawer lateral con focus trap)
+- Cupones de descuento aplicados server-side
+- Checkout con validación (React Hook Form + Zod) y pago vía **Transbank Webpay Plus**
+- **Reserva de citas veterinarias** (`/veterinaria`): elegir servicio, ver disponibilidad, agendar y pagar
+- Panel de administración (JWT): CRUD de productos, marcas, clientes, cupones, órdenes, analytics y gestión completa de veterinaria (servicios, disponibilidad, excepciones, citas — cancelar/reagendar con email)
+- Exportación de datos a CSV/XLSX desde el admin
+- Dark mode completo con paleta propia
+- Diseño responsive (mobile-first)
+
+---
+
+## 🛠 Stack tecnológico
 
 ### Frontend
-| Tecnología | Versión | Rol |
-|---|---|---|
-| React | 18 | Framework UI |
-| TypeScript | 5 | Tipado estático |
-| Vite | 5 | Bundler y dev server |
-| Tailwind CSS | 3 | Estilos utilitarios |
-| Shadcn/ui | latest | Componentes accesibles |
-| React Router | 6 | Routing SPA |
-| Zustand | latest | Estado global (carrito, tema, UI) |
-| React Query | 5 | Fetching y caché de datos |
-| Axios | latest | Cliente HTTP |
-| Sonner | latest | Notificaciones toast |
+
+| Tecnología | Rol |
+|---|---|
+| React 18 + TypeScript 5 | Framework UI, tipado estático |
+| Vite 5 | Bundler y dev server |
+| Tailwind CSS 3 | Único sistema de UI (sin Shadcn/ui) |
+| React Router 6 | Routing SPA |
+| Zustand | Estado global: carrito, tema, UI |
+| React Query | Fetching y caché de datos |
+| React Hook Form + Zod | Validación de formularios |
+| Axios | Cliente HTTP |
+| lucide-react | Iconografía |
+| Recharts | Gráficos en el dashboard admin |
+| Framer Motion | Transiciones y animaciones |
+| sonner | Toasts |
 
 ### Backend
-| Tecnología | Versión | Rol |
-|---|---|---|
-| Node.js | 20 | Runtime |
-| Express | 4 | Framework HTTP |
-| TypeScript | 5 | Tipado estático |
-| Prisma ORM | 5 | Acceso a base de datos |
-| PostgreSQL | 15 | Base de datos relacional |
-| JWT | latest | Autenticación admin |
-| bcrypt | latest | Hash de contraseñas |
-| transbank-sdk | latest | Pasarela de pago |
+
+| Tecnología | Rol |
+|---|---|
+| Node.js 20+ / Express 4 / TypeScript 5 | Runtime y framework HTTP |
+| Prisma ORM 5 / PostgreSQL 15+ | Acceso a base de datos |
+| JWT + bcrypt | Autenticación admin |
+| Zod | Validación de entrada |
+| express-rate-limit | Rate limiting |
+| helmet, cors, dotenv | Middleware / configuración |
+| transbank-sdk | Pasarela de pago |
+| ExcelJS | Exportación CSV/XLSX |
+| Resend | Emails transaccionales (veterinaria) |
 
 ### Deploy
+
 | Servicio | Qué aloja |
 |---|---|
 | Vercel | Frontend React |
@@ -40,70 +107,50 @@ E-commerce de mascotas tipo SPA con catálogo de productos, carrito de compras y
 
 ---
 
-## Estructura del proyecto
+## 📁 Estructura del proyecto
 
 ```
 petshop/
 ├── frontend/
 │   └── src/
-│       ├── components/
-│       │   ├── ui/           # Componentes Shadcn/ui
-│       │   ├── layout/       # Navbar, Footer, Layout
-│       │   ├── product/      # ProductCard, ProductGrid, BrandsCarousel
-│       │   ├── cart/         # CartDrawer, CartItem, CartSummary
-│       │   └── checkout/     # CheckoutForm
-│       ├── pages/
-│       │   ├── Home.tsx
-│       │   ├── CategoryPage.tsx
-│       │   ├── ProductPage.tsx
-│       │   ├── CartPage.tsx
-│       │   ├── CheckoutPage.tsx
-│       │   ├── PaymentReturn.tsx
-│       │   ├── PaymentSuccess.tsx
-│       │   ├── PaymentFailed.tsx
-│       │   └── admin/
-│       ├── store/
-│       │   ├── cartStore.ts    # Zustand — carrito (persiste en localStorage)
-│       │   ├── themeStore.ts   # Zustand — dark/light mode
-│       │   └── uiStore.ts      # Zustand — estado del drawer del carrito
-│       ├── hooks/              # useProducts, useCart, usePayment
-│       ├── services/           # api.ts + servicios por dominio
-│       ├── types/              # index.ts — tipos compartidos
-│       └── utils/              # formatters.ts (formatCLP)
+│       ├── components/       # layout, product, cart, checkout, payment, vet, admin
+│       ├── pages/             # Home, CategoryPage, ProductPage, Checkout, Vet*, admin/*
+│       ├── store/              # cartStore, themeStore, uiStore (Zustand)
+│       ├── hooks/               # useProducts, usePayment, useVet, useAdminVet
+│       ├── services/            # api.ts + servicios por dominio
+│       ├── types/index.ts       # Tipos TS compartidos
+│       └── utils/                # formatters, orderStatus, appointmentStatus, transbank
 │
 ├── backend/
-│   ├── prisma/
-│   │   ├── schema.prisma
-│   │   └── seed.ts
+│   ├── prisma/                   # schema.prisma + seeds encadenados
 │   └── src/
-│       ├── controllers/
+│       ├── controllers/           # product, order, payment, coupon, vet, vetPayment, admin/*
 │       ├── routes/
-│       ├── middleware/         # authMiddleware, errorHandler
-│       ├── services/           # transbankService, orderService
-│       └── lib/                # prisma singleton
+│       ├── schemas/                # Schemas Zod compartidos
+│       ├── middleware/             # auth, errorHandler, validateRequest, rateLimiter
+│       ├── services/                # transbankService, vetAvailabilityService, emailService
+│       └── lib/prisma.ts            # Singleton PrismaClient
 │
-├── CONTEXT.md                  # Arquitectura detallada
-└── AGENTS.md                   # Guía para agentes de código
+├── screenshots/                     # Capturas usadas en este README
+├── CLAUDE.md                          # Contexto técnico detallado para agentes de código
+└── PLAN.md                            # Bitácora histórica de fases
 ```
 
 ---
 
-## Requisitos previos
+## 🚀 Instalación
+
+### Requisitos previos
 
 - Node.js 20+
 - Docker (para base de datos local) o PostgreSQL 15 instalado
 - npm 9+
 
----
-
-## Instalación
-
 ### 1. Base de datos local
 
 ```bash
 docker run --name petshop-db \
-  -e POSTGRES_PASSWORD=password \
-  -e POSTGRES_DB=petshop_db \
+  -e POSTGRES_PASSWORD=password -e POSTGRES_DB=petshop_db \
   -p 5432:5432 -d postgres:15
 ```
 
@@ -111,26 +158,24 @@ docker run --name petshop-db \
 
 ```bash
 cd backend
-cp .env.example .env   # editar con tus valores
 npm install
 npx prisma generate
 npx prisma migrate dev --name init
-npx prisma db seed
-npm run dev            # → http://localhost:3001
+npx prisma db seed        # encadena seed-scraper.js → seed-orders.js → seed-vet.js
+npm run dev                # → http://localhost:3001
 ```
 
 ### 3. Frontend
 
 ```bash
 cd frontend
-cp .env.example .env   # editar con tus valores
 npm install
-npm run dev            # → http://localhost:5173
+npm run dev                # → http://localhost:5173
 ```
 
 ---
 
-## Variables de entorno
+## 🔐 Variables de entorno
 
 ### `backend/.env`
 
@@ -138,11 +183,14 @@ npm run dev            # → http://localhost:5173
 NODE_ENV=development
 PORT=3001
 DATABASE_URL="postgresql://user:password@localhost:5432/petshop_db"
-JWT_SECRET=<mínimo_32_caracteres>
-JWT_EXPIRES_IN=7d
+JWT_SECRET=<al_menos_32_chars_random>
+JWT_EXPIRES_IN=8h
 FRONTEND_URL=http://localhost:5173
 RETURN_URL=http://localhost:3001/api/payment/return
-# TBK_COMMERCE_CODE y TBK_API_KEY — solo en producción
+VET_RETURN_URL=http://localhost:3001/api/vet/payment/return
+RESEND_API_KEY=
+EMAIL_FROM="Petshop <reservas@petshop.cl>"
+# TBK_COMMERCE_CODE y TBK_API_KEY — solo producción
 ```
 
 ### `frontend/.env`
@@ -153,45 +201,58 @@ VITE_API_URL=http://localhost:3001/api
 
 ---
 
-## API — Endpoints principales
+## 📡 API — Endpoints principales
 
 ```
-GET    /api/products                  Lista productos (?category=, ?brand=, ?sale=true, ?search=)
-GET    /api/products/:slug            Detalle de producto
-GET    /api/categories                Árbol de categorías
-GET    /api/brands                    Lista de marcas
+# Productos / Categorías / Marcas
+GET    /api/products                    Lista (filtros: category, brand, sale, search, featured, sort, cursor, limit)
+GET    /api/products/:slug              Detalle de producto
+GET    /api/categories                  Árbol de categorías
+GET    /api/brands                      Lista de marcas
 
-POST   /api/orders                    Crear orden
-GET    /api/orders/:orderNumber       Estado de una orden
+# Órdenes / Pago / Cupones
+POST   /api/orders                      Crear orden
+GET    /api/orders/:orderNumber         Estado de una orden
+POST   /api/payment/create              Iniciar transacción Transbank → { token, url }
+GET    /api/payment/return              Callback Transbank (commit + redirect)
+GET    /api/payment/status/:orderNumber Resultado del pago
+POST   /api/coupons/validate            Preview de descuento de un cupón
 
-POST   /api/payment/create            Iniciar transacción Transbank → { token, url }
-GET    /api/payment/return            Callback Transbank (commit + redirect)
-GET    /api/payment/status/:order     Resultado del pago
+# Veterinaria
+GET    /api/vet/services                Servicios activos
+GET    /api/vet/availability            Slots disponibles (?date&serviceId)
+POST   /api/vet/appointments            Crear cita
+POST   /api/vet/payment/create          Iniciar pago de cita
+GET    /api/vet/payment/return          Callback Transbank (commit + email + redirect)
 
-POST   /api/admin/login               Login admin → { token }
-GET    /api/admin/products            Listar productos (incluye inactivos)  [JWT]
-POST   /api/admin/products            Crear producto  [JWT]
-PUT    /api/admin/products/:id        Editar producto  [JWT]
-DELETE /api/admin/products/:id        Desactivar producto (soft delete)  [JWT]
-GET    /api/admin/orders              Listar órdenes  [JWT]
-PUT    /api/admin/orders/:id/status   Actualizar estado  [JWT]
+# Admin (Authorization: Bearer <jwt>, excepto login)
+POST   /api/admin/login                 Login admin (rate limit: 5/15min)
+GET    /api/admin/products              CRUD completo + export CSV/XLSX
+GET    /api/admin/orders                Listado + cambio de estado + export
+GET    /api/admin/brands                CRUD + auto-assign por keyword
+GET    /api/admin/customers             Listado + export
+GET    /api/admin/coupons               CRUD
+GET    /api/admin/analytics/*           Ventas por categoría, comparación mensual
+GET    /api/admin/vet/*                 Servicios, disponibilidad, excepciones, citas (cancelar/reagendar)
 ```
 
 ---
 
-## Flujo de pago — Transbank Webpay Plus
+## 💳 Flujo de pago — Transbank Webpay Plus
 
-1. Usuario completa el checkout e ingresa sus datos.
-2. Frontend llama `POST /api/payment/create` → backend crea la transacción en Transbank y devuelve `{ token, url }`.
-3. Frontend envía un `<form method="POST">` nativo a la URL de Transbank con el token (no usar `fetch` ni `axios`).
+1. Usuario confirma el carrito, ingresa datos y aplica cupón (opcional).
+2. `POST /api/payment/create` → backend crea la transacción en Transbank y devuelve `{ token, url }`.
+3. Frontend envía un `<form method="POST">` nativo a la URL de Transbank (no `fetch`/`axios`).
 4. Usuario paga en el formulario de Transbank.
 5. Transbank redirige a `GET /api/payment/return?token_ws=...`.
-6. Backend llama `Transaction.commit()`, actualiza `Payment` y `Order` en una `prisma.$transaction`.
-7. Backend redirige al frontend: `/pago/exito` o `/pago/fallido`.
+6. Backend llama `Transaction.commit()` y actualiza `Payment` + `Order` en un único `prisma.$transaction`.
+7. Redirect server-side a `/pago/exito` o `/pago/fallido`.
+
+El flujo de **veterinaria** es análogo (`/api/vet/payment/*`), con envío de email de confirmación vía Resend al aprobarse el pago.
 
 ---
 
-## Credenciales de prueba
+## 🔑 Credenciales de prueba
 
 ### Panel de administración
 
@@ -201,50 +262,57 @@ PUT    /api/admin/orders/:id/status   Actualizar estado  [JWT]
 | Email | `admin@petshop.cl` |
 | Contraseña | `admin123` |
 
-> Creadas al correr `npx prisma db seed`. Para cambiarlas, edita `backend/prisma/seed.ts:629`.
+### Tarjetas sandbox Transbank
 
-### Tarjeta sandbox Transbank (solo pruebas)
+| Tipo | Número | CVV |
+|---|---|---|
+| VISA aprobada | `4051 8856 0044 6623` | `123` |
+| VISA rechazada | `5186 0595 5959 0568` | `123` |
 
-| Campo | Valor |
-|---|---|
-| Número | `4051 8856 0044 6623` |
-| Fecha vencimiento | `12/26` |
-| CVV | `123` |
-| RUT | `11.111.111-1` |
-| Clave | `123` |
+RUT: `11.111.111-1` · Clave: `123` · Fecha de vencimiento: cualquier fecha futura (ej. `12/26`)
 
-> Aplica solo con `NODE_ENV=development`. El backend usa credenciales sandbox públicas automáticamente; no se requiere configuración adicional.
+> Aplica solo fuera de `NODE_ENV=production`. El backend usa credenciales sandbox públicas automáticamente.
 
 ---
 
-## Comandos útiles
+## ⚙️ Comandos útiles
 
 ```bash
-# Verificar tipos (debe pasar sin errores antes de commit)
-cd frontend && npm run type-check
-cd backend  && npm run type-check
+# Frontend
+cd frontend
+npm run dev            # http://localhost:5173
+npm run build
+npm run lint            # eslint --max-warnings 0
+npm run type-check      # tsc --noEmit
+npm run test            # vitest run
 
-# Lint
-cd frontend && npm run lint
-cd backend  && npm run lint
+# Backend
+cd backend
+npm run dev             # ts-node-dev → http://localhost:3001
+npm run build
+npm run type-check
+npm run test            # jest
 
 # Prisma
-npx prisma studio          # GUI en http://localhost:5555
+npx prisma studio        # GUI en http://localhost:5555
 npx prisma migrate dev --name <nombre_descriptivo>
 npx prisma db seed
 ```
 
 ---
 
-## Funcionalidades
+## 📄 Licencia
 
-- Catálogo de productos con filtros por categoría, marca y ofertas
-- Megamenú de navegación con 6 secciones (Perro, Gato, Farmacia, Pequeñas Mascotas, Ofertas, Marcas)
-- Carrito de compras persistente (localStorage) con drawer lateral
-- Toast de confirmación al agregar productos al carrito
-- Checkout con validación de formulario (React Hook Form + Zod)
-- Pago integrado con Transbank Webpay Plus
-- Pantallas de resultado de pago (éxito / fallo)
-- Panel de administración protegido por JWT (gestión de productos y órdenes)
-- Dark mode completo con toggle persistido
-- Diseño responsive (mobile-first)
+Este proyecto no incluye actualmente un archivo `LICENSE`. Se sugiere licenciarlo bajo **MIT** si se planea distribuir o abrir el código:
+
+```
+MIT License
+
+Copyright (c) 2026 Nicolas Sarmiento
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction...
+```
+
+Para aplicarla, crea un archivo `LICENSE` en la raíz con el texto completo de la [licencia MIT](https://opensource.org/license/mit/).
