@@ -1,4 +1,4 @@
-# 🐾 Petshop — E-commerce de Mascotas
+# Petshop — E-commerce de Mascotas
 
 ![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white&labelColor=20232a)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)
@@ -9,28 +9,28 @@
 
 E-commerce tipo SPA con catálogo de productos, carrito de compras, cupones de descuento, pago integrado con **Transbank Webpay Plus** y un módulo completo de **reserva de citas veterinarias** con su propio flujo de pago. Incluye panel de administración con CRUD completo, analytics y exportación de datos.
 
-**🔗 Demo en vivo:** [petshop-e-commerce.vercel.app](https://petshop-e-commerce.vercel.app)
+**Demo en vivo:** [petshop-e-commerce.vercel.app](https://petshop-e-commerce.vercel.app)
 
 ![Hero](./screenshots/hero.png)
 
 ---
 
-## 📑 Tabla de contenidos
+## Tabla de contenidos
 
-- [📸 Capturas de pantalla](#-capturas-de-pantalla)
-- [✨ Funcionalidades](#-funcionalidades)
-- [🛠 Stack tecnológico](#-stack-tecnológico)
-- [📁 Estructura del proyecto](#-estructura-del-proyecto)
-- [🚀 Instalación](#-instalación)
-- [🔐 Variables de entorno](#-variables-de-entorno)
-- [📡 API — Endpoints principales](#-api--endpoints-principales)
-- [💳 Flujo de pago — Transbank Webpay Plus](#-flujo-de-pago--transbank-webpay-plus)
-- [🔑 Credenciales de prueba](#-credenciales-de-prueba)
-- [⚙️ Comandos útiles](#️-comandos-útiles)
+- [Capturas de pantalla](#capturas-de-pantalla)
+- [Funcionalidades](#funcionalidades)
+- [Stack tecnológico](#stack-tecnológico)
+- [Estructura del proyecto](#estructura-del-proyecto)
+- [Instalación](#instalación)
+- [Variables de entorno](#variables-de-entorno)
+- [API — Endpoints principales](#api--endpoints-principales)
+- [Flujo de pago — Transbank Webpay Plus](#flujo-de-pago--transbank-webpay-plus)
+- [Credenciales de prueba](#credenciales-de-prueba)
+- [Comandos útiles](#comandos-útiles)
 
 ---
 
-## 📸 Capturas de pantalla
+## Capturas de pantalla
 
 | Home | Dark mode |
 |---|---|
@@ -45,7 +45,7 @@ E-commerce tipo SPA con catálogo de productos, carrito de compras, cupones de d
 
 ---
 
-## ✨ Funcionalidades
+## Funcionalidades
 
 - Catálogo organizado en 6 secciones principales (Perro, Gato, Farmacia, Pequeñas Mascotas, Ofertas, Marcas) + Peluquería
 - Carrito de compras persistente (drawer lateral con focus trap)
@@ -59,7 +59,7 @@ E-commerce tipo SPA con catálogo de productos, carrito de compras, cupones de d
 
 ---
 
-## 🛠 Stack tecnológico
+## Stack tecnológico
 
 ### Frontend
 
@@ -101,7 +101,7 @@ E-commerce tipo SPA con catálogo de productos, carrito de compras, cupones de d
 
 ---
 
-## 📁 Estructura del proyecto
+## Estructura del proyecto
 
 ```
 petshop/
@@ -132,7 +132,7 @@ petshop/
 
 ---
 
-## 🚀 Instalación
+## Instalación
 
 ### Requisitos previos
 
@@ -169,7 +169,7 @@ npm run dev                # → http://localhost:5173
 
 ---
 
-## 🔐 Variables de entorno
+## Variables de entorno
 
 ### `backend/.env`
 
@@ -195,7 +195,7 @@ VITE_API_URL=http://localhost:3001/api
 
 ---
 
-## 📡 API — Endpoints principales
+## API — Endpoints principales
 
 ```
 # Productos / Categorías / Marcas
@@ -232,7 +232,7 @@ GET    /api/admin/vet/*                 Servicios, disponibilidad, excepciones, 
 
 ---
 
-## 💳 Flujo de pago — Transbank Webpay Plus
+## Flujo de pago — Transbank Webpay Plus
 
 1. Usuario confirma el carrito, ingresa datos y aplica cupón (opcional).
 2. `POST /api/payment/create` → backend crea la transacción en Transbank y devuelve `{ token, url }`.
@@ -246,7 +246,7 @@ El flujo de **veterinaria** es análogo (`/api/vet/payment/*`), con envío de em
 
 ---
 
-## 🔑 Credenciales de prueba
+## Credenciales de prueba
 
 ### Panel de administración
 
@@ -269,7 +269,7 @@ RUT: `11.111.111-1` · Clave: `123` · Fecha de vencimiento: cualquier fecha fut
 
 ---
 
-## ⚙️ Comandos útiles
+## Comandos útiles
 
 ```bash
 # Frontend
